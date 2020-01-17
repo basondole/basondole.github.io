@@ -1,0 +1,3049 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js no-svg">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+
+<title>basondole.io &#8211; Network design and development, 2x JNCIP (ENT/SP) 1x CCNP (RS), BSc.</title>
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link crossorigin="anonymous" rel='stylesheet' id='alia-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700%2C700i%7CPoppins%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+
+<link rel='stylesheet' id='wp-block-library-css'  href='karneliuk/style.min.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='github-embed-css'  href='karneliuk/github-embed.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-lightbox-swipebox-css'  href='karneliuk/swipebox.min.2.2.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='alia-style-css'  href='karneliuk/alia.style.1.35.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-css'  href='karneliuk/all.min.1.0.css' type='text/css' media='all' />
+
+
+<!-- <link rel='stylesheet' id='alia-customstyle-css'  href='http://karneliuk.com/wp-content/themes/alia/assets/css/customstyle.css?ver=5.3.2' /> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' id='codecolorer-css'  href='karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
+
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-192x192.jpg" sizes="192x192" />
+
+<link rel='https://api.w.org/' href='karneliuk/wp-json' />
+<!-- <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://karneliuk.com/xmlrpc.php?rsd" /> -->
+<!-- <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://karneliuk.com/wp-includes/wlwmanifest.xml" /> -->
+<!-- <link rel="apple-touch-icon-precomposed" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-180x180.jpg" /> -->
+<!-- <meta name="msapplication-TileImage" content="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-270x270.jpg" /> -->
+
+<script type='text/javascript' src='karneliuk/jquery-1.12.4-wp.js'></script>
+<script type='text/javascript' src='karneliuk/jquery-migrate.min-1.4.1.js'></script>
+<script type='text/javascript' src='karneliuk/ouibounce-5.3.2.js'></script>
+
+
+<script type="text/javascript">
+  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"karneliuk/wp-emoji-release.min.5.3.2.js"}};
+  !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+
+<style type="text/css">
+  img.wp-smiley,
+  img.emoji {
+    display: inline !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 1em !important;
+    width: 1em !important;
+    margin: 0 .07em !important;
+    vertical-align: -0.1em !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+</style>
+
+
+<style id='cm_ouibounce_css-inline-css' type='text/css'>
+
+            #ouibounce-modal .modal {
+                    width: 640px;
+//                    min-height: 356px;
+                    height: 356px;
+                    background-color: #f0f1f2;
+                    z-index: 1;
+                    position: absolute;
+                    margin: auto;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    display: flex;
+                    overflow: visible;
+                    opacity: 1;
+                    max-width: 85%;
+                    max-height: 85%;
+                    border-radius: 4px;
+                    -webkit-animation: popin 1.0s;;
+          -moz-animation: popin 1.0s;;
+          -o-animation: popin 1.0s;;
+                    animation: popin 1.0s;;
+          align-items: center;justify-content: center;
+                  }#ouibounce-modal .underlay {background-color: rgba(0,0,0,0.5);}#ouibounce-modal .modal .modal-body *:not(iframe) {
+            max-width: 100%;
+            height: auto;
+            max-height: 99%;
+        }
+        #ouibounce-modal .modal .modal-body iframe {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 0;
+        }
+</style>
+
+
+
+<style id='alia-customstyle-inline-css' type='text/css'>
+  body  {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, .title, .text_logo, .comment-reply-title, .header_square_logo a.square_letter_logo  {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  a  {
+    color: #ff374a;
+  }
+
+  input[type='submit']:hover  {
+    background-color: #ff374a;
+  }
+
+  .main_color_bg  {
+    background-color: #ff374a;
+  }
+
+  .main_color_text  {
+    color: #ff374a;
+  }
+
+  .social_icons_list.header_social_icons .social_icon:hover  {
+    color: #ff374a;
+  }
+
+  .header_square_logo a.square_letter_logo  {
+    background-color: #ff374a;
+  }
+
+  .header_nav .text_logo a span.logo_dot  {
+    background-color: #ff374a;
+  }
+
+  .header_nav .main_menu .menu_mark_circle  {
+    background-color: #ff374a;
+  }
+
+  .full_width_list .post_title a:hover:before  {
+    background-color: #ff374a;
+  }
+
+  .full_width_list .post_title a:hover:after  {
+    background: linear-gradient(to right,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -ms-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -o-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -moz-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-gradient(linear,left top,right top,color-stop(0%,#ff374a),color-stop(35%,#ff374a),color-stop(65%,#ff374a),color-stop(100%,#FFF));
+    ;       }
+
+  .grid_list .post_title a:hover:before  {
+    background-color: #ff374a;
+  }
+
+  .grid_list .post_title a:hover:after  {
+    background: linear-gradient(to right,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -ms-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -o-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -moz-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-gradient(linear,left top,right top,color-stop(0%,#ff374a),color-stop(35%,#ff374a),color-stop(65%,#ff374a),color-stop(100%,#FFF));
+    ;       }
+
+  .two_coloumns_list .post_title a:hover:before  {
+    background-color: #ff374a;
+  }
+
+  .two_coloumns_list .post_title a:hover:after  {
+    background: linear-gradient(to right,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -ms-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -o-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -moz-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-gradient(linear,left top,right top,color-stop(0%,#ff374a),color-stop(35%,#ff374a),color-stop(65%,#ff374a),color-stop(100%,#FFF));
+    ;       }
+
+  .post_meta_container a:hover  {
+    color: #ff374a;
+  }
+
+  .post.sticky .blog_meta_item.sticky_post  {
+    color: #ff374a;
+  }
+
+  .blog_post_readmore a:hover .continue_reading_dots .continue_reading_squares > span  {
+    background-color: #ff374a;
+  }
+
+  .blog_post_readmore a:hover .continue_reading_dots .readmore_icon  {
+    color: #ff374a;
+  }
+
+  .comment-list .reply a:hover  {
+    color: #ff374a;
+  }
+
+  .comment-list .reply a:hover .comments_reply_icon  {
+    color: #ff374a;
+  }
+
+  form.comment-form .form-submit input:hover  {
+    background-color: #ff374a;
+  }
+
+  .comment-list .comment.bypostauthor .comment-content:before  {
+    border-top-color: #ff374a;
+    border-left-color: #ff374a;
+  }
+
+  .comments-area a:hover  {
+    color: #ff374a;
+  }
+
+  .newsletter_susbcripe_form label .asterisk  {
+    color: #ff374a;
+  }
+
+  .newsletter_susbcripe_form .mce_inline_error  {
+    color: #ff374a!important;
+  }
+
+  .newsletter_susbcripe_form input[type='submit']:hover  {
+    background-color: #ff374a;
+  }
+
+  .widget_content #mc_embed_signup input[type='submit']:hover  {
+    background-color: #ff374a;
+  }
+
+  .social_icons_list .social_icon:hover  {
+    color: #ff374a;
+  }
+
+  .alia_post_list_widget .post_info_wrapper .title a:hover  {
+    color: #ff374a;
+  }
+
+  .tagcloud a:hover  {
+    color: #ff374a;
+  }
+
+  .navigation.pagination .nav-links .page-numbers.current  {
+    background-color: #ff374a;
+  }
+
+  .navigation_links a:hover  {
+    background-color: #ff374a;
+  }
+
+  .page-links > a:hover, .page-links > span  {
+    background-color: #ff374a;
+  }
+
+  .story_circle:hover  {
+    border-color: #ff374a;
+  }
+
+  .see_more_circle:hover  {
+    border-color: #ff374a;
+  }
+
+  .main_content_area.not-found .search-form .search_submit  {
+    background-color: #ff374a;
+  }
+
+  .blog_list_share_container .social_share_item_wrapper a.share_item:hover  {
+    color: #ff374a;
+  }
+
+  .widget_content ul li a:hover  {
+    color: #ff374a;
+  }
+
+  .footer_widgets_container .social_icons_list .social_icon:hover  {
+    color: #ff374a;
+  }
+
+  .footer_widgets_container .widget_content ul li a:hover  {
+    color: #ff374a;
+  }
+
+  .cookies_accept_button  {
+    background-color: #ff374a;
+  }
+
+  .alia_gototop_button > i  {
+    background-color: #ff374a;
+  }
+
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-twitter {
+  background: white;
+  color: #55ACEE;
+}
+
+.fa-linkedin {
+  background: white;
+  color: #007bb5;
+}
+
+/*.fa-skype {
+  background: white;
+  color: #125688;
+}*/
+
+.fa-telegram {
+  background: white;
+  color: #55ACEE;
+}
+
+div.contacts {
+  text-align: center;
+}
+
+.entry-content ol {
+    padding-left: 0;
+    margin-left: 32px;
+}
+</style>
+
+
+<style>
+  pre {
+    /*font-size:12px;*/
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0;
+  }
+/*  .ui-accordion .ui-accordion-content {
+      padding-bottom: 0px;
+      padding-top: 0px;
+  }*/
+</style>
+
+
+<meta name="generator" content="WordPress 5.3.2" />
+
+</head>
+
+
+
+<style type="text/css">
+  /* TOC inspired by http://jashkenas.github.com/coffee-script */
+  #table-of-contents {
+  bottom: 0;
+  left: 0;
+  -webkit-border-top-right-radius: 5px;
+
+  font-size: 10pt;
+  position: fixed;
+/*  right: 0em;
+  top: 0em;*/
+  background: white;
+  line-height: 12pt;
+  text-align: left;
+  box-shadow: 0 0 1em #777777;
+  -webkit-box-shadow: 0 0 1em #777777;
+  -moz-box-shadow: 0 0 1em #777777;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottom-left: 5px;
+  /* ensure doesn't flow off the screen when expanded */
+  max-height: 80%;
+  overflow: auto; }
+
+  #table-of-contents h2 {
+  font-size: 13pt;
+  max-width: 9em;
+  border: 0;
+  font-weight: normal;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.05em;
+  padding-bottom: 0.05em; }
+
+  #table-of-contents #text-table-of-contents {
+  display: none;
+  text-align: left; }
+
+  #table-of-contents:hover #text-table-of-contents {
+  display: block;
+  padding: 0.5em;
+  margin-top: -1.5em; }
+}
+</style>
+
+<style type="text/css">
+#table-of-contents {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+#text-table-of-contents.entry-content ol {
+    padding-left: 0;
+    margin-left: 10px;
+}
+</style>
+
+
+
+
+
+
+
+<div id="table-of-contents">
+  <p>Contents</p>
+  <div id="text-table-of-contents">
+    <!-- <ol> -->
+      <li type="1"><a href="#Python">Python</a>
+        <ul>
+          <li><a href="#Telnetlib">Telnetlib</a></li>
+          <li><a href="#Paramiko">Paramiko</a></li>
+          <li><a href="#Genie">Genie</a></li>
+          <li><a href="#Netmiko">Netmiko</a></li>
+          <li><a href="#Pyntc">Pyntc</a></li>
+          <li><a href="#Netconf">NETCONF</a></li>
+          <li><a href="#PyEZ">PyEZ</a></li>
+          <li><a href="#Napalm">NAPALM</a></li>
+          <li><a href="#Nornir">Nornir</a></li>
+        </ul>
+      </li>
+      <li type="1"><a href="#Ansible">Ansible</a></li>
+  </div>
+</div>
+
+
+
+
+
+
+
+<body class="home blog sticky_header header_logo_rounded text_posts_unbordered masonry_effect_enabled show_menu_circle_idicator sliding_sidebar_inactive">
+
+<div id="page" class="site">
+
+  <div class="site_main_container">
+
+    <header class="site_header">
+      
+    <div class="gray_header"  >
+      <div class="container site_header">
+        <div class="header_square_logo">
+          <style>.site_logo_image { width : 120px; }.site_logo_image { height : 120px; }</style>
+          <a class="alia_logo retina_logo" title="basondole.io" href="index.html" rel="home">
+            <img  width=120 height=120 src="all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+    
+          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="index.html" rel="home">
+          <img  width=120 height=120 src="all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+
+          <h1 class="screen-reader-text site_logo site-title clearfix">basondole.io</h1>
+
+        </div>
+
+        <div class="header_tagline">
+          Multivendor network design, development and automation for enterprise and service provider fabrics. Skills that matter
+        </div>
+
+        <div class="social_icons_list header_social_icons">
+          <a rel="nofollow" target="" href="https://twitter.com/misterbigpaul" title="Twitter" class="social_icon widget_social_icon social_twitter social_icon_twitter"><i class="fa fa-twitter"></i></a>
+          <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/paul-i-2b3013108" title="Linked In" class="social_icon widget_social_icon social_linkedin social_icon_linkedin"><i class="fa fa-linkedin"></i></a>
+          <a rel="nofollow" target="_blank" href="https://github.com/basondole" title="Github" class="social_icon widget_social_icon social_github social_icon_github"><i class="fa fa-github"></i></a>
+
+          <a rel="nofollow" target="_blank" href="https://stackoverflow.com/users/12078639/bassosimons" title="stackoverflow" class="social_icon widget_social_icon"><i class="fa fa-rss"></i></a>
+
+        </div>
+      </div>
+
+    </div>
+        
+    <div class="header_nav_wrapper">
+
+      <div class="header_nav">
+
+        <div class="container">
+          <div class="site_branding">
+          <h1 class="text_logo"><a href="index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
+          </div>
+          
+
+          <!-- Place header control before main menu if site title is enabled -->
+          <div class="header_controls">
+
+            <div class="header_sliding_sidebar_control header_control_wrapper">
+              <a id="user_control_icon" class="sliding_sidebar_button" href="#">
+                <i class="fa fa-bars header_control_icon"></i>
+              </a>
+            </div>
+        
+          </div>
+    
+
+          <div class="main_menu">
+            <ul id="top-menu" class="navbar">
+              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html">Home</a></li>
+              <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li>
+              <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">Noculous</a></li>
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="?post_type=post" data-hover="dropdown" class="dropdown-toggle">Blog</a>
+                <ul role="menu" class=" dropdown-menu">
+                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="https://github.com/basondole/collaboration/blob/master/Setting%20up%20Cisco%20Call%20Manager.md#setting-up-cisco-call-manager-express">Collaboration</a></li>
+                  <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="codefornetwork.html">Network Automation</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/tutorials">Network Servers</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/netmanagement">Misc</a></li>
+                </ul>
+              </li>
+              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="https://github.com/basondole/bgp">BGP</a></li>
+              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html">About</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="contact.html">Contact</a></li>
+              
+            </ul>
+            <!-- <span class="menu_mark_circle hidden_mark_circle"></span> -->
+          </div>
+              
+        <!-- Place header control after main menu if site title is enabled -->
+          
+        </div><!-- end .container -->
+      </div><!-- end .header_nav -->
+    </div><!-- end .header_nav_wrapper -->
+    </header>
+
+
+        <main id="content" class="site-content">
+          <section id="primary" class="container main_content_area">
+            <!-- end check for post layout -->
+            <div class="row full_width_page_single no_sidebar_post_single">
+              <div>
+                <!-- <article id="post-182" class="blog_page_container post-182 page type-page status-publish"> -->
+
+                  <div class="page_body">
+
+                    <!-- <div class="post_info_wrapper"> -->
+                      <h3 style="text-align: center;">
+                      <strong># Guide To Network Automation</strong>
+                      </h3>
+
+                      <div id="accordion" class="entry-content blog_page_text blog_page_description">
+
+                        <h3 id="Python" style="text-align: center;"><a href="#">
+                          <strong>Python</strong><strong>.</strong>
+                        </a></h3>
+                        <div>
+
+<h4>Raw Python</h4>
+Python offers support to interact with our network devices for management and administration by using different sets of libraries. On machine with python install we can use the raw python interpreter from Windows cmd or terminal for Mac and Linux to send commands and retrieve information or send configuration to devices. Python also comes with an IDE which can be used as well. 
+In order to be able to interface with the devices we need to have appropriate libraries installed. Think of libraries as add-ons that adds features to the native python. Python by default ships with core modules for basic functionality however you can install additional modules to extend the functionality.
+Generally we can interact with our devices by using the native CLI using telnet and SSH or by using APIs such as NETCONF and RESTCONF. Luckily there are libraries for all these methods in python.
+
+<h5>CLI methods</h5>
+On this section we’ll cover popular libraries available in python that supports native raw interaction with the network device CLI as regular ssh or telnet clients. Some of the popular libraries include  
+<ul>
+  <li>Telnetlib</li>
+  <li>Paramiko</li>
+  <li>Netmiko</li>
+  <li>Pyntc</li>
+</ul>
+
+These libraries allows for initialization of remote sessions to devices via SSH or telnet and sending of commands to the devices as you would via an ssh or telnet client such as putty or secureCRT.  
+
+<h5 id="Telnetlib">Telnetlib</h5>
+The telnetlib uses the telnet protocol to communicate to devices and send raw cli commands. The telnetlib comes with standard python installation and does not require a separate install, as soon as you got python installed on your workstation you are good to go. See demonstration below on how it works  
+
+Pre-requisite: telnet must be enabled on the remote device.  
+
+<h6>Telnetlib demo</h6>
+On this demo we'll use telnet lib to run some show commands on a router. Will be using ipython for the python interpreter
+
+<pre>
+basondole@box$ ipython
+Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 23:09:28) [MSC v.1916 64 bit (AMD64)] 
+Type 'copyright', 'credits' or 'license' for more information 
+IPython 7.7.0 -- An enhanced Interactive Python. Type '?' for help.
+</pre>
+
+<!-- For the syntax in the python interpreter where each numbered action is executed jump to the following snapshot.
+<ol>
+  <li>Import the telnetlib in python interpreter</li>
+  <li>Create a function that will be used to establish connection</li>
+  <li>Create a function that will be used to send commands to the device</li>
+  <li>Define login parameters</li>
+  <li>Connect to the device</li>
+  <li>Send sample command to the device</li>
+  <li>Send another sample command to the device</li>
+  <li>End the session and neatly exist.</li>
+</ol>
+
+<pre>
+In [1]: import telnetlib 
+In [2]: def telnet_connection(host,username,password):
+          session = telnetlib.Telnet(host)
+          '''Find the keyword username and type in the username''' 
+          session.read until('Username:'.encode()) 
+          session.write(username.encode()+ '\n'.encode())
+          '''Find the keyword password and type in the password'''
+          session.read until('Password:'.encode()) 
+          session.write(password.encode()+'\n'.encode())
+          session.read until(b'#')
+          return session
+
+In [3]: def send_command (session,command):
+          session.write(command.encode())
+          session.write(b'\n')
+          output = session.read_until(b'#')
+          print (output.decode())
+ 
+In [4]: username = 'fisi'
+        password = 'fisi123'
+        host = '192.168.56.26'
+
+In [5]: open_session = telnet_connection(host,username,password)
+ 
+In [6]: send command(open_session, 'show ip interface brief')
+
+show ip interface brief 
+Interface              IP-Address      OK? Method Status Protocol
+GigabitEthernet1       unassigned      YES manual down   down
+GigabitEthernet1.4094  unassigned      YES unset  down   down
+GigabitEthernet2       unassigned      YES manual up     up
+GigabitEthernet2.4094  unassigned      YES unset  up     up
+GigabitEthernet3       192.168.56.26   YES manual up     up
+KH16# 
+
+In [7]: send command(open_session, 'show ver | i up')
+
+show ver | i up
+Technical Support: http://www.cisco.com/techsupport KH16 uptime is 23 hours, 54 minutes
+KH16# 
+
+In [8]: open_session.close() 
+
+</pre>
+
+
+ -->
+
+
+
+
+
+
+
+
+
+<ol>
+  <li>Import the telnetlib in python interpreter</li>
+    <pre>
+In [1]: import telnetlib
+    </pre>
+  <li>Create a function that will be used to establish connection</li>
+    <pre>
+In [2]: def telnet_connection(host,username,password):
+          session = telnetlib.Telnet(host)
+          session.read until('Username:'.encode()) 
+          session.write(username.encode()+ '\n'.encode())
+          session.read until('Password:'.encode()) 
+          session.write(password.encode()+'\n'.encode())
+          session.read until(b'#')
+          return session
+    </pre>
+  <li>Create a function that will be used to send commands to the device</li>
+  <pre>
+In [3]: def send_command (session,command):
+          session.write(command.encode())
+          session.write(b'\n')
+          output = session.read_until(b'#')
+          print (output.decode())
+  </pre>
+  <li>Define login parameters</li>
+  <pre>
+In [4]: username = 'fisi'
+        password = 'fisi123'
+        host = '192.168.56.26'
+  </pre>
+  <li>Connect to the device</li>
+  <pre>
+In [5]: open_session = telnet_connection(host,username,password)
+  </pre>
+  <li>Send sample command to the device</li>
+  <pre>
+In [6]: send command(open_session, 'show ip interface brief')
+
+show ip interface brief 
+Interface              IP-Address      OK? Method Status Protocol
+GigabitEthernet1       unassigned      YES manual down   down
+GigabitEthernet1.4094  unassigned      YES unset  down   down
+GigabitEthernet2       unassigned      YES manual up     up
+GigabitEthernet2.4094  unassigned      YES unset  up     up
+GigabitEthernet3       192.168.56.26   YES manual up     up
+KH16# 
+  </pre>
+  <li>Send another sample command to the device</li>
+  <pre>
+In [7]: send command(open_session, 'show ver | i up')
+
+show ver | i up
+Technical Support: http://www.cisco.com/techsupport KH16 uptime is 23 hours, 54 minutes
+KH16# 
+</pre>
+  <li>End the session and neatly exist.</li>
+  <pre>
+In [8]: open_session.close() 
+</pre>
+</ol>
+
+<h7>Complete script</h7>
+<pre>
+import telnetlib 
+def telnet_connection(host,username,password):
+    session = telnetlib.Telnet(host)
+    session.read until('Username:'.encode()) 
+    session.write(username.encode()+ '\n'.encode())
+    session.read until('Password:'.encode()) 
+    session.write(password.encode()+'\n'.encode())
+    session.read until(b'#')
+    return session
+
+def send_command (session,command):
+    session.write(command.encode())
+    session.write(b'\n')
+    output = session.read_until(b'#')
+    print (output.decode())
+ 
+username = 'fisi'
+password = 'fisi123'
+host = '192.168.56.26'
+
+open_session = telnet_connection(host,username,password)
+
+send command(open_session, 'show ip interface brief')
+send command(open_session, 'show ver | i up')
+open_session.close() 
+
+</pre>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65575537-ba872780-df78-11e9-811e-d4c2ccd85574.png"> -->
+
+
+
+<h5 id="Paramiko">Paramiko</h5>
+Paramiko uses the SSH protocol to communicate with devices and sends raw cli commands as it will be shown in the demonstration. In very light language paramiko does what the telnetlib does but with SSH instead of telnet however paramiko is not a standard python library and must be installed separately.<br/>  
+To install paramiko on machine with python and pip installed do: <code>pip install paramiko</code><br/>
+Pre-requisite:
+<ol>
+<li>ssh is enabled on the remote device</li>
+<li>paramiko library is installed on the local working station</li>
+</ol>  
+
+<h6>Paramiko demo</h6>
+
+<ol>
+<li>Import the paramiko module
+  <pre>
+In [1]: import paramiko
+  </pre>
+<li>Create a paramiko ssh client object  
+  <pre>
+In [2]: session = paramiko.SSHClient()
+  </pre>
+<li>Specify the policy for missing host keys from the ssh server  
+  <pre>
+In [3]: session.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+  </pre>
+<li>Define login parameters  
+  <pre>
+In [4]: username = 'fisi'
+        password = 'fisi123'
+        host = '192.168.56.26'
+  </pre>
+<li>Connect to the device  
+  <pre>
+In [5]: session.connect(host,username=username,password=password)
+  </pre>
+<li>Invoke the device shell to interact with  
+  <pre>
+In [6]: shell = session.invoke_shell()
+  </pre>
+<li>Send command the output shows 24 bytes have been sent to the device 
+  <pre>
+In [7]: shell.send('show ip interface brief\n')
+Out[7]: 24
+  </pre>
+<li>Retrieve the output from the device  
+  <pre>
+In [8]: print(shell.recv(65535).decode())
+
+KH16#show ip interface brief
+Interface              IP-Address      OK? Method Status Protocol
+GigabitEthernet1       unassigned      YES manual down   down
+GigabitEthernet1.4094  unassigned      YES unset  down   down
+GigabitEthernet2       unassigned      YES manual up     up
+GigabitEthernet2.4094  unassigned      YES unset  up     up
+GigabitEthernet3       192.168.56.26   YES manual up     up
+KH16#
+  </pre>
+<li>Send another sample command  
+  <pre>
+In [9]: shell.send('show ver | i up\n')
+Out[9]: 16
+  </pre>
+<li>Retrieve the output from the device  
+  <pre>
+In [10]: print(shell.recv(65535).decode())
+show ver | i up
+Technical Support: http://www.cisco.com/techsupport
+KH16 uptime is 1 day, 24 minutes
+KH16#
+  </pre>
+<li>Close the session gracefully  
+  <pre>
+In [11] session.close()
+  </pre>
+</ol>
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65575536-ba872780-df78-11e9-984e-a58739e213d7.png"> -->
+
+Complete script
+<pre>
+import paramiko
+session = paramiko.SSHClient()
+session.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+username = 'fisi'
+password = 'fisi123'
+host = '192.168.56.26'
+
+session.connect(host,username=username,password=password)
+shell = session.invoke_shell()
+
+shell.send('show ip interface brief\n')
+print(shell.recv(65535).decode())
+
+shell.send('show ver | i up\n')
+print(shell. recv(65535).decode())
+
+session.close()
+
+</pre>
+
+<h5 id="Genie">Genie</h5>
+<p>
+  Genie is both a library framework and a test harness that facilitates rapid development, encourage re-usable and simplify writing test automation. Genie was initially developed internally in Cisco, and is now available to the general public. Genie offers both a python library and a cli based tool you can use directly from your command prompt (or terminal) without running the python interpreter. Learn more about Genie <a href="https://developer.cisco.com/site/pyats/">here</a>
+</p>
+<p>
+Genie uses the idea of testbeds where basically a testbed is where you define parameters of your device such as IP address, hostnames, login credential and transport protocol. Basically it is an equivalent of ansible inventory or routers.db for rancid respectively if you have worked with those before. Ansible is gonna be covered later in this write up, for rancid learn more <a href="https://github.com/basondole/tutorials/tree/master/rancid">here</a>
+</p>
+<p>
+Genie supports both telnet and ssh as transport protocols the caveat is however, similar to rancid and ansible, genie does not natively run on windows and since it also a non-standard python to install genie on a non-windows machine with python and pip installed do: <code>pip install genie</code>
+</p>
+
+<h7>Sample genie testbed</h7>
+
+<pre>
+basondole@box$ cat testbed.yaml
+testbed:
+  name: sample
+  tacacs:
+    username: fisi
+  passwords:
+    tacacs: fisil23
+
+services:
+  KH16:
+    os: iosxe
+    type: IOSv
+    connections:
+      defaults:
+        class: unicon.Unicon
+      console:
+        ip: 192.168.56.26
+        protocol: ssh
+</pre>
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65576253-43eb2980-df7a-11e9-9790-ad67608469a0.png"> -->
+
+
+<b>Important:</b> the hostname used in the testbed must be the exact match with the device configured hostname. I had so much problems before figuring this out :)
+
+<h6>Genie demo</h6>
+In this demo we are going to extract interface information from the device and record in a csv file the interface names and their mac addresses  
+For the syntax in the python interpreter where each numbered action is executed jump to the snapshot thereafter.  
+First I switchover to a linux box (wsl and run ipython) since genie is not supported on windows  
+<ol>
+<li>Import the genie module
+  <pre>
+In [1]: from genie.conf import Genie
+  </pre>
+<li>Load the testbed file
+  <pre>
+In [2]: testbed = Genie.init('testbed.yaml')
+  </pre>
+<li>Verify which devices are in the testbed and we only have KH16 in our testbed 
+  <pre>
+In [3]: testbed.devices
+Out[3]: TopologyDict({'KH16': &lt;Device KH16 at 0x7f293e53df98&gt;})
+  </pre> 
+<li>Create an object for the device  
+  <pre>
+In [4]: router = testbed.devices['KH16']
+  </pre>
+<li>Use the object to connect to the device. This will display the commands that have been issued by genie to the device which I will cut out of the snapshot  
+  <pre>
+In [5]: router.connect()
+
+[2019-08-25 15:02:15,852] +++ KH16 logfile /tmp/KH16-cli-20190825T150215851.log +++
+[2019-08-25 15:02:15,853] +++ Unicon plugin iosxe +++
+/home/baggy/.local/bin/ipython:1: DeprecationWarning: Arguments ‘username', ‘enable_password', ‘tac
+acs_password' and 'line_password' are now deprecated and replaced by ‘credentials’.
+#!/usr/bin/python3
+Password:
+[2019-08-25 15:02:18,415] +++ connection to spawn: ssh -l fisi 192.168.56.26, id: 139815100067176 +++
+[2019-08-25 15:02:18,417] connection to KH16
+
+[2019-08-25 15:02:18,482] +++ initializing handle +++
+[2019-08-25 15:02:18,484] +++ KH16: executing command ‘term length 0' +++
+.
+.
+{long output omitted}
+  </pre>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65575534-b9ee9100-df78-11e9-9491-ec160d16b51a.png"> -->
+
+<li>Verify the connection  
+  <pre>
+In [6]: router.connected
+Out[6]: True
+  </pre>
+<li>Get interface information from device. This will display the commands that have been issued by genie to the device together with the output which I will cut out of the snapshot  
+  <pre>
+In [7]: interfaces = router.parse('show interfaces')
+
+[2019-08-25 15:02:45,786] +++ KH16: executing command 'show interfaces' +++
+show interfaces
+GigabitEthernet1 is down, line protocol is down
+  Hardware is CSR vNIC, address is 000c.29be.12eb (bia 000c.29be.12eb)
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec,
+  reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation 802.1Q Virtual LAN, Vlan ID 1., loopback not set
+  Keepalive not set
+  Full Duplex, 1000Mbps, link type is auto, media type is Virtual
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input never, output never, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/375/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+    0 packets input, 0 bytes, 0 no buffer
+    Received 0 broadcasts (0 IP multicasts)
+    0 runts, 0 giants, 90 throttles
+    0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+    0 watchdog, 0 multicast, 0 pause input
+    0 packets output, 0 bytes, 0 underruns
+    0 output errors, 0 collisions, 0 interface resets
+    0 unknown protocol drops
+    0 babbles, 0 late collision, 0 deferred
+    0 lost carrier, 0 no carrier, 0 pause output
+    0 output buffer failures, 0 output buffers swapped out
+.
+.
+{long output omitted}
+  </pre>
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65575533-b9ee9100-df78-11e9-9d07-7a97e092a3e9.png"> -->
+
+<li>Import the csv module for creating a csv file  
+  <pre>
+In [8]: import csv
+  </pre>
+<li>Define the field of the csv file
+  <pre>
+In [9]: fields = ['interfaces','MAC']
+  </pre>
+<li>Write the data to the csv file
+  <pre>
+In [10]: with open('interfaces.csv,'w') as f:
+            writer = csv.DictWriter(f,fields)
+            writer.writeheader()
+            for interface, details in interfaces.items():
+                try: writer.writerow({'interfaces':interface, 'MAC':details['mac_address']})
+                except KeyError: pass
+  </pre>  
+<li>Close the session gracefully
+  <pre>
+In [11]: router.disconnect()
+  </pre>
+
+<li>Exit and verify the contents of the file created on step 10 above  
+  <pre>
+In [12]: exit
+  </pre>
+</ol>
+
+
+We can verify the new file is created as interfaces.csv and we can verify the contents
+<pre>
+basondole@box$ ls
+interfaces.csv testbed. yaml
+
+basondole@box$ cat interfaces.csv
+interface,MAC
+GigabitEthernet1,000c.29be.12eb
+GigabitEthernet1.4094,000c.29be.12eb
+GigabitEthernet2,000c.29be.12f5
+GigabitEthernet2.4094,000c.29be.12f5
+GigabitEthernet3 ,000c.29be. 12ff
+</pre>
+
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65575532-b955fa80-df78-11e9-9cc9-10bdf83d3f1f.png"> -->
+
+Complete script
+
+<pre>
+from genie.conf import Genie
+
+testbed = Genie.init('testbed.yaml')
+
+testbed.devices
+
+router = testbed.devices['KH16']
+router.connect()
+router.connected
+interfaces = router.parse('show interfaces')
+
+import csv
+fields = ['interfaces','MAC']
+with open('interfaces.csv,'w') as f:
+    writer = csv.DictWriter(f,fields)
+    writer.writeheader()
+    for interface, details in interfaces.items():
+      try: writer.writerow({'interfaces':interface, 'MAC':details['mac_address']})
+      except KeyError: pass
+
+router.disconnect()
+</pre>
+
+
+<h5 id="Netmiko">Netmiko</h5>
+Netmiko is yet another option. Essentially it is a multi-vendor library to simplify Paramiko SSH connections to network devices. Learn more about Netmiko <a href="https://github.com/ktbyers/netmiko">here</a>
+
+<h5 id="Pyntc">Pyntc</h5>
+Pyntc is a simple open source multi-vendor Python library that establishes a common framework for working with different network APIs & device types. Checkout this self-explanatory repo to learn more about Pyntc <a href="https://github.com/pyntc">here</a>
+
+
+<h5>Summary</h5>
+In this section we have covered the python libraries that allow us to use conventional CLI commands to interact with the devices. The CLI methods allows user to send raw commands to devices via SSH or telnet as they would on the regular CLI, some libraries offer pre-defined functions that can be used to perform specific tasks an example will be a method that gets the running-config or reboot the device without the user issuing the specific CLI commands and rather just call the method, the commands are generated by the function itself and are sent via SSH to the CLI for execution.
+
+
+<h4> API & Remote Procedure Calls method</h4>
+<p>
+In this section we cover the basics on interaction with network devices using APIs. This is however only useful when the device supports API interactions. The most popular protocol in this category is NETCONF. NETCONF is a protocol defined by the IETF to install manipulate and delete configuration of network devices. NETCONF operations are realized on top of a Remote Procedure Call using XML encoding. Equivalent protocols include RESTCONF and gRPC all of which make use of the YANG models.  
+</p>
+<p>
+The easiest way to understand this is to think of YANG as an SNMP MIB where as NETCONF and RESTCONF are like SNMP versions. They are responsible to connect to the devices, package and send requests to retrieve info or send configuration details.  
+</p>
+YANG is really a data structure to describe properties of an element using models (modules) analogous to SNMP MIB. There are different flavors of data models, these model include:  
+<ul>
+<li>IETF Models: IETF issues the industry standard models  
+<li>Native Models: Models developed by specific vendors such as Cisco or Juniper  
+</ul>
+
+Learn more about YANG <a href="https://github.com/YangModels/yang">here</a>
+<p>
+NETCONF runs over SSH tcp port 830 where as RESTCONF runs over HTTPS leveraging REST API standards. gRPC is created by google aiming to interface with everything in their data centres from switch, router and servers.
+</p>
+
+<h4 id="Netconf">NETCONF</h4>
+<!-- <h5>Configuring NETCONF on the device</h5> -->
+<h6>Cisco iosxe netconf config</h6>
+Issue the command <code>netconf-yang</code> in configuration mode
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65576615-ffac5900-df7a-11e9-8f90-06cc4c252683.png"> -->
+<pre>
+basondole@box $ ssh fisi@192.168.56.26 
+KH16#show version | include Software
+<b>Cisco IOS XE Software, Version 16.09.01</b>
+Cisco IOS Software [Fuji], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 16.9.1, RELEASE SOFTWARE (fc2)
+
+KH16#config terminal
+Enter configuration commands, one per line. End with CNTL/Z. 
+KH16(config)#<b>netconf-yang</b>
+KH16(config)#end
+KH16#exit
+Connection to 192.168.56.26 closed.
+</pre>
+
+<h6>Cisco iosxr netconf config</h6>
+
+<pre>
+RP/0/0/CPU0:ios#show version | utility egrep Software
+Thu Jan 16 14:22:42.870 UTC
+Cisco IOS XR Software, Version 6.0.1[Default]
+RP/0/0/CPU0:ios#conf
+Thu Jan 16 14:22:53.379 UTC
+RP/0/0/CPU0:ios(config)#<b>netconf-yang agent ssh</b>
+RP/0/0/CPU0:ios(config)#commit                
+Thu Jan 16 14:22:59.679 UTC
+RP/0/0/CPU0:ios(config)#end
+RP/0/0/CPU0:ios#exit
+</pre>
+
+
+<h6>Junos netconf config</h6>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65576686-194da080-df7b-11e9-8a53-d31790c2681c.png"> -->
+<pre>
+basondole@box $ ssh fisi@192.168.56.36
+JUNOS 12.1R1.9 built 2012-03-24 12:52:33 UTC 
+fisi@big> configure 
+Entering configuration mode 
+
+[edit] 
+fisi@big# <b>set system services netconf ssh</b> 
+
+[edit] 
+fisi@big# commit and-quit 
+commit complete 
+Exiting configuration mode 
+
+fisi@big> exit 
+Connection to 192.168.56.36 closed.
+</pre>
+
+<p>
+To verify the device is listening to NETCONF we open a netconf session via ssh specifying the netconf port <code>-p 830</code> and the netconf service <code>-s netconf</code>
+</p>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65576610-ffac5900-df7a-11e9-9811-60659e7b5b8e.png"> -->
+
+<pre>
+basondole@box $ ssh fisi@192.168.56.36 -p830 -s netconf 
+fisi@192.168.56.36's password: ****
+&lt;!-- No zombies were killed during the creation of this user interface --&gt; 
+&lt;!-- user fisi, class j-super-user --&gt; 
+&lt;hello&gt; 
+  &lt;capabilities&gt; 
+    &lt;capability&gt;urn:ietf:params:xml:ns:netconf:base:1.0&lt;/capability&gt; 
+    &lt;capability&gt;urn:ietf:params:xml:ns:netconf:capability:candidate:1.0&lt;/capability&gt; 
+    &lt;capability&gt;urn:ietf:params:xml:ns:netconf:capability:confirmed-commit:1.0&lt;/capability&gt; 
+    &lt;capability&gt;urn:ietf:params:xml:ns:netconf:capability:validate:1.0&lt;/capability&gt; 
+    &lt;capability&gt;urn:ietf:params:xml:ns:netconf:capability:url:1.0?protocol=http, ftp,file&lt;/capability&gt;
+    &lt;capability&gt;http://xml.juniper.net/netconf/junos/1.0&lt;/capability&gt;
+    &lt;capability&gt;http://xml.juniper.net/dmi/system/1.0&lt;/capability&gt;
+  &lt;/capabilities&gt;
+  &lt;session-id&gt;1900&lt;/session-id&gt; 
+&lt;/hello&gt; 
+]]&gt;]]&gt; 
+ 
+</pre>
+The session will open and the device will send its capability list in what is called a hello message, which is essentially the models it supports. To complete the hello we have to send our computers capability back to the device in an XML format  
+
+
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+   &lt;hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"&gt;
+      &lt;capabilities&gt;
+         &lt;capability>urn:ietf:params:netconf:base:1.0&lt;/capability&gt;
+      &lt;/capabilities&gt;
+   &lt;/hello&gt;]]&gt;]]&gt;
+</pre>
+
+
+Now the hello process is completes we can interact with the device by sending XML commands packaged as RPC (remote procedure calls) which tell the device what to do. However for now we will just issue an XML command that ends the session neatly without leaving a hanging vty session on the router.
+
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+   &lt;<b>rpc</b> message-id="1239123" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"&gt;
+       &lt;<b>close-session</b> /&gt;
+    &lt;/<b>rpc</b>&gt; ]]&gt;]]&gt;
+</pre>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65576618-0044ef80-df7b-11e9-805b-2799a4c00c27.png"> -->
+
+We get rpc response from the device, confirming session is closed
+
+<pre>
+&lt;<b>rpc-reply</b> xmlns:junos="http://xml.juniper.net/junos/12.1R1/junos" message-id="1239123" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"&gt;
+&lt;ok/&gt; 
+&lt;/<b>rpc-reply</b>&gt; ]]&gt;]]&gt;
+&lt;!-- session end at 2019-08-25 16:03:58 UTC --&gt; 
+basondole@box $
+</pre>
+
+
+As you can see it is not very user friendly as the regular CLI, this is because NETCONF is intended for writing scripts & network management tools. Mostly we work with NETCONF using a programming language such as python. The value for NETCONF is not replacing the CLI for running one command or one operational task. The value for NETCONF is doing this type of configuration across huge networks of devices not just one at a time.  
+
+<h5>NETCONF with python</h5>
+Pre-requisite:  
+<ul>
+<li>NETCONF is enabled on the network device</li>
+<li>Python and ncclient are installed on the workstation</li>
+</ul>
+
+<h6>NETCONF Cisco demo</h6>
+On this demo we use netconf to get config from the device and also to push config to the device running Cisco IOSXE  
+First we launch the python interpreter. I’m using ipython
+
+<pre>
+basondole@box$ ipython
+Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 23:09:28) [MSC v.1916 64 bit (AMD64)] 
+Type 'copyright', 'credits' or 'license' for more information 
+IPython 7.7.0 -- An enhanced Interactive Python. Type '?' for help.
+</pre>
+
+<ol>
+<li>Import the manager module from the netconf client (ncclient library)  
+Your workstation is the manager whereas the network device is running the agent code  
+  <pre>
+In [1]: from ncclient import manager
+  </pre>
+
+<li>Define the router and its login parameters 
+  <pre>
+In [2]: router = {
+          'address': '192.168.56.26',
+          'netconf_port': 830,
+          'username': 'fisi',
+          'password': 'fisi123} 
+  </pre> 
+<li>Connect to the router using the netconfclient manager  
+  <pre>
+In [3]: router_manager = manager.connect(
+          host = router['address'],
+          port = router['netconf_port'], 
+          username = router['username'],
+          password = router[password],
+          hostkey_verify = False)
+  </pre>
+<li>Verify the device is connected  
+  <pre>
+In [4]: router_manager.connected 
+Out[4]: True 
+  </pre>
+<li>Crete an xml filter to get config of interface GigabitEthernet3 since netconf uses xml format
+  <pre>
+In [5]: match_if_GigEth3 = ''' 
+&lt;filter&gt;
+  &lt;interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"&gt;
+    &lt;interface&gt;
+      &lt;name&gt;GigabitEthernet3&lt;/name&gt; 
+    &lt;/interface&gt;
+  &lt;/interfaces&gt;
+&lt;/filter&gt; 
+'''
+  </pre>
+
+<li>Get the running config from the device and apply the filter from step 5 to get only Gigethernet3 config  
+  <pre>
+In [6]: router_GigEth3_config_xml = router_manager.get_config('running',match_if_GigEth3) 
+  </pre>
+<li>Verify the operation was successful  
+  <pre>
+In [7]: router_GigEth3_config_xml.ok 
+Out[7] True 
+  </pre>
+<li>Import a library that will help us convert xml data returned by netconf to a python dictionary which is easier to navigate  
+  <pre>
+In [8]: import xmltodict 
+  </pre>
+<li>Convert the xml data collected at step 6 to a python dictionary  
+  <pre>
+In [9]: router_GigEth3_config_dict = xmltodict.parse(router_GigEth3_config_xml.xml)
+  </pre>
+<li>To extract the actual data, since netconf returns structured data we have to navigate to specific blocks of information in this case we go to the <code>rpc-reply</code> section then dive into the <code>data</code> section which is a leaf of the <code>rpc-reply</code>  
+  <pre>
+In [10]: router_GigEth3_config_data = router_GigEth3_config_dict['rpc-reply']['data'] 
+  </pre>
+<li>Use the dictionary keys (which I already know because I know the data structure) to access the data of interest in this case we are extracting the interface name. The return value datatype is <code>OrderedDict</code> the data model is <code>ietf</code> containing <code>#text</code> data which is the name of the interface  
+  <pre>
+In [11]: router_GigEth3_config_data['interfaces']['interface']['name'] 
+Out[11]: 
+OrderedDict([('@xmlns:nc', 'urn:ietf:params:xml:ns:netconf:base:1.01),
+             ('#text', 'GigabitEthernet3']) 
+  </pre>
+<li>Get the ipv4 address configured on the interface, we follow same paradigm as above except we want the key <code>ipv4</code> instead of <code>name</code>
+  <pre>
+In [12]: router_GigEth3_config_data['interfaces']['interface']['ipv4']
+Out[12]: 
+OrderedDict([('@xmlns', 'urn:ietf:params:xml:ns:yang:ietf-ip'), 
+             ('address',
+              OrderedDict([('ip', '192.168.56.26'),
+                          ('netmask', '255.255.255.0')]))])
+  </pre>
+<li>To send config to the device we create an xml block of our desired config. Here we are creating interface looopback0 and assign an ipv4 address as well as description  
+  <pre>
+In [13]: create_loopback_0_xml = '''
+&lt;config&gt;
+  &lt;interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"&gt; 
+    &lt;interface&gt; 
+      &lt;name&gt;Loopback0&lt;/name&gt; 
+      &lt;description&gt;LOOPBACK CREATED BY NETCONF&lt;/description&gt; 
+      &lt;type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type"&gt;
+       ianaift:softwareLoopback 
+      &lt;/type&gt; 
+      &lt;enabled&gt;true&lt;/enabled&gt; 
+      &lt;ipv4 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip"&gt; 
+        &lt;address&gt; 
+          &lt;ip&gt;10.1.1.1&lt;/ip&gt; 
+          &lt;netmask&gt;255.255.255.255&lt;/netmask&gt; 
+        &lt;/address&gt; 
+      &lt;/ipv4&gt; 
+    &lt;/interface&gt; 
+  &lt;/interfaces&gt; 
+&lt;/config&gt; 
+'''
+  </pre>
+<li>Push the config to the device running config 
+  <pre>
+In [14]: send_loopback_0_config = router_manager.edit_config(target='running', config=create_loopback_0_xml) 
+  </pre> 
+<li>Verify the operation was successful  
+  <pre>
+In [15]: send_loopback_0_config.ok 
+Out[15]: True 
+  </pre>
+</ol>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577144-efe14480-df7b-11e9-9903-aba49db5fb2f.png"> -->
+
+Complete script
+
+<pre>
+from ncclient import manager 
+
+router = {
+    'address': '192.168.56.26',
+    'netconf_port': 830,
+    'username': 'fisi',
+    'password': 'fisi123} 
+
+router_manager = manager.connect(
+    host = router['address'],
+    port = router['netconf_port'], 
+    username = router['username'],
+    password = router[password],
+    hostkey_verify = False) 
+
+router_manager.connected  
+
+match_if_GigEth3 = ''' 
+&lt;filter&gt;
+  &lt;interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"&gt;
+    &lt;interface&gt;
+      &lt;name&gt;GigabitEthernet3&lt;/name&gt; 
+    &lt;/interface&gt;
+  &lt;/interfaces&gt;
+&lt;/filter&gt; 
+'''
+router_GigEth3_config_xml = router_manager.get_config('running',match_if_GigEth3) 
+
+router_GigEth3_config_xml.ok 
+
+import xmltodict 
+
+router_GigEth3_config_dict = xmltodict.parse(router_GigEth3_config_xml.xml)
+ 
+router_GigEth3_config_data = router_GigEth3_config_dict['rpc-reply']['data'] 
+
+router_GigEth3_config_data['interfaces']['interface']['name'] 
+
+router_GigEth3_config_data['interfaces']['interface']['ipv4']
+
+create_loopback_0_xml = '''
+&lt;config&gt;
+  &lt;interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"&gt; 
+    &lt;interface&gt; 
+      &lt;name&gt;Loopback0&lt;/name&gt; 
+      &lt;description&gt;LOOPBACK CREATED BY NETCONF&lt;/description&gt; 
+      &lt;type xmlns:ianaift="urn:ietf:params:xml:ns:yang:iana-if-type"&gt;
+       ianaift:softwareLoopback 
+      &lt;/type&gt; 
+      &lt;enabled&gt;true&lt;/enabled&gt; 
+      &lt;ipv4 xmlns="urn:ietf:params:xml:ns:yang:ietf-ip"&gt; 
+        &lt;address&gt; 
+          &lt;ip&gt;10.1.1.1&lt;/ip&gt; 
+          &lt;netmask&gt;255.255.255.255&lt;/netmask&gt; 
+        &lt;/address&gt; 
+      &lt;/ipv4&gt; 
+    &lt;/interface&gt; 
+  &lt;/interfaces&gt; 
+&lt;/config&gt; 
+'''
+send_loopback_0_config = router_manager.edit_config(target='running' , config=create_loopback_0_xml) 
+
+send_loopback_0_config.ok 
+</pre>
+
+
+<p>
+Login to the router to verify the change
+</p>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577146-f079db00-df7b-11e9-8a7a-606e7491726a.png"> -->
+<pre>
+basondole@box $ ssh fisi@192.168.56.26 
+KH16#sh logging | begin NETCONF
+*Aug 3 23:36:32.616: %DMI-5-CONFIG_I: RO/O: nesd: <b>Configured from NETCONF/RESTCONF</b> by fisi, transaction-id 294 
+*Aug 3 23:36:34.591: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback0, changed state to up 
+*Aug 3 23:36:34.591: %LINK-3-UPDOWN: Interface Loopback0, changed state to up 
+
+KH16#sh run int lo0 
+Building configuration... 
+Current configuration : 105 bytes 
+!
+interface Loopback0 
+ description LOOPBACK CREATED BY NETCONF
+ ip address 10.1.1.1 255.255.255.255 
+end 
+KH16#exit 
+Connection to 192.168.56.26 closed. 
+</pre>
+
+We see from the logs the config was changed using NETCONF by user <code>fisi</code> and the interface <code>loopback0</code> comes up also we verify the configuration of interface <code>loopback0</code> which has been created.
+
+<h6>NETCONF Juniper demo</h6>
+In this demo we write a sample code to get logical interfaces from a device  
+First we launch the python interpreter. I’m using ipython
+<pre>
+basondole@box $ ipython 
+Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 23:09:28) [MSC v.1916 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information 
+IPython 7.7.0 -- An enhanced Interactive Python. Type '?' for help. 
+</pre>
+
+<ol>  
+<li>Import the manager module from the netconfclient (ncclient library) Your workstation is the manager whereas the network device is running the agent code  
+  <pre>
+In [1]: from ncclient import manager
+  </pre>
+<li>Import a library that will help us convert xml data returned by netconf to a python dictionary which is easier to navigate  
+  <pre>
+In [2]: import xmltodict 
+  </pre>
+<li>Define the router and its login parameters  
+  <pre>
+In [3]: junos = {'address':'192.168.56.36'
+                 'netconf_port':830,
+                 'username':'fisi',
+                 'password':'fisi123' }
+  </pre>
+<li>Connect to the router  
+  <pre>
+In [4]: junos_man = manager.connect( 
+                            host = junos['address'], 
+                            port = junos['netconf_port'], 
+                            username = junos['username'], 
+                            password = junos['password'], 
+                            hostkey_verify = False) 
+  </pre>
+<li>Get running config from the device and convert the xml to a python dictionary at the same time  
+  <pre>
+In [5]: junos_conf = xmltodict.parse((junos_man.get config('running')).xml)['rpc-reply']['data'] 
+  </pre>
+<li>From the config use the dictionary keys to navigate to the data of interest which is the interface section in this case and print out the interface name and its logical interfaces names  
+  <pre>
+In [6]: for intf in junos_conf['configuration']['interfaces']['interface']:
+            print('└── '+intf['name'])
+            if type(intf['unit'])==list : 
+                for unit in intf['unit']: 
+                    print('    └──'+unit['name']) 
+└── em0 
+└── em1
+    └──2 
+    └──7 
+    └──10 
+    └──111 
+    └──222 
+    └──300 
+    └──400 
+    └──450 
+    └──999 
+└── em2
+    └──9 
+    └──10 
+    └──100 
+    └──111 
+    └──200
+└── em3 
+    └──0
+└── lo0 
+  </pre>
+ 
+
+<li>Gracefully close the session 
+  <pre>
+In [7]: junos_man.close_session()
+&lt;rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:junos="http://xml.juniper.net/ junos/12.1R1/junos" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:f4c e20d2-1d51-4de8-9687-9468b1367f85"&gt;
+&lt;ok/&gt;
+&lt;/rpc-reply&gt;
+  </pre>
+</ol>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577145-ef48ae00-df7b-11e9-9a96-ebc8ea3d78b7.png"> -->
+
+Complete script
+<pre>
+from ncclient import manager 
+import xmltodict 
+junos = {'address':'192.168.56.36'
+         'netconf_port':830,
+         'username':'fisi',
+         'password':'fisi123' }
+ 
+junos_man = manager.connect( 
+                  host = junos['address'], 
+                  port = junos['netconf_port'], 
+                  username = junos['username'], 
+                  password = junos['password'], 
+                  hostkey_verify = False) 
+
+junos_conf = xmltodict.parse((junos_man.get config('running')).xml)['rpc-reply']['data'] 
+
+for intf in junos_conf['configuration']['interfaces']['interface']:
+    print('|__ '+intf['name'])
+    if type(intf['unit'])==list : 
+        for unit in intf['unit']: 
+            print('    |__'+unit['name']) 
+
+junos_man.close_session() 
+</pre>
+
+Important note is that since netconf uses structured data the commands are exactly the same across all vendors regardless of the difference in the cli syntax. Check out the other sample <a href="https://github.com/hpreston/netconf_yang_blog">here</a>
+
+
+<h5 id="PyEZ">PyEZ</h5>
+PyEZ is a python module that enables management and automation of devices running JunOS. PyEZ uses NETCONF to send remote procedure calls to JunOS devices with CLI support as well.</br>
+
+Pre-requisite:  Netconf is enabled on the network device  
+
+<h6>Junos PyEZ API demo</h6>
+In this demo we use PyEZ API to send commands to a junos device as well as equivalent CLI command  
+<ol>
+<li>Import the Device module from junos library
+  <pre>
+In [1]: from jnpr.junos import Device
+        from lxml import etree 
+  </pre>
+<li>Define login parameters
+  <pre>
+In [2]: username = 'fisi'
+        password = 'fisi123'
+        host = '192.168.56.36'
+  </pre>
+<li>Open a session with the JunOS device  
+  <pre>
+In [3]: router = Device(host=host,user=username,passwd=password) 
+        router.open() 
+Out[3]: Device(192.168.56.36)
+  </pre>
+<li>Make an rpc call to get bgp information from the device. The <code>{‘format’:‘text’}</code> is used to convert the xml data returned by the device to a human readable format.  
+  <pre>
+In [4]: bgp_info = router.rpc.get_bgp_summary_information({'format':'text'})
+  </pre>
+<li>Convert the text data into a format as the one displayed when issuing a CLI command  
+  <pre>
+In [5]: bgp_info_txt = etree.tostring(bgp_info).decode()
+  </pre>
+<li>Print the output 
+  <pre>
+In [6]: print(bgp_info_txt) 
+&lt;output&gt; 
+Groups: 4 Peers: 5 Down peers: 4 
+Table         Tot Paths Act Paths   Suppressed   History   Damp State    Pending 
+inet.0                0         0            0         0            0          0 
+bgp.l3vpn.0           0         0            0         0            0          0 
+bgp.l2vpn.0           0         0            0         0            0          0 
+Peer                   AS      InPkt       OutPkt   OutQ     Flaps Last Up/Dwn Statel#Active/Received/Accepted/Damped... 
+1.1.1.2             64512          0            0      0         0 1d 16:25:40 Idle 
+10.36.100.2         64518          0            0      0         0     5:53:14 Connect 
+192.168.0.15        64512          0            0      0         0 1d 16:25:40 Active 
+192.168.56.18       64512          0            0      0         0 1d 16:25:40 Active 
+192.168.56.26       64512        134          138      0         0     1:00:15 Establ 
+  inet.0: 0/0/0/0 
+&lt;/output&gt;
+  </pre>
+<li>Get bgp information using cli command, the <code>warning=False</code> clause is to stop the warning message when using the cli method as the writers of PyEZ discourage using this method unless it is for debugging  
+  <pre>
+In [7]: bgp_info_cli = router.cli('show bgp summary', warning=False) 
+  </pre>
+<li>Print the results  
+  <pre>
+In [8]: print(bgp_info_cli) 
+Groups: 4 Peers: 5 Down peers: 4 
+Table         Tot Paths Act Paths   Suppressed   History   Damp State    Pending 
+inet.0                0         0            0         0            0          0 
+bgp.l3vpn.0           0         0            0         0            0          0 
+bgp.l2vpn.0           0         0            0         0            0          0 
+Peer                   AS      InPkt       OutPkt   OutQ     Flaps Last Up/Dwn Statel#Active/Received/Accepted/Damped... 
+1.1.1.2             64512          0            0      0         0 1d 16:27:56 Idle 
+10.36.100.2         64518          0            0      0         0     5:55:30 Connect 
+192.168.0.15        64512          0            0      0         0 1d 16:27:56 Active 
+192.168.56.18       64512          0            0      0         0 1d 16:27:56 Active 
+192.168.56.26       64512        134          138      0         0     1:02:31 Establ 
+  inet.0: 0/0/0/0
+  </pre>
+</ol>
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577340-48b0dd00-df7c-11e9-965e-e6e0426edc98.png"> -->
+
+Complete script
+<pre>
+from jnpr.junos import Device
+from lxml import etree 
+
+username = 'fisi'
+password = 'fisi123'
+host = '192.168.56.36' 
+
+router = Device(host=host,user=username,passwd=password) 
+router.open()
+
+bgp_info = router.rpc.get_bgp_summary_information({'format':'text'})
+bgp_info_txt = etree.tostring(bgp_info).decode() 
+print(bgp_info_txt) 
+
+bgp_info_cli = router.cli('show bgp summary', warning=False) 
+print(bgp_info_cli) 
+</pre>
+
+
+From the above demo we can verify we get the same output when using either method. The question now becomes how do we know the rpc equivalent commands since we obviously only know the CLI commands? Next demonstration shows how.
+
+
+<h6>Getting the RPC command equivalent of the CLI command</h6>
+First im saving my username and password for the router as environment variables on my Ubuntu machine so that I can use the variable in the code and avoid typing the plain text password in the code then launch my python interpreter<br/>
+Procedures:  
+<ol>
+<li>Import the Device module from junos library 
+  <pre>
+In [1]: from jnpr.junos import Device
+  </pre>
+<li>Import the xml module for converting xml data
+  <pre>
+In [2]: from lxml import etree 
+  </pre> 
+<li>Import the os module that will be used to access the environment variables for username and password  
+  <pre>
+In [3]: import os 
+  </pre>
+<li>Create a device object for the router  
+  <pre>
+In [4]: router = Device(host='192.168.56.36',user=os.getenv('JUSER'),passwd=os.getenv('JPASS')) 
+  </pre>
+<li>Open a session with the JunOS device  
+  <pre>
+In [5]: router.open()
+Out[5]. Device(192.168.56.36) 
+  </pre>
+<li>Get the rpc command equivalent for the cli command <code>show route</code>  
+  <pre>
+In [6]: rpc_command = router.display_xml_rpc('show route',format='text') 
+  </pre>
+<li>Display the rpc command which is <code>get-route-information</code>  
+  <pre>
+In [7]: print(rpc_command) 
+&lt;get-route-information&gt;
+&lt;/get-route-information&gt; 
+  </pre>
+<li>Get the rpc command equivalent for the cli command <code>show system alarms</code>  
+  <pre>
+In [8]: rpc_command = router.display_xml_rpc('show system alarms',format='text') 
+  </pre>
+<li>Display the rpc command which is <code>get-system-alarm-information</code>
+  <pre>
+In [9]: print(rpc_command) 
+&lt;get-system-alarm-information&gt; 
+&lt;/get-system-alarm-information&gt; 
+  </pre>
+<li>Make an rpc call using the rpc command from step 9. Note "<code>–</code>" are replaced by "<code>_</code>" 
+  <pre>
+In [10] alarms = router.rpc.get_system_alarm_information({'format':'text') 
+  </pre>
+<li>Print the results from the device  
+  <pre>
+In [11]: print((etree.tostring(alarms)).decode()) 
+&lt;output&gt; 
+No alarms currently active 
+&lt;/output&gt; 
+  </pre>
+<li>Close the connection  
+  <pre>
+In [12]: router.close() 
+  </pre>
+</ol>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577339-48b0dd00-df7c-11e9-9d0b-a1186398bb65.png"> -->
+
+Complete script
+<pre>
+basondole@box $ export JUSER=fisi
+basondole@box $ export JPASS=fisi123
+basondole@box $ ipython 
+
+from jnpr.junos import Device 
+from lxml import etree 
+import os 
+
+router = Device(host='192.168.56.36',user=os.getenv('JUSER'),passwd=os.getenv('JPASS')) 
+router.open() 
+
+rpc_command = router.display_xml_rpc('show route',format='text') 
+print(rpc_command) 
+
+rpc_command = router.display_xml_rpc('show system alarms',format='text') 
+print(rpc_command) 
+
+alarms = router.rpc.get_system_alarm_information({'format':'text') 
+print((etree.tostring(alarms)).decode()) 
+router.close() 
+</pre>
+
+
+<h5 id="Napalm">NAPALM</h5>
+NAPALM stands for Network Automation and Programmability Abstraction Layer with Multivendor support is a Python library build by a community network engineers. It is a wrapper of different libraries that communicate directly with the network device. It also comes with a CLI tool you can use directly from your command prompt (or terminal) without running the python interpreter. The general idea behind this library is to create a standardized, multivendor interface for certain file and get operations
+
+<img src="https://user-images.githubusercontent.com/50369643/65577542-a8a78380-df7c-11e9-91ba-794a0a6bdf1a.png">
+
+
+
+<h6>NAPALM with Cisco ios</h6>
+To enable NAPALM interaction with IOS devices configure <code>ip scp server enable</code> on the device.
+This config enables the router to act as a secure copy server which povides ability to copy files to and from the device using ssh which is useful for mimicing diff and rollback features on regular ios
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577544-a9401a00-df7c-11e9-8e25-9aa189c3f215.png"> -->
+<pre>
+$ ssh fisi@192.168.56.26 
+KH16#sh version | i Software 
+Cisco IOS XE Software, Version 16.09.01 Cisco IOS Software [Fuji], 
+Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 16.9.1, RELEASE SOFTWARE (fc2) 
+KH16# KH16#conf t 
+Enter configuration commands, one per line. End with CNTL/Z. 
+KH16(config)#<b>ip scp server enable</b> 
+KH16(config)#end 
+KH16#exit 
+Connection to 192.168.56.26 closed by remote host. 
+Connection to 192.168.56.26 closed. 
+</pre>
+
+
+<h6>NAPALM with Cisco iosxr</h6>
+<pre>
+RP/0/0/CPU0:pycon-iosxr#sh ver | i Software
+Fri Jan 17 00:59:07.645 UTC
+Cisco IOS XR Software, Version 6.0.1[Default]
+RP/0/0/CPU0:pycon-iosxr#
+RP/0/0/CPU0:pycon-iosxr#conf
+Fri Jan 17 00:57:45.790 UTC
+RP/0/0/CPU0:pycon-iosxr(config)#xml agent tty iteration off
+RP/0/0/CPU0:pycon-iosxr(config)#commit 
+RP/0/0/CPU0:pycon-iosxr(config)#end 
+RP/0/0/CPU0:pycon-iosxr#
+</pre>
+
+<h6>Demo</h6>
+In the demonstration we use napalm to interact with a Cisco IOS device send configuration to the device and perform a rollback of the config. Note the rollback feature is not natively available on IOS devices but with the use of NAPALM we can easily achieve this.  
+
+<ol>
+<li>Import napalm driver  
+  <pre>
+In [1]: from napalm import get_network_driver 
+  </pre>
+<li>Define login parameters  
+  <pre>
+In [2]: username = 'fisi'
+        password = 'fisi123'
+        iosxe_host = '192.168.56.26'
+  </pre>
+<li>Create a napalm driver for the ios. By the time of this writing NAPALM did not have a dedicated <code>iosxe</code> driver 
+  <pre>
+In [3]: ios_driver = get_network_driver('ios') 
+  </pre>
+<li>Create a drive object and connect to the device  
+  <pre>
+In [4]: iosxe_dev = ios_driver(username=username,password=password,hostname=iosxe_host) 
+        iosxe dev.open() 
+  </pre>
+<li>Use napalm to get facts about the device and we see from the list of interfaces we do not have loopback1 (We are goingto create loopback1 in the following steps)  
+  <pre>
+In [5]: iosxe_dev.get_facts()
+Out[5]:
+{'uptime': 3480, 
+ 'vendor': 'Cisco',
+ 'os version': 'Virtual XE Software (X86 64 LINUX IOSD-UNIVERSALK9-M), Version 16.9.1, RELEASE SOFTWARE (fc2)',
+ 'serial number': '9XZ2CV2FFA4',
+ 'model': 'CSR1000V',
+ 'hostname': 'KH16',
+ 'fqdn': 'Unknown',
+ 'interface_list': ['GigabitEthernet1',
+  'GigabitEthernet1.4094',
+  'GigabitEthernet2',
+  'GigabitEthernet2.4094',
+  'GigabitEthernet3',
+  'Loopback0']}
+  </pre>
+<li>Create configuration for <code>loopback1</code> interface following the the regular CLI syntax  
+  <pre>
+In [6]: iosxe_loopback1_cfg = '''
+int loopback 1 
+ip add 10.2.2.2 255.255.255.255 
+desc CONFIGURED BY NAPALM 
+'''
+  </pre>
+<li>Load the configuration to the device (without saving the config)  
+  <pre>
+In [7]: iosxe_dev.load_merge_candidate(config=iosxe_loopback1_cfg) 
+  </pre>
+<li>Do a diff to compare the loaded config and the running config, the <code>+</code> sign means we are adding the respective config. Note this feature is not natively available in regular Cisco IOS  
+  <pre>
+In [8]: diff = iosxe_dev.compare_config()
+        print(diff) 
++int loopback 1 
++ip add 10.2.2.2 255.255.255.255 
++desc CONFIGURED BY NAPALM 
+  </pre>
+<li>Commit the configuration on the device  
+  <pre>
+In [9]: iosxe_dev.commit_config()
+  </pre>
+<li>Get the facts from the device again, this time we see interface <code>loopback1</code> is present since we added it with the commit operation on step 9  
+  <pre>
+In [10]: iosxe_dev.get_facts() 
+{'uptime': 3540, 
+ 'vendor': 'Cisco',
+ 'os version': 'Virtual XE Software (X86 64 LINUX IOSD-UNIVERSALK9-M), Version 16.9.1, RELEASE SOFTWARE (fc2)',
+ 'serial number': '9XZ2CV2FFA4',
+ 'model': 'CSR1000V',
+ 'hostname': 'KH16',
+ 'fqdn': 'Unknown',
+ 'interface_list': ['GigabitEthernet1',
+  'GigabitEthernet1.4094',
+  'GigabitEthernet2',
+  'GigabitEthernet2.4094',
+  'GigabitEthernet3',
+  'Loopback0',
+  '<b>Loopback1</b>']}
+  </pre>
+<li>Issue a rollback operation to delete interface <code>loopback1</code>  
+  <pre>
+In [11]: iosxe_dev.rollback()
+  </pre>
+<li>Close the session  
+  <pre>
+In [12]: iosxe_dev.close()
+  </pre>
+</ol>
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577543-a9401a00-df7c-11e9-8d2f-4455636f7d7b.png"> -->
+
+Complete script
+<pre>
+from napalm import get_network_driver 
+
+username = 'fisi'
+password = 'fisi123'
+iosxe_host = '192.168.56.26'
+
+ios_driver = get_network_driver('ios') 
+
+iosxe_dev = ios_driver(username=username,password=password,hostname=iosxe_host) 
+iosxe_dev.open() 
+
+iosxe_dev.get_facts()
+
+iosxe_loopback1_cfg = '''
+int loopback 1 
+ip add 10.2.2.2 255.255.255.255 
+desc CONFIGURED BY NAPALM 
+'''
+
+iosxe_dev.load_merge_candidate(config=iosxe_loopback1_cfg) 
+
+diff = iosxe_dev.compare_config()
+print(diff) 
+
+iosxe_dev.commit_config() 
+iosxe_dev.get_facts() 
+iosxe_dev.rollback()
+iosxe_dev.close()
+</pre>
+
+
+
+<h6>Verification on the device</h6>
+The below snapshot shows what was happening in the background as we were configuring the device using napalm. I had opened the ssh session to the device and did a terminal monitor to see the log messages before I started operating on NAPALM.  <br/>
+Below is what happened to the device  <br/>
+<li>First we see there was no interface <code>loopback1</code> 
+<li>Then log messages show there was a config change by user fisi via napalm and the interface <code>loopback1</code> comes up
+<li>We can now see the configuration on interface <code>loopback1</code> that was sent by napalm in the running config
+<li>Then we see the rollback operation taking place as we issued the rollback command on NAPALM
+<li>When we redo a <code>show run int lo1</code> the interface is not there anymore due to the rollback from NAPALM  
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577713-0936c080-df7d-11e9-944b-4b599bed9c24.png"> -->
+
+<pre>
+$ ssh fisi@192.168.56.26 
+KH16#sh run int lol 
+                  ^ 
+% Invalid input detected at '^' marker. 
+KH16#terminal monitor 
+KH16# 
+*Aug 5 23:06:34.225: %SYS-5-CONFIG_I: <b>Configured from console by fisi on vtyl</b> (192.168.56.1) 
+*Aug 5 23:06:36.477: %PARSER-4-BADCFG: Unexpected end of configuration file. 
+*Aug 5 23:06:36.477: %SYS-5-CONFIG_C: <b>Running-config file is Modified</b> 
+*Aug 5 23:06:38.462: %LINEPROTO-5-UPDOWN: Line protocol on <b>Interface Loopbackl, changed state to up</b> 
+*Aug 5 23:06:38.463: %LINK-3-UPDOWN: Interface Loopbackl, changed state to up 
+KH16# 
+KH16#sh run int lol 
+Building configuration.. 
+
+Current configuration : 98 bytes
+! 
+interface Loopbackl
+ description CONFIGURED BY NAPALM 
+ ip address 10.2.2.2 255.255.255.255
+end 
+
+KH16#  
+*Aug 5 23:07:46.399: Rollback:Acquired Configuration lock. 
+*Aug 5 23:07:46.399: %SYS-5-CONFIG_R: <b>Config Replace is Done</b> 
+*Aug 5 23:07:48.669: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopbackl, changed state to down 
+*Aug 5 23:07:48.669: %LINK-5-CHANGED: Interface Loopbackl, changed state to administratively down 
+KH16# 
+KH16#sh run int lol 
+                  ^
+% Invalid input detected at '^' marker. 
+KH16# 
+</pre>
+
+
+
+
+<h6>NAPALM with JunOS</h6>
+<ol>
+<li>Import napalm driver  
+  <pre>
+In [1]: from napalm import get_network_driver 
+  </pre>
+<li>Define login parameters  
+  <pre>
+In [2]: username = 'fisi' 
+        password = 'fisi123'
+        junos_host = '192.168.56.36'
+  </pre>
+<li>Create a napalm driver for junos, create a driver object and connect to the device  
+  <pre>
+In [3]: junos_driver = get_network_driver('junos')
+        junos_dev = junos_driver(username=username,password=password,hostname=junos_host)
+        junos_dev.open() 
+  </pre>
+<li>Use napalm to get facts about the device  
+  <pre>
+In [4]: junos_dev.get_facts() 
+Out[4]: 
+{'vendor': 'Juniper',
+ 'model': 'OLIVE',
+ 'serial number': 'None',
+ 'os version': '12.1R1.9',
+ 'hostname': 'big',
+ 'fqdn': 'big',
+ 'uptime': 6189,
+ 'interface list': ['.local.',
+  'cbp0',
+  'demux0',
+  'dsc',
+  'em0',
+  'em',
+  'em2',
+  'em3',
+  'gre',
+  'ipip',
+  'irb',
+  'lo0',
+  'mtun',
+  'pimd',
+  'pime',
+  'pp0']}
+  </pre>
+<li>Create configuration for interface em2.555 following the junos CLI syntax  
+  <pre>
+In [5]: junos_em2_555_cfg = '''
+interfaces{
+ em2{ 
+ unit 555{ 
+vlan-id 555;
+description "CONFIGURED BY NAPLAM";
+}
+}
+} 
+'''
+  </pre>
+<li>Load the configuration to the device (without saving the config) and print the diff between the active config and the loaded config   
+  <pre>
+In [6]: junos_dev.load_merge_candidate(config=junos_em2_555_cfg)
+        diff = junos_dev.compare_config() 
+        print(diff) 
+[edit interfaces em2]
++ unit 555 {
++      description "CONFIGURED BY NAPLAM";
++      vlan-id 555; 
++  } 
+
+  </pre>
+<li>Commit the config  
+  <pre>
+In [7]: junos_dev.commit_config() 
+  </pre>
+<li>Use the CLI method to get configuration of interface em2.555  
+  <pre>
+In [8]: em2_555_cf = junos_dev.cli(['show configuration interfaces em2.555'])
+  </pre>
+<li>Print the config and see what we have added with the commit on step 7  
+  <pre>
+In [9]: print(em2_555_cf)
+{'show configuration interfaces em2.555': '\ndescription "CONFIGURED BY NAPLAM";\nvlan-id 555;\n'}
+  </pre>
+<li>Rollback the config  
+  <pre>
+In [10] junos dev.rollback() 
+  </pre>
+<li>Use the CLI method to get configuration of interface em2.555  
+  <pre>
+In [11] em2_555_cf = junos_dev.cli(['show configuration interfaces em2.555']) 
+  </pre>
+<li>Print the config and we see there is none that’s because we rolled back the config on step 10  
+  <pre>
+In [12]: print(em2_555_cf) 
+{'show configuration interfaces em2.555': ''} 
+  </pre>
+<li>Close the session.  
+  <pre>
+In [13]: junos_dev.close()
+  </pre>
+</ol>
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577714-09cf5700-df7d-11e9-8f44-6b532151eae3.png"> -->
+
+
+Complete script
+<pre>
+from napalm import get_network_driver 
+
+username = 'fisi' 
+password = 'fisi123'
+junos_host = '192.168.56.36'
+ 
+junos_driver = get_network_driver('junos')
+junos_dev = junos_driver(username=username,password=password,hostname=junos_host)
+junos_dev.open() 
+
+junos_dev.get_facts() 
+
+junos_em2_555_cfg = '''
+interfaces{
+ em2{ 
+ unit 555{ 
+vlan-id 555;
+description "CONFIGURED BY NAPLAM";
+}
+}
+} 
+'''
+junos_dev.load_merge_candidate(config=junos_em2_555_cfg)
+diff = junos_dev.compare_config() 
+print(diff) 
+
+junos_dev.commit_config() 
+
+em2_555_cf = junos_dev.cli(['show configuration interfaces em2.555'])
+print(em2_555_cf)
+
+junos dev.rollback() 
+
+em2_555_cf = junos_dev.cli(['show configuration interfaces em2.555']) 
+print(em2_555_cf) 
+
+junos_dev.close()
+
+</pre>
+
+
+
+
+<h5 id="Nornir">NORNIR</h5>
+Nornir is an automation framework written in python with multiple threading capabilities. Nornir has a simple inventory which uses two YAML files
+<li>Hosts.yaml  
+<li>Groups.yaml (optional)  
+
+<p>
+See below snapshot of the files for my demo setup  
+</p>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577847-4e5af280-df7d-11e9-9a35-184d738cfff5.png"> -->
+<pre>
+basondole@box $ ls 
+groups.yaml    hosts.yaml
+
+basondole@box $ head *
+==> groups.yaml <==
+--- 
+routers:
+ username: fisi
+ password: fisi123 
+
+==> hosts.yaml <== 
+---
+kh16:
+ groups: [routers]
+ hostname: 192.168.56.26
+ platform: cisco_ios 
+
+big:
+ groups: [routers] 
+ hostname: 192.168.56.36
+ platform: juniper_junos
+</pre>
+
+
+<h6>Demo</h6>
+<ol>
+<li>Import the necessary libraries. In this demo we’ll use the netmiko_send_command in nornir to send commands to devices  
+  <pre>
+In [1]: from nornir import InitNornir
+        from nornir.plugins.tasks.networking import netmiko_send_command
+        from nornir.plugins.functions.text import print_result 
+
+  </pre>
+<li>Create a nornir object  
+  <pre>
+In [2] op = InitNornir() 
+  </pre>
+<li>Run the task using the netmiko_send_command function and specify the command  
+  <pre>
+In [3] res = op.run(task=netmiko_send_command, command_string= 'sh ip int brief')
+  </pre>
+<li>Use the nornir print function to print the results. The results are broken for router <code>big</code> that is because the command we issued is not a valid junos command. The changed flag is false for both devices meaning nothing was changed on the device  
+  <pre>
+
+In [4] print_result(res) 
+<font color="#9999ff">netmiko_send_command************************************************************</font>
+
+<font color="blue">* big ** changed : False *******************************************************</font>
+
+<font color="green">vvvv netmiko_send_command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+INFO </font>
+                 ^
+'ip' is ambiguous.
+Possible completions:
+ ipsec                Show IP Security information
+ ipv6                 Show IP version 6 information 
+fisi@big> show ip int 
+               ^
+syntax error, expecting &lt;command&gt;.
+
+fisi@big> show ipint brief 
+               ^
+syntax error, expecting &lt;command&gt;.
+
+<font color="green">^^^^ END netmiko send command ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</font>
+
+<font color="blue">* kh16 ** changed : False ******************************************************</font>
+<font color="green">vvvv netmiko send command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO</font>
+Interface              IP-Address    OK? Method Status Protocol 
+GigabitEthernet1       unassigned    YES NVRAM  down down 
+GigabitEthernet1.4094  unassigned    YES unset  down down 
+GigabitEthernet2       unassigned    YES NVRAM  up   up 
+GigabitEthernet2.4094  unassigned    YES unset  up   up 
+GigabitEthernet3       192.168.56.26 YES NVRAM  up   up 
+Loopback0              10.1.1.1      YES NVRAM  up   up 
+Loopback100            unassigned    YES unset  up   up 
+<font color="green">^^^^ END netmiko send command ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</font>
+  </pre>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577850-4ef38900-df7d-11e9-84b7-2f81796f80b8.png"> -->
+
+
+
+<li>Issue a command that works across both junos and ios  <code>show bgp summary</code>  
+  <pre>
+In [5]: result = op.run(task = netmiko_send_command,command_string='sh bgp summary') 
+  </pre>
+<li>Print the output we get clean output from both the routers big running junos and kh16 running ios. Again the change flag is false because nothing was changed in the config  
+  <pre>
+In [6]: print_result(result) 
+<font color="#9999ff">netmiko_send_command************************************************************</font>
+<font color="blue">* big ** changed : False *******************************************************</font>
+<font color="green">vvvv netmiko send command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO</font>
+Y 
+Groups: 2 Peers: 2 Down peers: 1 
+Table Tot Paths   Act Paths   Suppressed History Damp State Pending 
+inet.0       1            1            0       0          0       0 
+inetflow.0   0            0            0       0          0       0 
+Peer                AS  InPkt OutPkt   OutQ  Flaps  Last Up/Dwn Statel#Active/Received/Accepted/Damped... 
+10.36.100.2      64518      0      0      0      0      5:21:37 Connect 
+192.168.56.26    64512    705    723      0      0      5:21:29 Establ 
+  inet.0: 1/1/1/0 
+  inetflow.0: 0/0/0/0 
+
+<font color="green">^^^^ END netmiko send command ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</font>
+<font color="blue">* kh16 ** changed : False ******************************************************</font> 
+<font color="green">vvvv netmiko send command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO</font>
+% Command accepted but obsolete, unreleased or unsupported; see documentation. 
+BGP router identifier 10.1.1.1, local AS number 64512 
+BGP table version is 7, main routing table version 7 
+6 network entries using 1488 bytes of memory 
+6 path entries using 816 bytes of memory 
+2/2 BGP path/bestpath attribute entries using 560 bytes of memory 
+1 BGP AS-PATH entries using 24 bytes of memory 
+1 BGP extended community entries using 24 bytes of memory 
+0 BGP route-map cache entries using 0 bytes of memory 
+0 BGP filter-list cache entries using 0 bytes of memory 
+BGP using 2912 total bytes of memory BGP activity 8/0 prefixes, 8/0 paths, scan interval 60 secs 
+
+Neighbor        V      AS MsgRcvd MsgSent TblVer InQ OutQ Up/Down State/PfxRcd 
+
+192.168.56.36   4   64516     723     707      7   0    0  05:21:45      5 
+192.168.56.63   4   64512       0       0      1   0    0  never    Active 
+<font color="green">^^^^ END netmiko send command ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</font> 
+  </pre>
+
+
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577849-4ef38900-df7d-11e9-9246-58e8617836e7.png"> -->
+
+
+<li>Import a netmiko send config function for sending config to the device  
+  <pre>
+In [7]: from nornir.plugins.tasks.networking import netmiko_send_config 
+  </pre>
+<li>Filter the hosts to only hosts running <code>cisco_ios</code>
+  <pre>
+In [8]: ios_host = op.filter(platform='cisco_ios') 
+  </pre>  
+<li>Create config for interface <code>loopback10</code> 
+  <pre>
+In [9]: loopback_10 = '''interface lo10
+description CONPTGURED BY NORNIR'''
+  </pre> 
+<li>Send config to the device  
+  <pre>
+In [10]: result = ios_host.run(task = netmiko_send_config, config_commands=loopback_10)
+  </pre>
+<li>Display the results and we see the change flag is now True, this is because we have actually changed the device config  
+  <pre>
+In [11]: print_result(result)
+<font color="#9999ff">netmiko_send_config**************************************************************</font>
+<font color="blue">* kh16 ** changed : True ********************************************************</font> 
+<font color="#ff9900">vvvv netmiko —send config ** changed : True vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO</font>
+config term 
+Enter configuration commands, one per line. End with CNTL/Z. 
+KH16(config)#interface lo10 
+KH16(config-if)#description CONFIGURED BY NORNIR 
+KH16(config-if)#end 
+KH16# 
+<font color="#ff9900">^^^^ END netmiko send config ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</font> 
+  </pre>
+<li>Close the session.  
+  <pre>
+In [12]: op.close_connections() 
+  </pre>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577848-4ef38900-df7d-11e9-856a-162bf9f650b2.png"> -->
+
+ 
+Complete script
+<pre>
+from nornir import InitNornir
+from nornir.plugins.tasks.networking import netmiko_send_command
+from nornir.plugins.functions.text import print_result 
+
+op = InitNornir() 
+
+res = op.run(task=netmiko_send_command, command_string= 'sh ip int brief')
+print_result(res) 
+
+result = op.run(task = netmiko_send_command,command_string='sh bgp summary') 
+print_result(result) 
+
+from nornir.plugins.tasks.networking import netmiko_send_config 
+
+ios_host = op.filter(platform='cisco_ios') 
+
+loopback_10 = '''interface lo10
+description CONPTGURED BY NORNIR''' 
+
+result = ios_host.run(task = netmiko_send_config, config_commands=loopback_10)
+print_result(result)
+
+op.close_connections() 
+</pre>
+
+
+
+<h3> Command line tools</h3>
+<h4> Napalm</h4>
+NAPALM offers a command line utility that you can use directly from the command prompt for windows users or terminal for mac and linux users without using the python interpreter. Basically we can use all the get methods NAPALM provides right from the terminal such as getting facts, bgp neighbors and so much more.  
+
+<h5>Demonstration</h5>
+Using napalm cli to get facts about our cisco and junos devices  
+
+<pre>
+$ napalm --vendor ios --user fisi --password fisi123 192.168.56.26 call get_facts 
+{ 
+    "uptime": 28980, 
+    "vendor": "Cisco", 
+    "os version": "Virtual XE Software (X86 64 LINUX IOSD-UNIVERSALK9-M), Version 16.9.1, 
+    "serial number": "9XZ2CV2FFA4", 
+    "model": "CSR1000V", 
+    "hostname": "KH16", 
+    "fqdn": "KH16.baggy.org", 
+    "interface list": [
+         "GigabitEthernetl",
+         "GigabitEthernet1.4094",
+         "GigabitEthernet2",
+         "GigabitEthernet2.4094",
+         "GigabitEthernet3",
+         "Loopback0",
+         "Loopback10",
+         "Loopback100" 
+     ]
+}
+</pre>
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577970-8f530700-df7d-11e9-8fd9-0f3d540d4650.png"> -->
+
+<pre>
+$ napalm --vendor junos --user fisi --password fisi123 192.168.56.36 call get_facts 
+{ 
+    "vendor": "Juniper",
+    "model": "OLIVE", 
+    "serial number": "None",
+    "os version": "12.1R1.9",
+    "hostname": "big",
+    "fqdn": "big",
+    "uptime": 22625,
+    "interface list": [
+          ".local.",
+          "cbp0",
+          "demux0",
+          "dsc",
+          "em0",
+          "em1",
+          "em2",
+          "em3",
+          "gre",
+          "ipip",
+          "irb", 
+          "lsi",
+          "mtun", 
+          "pimd",
+          "pime", 
+          "pp0", 
+          "tap" 
+      ]
+}
+</pre>
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65577969-8f530700-df7d-11e9-981a-28cfbc6d0110.png"> -->
+
+
+<h4> Ansible</h4>
+Ansible uses playboooks to perform tasks. A play book consists of one or more tasks to be performed by modules. There are different modules for different operations such as backing up configuration, sending comands etc. These tasks are performed against specified host(s) as specified in the play<br/>
+
+In the below sample hosts file for ansible we have two groups of devices namely routers and vm with each group containing one device as displayed.
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578183-f7095200-df7d-11e9-9ceb-51b5e74f8e18.png"> -->
+
+<pre>
+pbasondole baggy@box $ cat hosts 
+[routers] 
+192.168.56.36 ansible_ssh_user=fisi ansible_ssh _pass=fisi123 ansible_network_os=junos 
+
+[vm]
+server ansible_host=192.168.56.1
+</pre>
+
+The playbook is written in yaml as displayed below. This play book provides a method of backing up configuration of junos devices, 
+the backup file is written to the <code>backup</code> folder in the playbook directory or role root directory, if playbook is part of an ansible role 
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578181-f7095200-df7d-11e9-8b31-5c1094675597.png"> -->
+<pre>
+pbasondole baggy@box $ cat junos_config_backup.yml 
+---
+- hosts: 192.168.56.36
+  gather_facts: no 
+
+  tasks: 
+    name: backup junos configuration 
+    connection: local 
+    junos_config: 
+      backup: yes 
+    register: config 
+...
+</pre>
+
+
+<h5>Running the playbook</h5>
+First we confirm the contents of our directory by issuing a tree command and we see there is only the <code>hosts</code> file and <code>junos_config_backup.yml</code> file which is the playbook
+Then we run the playbook specifying the host file with <code>-i</code> and it will play all the tasks defined in the play-book against the specified host, then we verify by using the <code>tree</code> command there is a new folder with the backup config for the router with ip <code>192.168.56.36</code>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578179-f7095200-df7d-11e9-99e6-b6d576f3aa94.png"> -->
+
+<pre>
+pbasondole baggy@box $ tree 
+.
+├── hosts
+└── junos_config_backup.yml 
+
+<b>0 directories, 2 files</b>
+
+pbasondole baggy@box $ ansible-playbook junos_config_backup.yml -i hosts 
+
+PLAY [192.168.56.36] ***************************************************************** 
+
+TASK [backup junos configuration] ****************************************************
+<font color="green">ok: [192.168.56.36]</font>
+
+PLAY RECAP ***************************************************************************
+<font color="green">192.168.56.36</font>               : <font color="green">ok=1</font>     changed=0     unreachable=0       failed=0 
+
+pbasondole baggy@box $ tree 
+.
+├── <b>backup</b>
+|   └── 192.168.56.36_config.2019-08-25@22:28:31
+├── hosts
+└── junos_config_backup.yml 
+
+
+<b>1 directory, 3 files</b>
+</pre>
+
+To learn more about ansible click <a href=">https://github.com/basondole/ansible">here</a>
+
+
+
+
+
+<h5>Playbook to configure junos device</h5>
+
+The playbook below uses diffrent modules to perform configuration changes on a junos device
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578187-f83a7f00-df7d-11e9-96ea-319b755d70f8.png"> -->
+
+<pre>
+---
+- name: Configuring junos device
+  hosts: 192.168.56.36
+  gather_facts: no 
+
+  tasks:
+    - name: configuring router interface via junos_config module
+      connection: local # can use "local" or "netconf" if netconf is enabled on remote device
+      junos_config:
+        lines: # each command must begin with set
+          - set interfaces em2.999 description "configured by ansible"
+          - set interfaces em2.999 vlan-id 999
+          - set interfaces em2.999 family inet address 10.10.20.1/30
+          - set interfaces em2.999 family inet policer input 2Mbps output 2Mbps
+        comment: configured by ansible junos_config
+      register: junos_config 
+
+    - name: rolling back config done by junos_config module
+      connection: local
+      junos_config:
+         rollback: 1 
+         comment: rollback of the config by ansible junos_config
+      register: rollback
+      when: junos_config.changed == true 
+
+    - name: configuring router interface via junos_command module 
+      connection: network cli 
+      junos_command: 
+          commands:
+            - configure private
+            - edit interface em2.999
+            - set description "configured by ansible"
+            - set vlan-id 999 - set family inet address 10.10.20.1/30 
+            - set family inet policer input 2Mbps output 2Mbps
+            - top
+            - show | compare
+            - commit and-quit comment "configured by ansible junos_command"
+            - show configuration interfaces em2.999 
+            - quit
+      register: junos_command
+      when: rollback.changed == true 
+
+    - name: print the results for the junos_command module
+      ignore_errors: yes 
+      debug: msg={{junos_command.stdout_lines[9]}}
+      when: rollback.changed == true 
+...
+</pre>
+
+
+The when statement in the tasks is a conditional. This means this task will only be done if the <code>configuring router interface via junos_config</code> task changes configuration so we need to use when conditional to check if the change flag is true from the first task. We run the playbook as shown below  
+
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578186-f83a7f00-df7d-11e9-8345-3482c845c7e5.png"> -->
+
+<pre>
+pbasondole $ ansible-playbook junosconf.yml -i ./hosts 
+
+PLAY [configuring junos device] *************************************************************** 
+
+TASK [configuring router interface via junos_config module] ***********************************
+<font color="#ff9900">changed: [192.168.56.36]</font>
+
+TASK [rolling back config done by junos_config module] ****************************************
+<font color="#ff9900">changed: [192.168.56.36]</font>
+
+TASK [configuring router interface via junos_command module] **********************************
+<font color="purple"> [WARNING]: arguments wait_for, rpcs are not supported when using transport=cli</font>
+
+<font color="green">ok: [192.168.56.36]</font>
+
+TASK [print the results for the junos_command module] ***************************************** 
+<font color="green">ok: [192.168.56.36] => {
+    "msg": [ 
+       "description \"configured by ansible\";",
+       "vlan-id 999;",
+       "family inet {", 
+       "    policer {",
+       "        input 2Mbps;",
+       "        output 2Mbps;",
+       "    }",
+       "    address 10.10.20.1/30;", 
+       "}"
+      ]
+}
+</font>
+PLAY RECAP ************************************************************************************ 
+<font color="#ff9900">192.168.56.36</font>            :  <font color="green">ok=4</font>      <font color="#ff9900">changed=2</font>     unreachable=0       failed=0 
+</pre>
+
+
+On a separate terminal window we log in to the router and check the commit history, we can verify all the three tasks were executed on the device.  
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578185-f7a1e880-df7d-11e9-8f84-d2bd4a7653e6.png"> -->
+
+<pre>
+pbasondole@box $ ssh fisi@192.168.56.36
+--- JUNOS 12.1R1.9 built 2012-03-24 12:52:33 UTC 
+fisi@big> show system commit 
+0   2019-08-17 00:45:38 UTC by fisi via cli
+    configured by ansible junos_command 
+1   2019-08-17 00:45:33 UTC by fisi via netconf
+    rollback of the config by ansible junos_config 
+2   2019-08-17 00:45:29 UTC by fisi via netconf 
+    configured by ansible junos_config 
+
+</pre>
+
+When we re-run the playbook again no changes are made, this is what is referred to as idempotency which essentially means only make changes when they are needed.
+
+
+
+
+
+
+<h4> Genie</h4>
+Genie is both a library framework and a test harness that facilitates rapid development, encourage re-usable and simplify writing test automation. Genie was initially developed internally in Cisco, and is now available to the general public. Learn more about Genie
+<a href="https://developer.cisco.com/site/pyats/">here</a><br/>
+Genie uses a testbed file to define devices and their respective properties. Below is a sample testbed containing one device with a configured hostname KH16, the name of the device in the testbed must match exactly the configured hostname of the device in question. Note testbeds are written in yaml.
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578476-8878c400-df7e-11e9-966b-2b91b4b1c2b7.png"> -->
+
+<pre>
+pbasondole:baggy@box $ ls 
+testbed.yaml* 
+
+pbasondole:baggy@box $ cat testbed.yaml
+testbed: 
+   name: sample
+   tacacs: 
+      username: fisi
+   passwords:
+      tacacs: fisi123 
+
+devices:
+   KH16:
+      os: iosxe
+      type: csr1000v 
+      platform: csr1000v
+      connections:
+         defaults:
+            class: unicon.Unicon 
+         console: 
+            ip: 192.168.56.26 
+            protocol: ssh
+</pre>
+
+To check whether the testbed file is valid use the command <code>pyats validate testbed testbed-file-path</code> as shown below. If the testbed file is not valid the errors will be displayed, in this case the testbed file is valid however there is a warning message which we’ll ignore.
+  
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578475-8878c400-df7e-11e9-8445-822a507a21e6.png"> -->
+<pre>
+pbasondole:baggy@box $ pyats validate testbed testbed.yaml 
+
+Loading testbed file: testbed.yaml 
+------------------------------------------------------------------------------------------------
+
+Testbed Name:
+    sample
+
+Testbed Devices:
+.
+`-- KH16 [csr1000v/iosxe/csr1000v] 
+
+<font color="#ff9900">Warning Messages 
+----------------
+  - Device 'KH16' has no interface definitions</font>
+
+YAML Lint Messages 
+------------------
+  
+</pre>
+
+Genie offers a learn method which can be used to learn different things from the device(s) specified. In below sample we use learn to gather routing information from the device. 
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578474-8878c400-df7e-11e9-8e0e-f2f1d0d31965.png"> -->
+
+<pre>
+pbasondole:baggy@box $ genie learn routing --testbed-file testbed.yaml
+
+Learning '['routing']' on devices '['KH16']'
+/home/baggy/.local/bin/genie:11: DeprecationWarning: Arguments 'username', 'enable_password','tacacs_password' and 'line_password' are now deprecated and replaced by 'credentials'.
+  sys.exit(main())
+100%|████████████████████████████████████████████████████████████████████████████████| 1/1 [00:04<00:00,  4.59s/it]
++==============================================================================+
+| Genie Learn Summary for device KH16                                          |
++==============================================================================+
+|  Connected to KH16                                                           |
+|  -   Log: ./connection_KH16.txt                                              |
+|------------------------------------------------------------------------------|
+|  Learnt feature 'routing'                                                    |
+|  -  Ops structure:  ./routing_iosxe_KH16_ops.txt                             |
+|  -  Device Console: ./routing_iosxe_KH16_console.txt                         |
+|==============================================================================|
+</pre>
+
+The operation produces three files in the directory. The connection_KH16.txt file contains what genie did as it sets up the connection to the device. The <code>routing_iosxe_KH16_console.txt</code> contains all the commands sent to the device cli and their respective outputs and finally <code>routing_iosxe_KH16_ops.txt</code> contains the parsed structured data.
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578478-89115a80-df7e-11e9-821d-b02b06dda6d7.png"> -->
+
+<pre>
+pbasondole:baggy@box $ tree
+.
+├── connection_KH16.txt
+├── interfaces.csv
+├── routing_iosxe_KH16_console.txt
+├── routing_iosxe_KH16_ops.txt
+└── testbed.yaml
+</pre>
+
+Refer below snapshot for the preview of the contents of each of the three files
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578477-89115a80-df7e-11e9-9c50-2cc466c758b2.png"> -->
+
+<pre>
+pbasondole:baggy@box $ head *.txt
+<b>==> connection_KH16.txt <==</b>
+[2019-08-25 23:45:58,825] +++ KH16 logfile ./connection_KH16.txt +++
+[2019-08-25 23:45:58,826] +++ Unicon plugin iosxe +++
+Password:
+[2019-08-25 23:46:01,505] +++ connection to spawn: ssh -l fisi 192.168.56.26, id: 140588126939064 +++
+[2019-08-25 23:46:01,505] connection to KH16
+
+
+
+
+KH16#
+
+<b>==> routing_iosxe_KH16_console.txt <==</b>
++++ KH16: executing command 'show vrf detail' +++
+show vrf detail
+VRF management (VRF Id = 1); default RD <not set>; default VPNID <not set>
+  New CLI format, supports multiple address-families
+  Flags: 0x1808
+  No interfaces
+Address family ipv4 unicast (Table ID = 0x1):
+  Flags: 0x0
+  No Export VPN route-target communities
+  No Import VPN route-target communities
+
+<b>==> routing_iosxe_KH16_ops.txt <==</b>
+{
+  "_exclude": [],
+  "attributes": null,
+  "commands": null,
+  "connections": null,
+  "context_manager": {},
+  "info": {
+    "ipv6_unicast_routing_enabled": true,
+    "vrf": {
+      "default": {
+</pre>
+
+
+
+<h4>Talktous</h4>
+Talk to us is a command line tool written by Paul S.I. Basondole on top of paramiko library. The tool provides a quick and easy way to send multiple commands to multiple devices and producing an intuitive output. These arguments can be loaded from a file or specified on cli at runtime. Talktous does not support ssh keys however it has the ability to cache ssh login username and password in an encrypted format and thus does not have to type in credentials every time an operation is ran on remote devices.
+In below demonstration we use talktous to request for bgp summary information from the two devices 192.168.56.36 running junos and 192.168.56.63 running ios, we also see the login credentials were retrieved from a prior execution.
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/65578647-dbeb1200-df7e-11e9-8c56-b8e3bc8c9f1f.png"> -->
+
+<pre>
+C:\Users\u>talktous -commands "show bgp summary" -ipaddress "192.168.56.36:192.168.56.63"
+
+INFO: username and password auto-retrieved
+
+[192.168.56.63]
+
+   show bgp summary
+   ----------------
+   BGP router identifier 192.168.142.63, local AS number 64512
+   BGP table version is 2, main routing table version 2
+   1 network entries using 144 bytes of memory
+   1 path entries using 80 bytes of memory
+   1/1 BGP path/bestpath attribute entries using 136 bytes of memory
+   0 BGP route-map cache entries using 0 bytes of memory
+   0 BGP filter-list cache entries using 0 bytes of memory
+   BGP using 360 total bytes of memory
+   BGP activity 1/0 prefixes, 1/0 paths, scan interval 60 secs
+
+   Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+   192.168.56.15   4        64512       0       0        1    0    0 never    Idle
+   192.168.56.26   4        64512       0       0        1    0    0 never    Idle
+
+
+[192.168.56.36]
+
+   show bgp summary
+   ----------------
+   Groups: 4 Peers: 6 Down peers: 6
+   Table          Tot Paths  Act Paths Suppressed    History Damp State    Pending
+   inet.0                 0          0          0          0          0          0
+   bgp.l3vpn.0            0          0          0          0          0          0
+   bgp.l2vpn.0            0          0          0          0          0          0
+   inetflow.0             0          0          0          0          0          0
+   Peer                  AS     InPkt   OutPkt  OutQ  Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+   10.36.100.2           64512   0        0      0     0        6:49 Connect
+   10.36.100.2           64518   0        0      0     0        6:49 Connect
+   192.168.0.15          64512   0        0      0     0        6:49 Connect
+   192.168.56.2          64512   0        0      0     0        6:49 Connect
+   192.168.56.18         64512   0        0      0     0        6:49 Connect
+   192.168.56.26         64512   0        0      0     0        6:49 Connect
+
+
+
+
+INFO: Developed by Paul S.I. Basondole
+</pre>
+
+
+
+
+                        </div>
+
+
+                        <h3 id="Ansible" style="text-align: center;"><a href="#">
+                          <strong>Ansible</strong><strong>.</strong>
+                        </a></h3>
+                        <div>
+
+<h4><strong>Introduction</strong></h4>
+
+<p>
+Ansible is an open-source automation tool, or platform, used for IT tasks such as configuration management, application deployment, intraservice orchestration and provisioning.
+
+Ansible uses playbooks to perform tasks. Essentially a play book consists of one or more tasks to be performed by modules
+There are different modules for different operations such as copying files, sending shell comands etc
+
+These tasks are performed against specified host(s) as specified in the play. Generaly however the hosts must be defined in the ansible hosts file
+
+A simple task can also be executed by using ad-hoc command, this means no play book is required and the command can be simply run on terminal specifying the module to use and the hosts.
+</p>
+
+Creating the invetory file for our devices
+<pre>
+basondole@box $ cat hosts
+[routers]
+192.168.56.36 ansible_network_os=junos ansible_ssh_user=fisi  ansible_ssh_password=fisi123
+192.168.56.26 ansible_network_os=ios ansible_ssh_user=fisi  ansible_ssh_password=fisi123
+</pre>
+
+
+<h4><strong> Ad-hoc commands </strong></h4>
+In below examples we are issuing the <code>show system alarms</code> commnad to a junos device using two different modules
+thats is the <code>raw</code> module and the <code>junos_command</code> module  
+<pre>
+$ ansible -m raw -a "show system alarms" 192.168.56.36 -i ./hosts
+192.168.56.36 | SUCCESS | rc=0 >>
+<b>No alarms currently active</b>
+Shared connection to 192.168.56.36 closed.
+</pre>
+
+<pre>
+$ ansible -m junos_command -a "commands='show sys alarm'" -c network_cli 192.168.56.36 -i ./hosts
+ [WARNING]: arguments wait_for, match, rpcs are not supported when using transport=cli
+
+192.168.56.36 | SUCCESS => {
+    "changed": false,
+    "stdout": [
+        "show system alarms \nNo alarms currently active"
+    ],
+    "stdout_lines": [
+        [
+            "show system alarms ",
+            <b>"No alarms currently active"</b>
+        ]
+    ]
+}
+</pre>
+
+<h4> Playbooks</h4>
+
+In the example below a playbook runs and gets the uptime of junos and cisco ios device
+
+<pre>
+basondole@box $ cat uptime.yml
+---
+   - hosts: routers
+     gather_facts: no
+     ignore_errors: yes
+     vars:
+        ansible_ssh_user: fisi
+        ansible_ssh_password: fisi123
+
+     tasks:
+         - name: check uptime juniper
+           raw: show system uptime | match boot
+           register: junos_uptime
+           when: ansible_network_os == "junos"
+
+         - name: check uptime cisco
+           raw: show ver | i uptime
+           register: cisco_uptime
+           when: ansible_network_os == "ios"
+
+         - name: print the uptime
+           debug: var=junos_uptime.stdout
+           debug: msg="{{ cisco_uptime.stdout }}"
+
+</pre>
+
+<h5> Running the playbook</h5>
+
+<pre>
+basondole@box $ ansible-playbook router_uptime_playbook.yml  -i hosts  -v            
+Using /etc/ansible/ansible.cfg as config file
+
+PLAY [routers] ********************************************************************************
+
+TASK [check uptime juniper] *******************************************************************
+skipping: [192.168.56.26] => changed=false
+  skip_reason: Conditional result was False
+changed: [192.168.56.36] => changed=true
+  rc: 0
+  stderr: |-
+    Shared connection to 41.188.128.120 closed.
+  stdout: |-
+    <b>System booted: 2019-05-21 16:38:27 EAT (12w3d 23:26 ago)</b>
+  stdout_lines: <omitted>
+
+TASK [check uptime cisco] *********************************************************************
+skipping: [192.168.56.36] => changed=false
+  skip_reason: Conditional result was False
+changed: [192.168.56.26] => changed=true
+  rc: 0
+  stderr: |-
+    Shared connection to 41.188.128.41 closed.
+  stdout: |-
+    <b>router01 uptime is 22 weeks, 2 days, 6 hours, 27 minutes</b>
+  stdout_lines: <omitted>
+
+PLAY RECAP ************************************************************************************
+192.168.56.36             : ok=1    changed=1    unreachable=0    failed=0
+192.168.56.26             : ok=1    changed=1    unreachable=0    failed=0
+</pre>
+
+After a playbook completes you get a recap of the tasks done
+
+
+<h4> Note</h4>
+To get more information about a module<br/>
+<code>$ ansible-doc module-name</code><br/>
+
+To check what documentation is availbale<br/>
+<code>$ ansible-doc -l</code>
+
+
+                        </div>
+
+
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
+                  <!-- end post_body -->
+
+                </article>
+
+                <div class="author_info_container author_single_box">
+                  <div class="row">
+                    <div class="author_avatar_col col">
+                      <a class="author_avatar_url" href="about"><img alt='' src='all-baggy.jpg' srcset='all-baggy.jpg' class='avatar avatar-150 photo' height='150' width='150' /></a>
+                    </div>
+                    <div class="author_info_col col">
+                      <div class="author_box_info_header">
+                        <h2 class="author_display_name title">
+                          <a class="author_name_url url fn n" href="">Paul S.I. Basondole </a>
+                        </h2>
+
+                      </div>
+                      <div class="author_description">
+IT &amp; Network Expert / Lead <br>
+Network & Automation designer; <br>
+2x JNCIP (RS/SP) 1x CCNP (RS) <br>
+BSc Telecommunications Eng.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- close col12 just inside .full_width_list -->
+            </div>
+            <!-- close .full_width_list -->
+            <!-- close col and row in case of sidebar layout -->
+            <!-- end check for post layout -->
+          </section>
+          <!-- #primary -->
+        </main>
+
+
+        <!-- #content -->
+        <footer id="colophon" class="site_footer container" role="contentinfo">
+          <div class="footer_credits footers_active_sidebars_0">
+            &copy; 2020 basondole.io
+          </div>
+          <div id="aliagototop" title="Scroll To Top" class="alia_gototop_button footer_button">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </footer>
+
+        <!-- #colophon -->
+      </div>
+
+      <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+      <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+      <div class="sliding_close_helper_overlay"></div>
+      <div class="site_side_container">
+        <h3 class="screen-reader-text">
+          Sliding Sidebar
+        </h3>
+        <div class="info_sidebar">
+          <div class="top_header_items_holder mobile_menu_opened">
+            <div class="main_menu">
+              <ul id="mobile-menu" class="navbar">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu">
+                  <a href="index.html">Home</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu">
+                  <a href="https://github.com/basondole/mpls#introduction">Design</a>
+                </li>
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu">
+                  <a href="https://github.com/basondole/open#hocid">Noculous</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active">
+                  <a href="?post_type=post" data-hover="dropdown" class="dropdown-toggle">Blog</a>
+                  <ul role="menu" class=" dropdown-menu">
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
+                      <a href="https://github.com/basondole/collaboration/blob/master/Setting%20up%20Cisco%20Call%20Manager.md#setting-up-cisco-call-manager-express">Collaboration</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
+                      <a href="codefornetwork.html">Network Automation</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/tutorials">Network Servers</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/netmanagement">Misc</a>
+                    </li>
+                  </ul>
+                </li>
+                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="https://github.com/basondole/bgp">BGP</a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu">
+                  <a href="about.html">About</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-145 menu-item-412 default_menu">
+                  <a href="contact.html">Contact</a>
+                </li>
+                <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
+                  <a href="http://karneliuk.com/donate/">Donate</a> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- end .top_header_items_holder -->
+        </div>
+      </div>
+      <!-- end sliding sidebar content -->
+      <!-- start footer static content -->
+      <!-- start footer static content -->
+    </div>
+    <!-- #page -->
+    <div id="ajax_modal_story" class="ajax_modal ajax_modal_story modal enable_rotate">
+      <div class="story_modal_overlay_helper"></div>
+    </div>
+
+
+    </script>
+
+<!--     <script type='text/javascript'>
+/* <![CDATA[ */
+var alia_vars = { "ajax_accept_cookies": "http:\/\/karneliuk.com\/wp-content\/themes\/alia\/acceptcookies.php" };
+/* ]]> */
+    </script> -->
+    <script type='text/javascript' src='karneliuk/global.1.35.js'></script>
+    <script type='text/javascript'>
+/* <![CDATA[ */
+var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-load-story.php", "ajax_rotate_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-rotate-story.php" };
+/* ]]> */
+    </script>
+    <script type='text/javascript' src='karneliuk/alia-core.1.13.js'></script>
+
+    <script type='text/javascript' src='karneliuk/wp-embed.min.5.3.2.js'></script>
+
+<script src="jquery-1.6.1.js"></script>
+<script src="jquery-ui-1.8.13.min.js"></script>
+<script>
+  window.onload = function () {
+   $("#accordion").accordion({ header: "h3", collapsible: true, active: false, autoHeight: false });
+};
+</script>
+
+<script type="text/javascript">
+  // $("p").hide();
+  // $("p").show(4000);
+</script>
+
+
+
+
+
+  </body>
+</html>
