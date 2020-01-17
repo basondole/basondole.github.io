@@ -23,6 +23,9 @@
 <link rel='stylesheet' id='alia-style-css'  href='karneliuk/alia.style.1.35.css' type='text/css' media='all' />
 <link rel='stylesheet' id='fontawesome-css'  href='karneliuk/all.min.1.0.css' type='text/css' media='all' />
 
+
+<!-- <link rel='stylesheet' id='alia-customstyle-css'  href='http://karneliuk.com/wp-content/themes/alia/assets/css/customstyle.css?ver=5.3.2' /> -->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel='stylesheet' id='codecolorer-css'  href='karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
 
@@ -30,7 +33,10 @@
 <link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-192x192.jpg" sizes="192x192" />
 
 <link rel='https://api.w.org/' href='karneliuk/wp-json' />
-
+<!-- <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://karneliuk.com/xmlrpc.php?rsd" /> -->
+<!-- <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://karneliuk.com/wp-includes/wlwmanifest.xml" /> -->
+<!-- <link rel="apple-touch-icon-precomposed" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-180x180.jpg" /> -->
+<!-- <meta name="msapplication-TileImage" content="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-270x270.jpg" /> -->
 
 <script type='text/javascript' src='karneliuk/jquery-1.12.4-wp.js'></script>
 <script type='text/javascript' src='karneliuk/jquery-migrate.min-1.4.1.js'></script>
@@ -332,6 +338,9 @@ div.contacts {
 
 
 
+
+
+
 <body class="home blog sticky_header header_logo_rounded text_posts_unbordered masonry_effect_enabled show_menu_circle_idicator sliding_sidebar_inactive">
 
 <div id="page" class="site">
@@ -383,19 +392,6 @@ div.contacts {
           <!-- Place header control before main menu if site title is enabled -->
           <div class="header_controls">
 
-            <!-- start search box -->
-<!--            <div class="header_search header_control_wrapper">
-              <form class="search clearfix animated searchHelperFade" method="get" id="searchform" action="http://karneliuk.com/">
-                <input class="col-md-12 search_text" id="appendedInputButton" placeholder="Hit enter to search" type="text" name="s" autocomplete="off">
-                <div class="search_form_icon">
-                  <i class="fa fa-search header_control_icon"></i>
-                  <input type="hidden" name="post_type" value="post" />
-                  <input type="submit" class="search_submit" id="searchsubmit" value="" />
-                </div>
-              </form>
-            </div> -->
-            <!-- end search box -->
-
             <div class="header_sliding_sidebar_control header_control_wrapper">
               <a id="user_control_icon" class="sliding_sidebar_button" href="#">
                 <i class="fa fa-bars header_control_icon"></i>
@@ -410,7 +406,7 @@ div.contacts {
               <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html">Home</a></li>
               <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li>
               <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">Noculous</a></li>
-              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu"><a href="blog.html" data-hover="dropdown" class="dropdown-toggle">Blog</a>
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="blog.html" data-hover="dropdown" class="dropdown-toggle">Blog</a>
                 <ul role="menu" class=" dropdown-menu">
                   <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="blog/collaboration/index.html">Collaboration</a></li>
                   <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="blog/networkauto/index.html">Network Automation</a></li>
@@ -420,7 +416,7 @@ div.contacts {
               </li>
               <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html">BGP</a></li>
               <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html">About</a></li>
-              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu current-menu-item current_page_item active"><a href="contact.html">Contact</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="contact.html">Contact</a></li>
               <!-- <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="http://karneliuk.com/donate/">Donate</a></li> -->
             </ul>
             <span class="menu_mark_circle hidden_mark_circle"></span>
@@ -433,36 +429,91 @@ div.contacts {
     </div><!-- end .header_nav_wrapper -->
     </header>
 
-
         <main id="content" class="site-content">
           <section id="primary" class="container main_content_area">
             <!-- end check for post layout -->
             <div class="row full_width_page_single no_sidebar_post_single">
               <div class="col12">
-                <article id="post-145" class="blog_page_container post-145 page type-page status-publish">
-                  
+                <article id="post-182" class="blog_page_container post-182 page type-page status-publish">
 
                   <div class="page_body">
                     <div class="post_info_wrapper">
                       <div class="entry-content blog_page_text blog_page_description">
-                        <div class="row">
-                          <div class="post_header post_header_single">
-                            <h5>
-                              <strong>Let's find how we can bring benefits to each other. Get intouch<br />
-                              </strong>
-                            </h5>
-
-                            <ul>
-                              <li>If you have questions about materials on this site</li>
-                              <li>If you want to propose topics to be covered</li>
-                              <li>If you want to buy consulting/training service or hire me</li>
-                              <li>If you want to propose a joint project</li>
-                              <li>If you want collaboration in new projects and other partnership</li>
-                            </ul>
 
 
-                          </div>
+<!-- ============================ CONTENT ============================================ -->
 
+
+                  <div class="post_body has_post_banner">
+                    <div class="post_header">
+                      <h3 class="entry-title title post_title">
+                        Setting up Cisco Call Manager
+                      </h3>
+                    </div>
+                    <div class="post_meta_container clearfix">
+
+                      <div class="post_meta_info post_meta_row clearfix">
+
+                        <span class="post_meta_item meta_item_category">
+                          <i class="fa fa-align-left standardpost_format_icon post_meta_icon post_fromat_icon"></i>
+                          <a href="" rel="category tag">Collaboration</a>
+                        </span>
+                        <a class="post_date_link" href="">
+                          <span class="post_meta_item meta_item_date"><span class="screen-reader-text"></span>
+                            <time class="entry-date published updated" datetime="2019-07-27T19:23:06+00:00">July 27, 2019</time>
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="post_info_wrapper">
+                      <div class="entry-summary blog_post_text blog_post_description">
+                        The objective is to configure a call manager for users to make internal calls in a SOHO environment. &#8230;
+                        <div class="blog_post_control_item blog_post_readmore">
+                          <a href="blog/collaboration/SettingUpCiscoCallManagerExpress.html" class="more-link">Continue reading<span class="continue_reading_dots"><span class="continue_reading_squares"><span></span><span></span><span></span><span></span></span>
+                              <i class="fa fa-chevron-right readmore_icon"></i>
+                            </span>
+                          </a>
+
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
+                  <!-- end post_body -->
+
+
+                  <div class="post_body has_post_banner">
+                    <div class="post_header">
+                      <h3 class="entry-title title post_title">
+                        Guide to network automation
+                      </h3>
+                    </div>
+                    <div class="post_meta_container clearfix">
+
+                      <div class="post_meta_info post_meta_row clearfix">
+
+                        <span class="post_meta_item meta_item_category">
+                          <i class="fa fa-align-left standardpost_format_icon post_meta_icon post_fromat_icon"></i>
+                          <a href="" rel="category tag">Automation</a>
+                        </span>
+                        <a class="post_date_link" href="">
+                          <span class="post_meta_item meta_item_date"><span class="screen-reader-text"></span>
+                            <time class="entry-date published updated" datetime="2019-09-25T10:33:06+00:00">September 25, 2019</time>
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="post_info_wrapper">
+                      <div class="entry-summary blog_post_text blog_post_description">
+                        Python offers support to interact with our network devices for management and administration by using different sets of libraries. &#8230;
+                        <div class="blog_post_control_item blog_post_readmore">
+                          <a href="blog/networkauto/index.html" class="more-link">Continue reading<span class="continue_reading_dots"><span class="continue_reading_squares"><span></span><span></span><span></span><span></span></span>
+                              <i class="fa fa-chevron-right readmore_icon"></i>
+                            </span>
+                          </a>
+
+                          
                         </div>
                       </div>
                     </div>
@@ -471,21 +522,52 @@ div.contacts {
 
 
 
+
+
+
+
+
+
+                        
+                        
+
+
+
+
+
+
+
+
+
+
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
                   <!-- end post_body -->
+
                 </article>
+
+
 
                 <div class="author_info_container author_single_box">
                   <div class="row">
-
-                    <div class="author_info_col col">
-
-                    <div class="social_icons_list">
-                      <a rel="nofollow" target="_blank" href="https://t.me/bassosimons" title="Telegram" class="social_icon widget_social_icon">Telegram <i class="fa fa-paper-plane"></i></a>
-                      <!-- <br> -->
-                      <a rel="nofollow" target="_blank" href="https://join.skype.com/invite/kDCe69W4K5bO" title="skype" class="social_icon widget_social_icon">Skype <i class="fa fa-skype"></i></a>
-                      <!-- <br> -->
-                      <a rel="nofollow" target="_blank" href="mailto:bassosimons@me.com" title="bassosimons@me.com" class="social_icon widget_social_icon">Mail <i class="fa fa-at"></i></a>
+                    <div class="author_avatar_col col">
+                      <a class="author_avatar_url" href="about"><img alt='' src='img/all-baggy.jpg' srcset='img/all-baggy.jpg' class='avatar avatar-150 photo' height='150' width='150' /></a>
                     </div>
+                    <div class="author_info_col col">
+                      <div class="author_box_info_header">
+                        <h2 class="author_display_name title">
+                          <a class="author_name_url url fn n" href="">Paul S.I. Basondole </a>
+                        </h2>
+
+                      </div>
+                      <div class="author_description">
+IT &amp; Network Expert / Lead <br>
+Network & Automation designer; <br>
+2x JNCIP (RS/SP) 1x CCNP (RS) <br>
+BSc Telecommunications Eng.
+                      </div>
                       <div class="stories_circles_wrapper"></div>
                     </div>
                   </div>
@@ -508,12 +590,12 @@ div.contacts {
             <i class="fa fa-arrow-up"></i>
           </div>
         </footer>
+
         <!-- #colophon -->
       </div>
-
-
-
       <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+     <!-- .site_main_container -->
       <!-- start sliding sidebar content -->
       <div class="sliding_close_helper_overlay"></div>
       <div class="site_side_container">
@@ -551,14 +633,14 @@ div.contacts {
                   </ul>
                 </li>
                 <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html">BGP</a></li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu">
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
                   <a href="about.html">About</a>
                 </li>
                 <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-145 current_page_item menu-item-412 default_menu active">
                   <a href="contact.html">Contact</a>
                 </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
-                  <!-- <a href="http://karneliuk.com/donate/">Donate</a> -->
+                <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
+                  <a href="http://karneliuk.com/donate/">Donate</a> -->
                 </li>
               </ul>
             </div>
@@ -577,11 +659,6 @@ div.contacts {
 
 
     </script>
-<!--     <script type='text/javascript'>
-/* <![CDATA[ */
-var alia_vars = { "ajax_accept_cookies": "http:\/\/karneliuk.com\/wp-content\/themes\/alia\/acceptcookies.php" };
-/* ]]> */
-    </script> -->
 
     <script type='text/javascript' src='karneliuk/global.1.35.js'></script>
 
@@ -596,6 +673,7 @@ var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/p
     <script type='text/javascript' src='karneliuk/alia-core.1.13.js'></script>
     <script type='text/javascript' src='karneliuk/wp-embed.min.5.3.2.js'></script>
 
+    
 
 
   </body>

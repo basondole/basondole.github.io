@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js no-svg">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+
+<title>basondole.io &#8211; Network design and development, 2x JNCIP (ENT/SP) 1x CCNP (RS), BSc.</title>
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link crossorigin="anonymous" rel='stylesheet' id='alia-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700%2C700i%7CPoppins%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+
+<link rel='stylesheet' id='wp-block-library-css'  href='karneliuk/style.min.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='github-embed-css'  href='karneliuk/github-embed.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-lightbox-swipebox-css'  href='karneliuk/swipebox.min.2.2.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='alia-style-css'  href='karneliuk/alia.style.1.35.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-css'  href='karneliuk/all.min.1.0.css' type='text/css' media='all' />
+
+
+<!-- <link rel='stylesheet' id='alia-customstyle-css'  href='http://karneliuk.com/wp-content/themes/alia/assets/css/customstyle.css?ver=5.3.2' /> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' id='codecolorer-css'  href='karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
+
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-192x192.jpg" sizes="192x192" />
+
+<link rel='https://api.w.org/' href='karneliuk/wp-json' />
+
+
+<script type='text/javascript' src='karneliuk/jquery-1.12.4-wp.js'></script>
+<script type='text/javascript' src='karneliuk/jquery-migrate.min-1.4.1.js'></script>
+<script type='text/javascript' src='karneliuk/ouibounce-5.3.2.js'></script>
+
+
+<script type="text/javascript">
+  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"karneliuk/wp-emoji-release.min.5.3.2.js"}};
+  !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+
+<style type="text/css">
+  img.wp-smiley,
+  img.emoji {
+    display: inline !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 1em !important;
+    width: 1em !important;
+    margin: 0 .07em !important;
+    vertical-align: -0.1em !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+</style>
+
+
+<style id='cm_ouibounce_css-inline-css' type='text/css'>
+
+            #ouibounce-modal .modal {
+                    width: 640px;
+//                    min-height: 356px;
+                    height: 356px;
+                    background-color: #f0f1f2;
+                    z-index: 1;
+                    position: absolute;
+                    margin: auto;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    display: flex;
+                    overflow: visible;
+                    opacity: 1;
+                    max-width: 85%;
+                    max-height: 85%;
+                    border-radius: 4px;
+                    -webkit-animation: popin 1.0s;;
+          -moz-animation: popin 1.0s;;
+          -o-animation: popin 1.0s;;
+                    animation: popin 1.0s;;
+          align-items: center;justify-content: center;
+                  }#ouibounce-modal .underlay {background-color: rgba(0,0,0,0.5);}#ouibounce-modal .modal .modal-body *:not(iframe) {
+            max-width: 100%;
+            height: auto;
+            max-height: 99%;
+        }
+        #ouibounce-modal .modal .modal-body iframe {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 0;
+        }
+</style>
+
+
+
+<style id='alia-customstyle-inline-css' type='text/css'>
+  body  {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, .title, .text_logo, .comment-reply-title, .header_square_logo a.square_letter_logo  {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  a  {
+    color: #ff374a;
+  }
+
+  input[type='submit']:hover  {
+    background-color: #ff374a;
+  }
+
+  .main_color_bg  {
+    background-color: #ff374a;
+  }
+
+  .main_color_text  {
+    color: #ff374a;
+  }
+
+  .social_icons_list.header_social_icons .social_icon:hover  {
+    color: #ff374a;
+  }
+
+  .header_square_logo a.square_letter_logo  {
+    background-color: #ff374a;
+  }
+
+  .header_nav .text_logo a span.logo_dot  {
+    background-color: #ff374a;
+  }
+
+  .header_nav .main_menu .menu_mark_circle  {
+    background-color: #ff374a;
+  }
+
+  .full_width_list .post_title a:hover:before  {
+    background-color: #ff374a;
+  }
+
+  .full_width_list .post_title a:hover:after  {
+    background: linear-gradient(to right,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -ms-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -o-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -moz-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-gradient(linear,left top,right top,color-stop(0%,#ff374a),color-stop(35%,#ff374a),color-stop(65%,#ff374a),color-stop(100%,#FFF));
+    ;       }
+
+  .grid_list .post_title a:hover:before  {
+    background-color: #ff374a;
+  }
+
+  .grid_list .post_title a:hover:after  {
+    background: linear-gradient(to right,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -ms-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -o-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -moz-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-gradient(linear,left top,right top,color-stop(0%,#ff374a),color-stop(35%,#ff374a),color-stop(65%,#ff374a),color-stop(100%,#FFF));
+    ;       }
+
+  .two_coloumns_list .post_title a:hover:before  {
+    background-color: #ff374a;
+  }
+
+  .two_coloumns_list .post_title a:hover:after  {
+    background: linear-gradient(to right,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -ms-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -o-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#FFF 100%);
+    background: -moz-linear-gradient(left,#ff374a 0,#ff374a 35%,#ff374a 65%,#fff 100%);
+    background: -webkit-gradient(linear,left top,right top,color-stop(0%,#ff374a),color-stop(35%,#ff374a),color-stop(65%,#ff374a),color-stop(100%,#FFF));
+    ;       }
+
+  .post_meta_container a:hover  {
+    color: #ff374a;
+  }
+
+  .post.sticky .blog_meta_item.sticky_post  {
+    color: #ff374a;
+  }
+
+  .blog_post_readmore a:hover .continue_reading_dots .continue_reading_squares > span  {
+    background-color: #ff374a;
+  }
+
+  .blog_post_readmore a:hover .continue_reading_dots .readmore_icon  {
+    color: #ff374a;
+  }
+
+  .comment-list .reply a:hover  {
+    color: #ff374a;
+  }
+
+  .comment-list .reply a:hover .comments_reply_icon  {
+    color: #ff374a;
+  }
+
+  form.comment-form .form-submit input:hover  {
+    background-color: #ff374a;
+  }
+
+  .comment-list .comment.bypostauthor .comment-content:before  {
+    border-top-color: #ff374a;
+    border-left-color: #ff374a;
+  }
+
+  .comments-area a:hover  {
+    color: #ff374a;
+  }
+
+  .newsletter_susbcripe_form label .asterisk  {
+    color: #ff374a;
+  }
+
+  .newsletter_susbcripe_form .mce_inline_error  {
+    color: #ff374a!important;
+  }
+
+  .newsletter_susbcripe_form input[type='submit']:hover  {
+    background-color: #ff374a;
+  }
+
+  .widget_content #mc_embed_signup input[type='submit']:hover  {
+    background-color: #ff374a;
+  }
+
+  .social_icons_list .social_icon:hover  {
+    color: #ff374a;
+  }
+
+  .alia_post_list_widget .post_info_wrapper .title a:hover  {
+    color: #ff374a;
+  }
+
+  .tagcloud a:hover  {
+    color: #ff374a;
+  }
+
+  .navigation.pagination .nav-links .page-numbers.current  {
+    background-color: #ff374a;
+  }
+
+  .navigation_links a:hover  {
+    background-color: #ff374a;
+  }
+
+  .page-links > a:hover, .page-links > span  {
+    background-color: #ff374a;
+  }
+
+  .story_circle:hover  {
+    border-color: #ff374a;
+  }
+
+  .see_more_circle:hover  {
+    border-color: #ff374a;
+  }
+
+  .main_content_area.not-found .search-form .search_submit  {
+    background-color: #ff374a;
+  }
+
+  .blog_list_share_container .social_share_item_wrapper a.share_item:hover  {
+    color: #ff374a;
+  }
+
+  .widget_content ul li a:hover  {
+    color: #ff374a;
+  }
+
+  .footer_widgets_container .social_icons_list .social_icon:hover  {
+    color: #ff374a;
+  }
+
+  .footer_widgets_container .widget_content ul li a:hover  {
+    color: #ff374a;
+  }
+
+  .cookies_accept_button  {
+    background-color: #ff374a;
+  }
+
+  .alia_gototop_button > i  {
+    background-color: #ff374a;
+  }
+
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-twitter {
+  background: white;
+  color: #55ACEE;
+}
+
+.fa-linkedin {
+  background: white;
+  color: #007bb5;
+}
+
+/*.fa-skype {
+  background: white;
+  color: #125688;
+}*/
+
+.fa-telegram {
+  background: white;
+  color: #55ACEE;
+}
+
+div.contacts {
+  text-align: center;
+}
+</style>
+
+<style>
+  pre {
+    /*font-size:12px;*/
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0;
+  }
+  .entry-content ol {
+    padding-left: 0;
+    margin-left: 32px;
+  }
+/*  .ui-accordion .ui-accordion-content {
+      padding-bottom: 0px;
+      padding-top: 0px;
+  }*/
+
+</style>
+
+
+
+<meta name="generator" content="WordPress 5.3.2" />
+
+</head>
+
+
+
+<body class="home blog sticky_header header_logo_rounded text_posts_unbordered masonry_effect_enabled show_menu_circle_idicator sliding_sidebar_inactive">
+
+<div id="page" class="site">
+
+  <div class="site_main_container">
+
+    <header class="site_header">
+      
+    <div class="gray_header"  >
+      <div class="container site_header">
+        <div class="header_square_logo">
+          <style>.site_logo_image { width : 120px; }.site_logo_image { height : 120px; }</style>
+          <a class="alia_logo retina_logo" title="basondole.io" href="index.html" rel="home">
+            <img  width=120 height=120 src="img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+    
+          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="index.html" rel="home">
+          <img  width=120 height=120 src="img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+
+          <h1 class="screen-reader-text site_logo site-title clearfix">basondole.io</h1>
+
+        </div>
+
+        <div class="header_tagline">
+          Multivendor network design, development and automation for enterprise and service provider fabrics. Skills that matter
+        </div>
+
+        <div class="social_icons_list header_social_icons">
+          <a rel="nofollow" target="" href="https://twitter.com/misterbigpaul" title="Twitter" class="social_icon widget_social_icon social_twitter social_icon_twitter"><i class="fa fa-twitter"></i></a>
+          <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/paul-i-2b3013108" title="Linked In" class="social_icon widget_social_icon social_linkedin social_icon_linkedin"><i class="fa fa-linkedin"></i></a>
+          <a rel="nofollow" target="_blank" href="https://github.com/basondole" title="Github" class="social_icon widget_social_icon social_github social_icon_github"><i class="fa fa-github"></i></a>
+
+          <a rel="nofollow" target="_blank" href="https://stackoverflow.com/users/12078639/bassosimons" title="stackoverflow" class="social_icon widget_social_icon"><i class="fa fa-rss"></i></a>
+
+        </div>
+      </div>
+
+    </div>
+        
+    <div class="header_nav_wrapper">
+
+      <div class="header_nav">
+
+        <div class="container">
+          <div class="site_branding">
+          <h1 class="text_logo"><a href="index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
+          </div>
+          
+
+          <!-- Place header control before main menu if site title is enabled -->
+          <div class="header_controls">
+
+            <div class="header_sliding_sidebar_control header_control_wrapper">
+              <a id="user_control_icon" class="sliding_sidebar_button" href="#">
+                <i class="fa fa-bars header_control_icon"></i>
+              </a>
+            </div>
+        
+          </div>
+    
+
+          <div class="main_menu">
+            <ul id="top-menu" class="navbar">
+              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html">Home</a></li>
+              <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li>
+              <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">Noculous</a></li>
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="blog.html" data-hover="dropdown" class="dropdown-toggle">Blog</a>
+                <ul role="menu" class=" dropdown-menu">
+                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="blog/collaboration/index.html">Collaboration</a></li>
+                  <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="blog/networkauto/index.html">Network Automation</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/tutorials">Network Servers</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/netmanagement">Misc</a></li>
+                </ul>
+              </li>
+              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html">BGP</a></li>
+              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html">About</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="contact.html">Contact</a></li>
+              <!-- <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="http://karneliuk.com/donate/">Donate</a></li> -->
+            </ul>
+            <span class="menu_mark_circle hidden_mark_circle"></span>
+          </div>
+              
+        <!-- Place header control after main menu if site title is enabled -->
+          
+        </div><!-- end .container -->
+      </div><!-- end .header_nav -->
+    </div><!-- end .header_nav_wrapper -->
+    </header>
+
+
+        <main id="content" class="site-content">
+          <section id="primary" class="container main_content_area">
+            <!-- end check for post layout -->
+            <div class="row full_width_page_single no_sidebar_post_single">
+              <div>
+                <!-- <article id="post-182" class="blog_page_container post-182 page type-page status-publish"> -->
+
+                  <div class="page_body">
+
+                    <!-- <div class="post_info_wrapper"> -->
+
+                      <div id="accordion" class="entry-content blog_page_text blog_page_description">
+
+                        <h3 id="Python" style="text-align: center;"><a href="#">
+                          <strong>BGP Conditional Advertisement</strong><strong>.</strong>
+                        </a></h3>
+                        <div>
+
+This features allows for advertisement of routes to other neighbours only when a specific condition is met. Particularly by checking the existence of another prefix in the BGP RIB such that the advertisement of a specific prefix or set of prefixes depends on the existence or inexistence of another prefix in the bgp table.
+
+<h4>Objective</h4>
+<code>AS64513</code> is the source of the prefix <code>172.31/16</code> which it announce to its two peers in <code>AS64512</code> and <code>AS64515</code> who in turn announce it to <code>AS64516</code>. <code>AS64516</code> itself is a source of two prefixes <code>10.1.1/24</code> and <code>172.18.0/24</code>. The objective is to have <code>AS64516</code> announce the prefix <code>10.1.1/24</code> to <code>AS64515</code> only when <code>AS64515</code> announces the prefix <code>172.31/16</code> (from <code>AS64513</code>) to <code>AS64516</code>. When <code>AS64515</code> is not advertising <code>172.31/16</code> to <code>AS64516</code>, <code>AS64516</code> should stop advertising its prefix <code>10.1.1/24</code> to <code>AS64515</code> while still advertising the other prefixes (except <code>10.1.1/24</code>) to <code>AS64515</code> as well as advertising <code>10.1.1/24</code> and other prefixes to <code>AS64512</code>.
+
+<p>
+<img width="674" alt="BGP Conditional advertisement" src="https://user-images.githubusercontent.com/50369643/62410542-86822c80-b5ef-11e9-97a0-df67ea571029.png">
+
+
+<h4> Configuration</h4>
+
+<h5>AS64516</h5>
+
+<pre>
+interface FastEthernet0/0
+ description CONNECTION TO AS64515
+ ip address 10.0.0.10 255.255.255.252
+!
+interface FastEthernet0/1
+ description CONNECTION TO AS64512
+ ip address 10.0.0.13 255.255.255.252
+!
+router bgp 64516
+ neighbor 10.0.0.9 remote-as 64515
+ neighbor 10.0.0.14 remote-as 64512
+ !
+ address-family ipv4
+  network 10.1.1.0 mask 255.255.255.0
+  network 172.18.0.0 mask 255.255.255.0
+  neighbor 10.0.0.9 activate
+  <b>neighbor 10.0.0.9 advertise-map MAP_AS64515_CONDITIONAL_OUT exist-map MAP_AS64513_FROM_AS64515</b>
+  neighbor 10.0.0.9 soft-reconfiguration inbound
+  neighbor 10.0.0.14 activate
+  neighbor 10.0.0.14 soft-reconfiguration inbound
+ exit-address-family
+!
+ip as-path access-list 1 permit 64515 64513.*
+!
+ip route 10.1.1.0 255.255.255.0 Null0
+ip route 172.18.0.0 255.255.255.0 Null0
+!
+ip prefix-list PL_AS64513 seq 5 permit 172.31.0.0/16
+!
+ip prefix-list PL_AS64516 seq 5 permit 10.1.1.0/24
+!
+<b>route-map MAP_AS64513_FROM_AS64515 permit 10
+ description MATCH AS64513 PREFIX RECEIVED FROM AS64515
+ match ip address prefix-list PL_AS64513
+ match as-path 1</b>
+!
+<b>route-map MAP_AS64515_CONDITIONAL_OUT permit 10
+ match ip address prefix-list PL_AS64516</b>
+</pre>
+
+The route-maps applied tell the router to use <code> MAP_AS64515_CONDITIONAL_OUT</code> only when the conditions in <code>MAP_AS64513_FROM_AS64515</code> are satisfied if the conditions are not satisfied it does the opposite of what is specified in <code>MAP_AS64515_CONDITIONAL_OUT</code> which in this case the opposite of <code>MAP_AS64515_CONDITIONAL_OUT</code> is to deny prefixes from prefix-list <code>PL_AS64516</code> since the route map <code>MAP_AS64515_CONDITIONAL_OUT</code> does not have any other entries the implicit deny in the end of the route-map turns to allow all that is not matched with the prefix-list <code>PL_AS64516</code>
+
+The configuration on the other routers is just standard BGP stuff.
+
+<h5>AS64513</h5>
+<pre>  
+interface FastEthernet0/0
+ description CONNECTION TO AS64515
+ ip address 10.0.0.1 255.255.255.252
+interface FastEthernet0/1
+ description CONNECTION TO AS64512 
+ ip address 10.0.0.5 255.255.255.252
+router bgp 64513
+ bgp log-neighbor-changes
+ neighbor 10.0.0.2 remote-as 64512
+ neighbor 10.0.0.6 remote-as 64515
+ !
+ address-family ipv4
+  network 172.31.0.0
+  neighbor 10.0.0.2 activate
+  neighbor 10.0.0.6 activate
+ exit-address-family
+ip route 172.31.0.0 255.255.0.0 Null0
+</pre>
+
+<h5> AS64515</h5>
+<pre> 
+interface FastEthernet0/0
+ description CONNECTION TO AS64516
+ ip address 10.0.0.9 255.255.255.252
+interface FastEthernet0/1
+ description CONNECTION TO AS64513
+ ip address 10.0.0.6 255.255.255.252
+router bgp 64515
+ neighbor 10.0.0.5 remote-as 64513
+ neighbor 10.0.0.10 remote-as 64516
+ !
+ address-family ipv4
+  neighbor 10.0.0.5 activate
+  neighbor 10.0.0.10 activate
+  neighbor 10.0.0.10 soft-reconfiguration inbound
+  neighbor 10.0.0.10 route-map MAP_AS64516_OUT out
+ exit-address-family
+ip prefix-list PL_AS6513 seq 5 permit 172.31.0.0/16
+route-map MAP_AS64516_OUT deny 10
+ description DENY AS64513
+ match ip address prefix-list PL_AS6513
+route-map MAP_AS64516_OUT permit 20
+ description PERMIT OTHERS
+</pre>
+
+<h5> AS64512</h5>
+<pre>
+interface FastEthernet0/0
+ description CONNECTION TO AS64513
+ ip address 10.0.0.2 255.255.255.252
+interface FastEthernet0/1
+ description CONNECTION TO AS64516 
+ ip address 10.0.0.14 255.255.255.252
+router bgp 64512
+ bgp log-neighbor-changes
+ neighbor 10.0.0.1 remote-as 64513
+ neighbor 10.0.0.13 remote-as 64516
+ !
+ address-family ipv4
+  network 192.168.0.0 mask 255.255.0.0
+  neighbor 10.0.0.1 activate
+  neighbor 10.0.0.13 activate
+  neighbor 10.0.0.13 soft-reconfiguration inbound
+ exit-address-family
+ip route 192.168.0.0 255.255.0.0 Null0
+</pre>
+
+
+
+                        </div>
+
+
+                        <h3 id="Ansible" style="text-align: center;"><a href="#">
+                          <strong>BGP Flowspec</strong><strong>.</strong>
+                        </a></h3>
+                        <div>
+BGP Flowspec is an alternative and a more granular method to RTBH described in RFC5575 that can be used to mitigate a distributed denial-of-service (DDoS) attack. Match criteria allow network operators to define a particular flow with source, destination, L4 parameters and packet specifics such as length. These are sent in a BGP UPDATE message to BGP border routers within FLOW_SPEC_NLRI along with the action criteria.  
+<p>
+Actions are carried in the extended communities Path attribute. They can drop traffic matching the flow specification, redirect traffic to a particular VRF for further analysis or policy traffic at a defined rate. 
+BGP Flowspec resembles access lists or firewall filters that provide matching criteria and traffic filtering actions. They are injected to BGP and propagated to BGP peers. This mechanism allows an upstream AS system to perform inbound filtering in their ingress routers of traffic that a downstream AS wishes to drop or policy.  
+</p>
+
+<h4> FlowSpec Actions  </h4>
+RFC 5575 has defined 4 minimum Actions that routes matching FlowSpec NRLI types can take. These actions are carried as BGP extended communities added to the FlowSpec route. These actions are:
+<ul>
+<li> Traffic-Rate Community
+The Traffic-Rate community is non-transitive, that tells the receiving BGP peer, what to rate limit matching traffic to. If the traffic needs to be discarded or dropped, this will be limit of 0 should be used.
+<li> Traffic-Action Community
+The Traffic-Action community is used to sample defined traffic. This allows sampling and logging metrics to be collected from the FlowSpec route, that could be used to get a better understand of the attack traffic.
+<li> Redirect Community
+The Redirect community allows the FlowSpec traffic to be redirected into a Virtual Routing and Forward Instance VRF. As the same Route-Targets and Route-Distinguisher can be used, you are able to import routes into a dedicated blackhole VPN or any other VPNv4.
+<li> Traffic-Marking Community
+The Traffic-Marking community is used to modify the Differentiated Service Code Point DSCP bits of a transiting IP packet to the defined value. This could be used to set to FlowSpec routes to highest discard probability, allowing traffic not to dropped/discarded until co
+</ul>
+
+Network infrastructure with the enabled BGP Flowspec consists of a Flowspec controller (server), one or more Flowspec clients. Rules that contain matching criteria and actions are created on the server and are redistributed to clients via MP-BGP. An additional optional route reflector component can be used to receive rules from the controller and distribute to its clients.
+
+<h4> Flow spec demonstration</h4>
+<img width="638" alt="bgp flowspec" src="https://user-images.githubusercontent.com/50369643/63919523-969ef780-ca47-11e9-8627-9fa47632ddf2.png">
+
+<h5> Configuration of FlowSpec in the provider network</h5>
+
+<h6> Edge router</h6>
+<pre>
+fisi@big# show protocols bgp group CUSTOM
+local-as 64516;
+neighbor 192.168.56.26 {
+    family inet {
+        unicast;
+        <b>flow</b>;
+    }
+    peer-as 64512;
+}
+</pre>
+
+<h6> Border router</h6>
+<pre>
+KH16#sh run | se router bgp
+router bgp 64512
+ bgp log-neighbor-changes
+ neighbor CUSTOM peer-group
+ neighbor CUSTOM remote-as 64516
+ neighbor 192.168.56.36 peer-group CUSTOM
+ !
+ address-family ipv4
+  neighbor 192.168.56.36 activate
+ exit-address-family
+ !
+ <b>address-family ipv4 flowspec
+  neighbor 192.168.56.36 activate</b>
+ exit-address-family
+
+<b>flowspec
+ local-install interface-all</b>
+ </pre>
+
+<h5> Verification</h5>
+
+Border router
+<pre>
+KH16#sh bgp ipv4 unicast summary | b Neighbor
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.56.36   4        64516      35      36        5    0    0 00:14:27        0
+
+KH16#sh bgp ipv4 <b>flowspec</b> summary | b Neighbor
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.56.36   4        64516      35      36        1    0    0 00:14:30        0
+</pre>
+
+Edge router
+<pre>
+fisi@big# run show bgp summary | find 192.168.56.26
+192.168.56.26         64512         49         52       0       2       20:37 Establ
+  inet.0: 0/0/0/0
+  <b>inetflow.0: 0/0/0/0</b>
+</pre>
+
+<h4> Configuration of Flowspec server to signal flowspec</h4>
+Once the provider detects a DDoS attack targeting the servers 172.16.0.0/29. Service provider decides to drop all traffic to the prefix 172.16.0.0/29. To achieve this service provider will configure the flowspec server to tell other routers to drop traffic for the prefix 172.16.0.0/29
+
+<h5> Edge router</h5>
+
+<pre>
+fisi@big# show routing-options flow
+route EXAMPLE {
+    match destination 172.16.0.0/29;
+    then discard;
+}
+term-order standard;
+</pre>
+
+<h4> Verification</h4>
+
+<pre>
+fisi@big# run show firewall filter __flowspec_default_inet__
+
+Filter: __flowspec_default_inet__
+Counters:
+Name                                                Bytes              Packets
+172.16.0.0/29,*                                         0                    0
+</pre>
+
+Flowspec routes are installed into their own routing table inetflow.0 and if dedicated VRF is used, FlowSpec routes will be under routing-instance-name.inetflow.0. 
+
+<pre>
+fisi@big# run show route table inetflow.0
+inetflow.0: 2 destinations, 2 routes (2 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+172.16.0.0/29,*/term:1
+                   *[Flow/5] 00:06:41
+                      Fictitious
+
+fisi@big# run show route advertising-protocol bgp 192.168.56.26
+
+inetflow.0: 1 destinations, 1 routes (1 active, 0 holddown, 0 hidden)
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  172.16.0.0/29,*/term:1
+*                         Self                                    I
+</pre>
+
+The BGP update with Flowspec SAFI 133 is advertised to the provider border router .The UPDATE message contains flow specification, matching the 172.16.0.0/29 prefix, The action criterion that drops traffic matching flow specification, are carried as BGP extended communities. The border router programs the rules into TCAM. Traffic received from the internet that corresponds to the match criteria is dropped.
+
+<pre>
+KH16#sh bgp ipv4 flowspec summary | b Neighbor
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.56.36   4        64516      35      36        1    0    0 00:14:30        <b>1</b>
+</pre>
+
+<pre>
+KH16#sh bgp ipv4 flowspec
+BGP table version is 1, local router ID is 10.1.1.1
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+              t secondary path, L long-lived-stale,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *    Dest:172.16.0.0/29
+                      0.0.0.0                                0 64516 i
+</pre>
+
+<pre>
+KH16#sh bgp ipv4 flowspec detail
+BGP routing table entry for Dest:172.16.0.0/29, version 0
+  Paths: (1 available, no best path)
+  Not advertised to any peer
+  Refresh Epoch 1
+  64516, (FS invalid: originator)
+    0.0.0.0 from 192.168.56.36 (1.1.1.1)
+      Origin IGP, localpref 100, valid, external
+      Extended Community: FLOWSPEC Traffic-rate:0,0
+      rx pathid: 0, tx pathid: 0
+
+KH16#show flowspec ipv4
+AFI: IPv4
+  Flow           :Dest:172.16.0.0/29
+    Actions      :Traffic-rate: 0 bps  (bgp.1)
+
+</pre>
+
+When the attacker tries to access the servers again all traffic is dropped. We can test by simple ping
+
+<pre>
+attacker#do ping 172.16.0.1 re 10000
+Type escape sequence to abort.
+Sending 10000, 100-byte ICMP Echos to 172.16.0.1, timeout is 2 seconds:
+................
+Success rate is 0 percent (0/37)
+</pre>
+We can see all the 37 packets sent from the hacker to the server have been dropped by the border router in the provider network
+
+<pre>
+KH16#sh flowspec afi-all detail
+AFI: IPv4
+  Flow           :Dest:172.16.0.0/29
+    Actions      :Traffic-rate: 0 bps  (bgp.1)
+    Statistics                        (packets/bytes)
+      Matched             :                  37/4218
+      Dropped             :                  37/4218
+</pre>
+
+Note: In my testing I have observed traffic sourced from the border router or the edge router itself for example ping with source of loopback from the border router to the servers was working. Therefore the flowspec rule seem to be affecting only the transit traffic, will need more testing and reading the docs to verify this.
+
+<h4> Configuration of Flowspec Signalized from Customer to Provider  </h4>
+Once Customer detects a DDoS attack targeting a destination UDP port 53 (DNS) on the servers 172.16.0.0/29, the BGP update is advertised to the provider edge router. The UPDATE message contains flow specification, matching the 172.16.0.0/29 prefix, UDP protocol (17) and destination port 53. Subsequently, the edge router sends the BGP update to the border router. Traffic received from the internet that corresponds to the match criteria is dropped. This time fow spec from the customer is more specific containing port and protocol to match this avoids blackholing all traffic. This could also be done in the option where the service provider flow spec server was signalling.
+
+<h5> Flowspec Server (Controller) Configuration on CE running IOSXR</h5>
+
+Create class-map attack-fs matching the IP address of the servers, protocol (17) – UDP and destination port 53 (DNS).
+<pre>
+class-map type traffic match-all attack-fs
+ match destination-address ipv4 172.16.0.0 255.255.255.248
+ match protocol 17 
+ match destination-port 53 
+ end-class-map
+</pre>
+
+Configure policy-map attack_pbr and associate class-map attack-fs. Use the class-map to define an action.
+<pre>
+policy-map type pbr attack_pbr
+ class type traffic attack-fs 
+  drop
+ class type traffic class-default 
+ end-policy-map
+</pre>
+
+We need to define a route policy that allows exporting and importing routes to/from eBGP peers.
+<pre>
+route-policy PASS
+  pass
+end-policy 
+
+router bgp 64501
+ bgp router-id 10.4.4.4
+ address-family ipv4 unicast
+  network 172.16.0.0/24
+ 
+ address-family ipv4 flowspec
+  neighbor 10.0.0.2
+  remote-as 64516
+  address-family ipv4 unicast
+   route-policy PASS in
+   route-policy PASS out
+
+address-family ipv4 flowspec
+   route-policy PASS in
+   route-policy PASS out
+</pre>
+
+Configure flowspec and assign service-policy type PBR policy-map attack_pbr.
+<pre>
+flowspec
+ address-family ipv4
+  service-policy type pbr attack_pbr
+</pre>
+
+
+<h4> Verification on the CE router</h4>
+<pre>
+RP/0/0/CPU0:CE# show flowspec ipv4 detail
+Sun Jul 28 12:07:41.925 UTC
+
+AFI: IPv4
+  Flow           :Dest:172.16.0.0/29,Proto:=17,DPort:=53
+    Actions      :Traffic-rate: 0 bps (policy.1.attack_pbr.attack-fs)
+RP/0/0/CPU0:CE#
+</pre>
+                        </div>
+
+
+
+                        <h3 id="Ansible" style="text-align: center;"><a href="#">
+                          <strong>BGP Table Map  </strong><strong>.</strong>
+                        </a></h3>
+                        <div>
+
+
+This feature allows for selective download of prefixes from the BGP RIB to the routing table.
+It is primary used to suppress the unnecessary downloading of certain BGP routes to the RIB or Forwarding Information Base (FIB) on a dedicated route reflector, which propagates BGP updates without carrying transit traffic.
+Essesntially filtering the routes in RIB/FIB on the dedicated route-reflectors provides essential saving on the memory and CPU resources on the router.
+This feature is applicable not only to route reflectors but also any router that require control of prefixes that are put in the routing table due to resources constraints
+
+
+<h4> Configurations</h4>
+In below example the ASBR1 router receives 50 prefixes from its upstream however we are only interested in specific prefixes which we'll use the table map to install in the routing table
+<pre>
+ASBR1#sh ver | i Software
+Cisco IOS Software, 7200 Software (C7200-ADVIPSERVICESK9-M), Version 15.2(4)S5, RELEASE SOFTWARE (fc1)
+BOOTLDR: 7200 Software (C7200-ADVIPSERVICESK9-M), Version 15.2(4)S5, RELEASE SOFTWARE (fc1)
+
+
+ASBR1#sh bgp summary | b Neighbor
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+172.29.0.2      4        64515       7       6      151    0    0 00:01:53       <b>50</b>
+
+ASBR1#sh bgp nei 172.29.0.2 received-routes | count ^ \*
+Number of lines which match regexp = <b>50</b>
+
+ASBR1#sh ip route bgp | count ^B
+Number of lines which match regexp = <b>50</b>
+</pre>
+
+Creating a prefix-list and route-map to match our intersting destinations
+<pre>
+ASBR1(config)#ip prefix-list PREFIXLIST_INTERSTING_DESTINATIONS seq 5 permit 10.1.0.0/16
+ASBR1(config)#ip prefix-list PREFIXLIST_INTERSTING_DESTINATIONS seq 10 permit 192.168.21.0/24
+
+ASBR1(config)#route-map MAP_BGPIB_TO_RIB permit 10
+ASBR1(config-route-map)# match ip address prefix-list PREFIXLIST_INTERSTING_DESTINATIONS
+ASBR1(config-route-map)#exit
+</pre>
+
+Applying the table-map
+<pre>
+ASBR1(config)#router bgp 64512
+ASBR1(config-router)#address-family ipv4
+ASBR1(config-router-af)#<b>table-map MAP_BGPIB_TO_RIB filter</b>
+ASBR1(config-router-af)#exit
+ASBR1(config-router)#exit
+ASBR1(config)#do clear ip bgp 172.29.0.2 all
+*Aug 11 22:54:12.887: %BGP-5-ADJCHANGE: neighbor 172.29.0.2 Down User reset
+*Aug 11 22:54:12.887: %BGP_SESSION-5-ADJCHANGE: neighbor 172.29.0.2 IPv4 Unicast topology base removed from session  User reset
+*Aug 11 22:54:13.823: %BGP-5-ADJCHANGE: neighbor 172.29.0.2 Up 
+</pre>
+
+<h4>Verification</h4>
+We are still receiving and accepting the 50 prefixes from the upstream but only 2 of those are allowed to the routing table
+<pre>
+ASBR1(config)#do sh bgp summary | b Neighbor
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+172.29.0.2      4        64515       5       4      251    0    0 00:00:17       <b>50</b>
+                                                     
+ASBR1(config)#do sh bgp nei 172.29.0.2 received-routes | count ^ \*
+Number of lines which match regexp = <b>50</b>
+
+ASBR1(config)#do sh ip route bgp | count ^B
+Number of lines which match regexp = <b>2</b>
+
+ASBR1(config)#do sh ip route bgp | begin ^B
+B        10.1.0.0 [20/0] via 172.29.0.2, 00:00:54
+B     192.168.21.0/24 [20/0] via 172.29.0.2, 00:00:54
+
+ASBR1(config)#do sh route-map
+route-map MAP_BGPIB_TO_RIB, permit, sequence 10
+  Match clauses:
+    ip address prefix-lists: PREFIXLIST_INTERSTING_DESTINATIONS 
+  Set clauses:
+  Policy routing matches: 0 packets, 0 bytes
+ASBR1(config)#
+ASBR1(config)#do sh ip prefix-list
+ip prefix-list PREFIXLIST_INTERSTING_DESTINATIONS: 2 entries
+   seq 5 permit 10.1.0.0/16
+   seq 10 permit 192.168.21.0/24
+ASBR1(config)#
+</pre>                          
+                        </div>
+
+
+                        <h3 id="Ansible" style="text-align: center;"><a href="#">
+                          <strong>BIRD</strong><strong>.</strong>
+                        </a></h3>
+                        <div>
+
+The BIRD Internet Routing Daemon project aims to develop a fully functional dynamic IP routing daemon primarily targeted on (but not limited to) Linux, FreeBSD and other UNIX-like systems  
+BIRD supports Internet Protocol version 4 and version 6 by running separate daemons. It establishes multiple routing tables, and uses BGP, RIP, and OSPF routing protocols, as well as statically defined routes.  
+Learn more about the project <a href="https://bird.network.cz/">here</a>
+
+
+<h5> Installation and configuration on debian distributions  </h5>
+<p>Here we install bird on linux box running ubuntu 18 and configure local BGP using BIRD between the box and a junos router.
+</p>
+
+
+Install bird 
+<pre>basondole@box $ sudo apt install bird</pre>
+
+Check the if ip forwarding is enable in the file <code>/etc/sysctl.conf</code> if the lines are starting with <code>“#”</code> that means they are commented and hence ip forwarding is disabled  
+<pre>
+basondole@box $ cat /etc/sysctl.conf | egrep "ip.*forward" 
+#net.ipv4.ip_forward=1
+#net.ipv6.conf.all.forwarding=1
+</pre>
+
+Use nano editor or any editor of your choice to edit the file <code>/etc/sysctl.conf</code> and remove the <code>“#”</code> preceeding the lines save and verify the lines have been uncommented
+<pre>
+basondole@box $ cat /etc/sysctl.conf | egrep "ip.*forward"
+net.ipv4.ip_forward=1
+net.ipv6.conf.all.forwarding=1
+</pre>
+
+Make a backup of the default bird configuration you may need it in the future
+<pre>
+basondole@box $ cp /etc/bird/bird.conf /etc/bird/bird.conf.old
+</pre>
+
+
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/63584660-117a9500-c5a6-11e9-8698-2b115695253f.png"> -->
+
+Edit the <code>/etc/bird/bird.conf</code> to specify your bgp and neighbor parameters and prefixes to announce.  
+Sample configuration below  <br/>
+Note: I have used awk to only print the lines I have modified in the file
+<pre>
+basondole@box $ sudo awk 'NR>=22' /etc/bird/bird.conf
+# Below is additional non default configuration added by Paul S.I.Basondole
+router id 192.168.56.2;
+
+# The Device protocol is not a real routing protocol. It doesn't generate any
+# routes and it only serves as a module for getting information about network
+# interfaces from the kernel.
+protocol device {
+        scan time 10;           # Scan interfaces every 10 seconds
+}
+
+# Static routes (again, there can be multiple instances, so that you
+# can disable/enable various groups of static routes on the fly).
+protocol static static_bgp {
+        route 192.168.56.2:255.255.255.255 via 192.168.56.2;
+        route 192.168.56.0:255.255.255.0 via 192.168.56.2;
+}
+
+#BGP Configuration
+protocol bgp {
+        import all;
+        export where proto = "static_bgp";
+
+        local as 64512;
+        neighbor 192.168.56.36 as 64512;
+}
+</pre>
+
+Start the bird service on the machine. If there is something wrong in the <code>/etc/bird/bird.conf</code> the service will not start. In such case the terminal will suggest some methods to follow so as to view the logs  
+<pre>
+$ sudo invoke-rc.d bird start
+</pre>
+
+
+Verify the service is started
+<pre>
+$ systemctl status bird
+● bird.service - BIRD Internet Routing Daemon (IPv4)
+   Loaded: loaded (/lib/systemd/system/bird.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sat 2020-01-18 00:47:58 EAT; 5min ago
+  Process: 612 ExecStartPre=/usr/sbin/bird -p (code=exited, status=0/SUCCESS)
+  Process: 587 ExecStartPre=/usr/lib/bird/prepare-environment (code=exited, status=0/SUCCESS)
+ Main PID: 646 (bird)
+    Tasks: 1 (limit: 4657)
+   CGroup: /system.slice/bird.service
+           └─646 /usr/sbin/bird -f -u bird -g bird
+
+Jan 18 00:51:55 plasma bird[646]: KRT: Received route 192.168.56.2/32 with strange next-hop 192.168.56.2
+Jan 18 00:51:55 plasma bird[646]: Netlink: File exists
+Jan 18 00:51:55 plasma bird[646]: Netlink: File exists
+Jan 18 00:51:55 plasma bird[646]: Netlink: File exists
+Jan 18 00:52:55 plasma bird[646]: KRT: Received route 0.0.0.0/0 with strange next-hop 192.168.56.2
+Jan 18 00:52:55 plasma bird[646]: KRT: Received route 192.168.56.0/24 with strange next-hop 192.168.56.2
+Jan 18 00:52:55 plasma bird[646]: KRT: Received route 192.168.56.2/32 with strange next-hop 192.168.56.2
+Jan 18 00:52:55 plasma bird[646]: Netlink: File exists
+Jan 18 00:52:55 plasma bird[646]: Netlink: File exists
+Jan 18 00:52:55 plasma bird[646]: Netlink: File exists
+</pre>
+
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/63585029-dcbb0d80-c5a6-11e9-9975-cd18b2475c95.png"> -->
+
+Verify BGP by getting into the bird client issue command birdc as super user  
+Use the command <code>show protocols all bgp1</code> to check the bgp summary. We see the configured neighbour 192.168.56.36 is up and we are receiving 1 prefix.
+To view the prefix issue the command <code>show route protocol bgp1</code> This shows we are receiving a default route  
+<pre>
+$ sudo birdc
+BIRD 1.6.3 ready.
+bird> show protocol all bgp1
+name     proto    table    state  since       info
+bgp1     BGP      master   up     00:51:07    Established
+  Preference:     100
+  Input filter:   ACCEPT
+  Output filter:  (unnamed)
+  Routes:         1 imported, 2 exported, 1 preferred
+  Route change stats:     received   rejected   filtered    ignored   accepted
+    Import updates:              1          0          0          0          1
+    Import withdraws:            0          0        ---          0          0
+    Export updates:              3          1          0        ---          2
+    Export withdraws:            0        ---        ---        ---          0
+  BGP state:          Established
+    Neighbor address: 192.168.56.36
+    Neighbor AS:      64512
+    Neighbor ID:      10.1.1.1
+    Neighbor caps:    refresh restart-aware AS4
+    Session:          internal multihop AS4
+    Source address:   192.168.56.2
+    Hold timer:       61/90
+    Keepalive timer:  23/30
+
+bird> show route protocol bgp1
+0.0.0.0/0          via 192.168.56.2 on enp0s8 [bgp1 00:51:07 from 192.168.56.36] ! (100/?) [i]
+bird> exit
+</pre>
+
+
+Verify the host machine routing table. We see the default route we receive from the bgp neighbour 192.168.56.36 is installed in the local machine routing table with the next-hop 192.168.56.2  
+<pre>
+$ route -n | egrep -i "^(dest|0)"
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.56.2    0.0.0.0         UG    64     0        0 enp0s8
+0.0.0.0         10.0.2.2        0.0.0.0         UG    100    0        0 enp0s3
+</pre>
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/63585144-2277d600-c5a7-11e9-8932-6ee709a653bd.png"> -->
+
+Login to the router 192.168.56.36 we see the bgp session is up. The router is advertising the default route to the machine running bird and receiving the two prefixes as we announce them on the bird configuration
+<pre>
+ssh fisi@192.168.56.36
+--- JUNOS 12.1R1.9 built 2012-03-24 12:52:33 UTC
+
+fisi@big> show bgp summary | find 192.168.56.2
+192.168.56.2          64512         22         24       0       0        9:11 Establ
+  inet.0: 0/2/2/0
+
+fisi@big> show route advertising-protocol bgp 192.168.56.2
+
+inet.0: 14 destinations, 15 routes (13 active, 0 holddown, 1 hidden)
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 0.0.0.0/0               192.168.56.1                 100        I
+
+</pre>
+
+However the received prefixes are not active routes due to presence of more preferable options on the router
+<pre>
+fisi@big> show route receive-protocol bgp 192.168.56.2 all table inet.0
+
+inet.0: 14 destinations, 15 routes (13 active, 0 holddown, 1 hidden)
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  192.168.56.0/24         192.168.56.2                 100        I
+  192.168.56.2/32         192.168.56.2                 100        I
+
+fisi@big> show route 192.168.56.0/24 table inet.0
+
+inet.0: 14 destinations, 15 routes (13 active, 0 holddown, 1 hidden)
++ = Active Route, - = Last Active, * = Both
+
+192.168.56.0/24    *[Direct/0] 00:10:35
+                    > via em0.0
+                    [BGP/170] 00:10:27, localpref 100
+                      AS path: I
+                    > to 192.168.56.2 via em0.0
+192.168.56.36/32   *[Local/0] 00:10:36
+                      Local via em0.0
+
+fisi@big>
+</pre>
+
+
+<!-- <img src="https://user-images.githubusercontent.com/50369643/63585434-c82b4500-c5a7-11e9-982b-bf6ef58b9df6.png"> -->
+
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
+                  <!-- end post_body -->
+
+                </article>
+
+                <div class="author_info_container author_single_box">
+                  <div class="row">
+                    <div class="author_avatar_col col">
+                      <a class="author_avatar_url" href="about"><img alt='' src='img/all-baggy.jpg' srcset='img/all-baggy.jpg' class='avatar avatar-150 photo' height='150' width='150' /></a>
+                    </div>
+                    <div class="author_info_col col">
+                      <div class="author_box_info_header">
+                        <h2 class="author_display_name title">
+                          <a class="author_name_url url fn n" href="">Paul S.I. Basondole </a>
+                        </h2>
+
+                      </div>
+                      <div class="author_description">
+IT &amp; Network Expert / Lead <br>
+Network & Automation designer; <br>
+2x JNCIP (RS/SP) 1x CCNP (RS) <br>
+BSc Telecommunications Eng.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- close col12 just inside .full_width_list -->
+            </div>
+            <!-- close .full_width_list -->
+            <!-- close col and row in case of sidebar layout -->
+            <!-- end check for post layout -->
+          </section>
+          <!-- #primary -->
+        </main>
+        <!-- #content -->
+        <footer id="colophon" class="site_footer container" role="contentinfo">
+          <div class="footer_credits footers_active_sidebars_0">
+            &copy; 2020 basondole.io
+          </div>
+          <div id="aliagototop" title="Scroll To Top" class="alia_gototop_button footer_button">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </footer>
+
+        <!-- #colophon -->
+      </div>
+      <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+     <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+      <div class="sliding_close_helper_overlay"></div>
+      <div class="site_side_container">
+        <h3 class="screen-reader-text">
+          Sliding Sidebar
+        </h3>
+        <div class="info_sidebar">
+          <div class="top_header_items_holder mobile_menu_opened">
+            <div class="main_menu">
+              <ul id="mobile-menu" class="navbar">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu">
+                  <a href="index.html">Home</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu">
+                  <a href="https://github.com/basondole/mpls#introduction">Design</a>
+                </li>
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu">
+                  <a href="https://github.com/basondole/open#hocid">Noculous</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu">
+                  <a href="blog.html" data-hover="dropdown" class="dropdown-toggle">Blog</a>
+                  <ul role="menu" class=" dropdown-menu">
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
+                      <a href="https://github.com/basondole/collaboration/blob/master/Setting%20up%20Cisco%20Call%20Manager.md#setting-up-cisco-call-manager-express">Collaboration</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
+                      <a href="blog/networkauto/index.html">Network Automation</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/tutorials">Network Servers</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/netmanagement">Misc</a>
+                    </li>
+                  </ul>
+                </li>
+                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html">BGP</a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
+                  <a href="about.html">About</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-145 current_page_item menu-item-412 default_menu active">
+                  <a href="contact.html">Contact</a>
+                </li>
+                <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
+                  <a href="http://karneliuk.com/donate/">Donate</a> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- end .top_header_items_holder -->
+        </div>
+      </div>
+      <!-- end sliding sidebar content -->
+      <!-- start footer static content -->
+      <!-- start footer static content -->
+    </div>
+    <!-- #page -->
+    <div id="ajax_modal_story" class="ajax_modal ajax_modal_story modal enable_rotate">
+      <div class="story_modal_overlay_helper"></div>
+    </div>
+
+
+    </script>
+
+    <script type='text/javascript' src='karneliuk/global.1.35.js'></script>
+
+
+    <script type='text/javascript'>
+/* <![CDATA[ */
+var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-load-story.php", "ajax_rotate_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-rotate-story.php" };
+/* ]]> */
+    </script>
+
+
+    <script type='text/javascript' src='karneliuk/alia-core.1.13.js'></script>
+    <script type='text/javascript' src='karneliuk/wp-embed.min.5.3.2.js'></script>
+
+    
+    <script src="karneliuk/jquery-1.6.1.js"></script>
+    <script src="karneliuk/jquery-ui-1.8.13.min.js"></script>
+    <script>
+      window.onload = function () {
+       $("#accordion").accordion({ header: "h3", collapsible: true, active: false, autoHeight: false });
+      };
+    </script>
+
+    <script type="text/javascript">
+      // $("p").hide();
+      // $("p").show(4000);
+    </script>
+
+
+  </body>
+</html>
