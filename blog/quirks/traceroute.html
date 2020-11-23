@@ -24,8 +24,6 @@
 <link rel='stylesheet' id='fontawesome-css'  href='../../karneliuk/all.min.1.0.css' type='text/css' media='all' />
 
 
-<!-- <link rel='stylesheet' id='alia-customstyle-css'  href='http://karneliuk.com/wp-content/themes/alia/assets/css/customstyle.css?ver=5.3.2' /> -->
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel='stylesheet' id='codecolorer-css'  href='../../karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
 
@@ -35,13 +33,13 @@
 <link rel='https://api.w.org/' href='../../karneliuk/wp-json' />
 
 
-<script type='text/javascript' src='../../karneliuk/jquery-1.12.4-wp.js'></script>
-<script type='text/javascript' src='../../karneliuk/jquery-migrate.min-1.4.1.js'></script>
-<script type='text/javascript' src='../../karneliuk/ouibounce-5.3.2.js'></script>
+<script type='text/javascript' src='../../karneliuk/jquery-1.12.4-wp.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/jquery-migrate.min-1.4.1.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/ouibounce-5.3.2.js' class="local-root-js"></script>
 
 
 <script type="text/javascript">
-  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"../../karneliuk/wp-emoji-release.min.5.3.2.js"}};
+  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"karneliuk/wp-emoji-release.min.5.3.2.js"}};
   !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
 </script>
 
@@ -331,6 +329,10 @@ div.contacts {
     white-space: pre;
     margin: 1em 0;
   }
+  .entry-content ol {
+    padding-left: 0;
+    margin-left: 32px;
+  }
 /*  .ui-accordion .ui-accordion-content {
       padding-bottom: 0px;
       padding-top: 0px;
@@ -363,10 +365,10 @@ div.contacts {
       <div class="container site_header">
         <div class="header_square_logo">
           <style>.site_logo_image { width : 120px; }.site_logo_image { height : 120px; }</style>
-          <a class="alia_logo retina_logo" title="basondole.io" href="../../index.html" rel="home">
+          <a class="alia_logo retina_logo" title="basondole.io" href="index.html" rel="home">
             <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
     
-          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="../../index.html" rel="home">
+          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="index.html" rel="home">
           <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
 
           <h1 class="screen-reader-text site_logo site-title clearfix">basondole.io</h1>
@@ -395,7 +397,7 @@ div.contacts {
 
         <div class="container">
           <div class="site_branding">
-          <h1 class="text_logo"><a href="../../index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
+          <h1 class="text_logo"><a href="index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
           </div>
           
 
@@ -413,21 +415,21 @@ div.contacts {
 
           <div class="main_menu">
             <ul id="top-menu" class="navbar">
-              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html">Home</a></li>
+              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="../../index.html" class="local-root-page">Home</a></li>
               <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li>
               <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">NET2CODE</a></li>
-              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle">Blog</a>
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
                 <ul role="menu" class=" dropdown-menu">
-                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="">Collaboration</a></li>
+                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
                   <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
                   <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/tutorials">Network Servers</a></li>
                   <!-- <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/netmanagement">Misc</a></li> -->
-                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="../quirks/index.html">Quirks</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Quirks</a></li>
                 </ul>
               </li>
-              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="../../bgp.html">BGP</a></li>
-              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="../../about.html">About</a></li>
-              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="../../contact.html">Contact</a></li>
+              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="../../bgp.html" class="local-root-page">BGP</a></li>
+              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="../../about.html" class="local-root-page">About</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="../../contact.html" class="local-root-page">Contact</a></li>
               <!-- <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="http://karneliuk.com/donate/">Donate</a></li> -->
             </ul>
             <span class="menu_mark_circle hidden_mark_circle"></span>
@@ -440,379 +442,33 @@ div.contacts {
     </div><!-- end .header_nav_wrapper -->
     </header>
 
-        <main id="content" class="site-content">
-          <section id="primary" class="container main_content_area">
-            <!-- end check for post layout -->
-            <div class="row full_width_page_single no_sidebar_post_single">
-              <div class="col12">
-                <article id="post-182" class="blog_page_container post-182 page type-page status-publish">
+    <main id="content" class="site-content">
+      <section id="primary" class="container main_content_area">
+        <!-- end check for post layout -->
+        <div class="row full_width_page_single no_sidebar_post_single">
+          <div>
+            <!-- <article id="post-182" class="blog_page_container post-182 page type-page status-publish"> -->
 
-                  <div class="page_body">
+              <div class="page_body">
                     <div class="post_info_wrapper">
                       <div class="entry-content blog_page_text blog_page_description">
 
 
 
-
+<!-- ============================ START CONTENT ============================================ -->
 <h2 style="text-align: center;">
-  <strong>Setting up Cisco Call Manager Express</strong><strong>.</strong>
+  <strong>Don't be confused with traceroute behaviour</strong><strong>.</strong>
 </h2>
 
-The objective is to configure a call manager for users to make internal calls in a SOHO environment. Users can use Cisco IP Phones (SCCP) or third party SIP Phones
-
-The router used as CME is a Cisco 3725 Integrated Services Router running IOS image c3725-adventerprisek9-mz.124-15.T14  
-
-<h3>Topology view</h3>
-
-<img width="732" alt="collaboration1" src="https://user-images.githubusercontent.com/50369643/61995423-090b6900-b091-11e9-8151-6a0c0f5c5f70.png">  
-
-
-<h3> SIP Configuration</h3>
-
-<pre>
-voice service voip 
- allow-connections h323 to h323
- allow-connections h323 to sip
- allow-connections sip to h323
- allow-connections sip to sip
- redirect ip2ip
- sip
-  bind control source-interface FastEthernet0/1
-  bind media source-interface FastEthernet0/1
-  registrar server expires max 500 min 60
-
-voice class codec 10
- codec preference 1 g711ulaw
-
-voice register global
- mode cme
- source-address 192.168.251.96 port 5060
- max-dn 20
- max-pool 20
- authenticate register
- authenticate realm local
- create profile
-
-gateway 
- timer receive-rtp 1200
-
-sip-ua 
-</pre>
-
-<h4>Registering SIP Phones and Phone Directory entries</h4>
-<pre>
-voice register dn  1
- number 1112
- name 1112
- allow watch
-
-voice register pool  1
- id mac 0015.6579.F61E
- number 1 dn 1
- presence call-list
- username 1112 password 1112
- codec g711ulaw
-
-
-voice register dn  2
- number 1113
- allow watch
-
-voice register pool  2
- id mac 0000.0000.0000
- number 1 dn 2
- presence call-list
- username 1113 password 1113
- codec g711ulaw
-</pre>
- 
-<h4>Configuring dial peer for SIP phones</h4>
- <pre>
- dial-peer voice 1 voip
- session protocol sipv2
- incoming called-number .
- dtmf-relay rtp-nte
- </pre>
- 
-<h3>SCCP Configuration</h3>
-<pre>
-telephony-service
- max-ephones 5
- max-dn 5
- ip source-address 192.168.251.96 port 2000
- create cnf-files
-</pre>
-
-<h4> Registering SCCP Phones and Phone Directory entries</h4>
-<pre>
-ephone-dn 1 dual-line
- number 1000
- label PHONE#1000
-
-ephone 1
- device-security-mode none
- mac-address 0800.2764.4F44
- type CIPC
- button  1:1
-</pre>
-
-<h3> Yealink Phone Configuration</h3>
-Browse the IP of the Yealink phone to access the configuration wizard  
-
-<img width="913" alt="img/yealinkconf.PNG" src="img/yealinkconf.png">
-
-<h3> 3CX Softphone configuration</h3>
-
-<img width="288" alt="collaboration3" src="https://user-images.githubusercontent.com/50369643/61995871-87b6d500-b096-11e9-8d65-1c4691bd74ed.PNG">
-
-
-<h3>CIPC Configuration</h3>
-
-<img width="297" alt="collaboration6" src="https://user-images.githubusercontent.com/50369643/61996506-a2407c80-b09d-11e9-8c47-d0243b11e3fa.PNG">  
-
-
-<h3> Verification of phone registration</h3>
-<h4>SIP</h4>
-
-<pre>
-show sip-ua status registrar
-Line          destination      expires(sec)  contact
-              call-id
-              peer
-============================================================
-1112          192.168.250.92   344           192.168.250.92
-              1548037929@192.168.250.92                     
-              40002
-
-1113          192.168.251.88   104           192.168.251.88
-              Y2Q4ZjcyN2Y5MjgxYjQzYzJlZTZmM2ZiN2NiYTAzODU.  
-              40001
-
-</pre>
-
-<h5>3CX</h5>
-<img width="124" alt="collaboration4" src="https://user-images.githubusercontent.com/50369643/61996343-ef235380-b09b-11e9-8892-f9996f0a6632.PNG">  
-
-<h5>Yealink</h5>
-<img width="618" alt="collaboration7" src="https://user-images.githubusercontent.com/50369643/61996702-df0d7300-b09f-11e9-8951-5fd49940f7a2.PNG">  
-
-<h4>SCCP</h4>
-
-<pre>
-show ephone registered
-
-
-ephone-1 Mac:0800.2764.4F44 TCP socket:[1] activeLine:0 REGISTERED in SCCP ver 20 and Server in ver 8
-mediaActive:0 offhook:0 ringing:0 reset:0 reset_sent:0 paging 0 debug:0 caps:11
-IP:192.168.251.98 49642 CIPC   keepalive 74 max_line 8
-button 1: dn 1  number 1000 CH1   IDLE         CH2   IDLE         
-
-</pre>
-<img width="326" alt="collaboration5" src="https://user-images.githubusercontent.com/50369643/61996381-6c4ec880-b09c-11e9-99d5-7f4de028db88.PNG">
-
-
-<h3> Testing calls</h3>
-
-Call from 1113 (3CX via SIP)  to 1112 (Yealink via SIP)
-
-<pre>
-show sip-ua calls 
-
-<b>SIP UAC CALL INFO</b>
-
-Call 1
-SIP Call ID                : 4B357B8F-2BE611D6-803FDA4B-963963A8@192.168.251.96
-   <b>State of the call       : STATE_RECD_PROCEEDING (4)</b>
-   Substate of the call    : SUBSTATE_PROCEEDING_PROCEEDING (2)
-   Calling Number          : 1113
-   Called Number           : 1112
-   Bit Flags               : 0xC00018 0x100 0x280
-   CC Call ID              : 44
-   Source IP Address (Sig ): 192.168.251.96
-   Destn SIP Req Addr:Port : 192.168.250.92:5063
-   Destn SIP Resp Addr:Port: 192.168.250.92:5063
-   Destination Name        : 192.168.250.92
-   Number of Media Streams : 1
-   Number of Active Streams: 1
-   RTP Fork Object         : 0x0
-   Media Mode              : flow-through
-   Media Stream 1
-     <b>State of the stream      : STREAM_ACTIVE</b>
-     Stream Call ID           : 44
-     Stream Type              : voice+dtmf (1)
-     Negotiated Codec         : No Codec    (0 bytes)
-     Codec Payload Type       : 255 (None)
-     Negotiated Dtmf-relay    : inband-voice
-     Dtmf-relay Payload Type  : 0
-     Media Source IP Addr:Port: 192.168.251.96:17538
-     Media Dest IP Addr:Port  : 0.0.0.0:0
-     Orig Media Dest IP Addr:Port : 0.0.0.0:0
-
-
-Options-Ping    ENABLED:NO    ACTIVE:NO
-   Number of SIP User Agent Client(UAC) calls: 1
-
-SIP UAS CALL INFO
-
-Call 1
-SIP Call ID                : Y2U0YjdmYjQwZjg5ZjVhNzg3Mzc4ODhiZGQwMzhhNjQ.
-   <b>State of the call       : STATE_SENT_ALERTING (14)</b>
-   Substate of the call    : SUBSTATE_NONE (0)
-   Calling Number          : 1113
-   Called Number           : 1112
-   Bit Flags               : 0xC0001C 0x100 0x404
-   CC Call ID              : 43
-   Source IP Address (Sig ): 192.168.251.96
-   Destn SIP Req Addr:Port : 192.168.251.88:52705
-   Destn SIP Resp Addr:Port: 192.168.251.88:52705
-   Destination Name        : 192.168.251.88
-   Number of Media Streams : 2
-   Number of Active Streams: 0
-   RTP Fork Object         : 0x0
-   Media Mode              : flow-through
-   Media Stream 1
-     <b>State of the stream      : STREAM_ADDING</b>
-     Stream Call ID           : -1
-     Stream Type              : voice-only (0)
-     Negotiated Codec         : g711ulaw (160 bytes)
-     Codec Payload Type       : 0 
-     Negotiated Dtmf-relay    : inband-voice
-     Dtmf-relay Payload Type  : 0
-     Media Source IP Addr:Port: 192.168.251.96:17032
-     Media Dest IP Addr:Port  : 192.168.251.88:40036
-     Orig Media Dest IP Addr:Port : 0.0.0.0:0
-   Media Stream 2
-     State of the stream      : STREAM_DEAD
-     Stream Call ID           : -1
-     Stream Type              : voice+dtmf (1)
-     Negotiated Codec         : No Codec    (0 bytes)
-     Codec Payload Type       : 255 (None)
-     Negotiated Dtmf-relay    : inband-voice
-     Dtmf-relay Payload Type  : 0
-     Media Source IP Addr:Port: 192.168.251.96:0
-     Media Dest IP Addr:Port  : 0.0.0.0:0
-     Orig Media Dest IP Addr:Port : 0.0.0.0:0
-
-
-Options-Ping    ENABLED:NO    ACTIVE:NO
-   Number of SIP User Agent Server(UAS) calls: 1
-
-</pre>
-
-
-Call from 1113 (3CX via SIP) to 1000 (CICP via SCCP)
-
-<pre>
-show sip-ua calls 
-SIP UAC CALL INFO
-
-   Number of SIP User Agent Client(UAC) calls: 0
-
-SIP UAS CALL INFO
-
-Call 1
-SIP Call ID                : NWQ3YTVhZDk2OGE2NzU0MWQxYjFkMThjY2QwNmE2Njc.
-   <b>State of the call       : STATE_SENT_ALERTING (14)</b>
-   Substate of the call    : SUBSTATE_NONE (0)
-   Calling Number          : 1113
-   Called Number           : 1000
-   Bit Flags               : 0xC0001C 0x100 0x404
-   CC Call ID              : 14
-   Source IP Address (Sig ): 192.168.251.96
-   Destn SIP Req Addr:Port : 192.168.251.88:52705
-   Destn SIP Resp Addr:Port: 192.168.251.88:52705
-   Destination Name        : 192.168.251.88
-   Number of Media Streams : 2
-   Number of Active Streams: 0
-   RTP Fork Object         : 0x0
-   Media Mode              : flow-through
-   Media Stream 1
-     <b>State of the stream      : STREAM_ADDING</b>
-     Stream Call ID           : -1
-     Stream Type              : voice-only (0)
-     Negotiated Codec         : g711ulaw (160 bytes)
-     Codec Payload Type       : 0 
-     Negotiated Dtmf-relay    : inband-voice
-     Dtmf-relay Payload Type  : 0
-     Media Source IP Addr:Port: 192.168.251.96:16522
-     Media Dest IP Addr:Port  : 192.168.251.88:40018
-     Orig Media Dest IP Addr:Port : 0.0.0.0:0
-   Media Stream 2
-     State of the stream      : STREAM_DEAD
-     Stream Call ID           : -1
-     Stream Type              : voice+dtmf (1)
-     Negotiated Codec         : No Codec    (0 bytes)
-     Codec Payload Type       : 255 (None)
-     Negotiated Dtmf-relay    : inband-voice
-     Dtmf-relay Payload Type  : 0
-     Media Source IP Addr:Port: 192.168.251.96:0
-     Media Dest IP Addr:Port  : 0.0.0.0:0
-     Orig Media Dest IP Addr:Port : 0.0.0.0:0
-
-
-Options-Ping    ENABLED:NO    ACTIVE:NO
-   Number of SIP User Agent Server(UAS) calls: 1
-</pre>
-
-After picking up on CIPC  
-<pre>
-show sip-ua calls 
-SIP UAC CALL INFO
-
-   Number of SIP User Agent Client(UAC) calls: 0
-
-SIP UAS CALL INFO
-
-Call 1
-SIP Call ID                : NWQ3YTVhZDk2OGE2NzU0MWQxYjFkMThjY2QwNmE2Njc.
-   <b>State of the call       : STATE_ACTIVE (7)</b>
-   Substate of the call    : SUBSTATE_NONE (0)
-   Calling Number          : 1113
-   Called Number           : 1000
-   Bit Flags               : 0xC0401C 0x100 0x4
-   CC Call ID              : 14
-   Source IP Address (Sig ): 192.168.251.96
-   Destn SIP Req Addr:Port : 192.168.251.88:52705
-   Destn SIP Resp Addr:Port: 192.168.251.88:52705
-   Destination Name        : 192.168.251.88
-   Number of Media Streams : 2
-   Number of Active Streams: 1
-   RTP Fork Object         : 0x0
-   Media Mode              : flow-through
-   Media Stream 1
-     <b>State of the stream      : STREAM_ACTIVE</b>
-     Stream Call ID           : 14
-     Stream Type              : voice-only (0)
-     Negotiated Codec         : g711ulaw (160 bytes)
-     Codec Payload Type       : 0 
-     Negotiated Dtmf-relay    : inband-voice
-     Dtmf-relay Payload Type  : 0
-     Media Source IP Addr:Port: 192.168.251.96:16522
-     Media Dest IP Addr:Port  : 192.168.251.88:40018
-     Orig Media Dest IP Addr:Port : 0.0.0.0:0
-   Media Stream 2
-     State of the stream      : STREAM_DEAD
-     Stream Call ID           : -1
-     Stream Type              : voice+dtmf (1)
-     Negotiated Codec         : No Codec    (0 bytes)
-     Codec Payload Type       : 255 (None)
-     Negotiated Dtmf-relay    : inband-voice
-     Dtmf-relay Payload Type  : 0
-     Media Source IP Addr:Port: 192.168.251.96:0
-     Media Dest IP Addr:Port  : 0.0.0.0:0
-     Orig Media Dest IP Addr:Port : 0.0.0.0:0
-
-
-Options-Ping    ENABLED:NO    ACTIVE:NO
-   Number of SIP User Agent Server(UAS) calls: 1
-</pre>
-
-
-
-
-
-
-
+Over the course of the years I have observed; many times; traceroute failure even when the device is up.
+Sometimes traceroute from a customer PC to some destination does not work, and It would work with another PC when connected to the same network.
+What I failed to ask the customer is what OS are they running on their computers. See we often think traceroute is just ICMP messages
+but this is not always the case.<br/>
+Traceroutes on Windows machines uses ICMP Echo Request while on Linux and Unix machines, 
+traceroute uses UDP packets. This means if there device is discarding UDP in the network path and you are performing traceroute from a linux machine 
+packets the traceoute response will not be sent back to the source, and you would see the same effect as if the node was not reachable.
+Similarly if you traceroute from Windows PC and somefirewall in the path is blocking ICMP trace would fail.
+For extensive details on this behaviour check out <a href="https://www.networkfuntimes.com/a-qurik-of-traceroute-that-youll-want-to-know-about/">this post</a>
 
 
                       </div>
@@ -823,7 +479,7 @@ Options-Ping    ENABLED:NO    ACTIVE:NO
 
                 </article>
 
-
+<!-- ============================ END CONTENT ============================================ -->
 
                 <div class="author_info_container author_single_box">
                   <div class="row">
@@ -882,7 +538,7 @@ BSc Telecommunications Eng.
             <div class="main_menu">
               <ul id="mobile-menu" class="navbar">
                 <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu">
-                  <a href="../../index.html">Home</a>
+                  <a href="index.html" class="local-root-page">Home</a>
                 </li>
                 <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu">
                   <a href="https://github.com/basondole/mpls#introduction">Design</a>
@@ -891,10 +547,10 @@ BSc Telecommunications Eng.
                   <a href="https://github.com/basondole/open#hocid">NET2CODE</a>
                 </li>
                 <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu">
-                  <a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle">Blog</a>
+                  <a href="blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
                   <ul role="menu" class=" dropdown-menu">
                     <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
-                      <a href="https://github.com/basondole/collaboration/blob/master/Setting%20up%20Cisco%20Call%20Manager.md#setting-up-cisco-call-manager-express">Collaboration</a>
+                      <a href="index.html">Collaboration</a>
                     </li>
                     <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
                       <a href="../networkauto/index.html">Network Automation</a>
@@ -907,12 +563,12 @@ BSc Telecommunications Eng.
                     </li>
                   </ul>
                 </li>
-                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="../../bgp.html">BGP</a></li>
+                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
-                  <a href="../../about.html">About</a>
+                  <a href="about.html" class="local-root-page">About</a>
                 </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-145 current_page_item menu-item-412 default_menu active">
-                  <a href="../../contact.html">Contact</a>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-145 menu-item-412 default_menu">
+                  <a href="contact.html" class="local-root-page">Contact</a>
                 </li>
                 <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
                   <a href="http://karneliuk.com/donate/">Donate</a> -->
@@ -935,7 +591,7 @@ BSc Telecommunications Eng.
 
     </script>
 
-    <script type='text/javascript' src='../../karneliuk/global.1.35.js'></script>
+    <script type='text/javascript' src='../../karneliuk/global.1.35.js' class="local-root-js"></script>
 
 
     <script type='text/javascript'>
@@ -945,10 +601,65 @@ var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/p
     </script>
 
 
-    <script type='text/javascript' src='../../karneliuk/alia-core.1.13.js'></script>
-    <script type='text/javascript' src='../../karneliuk/wp-embed.min.5.3.2.js'></script>
+    <script type='text/javascript' src='../../karneliuk/alia-core.1.13.js' class="local-root-js"></script>
+    <script type='text/javascript' src='../../karneliuk/wp-embed.min.5.3.2.js' class="local-root-js"></script>
 
     
+<script type="text/javascript">
+  // edit the level variable, the load the page and copy the loaded DOM, NOT the source
+  // to get updated paths throughout the dom
+  
+  var 
+  localPagesFiles = document.getElementsByClassName("local-root-page"),
+  localJsFiles = document.getElementsByClassName("local-root-js"),
+  localCssFiles = document.getElementsByClassName("local-root-css"),
+  localImagesFiles = document.getElementsByClassName("local-root-image");
+
+  var level = "../../";
+
+  function updatePaths() { 
+    for (var i=0; i<localPagesFiles.length; i++) {
+          var path = level + localPagesFiles[i].getAttribute("href");
+          localPagesFiles[i].setAttribute("href",path);
+          console.log(localPagesFiles[i].getAttribute("href"));
+    }
+
+    for (var i=0; i<localJsFiles.length; i++) {
+          var path = level + localJsFiles[i].getAttribute("src");
+          localJsFiles[i].setAttribute("src",path);
+          console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localCssFiles.length; i++) {
+          var path = level + localCssFiles[i].getAttribute("src");
+          localCssFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localImagesFiles.length; i++) {
+          var path = level + localImagesFiles[i].getAttribute("src");
+          localImagesFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+  }
+
+  window.onload = function () {
+   updatePaths();
+  };
+
+</script>
+
+<script type="text/javascript">
+  var localPagesFiles = document.getElementsByClassName("local-root-page");
+function printId(event) {
+  var myId = this.Id;
+  console.log(myId);
+}
+for (var i=0; i<localPagesFiles.length; i++) {
+       localPagesFiles[i].addEventListener("click",printId);
+}
+</script>
+
 
 
 
