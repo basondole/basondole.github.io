@@ -4813,7 +4813,7 @@ if ( document.querySelectorAll ) {
 		div.innerHTML = "<p class='TEST'></p>";
 
 		// Safari can't handle uppercase or unicode characters when
-		// in quirks mode.
+		// in misc mode.
 		if ( div.querySelectorAll && div.querySelectorAll(".TEST").length === 0 ) {
 			return;
 		}
@@ -8901,7 +8901,7 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 		}
 
 		if ( jQuery.isWindow( elem ) ) {
-			// Everyone else use document.documentElement or document.body depending on Quirks vs Standards mode
+			// Everyone else use document.documentElement or document.body depending on misc vs Standards mode
 			// 3rd condition allows Nokia support, as it supports the docElem prop but not CSS1Compat
 			var docElemProp = elem.document.documentElement[ "client" + name ];
 			return elem.document.compatMode === "CSS1Compat" && docElemProp ||

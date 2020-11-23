@@ -422,9 +422,9 @@ div.contacts {
                 <ul role="menu" class=" dropdown-menu">
                   <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
                   <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
-                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/tutorials">Network Servers</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
                   <!-- <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/netmanagement">Misc</a></li> -->
-                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Quirks</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">misc</a></li>
                 </ul>
               </li>
               <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="../../bgp.html" class="local-root-page">BGP</a></li>
@@ -456,378 +456,195 @@ div.contacts {
 
 
 <!-- ============================ START CONTENT ============================================ -->
-<h1 id="essential-huawei-olt-cli-commands" style="text-align: center;">Essential Huawei OLT CLI Commands</h1>
-<h3 id="checking-olt-uptime">Checking OLT Uptime</h3>
+<h2 style="text-align: center;">
+  <strong>Installation of Icinga 2 on CentoS</strong><strong>.</strong>
+</h2>
+Icinga is a monitoring system which checks the availability of your network resources, notifies users of outages, and generates performance data for reporting.
+
+<h2 id="install-required-packages">Install required packages</h2>
 <pre>
-OL01#display sysuptime
-System up time: 324 day 20 hour 55 minute 38 second
+[basondole@localhost ~]
+sudo yum install httpd
+sudo yum install mariadb mariadb-server
+sudo systemctl start mariadb && sudo systemctl enable mariadb
+sudo mysql_secure_installation
+sudo yum install centos-release-scl
+sudo yum install rh-php71-php-mysqlnd rh-php71-php-cli php-Icinga rh-php71-php-common rh-php71-php-fpm rh-php71-php-pgsql rh-php71-php-ldap rh-php71-php-intl rh-php71-php-xml rh-php71-php-gd rh-php71-php-pdo rh-php71-php-mbstring -y
 </pre>
 
-<h3 id="checking-olt-board">Checking OLT Board</h3>
+<p>Verify the timezone is properly configured</p>
+<pre>
+[basondole@localhost ~]
+cat /etc/opt/rh/rh-php71/php.ini | grep timezone
+; Defines the default timezone used by the date functions
+; http://php.net/date.timezone
+date.timezone = Africa/Nairobi
+</pre>
+
+<p>if date.timezone is empty edit the file to add correct timezone</p>
+<h3 id="install-more-dependencies">Install more dependencies</h3>
+<pre>
+[basondole@localhost ~]
+sudo yum -y install http://mirror.centos.org/centos/7/sclo/x86_64/sclo/sclo-php71/sclo-php71-php-pecl-imagick-3.4.3-2.el7.x86_64.rpm
+sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+sudo yum install https://packages.icinga.com/epel/icinga-rpm-release-7-latest.noarch.rpm
+sudo yum install icinga2-ido-mysql icingaweb2 icingacli nagios-plugins-all
+</pre>
+
+<h2 id="install-icinga">Install icinga</h2>
+<pre>
+[basondole@localhost ~]
+yum install icinga2
+</pre>
+
+<p>Start and enable the services</p>
+<pre>
+[basondole@localhost ~]
+sudo systemctl start httpd.service
+sudo systemctl start icinga2.service
+sudo systemctl start rh-php71-php-fpm.service
+sudo systemctl enable rh-php71-php-fpm.service
+sudo systemctl enable icinga2.service
+</pre>
+
+
+<h2 id="configuring-the-firewall">Configuring the firewall</h2>
+<pre>
+[basondole@localhost ~]
+sudo firewall-cmd --zone=public --permanent --add-port=80/tcp 
+sudo firewall-cmd --zone=public --permanent --add-port=5665/tcp
+sudo firewall-cmd --reload
+</pre>
+
+<p>Now icinga2 is successfully installed and can be accessed on a browser to finalize the setup proccess<br>via <code>http://&lt;ip-addrees-or-hostname-of-icnga2-server&gt;/icingaweb2/setup</code>  </p>
+<h2 id="configuring-icinga2-web">Configuring icinga2 web</h2>
+<p>My installation is done on a vm with IP 192.168.56.4<br>I will browse <code>http://192.168.56.4/icingaweb2/setup</code>  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597564-3c41fe80-04ae-11ea-9229-8e2268917047.png" alt="icinga1"></p>
+<h3 id="create-token-">Create token:</h3>
+<pre>
+[basondole@localhost ~]
+sudo groupadd -r icingaweb2
+sudo usermod -a -G icingaweb2 apache
+sudo icingacli setup config directory --group icingaweb2
+sudo icingacli setup token create
+</pre>
+
+<p>Fill the token to the web interface and click next</p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597567-3cda9500-04ae-11ea-903b-13cd326e1b3c.png" alt="icinga2">  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597544-3815e100-04ae-11ea-8965-9517e170ff8c.png" alt="icinga3">  </p>
+<p>Review the modules and click next  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597545-38ae7780-04ae-11ea-8fe6-8d9a3f2dbc25.png" alt="icinga4">  </p>
+<h3 id="create-icinga-database">Create Icinga database</h3>
+<pre>
+[basondole@localhost ~]
+mysql -u root -p
+Enter password:
+MariaDB [(none)]> create database icinga2;
+MariaDB [(none)]> exit
+</pre>
+
+<p>Fill in the details as illustrated and click validate configuration then next  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597547-38ae7780-04ae-11ea-8486-86eaec2901ae.png" alt="icinga5"></p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597548-38ae7780-04ae-11ea-936f-bfde35cf9f43.png" alt="icinga6">  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597549-39470e00-04ae-11ea-99e0-ac6054c56b94.png" alt="icinga7">  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597550-39470e00-04ae-11ea-9dc0-a4bde81f5200.png" alt="icinga8">  </p>
+<p>On the next screen, we will be asked to review the changes that we have made for icinga.<br>Make sure that everything is in order &amp; hit next  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597551-39dfa480-04ae-11ea-977a-82b3ee5169dc.png" alt="icinga9">  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597552-39dfa480-04ae-11ea-829f-10a139a53ce1.png" alt="icinga10">  </p>
+<h2 id="configuring-monitoring-module-for-icinga">Configuring monitoring module for Icinga</h2>
+<pre>
+[basondole@localhost ~]
+mysql -u root -p 
+ MariaDB [(none)]> CREATE DATABASE icinga; 
+ MariaDB [(none)]> GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icinga.* TO 'baggy'@'localhost' IDENTIFIED BY 'password'; 
+ MariaDB [(none)]> FLUSH PRIVILEGES; 
+ MariaDB [(none)]> EXIT;
+mysql -u root -p icinga < /usr/share/icinga2-ido-mysql/schema/mysql.sql
+</pre>
+
+<h3 id="configure-ido">Configure IDO</h3>
+<pre>
+[basondole@localhost ~]
+sudo cat /etc/icinga2/features-available/ido-mysql.conf
+/**
+ * The IdoMysqlConnection type implements MySQL support
+ * for DB IDO.
+ */
+object IdoMysqlConnection "ido-mysql" {
+  //user = "icinga"
+  //password = "icinga"
+  //host = "localhost"
+  //database = "icinga"
+}
+</pre>
+
+<p>Edit the above file to become</p>
+<pre>
+[basondole@localhost ~]
+sudo cat /etc/icinga2/features-available/ido-mysql.conf
+/**
+ * The IdoMysqlConnection type implements MySQL support
+ * for DB IDO.
+ */
+library "db_ido_mysql"
+object IdoMysqlConnection "ido-mysql" {
+  user = "icinga"
+  password = "icinga"
+  host = "localhost"
+  database = "icinga"
+}
+</pre>
+
+<p>Check if IDO is enable </p>
+<pre>
+[basondole@localhost ~]
+sudo icinga2 feature list
+</pre>
+
+<p>if not enabled, enable with</p>
+<pre>
+[basondole@localhost ~]
+sudo icinga2 feature enable ido-mysql
+sudo icinga2 feature enable command
+sudo systemctl restart icinga2
+</pre>
+
+<p><img src="https://user-images.githubusercontent.com/50369643/68597560-3ba96800-04ae-11ea-9367-6e6a6f39f707.png" alt="icinga11">  </p>
+<p>If you get below error upon validation</p>
 <blockquote>
-<p>SCUN  boards are the Control Module<br>X2CS boards are the uplink ports  </p>
+<p>&quot;There is currently no icinga instance writing to the IDO. Make sure that a icinga instance is configured and able to write to the IDO.”</p>
 </blockquote>
+<p>Issue these commands  </p>
 <pre>
-OL01#display board 0
-————————————————————————-
-SlotID  BoardName  Status          SubType0 SubType1    Online/Offline
-————————————————————————-
-0
-1       H805GPFD   Normal
-2       H805GPFD   Normal
-3       H805GPFD   Normal
-4       H805GPFD   Normal
-5       H805GPFD   Normal
-6       H805GPFD   Normal
-7       H802SCUN   Active_normal<br>8       H802SCUN   Standby_normal<br>9       H805GPFD   Normal
-10      H805GPFD   Normal
-11      H805GPFD   Normal
-12      H805GPFD   Normal
-13      H805GPFD   Normal
-14      H805GPFD   Normal
-15      H805GPFD   Normal
-16      H805GPFD   Normal
-17      H801X2CS   Normal<br>18      H801X2CS   Normal
-19      H801PRTE   Normal
-20      H801PRTE   Normal
-————————————————————————-
-</pre></p>
-<h3 id="checking-olt-processor-and-memory-per-slot">Checking OLT processor and Memory per Slot</h3>
-<pre>
-OL01#display mem 0/1
-Memory occupancy: 33%
-OL01#display cpu 0/1
-Send message for inquiring board cpu occupancy successfully, board executing…
-CPU occupancy: 15%
+[basondole@localhost ~]
+sudo chmod 660 /etc/icinga2/features-available/ido-mysql.conf
+sudo chown icinga:icinga /etc/icinga2/features-available/ido-mysql.conf
 </pre>
 
-<h3 id="checking-olt-temperature">Checking OLT Temperature</h3>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597554-39dfa480-04ae-11ea-9367-9656e4696f5f.png" alt="icinga12">  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597556-3a783b00-04ae-11ea-9ad7-7217f722b875.png" alt="icinga13">  </p>
+<h2 id="login-to-icinga2">Login to icinga2</h2>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597557-3b10d180-04ae-11ea-8a4d-db5eed8f8e04.png" alt="icinga14">  </p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597559-3b10d180-04ae-11ea-9dce-82aa937fed47.png" alt="icinga15">  </p>
+<h3 id="adding-nodes-to-be-monitored">Adding Nodes to be monitored</h3>
 <pre>
-OL01#display temperature 0
-SlotID:  1      BoardName: H805      Temperature:   42C( 107F)
-SlotID:  2      BoardName: H805       Temperature:   41C( 105F
+[basondole@localhost ~]
+nano /etc/icinga2/conf.d/hosts.conf
+object Host “router-63” {
+  address = “192.168.56.63”
+  check_command = “hostalive”
+}
 </pre>
 
-<h3 id="finding-ont-by-sn-number">Finding ONT by SN number</h3>
+<p>Restart the service</p>
 <pre>
-OL01#display ont info by-sn ABCDEF
-—————————————————————————–
-In Huawei port 1 = port 0 at system
-F/S/P                   : 0/1/0 
-ONT-ID                  : 2
-Control flag            : active
-Run state               : offline
-Config state            : initial
-Match state             : initial
-DBA type                : SR
-ONT distance(m)         : –
-ONT battery state       : –
-Memory occupation       : –
-CPU occupation          : –
-Temperature             : –
-Authentic type          : SN-auth
-SN                      : ABCDEF (HWTC-07930A53)
-Management mode         : OMCI
-Software work mode      : normal
-Isolation state         : normal
-ONT IP 0 address/mask   : –
-Description             : IRONMAN
-Last down cause         : dying-gasp 
-Last up time            : 2016-11-11 17:52:08+07:00 
-Last down time          : 2016-11-15 09:23:27+07:00
-Last dying gasp time    : 2016-11-15 09:23:27+07:00
-ONT online duration     : –
-Type C support          : Not support
-Interoperability-mode   : Unknown
+[basondole@localhost ~]
+sudo systemctl restart icinga2.service
 </pre>
 
-<h3 id="checking-ont-status">Checking ONT Status</h3>
-<pre>
-OL01#display ont info 0 1 0 all
-—————————————————————————–
-F/S/P   ONT         SN         Control     Run      Config   Match    Protect
-ID                     flag        state    state    state    side
-—————————————————————————–
-0/ 1/0    1  ABCDEF  deactivated offline  initial  initial  no
-0/ 1/0    2  REZABU  active      offline  initial  initial  no 
-0/ 1/0    4  BAREZU  active      online   normal   match    no  
+<p>On the web page navigate to hosts</p>
+<p><img src="https://user-images.githubusercontent.com/50369643/68597561-3ba96800-04ae-11ea-8ca1-8fef800a9abc.png" alt="icinga16"></p>
 
-</pre>
-
-<h3 id="checking-ont-history-logs">Checking ONT History Logs</h3>
-<pre>
-OL01#config
-OL01(config)#interface gpon 0/1
-OL01(config-if-gpon-0/1)#display ont register-info 0 1
-——————————————————————————
-Index               : 10
-Auth-type           : SN-auth
-SN                  : ABCDEF (HWTC-19698F53)
-TYPE                : 245H
-UpTime              : 2016-11-02 16:56:37+07:00
-DownTime            : 2016-11-04 07:52:15+07:00
-DownCause           : ONT dying-gasp
-——————————————————————————
-Index               : 9
-Auth-type           : SN-auth
-SN                  : ABCDEF (HWTC-19698F53)
-TYPE                : 245H
-UpTime              : 2016-10-31 22:29:05+07:00
-DownTime            : 2016-11-02 16:42:36+07:00
-DownCause           : ONT dying-gasp
-——————————————————————————
-Index               : 8
-Auth-type           : SN-auth
-SN                  : ABCDEF (HWTC-19698F53)
-TYPE                : 245H
-UpTime              : 2016-10-29 00:25:35+07:00
-DownTime            : 2016-10-31 22:13:03+07:00
-DownCause           : ONT dying-gasp
-</pre>
-
-<h3 id="checking-ont-mac-address">Checking ONT mac address</h3>
-<pre>
-OL01#display mac-address port 0/1/0 ont 2
-———————————————————————–
-SRV-P BUNDLE TYPE MAC            MAC TYPE F /S /P   VPI  VCI   VLAN ID
-INDEX INDEX
-———————————————————————–
-2389     –  gpon aaaa-bbbb-cccc dynamic  0 /1 /0   2    2         122
-2388     –  gpon bbbb-aaaa-cccc dynamic  0 /1 /0   2    1         212
-———————————————————————–
-Total: 2
-Note: F–Frame, S–Slot, P–Port, F/S/P indicates PW Index for PW,
-A–The MAC address is learned or configured on the aggregation port,
-VPI indicates ONT ID for PON, VCI indicates GEM index for GPON,
-v/e–vlan/encap, pritag–priority-tagged,
-ppp–pppoe, ip–ipoe, ip4–ipv4oe, ip6–ipv6oe
-</pre>
-
-<h3 id="checking-ont-optical-power">Checking ONT optical power</h3>
-<pre>
-OL01#config
-OL01(config)#interface gpon 0/1
-OL01(config-if-gpon-0/1)#display ont optical-info 0 all
-—————————————————————————–
-ONT  Rx power    Tx power    OLT Rx ONT  Temperature  Voltage     Current
-ID   (dBm)       (dBm)       power(dBm)  (C)          (V)         (mA)
-—————————————————————————–
-4  -23.10      2.30        -24.21      56           3.260       13
-6  -21.08      2.28        -21.49      44           3.240       13
-</pre>
-
-
-<h3 id="checking-ont-version">Checking ONT Version</h3>
-<pre>
-OL01#display ont version 0 1 0 4
-————————————————————————–
-F/S/P                    : 0/1/0
-ONT-ID                   : 4
-Vendor-ID                : HWTC
-ONT Version              : 49
-Product-ID               : 4
-Equipment-ID             : 24
-Main Software Version    : V3R0
-Standby Software Version : V3R0
-OntProductDescription    : EchoLife
-Support XML Version      : 1.3.
-OL01#
-</pre>
-
-<h3 id="checking-ont-ip-routing-mode-">Checking ONT IP (Routing Mode)</h3>
-<pre>
-OL01#display ont wan-info 0/1 0 4
-———————————————————————
-F/S/P                      : 0/1/0
-ONT ID                     : 4
-———————————————————————
-Index                      : 1
-Name                       : OLT_C_INTERNET_DHCP_WAN
-Service type               : Internet
-Connection type            : IP routed
-IPv4 Connection status     : Connected
-IPv4 access type           : DHCP
-IPv4 address               : 1.2.3.4
-Subnet mask                : 255.255.255.0
-Default gateway            : 1.2.3.1
-Manage VLAN                : 212
-Manage priority            : 0
-Option60                   : Yes
-Switch                     : Enable
-MAC address                : BBBB-AAAA-CCCC
-Priority policy            : Specified
-L2 encap-type              : IPoE
-IPv4 switch                : Enable
-IPv6 switch                : Disable
-———————————————————————
-</pre>
-
-<h3 id="checking-ont-port-status">Checking ONT port status</h3>
-<pre>
-OL01#config
-OL01(config)#interface gpon 0/1
-OL01(config-if-gpon-0/1)#display ont port state 0 4 eth-port all
-————————————————————————–
-ONT-ID   ONT      ONT       Speed(Mbps)   Duplex   LinkState  RingStatus
-port-ID  Port-type
-————————————————————————–
-4         1         GE –             –        down       –
-4         2         GE 100           full     up         –
-4         3         GE –             –        down       –
-4         4         GE –             –        down       –
-————————————————————————–
-</pre>
-
-<h3 id="checking-ont-configuration">Checking ONT configuration</h3>
-<blockquote>
-<p>Port 1 and Port 4 are in bridge mode
-Port 2 and Port 3 are in routed mode</p>
-</blockquote>
-<pre>
-OL01#display current-configuration ont 0/1/0 4
-#
-[gpon]
-<gpon-0/1>
-interface gpon 0/1
-ont add 0 4 sn-auth “SN” omci ont-lineprofile-id 5
-ont-srvprofile-id 1 desc “SERVICE1”
-ont ipconfig 0 4 dhcp vlan 212 priority
-ont internet-config 0 4 ip-index 0
-ont wan-config 0 4 ip-index 0 profile-id 1
-ont port route 0 4 eth 1 enable 
-ont port native-vlan 0 4 eth 2 vlan 122 priority 0 
-ont port native-vlan 0 4 eth 3 vlan 122 priority 0 
-ont port route 0 4 eth 4 enable 
-#
-[bbs-config]
-<bbs-config>
-service-port 2677 vlan 212 gpon 0/1/0 ont 4 gemport 1 multi-service user-vlan  212 tag-transform translate inbound traffic-table index 20 outbound
-traffic-table index 20
-service-port 2678 vlan 122 gpon 0/1/0 ont 4 gemport 2 multi-service user-vlan  122 tag-transform translate inbound traffic-table index 0 outbound traffic-table index 0
-return
-</pre>
-
-
-<h2 id="checking-pon-port-configuration">Checking PON Port Configuration</h2>
-<pre>
-OL01#display current-configuration port 0/1/1
-#
-[gpon]
-<gpon-0/1>
-interface gpon 0/1
-port 1 ont-auto-find enable
-</pre>
-
-<h3 id="checking-service-ports-in-ont">Checking Service Ports in ONT</h3>
-<pre>
-OL01#display service-port port 0/1/0 ont 4
-{ <cr>|e2e<K>|gemport<K>|sort-by<K> }:
-Command:
-display service-port port 0/1/0 ont 4
-Switch-Oriented Flow List
-—————————————————————————–
-INDEX VLAN VLAN     PORT F/ S/ P VPI  VCI   FLOW  FLOW       RX   TX   STATE
-ID   ATTR     TYPE                    TYPE  PARA
-—————————————————————————–
-2677  212 common   gpon 0/1 /0  4    1     vlan  212        20   20   up
-2678  122 common   gpon 0/1 /0  4    2     vlan  122        0    0    up
-—————————————————————————–
-Total : 2  (Up/Down :    2/0)
-Note : F–Frame, S–Slot, P–Port,
-VPI indicates ONT ID for PON, VCI indicates GEM index for GPON,
-</pre>
-
-<h3 id="ping-test-from-ont">Ping Test From ONT</h3>
-<pre>
-OL01#config
-OL01(config)#interface gpon 0/1
-OL01(config-if-gpon-0/1)#ont remote-ping 0 4 ip-address 10.10.8.8
-OL01(config-if-gpon-0/1)#
-—————————————–
-ONT remote-ping information
-—————————————–
-F/S/P                : 0/ 1/0
-ONT-ID               : 4
-ONT IP Index         : 0
-IP address of ping   : 8.8.8.8
-Transmit packets     : 4
-Receive packets      : 4
-Lost packets         : 0
-Lost packets ratio(%): 0
-Min delay(ms)        : 31
-Max delay(ms)        : 31
-Average delay(ms)    : 31
-Error Code           : –
-—————————————–
-</pre>
-
-<h3 id="reboot-ont">Reboot ONT</h3>
-<pre>
-OL01#config
-OL01(config)#interface gpon 0/1
-OL01(config-if-gpon-0/1)#ont reset 0 4
-</pre>
-
-<h3 id="factory-reset-ont">Factory Reset  ONT</h3>
-<pre>
-OL01#config
-OL01(config)#interface gpon 0/1
-OL01(config-if-gpon-0/1)#ont factory-setting-restore 0 4
-</pre>
-
-<h3 id="how-to-release-renew-ont-as-dhcp-client">How To Release Renew ONT as DHCP client</h3>
-<pre>
-OL01#config
-OL01(config)#interface gpon 0/1
-OL01(config-if-gpon-0/1)#ont ipconfig 0 4 dhcp reset
-Checking Rx Level For OLT Uplink
-OL01#config
-OL01(config)#interface giu 0/18
-OL01(config-if-giu-0/18)#display port ddm-info 0
-Temperature(C)                       : 38.640000
-Supply voltage(V)                    : 3.260000
-TX bias current(mA)                  : 38.000000
-TX power(dBm)                        : 1.095110
-RX power(dBm)                        : -14.659738
-OL01(config-if-giu-0/18)#quit
-OL01(config)#quit
-</pre>
-
-<h3 id="reset-slot">Reset Slot</h3>
-<pre>
-OL01#config
-OL01(config)#board reset 0/1
-</pre>
-
-<h3 id="locate-mac-address-learnt-from-ont">Locate mac address learnt from ONT</h3>
-<p>Use case is when you know the mac address but you do not know it comes in via which ONT</p>
-<pre>
-OL01#display location aaaa-bbbb-cccc
-{ <cr>|fabric<K>|ont<K> }:
-Command:
-display location 4cf9-5dd3-1914
-It will take several minutes, and console may be timeout, please use command  idle-timeout to set time limit
-Are you sure to query MAC address location ? (y/n)[n]:y
-———————————————————————–
-SRV-P BUNDLE TYPE MAC            MAC TYPE F /S /P   VPI  VCI   VLAN ID
-INDEX INDEX
-———————————————————————–
-5493     –  gpon aaaa-bbbb-cccc dynamic  0 /6 /6   50   1         203
-———————————————————————–
-</pre>
-
-<h3 id="checking-statistic-from-uplink-port">Checking statistic from uplink port</h3>
-<pre>
-OL01-HW#config
-OL01-HW(config)#interface giu 0/18
-OL01-HW(config-if-giu-0/18)#display port traffic 0
-The received traffic of this port(packets/s) =307216
-The received traffic of this port(octets/s) =370001834
-The received traffic of this port(kbits/s) =2960014.7
-The transmitted traffic of this port(packets/s) =125081
-The transmitted traffic of this port(octets/s) =21000637
-The transmitted traffic of this port(kbits/s) =168005.1
-</pre>
                       </div>
                     </div>
                     <!-- end post_info_wrapper -->

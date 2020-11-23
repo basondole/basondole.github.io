@@ -422,9 +422,9 @@ div.contacts {
                 <ul role="menu" class=" dropdown-menu">
                   <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
                   <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
-                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/tutorials">Network Servers</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
                   <!-- <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/netmanagement">Misc</a></li> -->
-                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Quirks</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">misc</a></li>
                 </ul>
               </li>
               <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="../../bgp.html" class="local-root-page">BGP</a></li>
@@ -457,51 +457,91 @@ div.contacts {
 
 <!-- ============================ START CONTENT ============================================ -->
 <h2 style="text-align: center;">
-  <strong>NAT Rules for MikroTik routers</strong><strong>.</strong>
+  <strong>Switch Port Analyzer</strong>
 </h2>
 
-<p>This guide covers different NAT cases for the RouterOS.</p>
-<blockquote>
-<p>RouterOS is the softwares that powers MikroTik devices</p>
-</blockquote>
-<h2 id="nat-for-internet-access">NAT for Internet access</h2>
-<p><strong>Command:</strong><br><code>/ip firewall nat add chain=srcnat action=masquerade out-interface=&lt;WAN_INTERFACE&gt;</code>  </p>
-<p>The masquerading will change the source IP address and port of the packets to the IP address of WAN interface when the packet is routed through it. </p>
-<p>You can also specify interface list instead of specific WAN interface  </p>
-<blockquote>
-<p>Interface-list is a feature in RouterOS where you can group several interfaces together and use the list to reference all interfaces in that group   </p>
-</blockquote>
-<p>Below command does the same thing the first does only using an interface list instead of specific interface  </p>
-<p><strong>Command:</strong><br><code>/ip firewall nat add chain=srcnat action=masquerade out-interface-list=&lt;WAN_INTERFACE_LIST&gt;</code></p>
-<h3 id="altenative-method">Altenative method</h3>
-<p>You can also use a specific WAN IP to do NAT with instead of using interface address</p>
-<p><strong>Command:</strong>  </p>
-<pre><code>/ip firewall nat
-add <span class="hljs-attr">chain=srcnat</span> <span class="hljs-attr">src-address=&lt;LAN_BLOCK&gt;</span> <span class="hljs-attr">action=src-nat</span> <span class="hljs-attr">to-addresses=&lt;PUBLIC_IP&gt;</span> <span class="hljs-attr">out-interface=&lt;WAN_INTERFACE&gt;</span>
-</code></pre><p>Or use an interface list<br><strong>Command:</strong> </p>
-<pre><code>/ip firewall nat
-<span class="hljs-built_in">add</span> chain=srcnat src-address=<span class="hljs-symbol">&lt;LAN_BLOCK&gt;</span> action=src-nat <span class="hljs-keyword">to</span>-addresses=<span class="hljs-symbol">&lt;PUBLIC_IP&gt;</span> out-interface-<span class="hljs-keyword">list</span>=<span class="hljs-symbol">&lt;WAN_INTERFACE_LIST&gt;</span>
-</code></pre><p>This will change the source IP address and port of the packets from LAN_BLOCK to the IP address PUBLIC_IP</p>
-<h2 id="port-forwarding-wan-to-lan">Port Forwarding WAN to LAN</h2>
-<p>Below WAN port 5901 is forwarded to LAN IP address 192.168.3.100<br><strong>Command:</strong></p>
-<pre><code>/ip firewall nat
-add <span class="hljs-attr">chain=dstnat</span> <span class="hljs-attr">protocol=tcp</span> <span class="hljs-attr">dst-address=&lt;PUBLIC_IP&gt;</span> <span class="hljs-attr">dst-port=5901</span> <span class="hljs-attr">action=dst-nat</span> <span class="hljs-attr">to-addresses=192.168.3.100</span>
-</code></pre><p>Below WAN port 5901 is forwarded to LAN ip 192.168.3.100 port 80<br><strong>Command:</strong></p>
-<pre><code>/ip firewall nat
-add <span class="hljs-attr">chain=dstnat</span> <span class="hljs-attr">protocol=tcp</span> <span class="hljs-attr">dst-port=5901</span> <span class="hljs-attr">action=dst-nat</span> <span class="hljs-attr">to-addresses=192.168.3.100</span> <span class="hljs-attr">to-ports=80</span>
-</code></pre><p>This means when an incoming connection requests TCP port 5901 use the DST-NAT action and redirect it to local address 192.168.3.100 and the port 80</p>
-<h2 id="mapping">Mapping</h2>
-<h3 id="one-to-one-mapping-ip-to-ip">One to One Mapping: IP to IP</h3>
-<p><strong>Command:</strong></p>
-<pre><code>/ip firewall nat add <span class="hljs-attr">chain=dstnat</span> <span class="hljs-attr">dst-address=&lt;PUBLIC_IP&gt;</span> <span class="hljs-attr">action=dst-nat</span> <span class="hljs-attr">to-addresses=&lt;PRIVATE_IP&gt;</span>
-/ip firewall nat add <span class="hljs-attr">chain=srcnat</span> <span class="hljs-attr">src-address=&lt;PRIVATE_IP&gt;</span> <span class="hljs-attr">action=src-nat</span> <span class="hljs-attr">to-addresses=&lt;PUBLIC_IP&gt;</span>
-</code></pre><h3 id="one-to-one-mapping-subnet-to-subnet">One to One Mapping: Subnet to Subnet</h3>
-<p><strong>Command:</strong></p>
-<pre><code>/ip firewall nat add <span class="hljs-attr">chain=dstnat</span> <span class="hljs-attr">dst-address=&lt;SUBNET_1&gt;</span> <span class="hljs-attr">action=netmap</span> <span class="hljs-attr">to-addresses=&lt;SUBNET_2&gt;</span>
-/ip firewall nat add <span class="hljs-attr">chain=srcnat</span> <span class="hljs-attr">src-address=&lt;SUBNET_2&gt;</span> <span class="hljs-attr">action=src-nat</span> <span class="hljs-attr">to-addresses=&lt;SUBNET_1&gt;</span>
-</code></pre><h2 id="port-translation">Port Translation</h2>
-<p>Below incoming port 2222 is translated to 22</p>
-<p><strong>Command:</strong><br><code>/ip firewall nat add action=dst-nat chain=dstnat dst-address=&lt;PUBLIC_IP&gt; dst-port=2222 protocol=tcp to-ports=22</code></p>
+<p>Switched Port Analyzer (SPAN), sometimes called port mirroring or port monitoring, copies switch network traffic and forwards it out the SPAN port for analysis by a network analyzer. By enabling the SPAN, you can monitor traffic on a switch port by forwarding incoming and outgoing traffic to another port for data collection and analysis. You can use a network analyzer on this monitor port to troubleshoot network problems by examining traffic on other ports or segments without taking the network out of service.</p>
+<h1 id="basic-span-configuration">Basic SPAN configuration</h1>
+<p>Basic SPAN captures traffic from one source port or VLAN and sends the traffic to another port on the same switch. On the diagram shown below, we will capture traffic from source port fa0/1 (connected to a user computer) and send the traffic to destination port fa0/5</p>
+<p><img src="https://user-images.githubusercontent.com/50369643/63925570-fbac1a80-ca52-11e9-9fd0-15fe4fb22ccb.png" alt="span"></p>
+<h2 id="configuration-commands">Configuration Commands</h2>
+<pre>
+Switch# configure terminal
+Switch(config)# monitor session 1 source interface fa0/1
+Switch(config)# monitor session 1 destination interface fa0/5
+</pre>
+
+<p>With this simple configuration, traffic sourced from interface fa0/1 will be mirrored to interface fa0/5 where you will be able to capture it.</p>
+<h2 id="basic-rspan-configuration">Basic RSPAN configuration</h2>
+<p>RSPAN (Remote SPAN) feature allows traffic that is sourced from a switch to be mirrored to a remote switch within a layer 2 network over trunk ports. To accomplish this you will have to configure the destination VLAN across the entire path between the switches.
+In the diagram below, we want to capture traffic from Switch1 (port fa0/1) and send the traffic to Switch2 (port fa0/5).<br>Although here we show a direct connection with a Layer2 trunk port between Switch1-Switch2, you can have multiple switches between them with no problem (the capturing vlan must be active on the whole path though).</p>
+<p><img src="https://user-images.githubusercontent.com/50369643/63930010-269a6c80-ca5b-11e9-8244-6424de8638a4.png" alt="rspan"></p>
+<h3 id="configuration-commands">Configuration Commands</h3>
+<pre>
+Switch1# config term
+Switch1 (config)# vlan 100
+Switch1 (config-vlan)# remote span   
+Switch1(config-vlan)# exit
+Switch1 (config)# monitor session 10 source interface fa0/1
+Switch1 (config)# monitor session 10 destination remote vlan 100
+
+Switch2_Remote# config term
+Switch2_Remote (config)# vlan 100
+Switch2_Remote (config-vlan)# remote span
+Switch2_Remote (config-vlan)# exit
+Switch2_Remote (config)# monitor session 11 source remote vlan 100
+Switch2_Remote (config)# monitor session 11 destination interface fa0/5
+</pre>
+
+
+<p>All traffic sourced from interface fa0/1 on switch 1 will be forwarded using vlan 100 towards the destination port on remote switch2 where you can sniff the traffic.</p>
+<h2 id="basic-erspan-configuration">Basic ERSPAN configuration</h2>
+<p>ERSPAN (Encapsulated Remote Switched Port Analyzer) is a feature present on the new IOS-XE on ASR1000 but is also available on Catalyst 6500 or 7600. It is used to send traffic for sniffing over layer3 networks and it works by encapsulating the traffic using a GRE tunnel.
+On the diagram below, there is a GRE tunnel between Switch1 (again this is usually an ASR1000 or 7600 etc) and remote Switch2. The GRE tunnel is established between IP address 172.16.10.10 (on switch1) and 10.10.10.10 (on switch2). We want to send traffic from fa0/1 on Switch1 to fa0/5 on Switch2.</p>
+<p><img src="https://user-images.githubusercontent.com/50369643/63930622-5c8c2080-ca5c-11e9-8a67-d2e5398b3934.png" alt="erspan"></p>
+<p>Configuration Commands
+The erspan-id must match on both devices</p>
+<pre>
+Switch1(config)# monitor session 1 type erspan-source
+Switch1 (config-mon-erspan-src)# source interface fa0/1
+Switch1 (config-mon-erspan-src)# destination
+Switch1 (config-mon-erspan-src-dst)# erspan-id 110
+Switch1 (config-mon-erspan-src-dst)# ip address 10.10.10.10 # ip address on switch2
+Switch1(config-mon-erspan-src-dst)# origin ip address 172.16.10.10 # local ip on switch 1
+
+Switch2_Remote (config)# monitor session 1 type erspan-destination
+Switch2_Remote (config-mon-erspan-dst)# destination interface fa0/5
+Switch2_Remote (config-mon-erspan-dst)# source
+Switch2_Remote (config-mon-erspan-dst-src)# erspan-id 110
+Switch2_Remote (config-mon-erspan-dst-src)# ip address 10.10.10.10
+
+</pre>
+
+<h3 id="there-s-an-easier-way-">There’s an Easier Way ...</h3>
+<p>When configuring the IP address of the destination, you can simply enter the IP address of your own PC and all of the encapsulated mirrored traffic is sent to your PC’s IP address. With a simple capture filter setup in Wireshark you can limit your captured packets only to GRE packets. Now you’re only seeing the mirrored traffic. But it gets better. Wireshark is very smart. It realizes that the traffic is encapsulated and automatically displays the “real” source and destination IP addresses of the captured traffic, not the source switch’s IP address and your PC’s (destination) IP address. As a bonus, if you’re sniffing a VLAN trunk, the 802.1Q tags are also captured in the ERSPAN header info</p>
+<h2 id="configuration">Configuration</h2>
+<p>On Cisco IOSXE</p>
+<p><pre>
+KH16(config)#do sh run | se monitor session
+monitor session 1 type erspan-source
+ description ERSPAN DIRECT TO WIRESHARK
+ source interface Gi3
+ destination
+  erspan-id 32
+  mtu 1464
+  ip address 192.168.56.1
+  origin ip address 192.168.56.26
+KH16(config)#
+</pre>
+Here the IP address 192.168.56.1 is the ip address of a PC running wireshark</p>
+<p>On your Sniffer PC running Wireshark, you’ll want to configure a Capture Filter that limits the captured traffic to IP Protocol number 47, which is GRE. 47 in HEX is 2F, so the capture filter for this is ip proto 0x2f.
+Click “capture” on the toolbar then choose “capture filter” a window will pop up</p>
+<p><img src="https://user-images.githubusercontent.com/50369643/63931427-ebe60380-ca5d-11e9-9ffd-eea4ceef6407.png" alt="wiresharkfilter"></p>
+<p>Click the plus sign on the lower left and add the name and filter value</p>
+<p><img src="https://user-images.githubusercontent.com/50369643/63931554-2ea7db80-ca5e-11e9-832e-2b510f53bec7.png" alt="gre-filter"></p>
+<p>Then start a capture on your PC interfaces on the filter box type erspan then enter to filter the packets recived from the ERSPAN source</p>
+<p><img src="https://user-images.githubusercontent.com/50369643/63931786-9a8a4400-ca5e-11e9-9384-67f272caa25f.png" alt="capturegre"></p>
+
 
 
                       </div>

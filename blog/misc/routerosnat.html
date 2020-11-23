@@ -422,9 +422,9 @@ div.contacts {
                 <ul role="menu" class=" dropdown-menu">
                   <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
                   <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
-                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/tutorials">Network Servers</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
                   <!-- <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="https://github.com/basondole/netmanagement">Misc</a></li> -->
-                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Quirks</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">misc</a></li>
                 </ul>
               </li>
               <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="../../bgp.html" class="local-root-page">BGP</a></li>
@@ -457,27 +457,51 @@ div.contacts {
 
 <!-- ============================ START CONTENT ============================================ -->
 <h2 style="text-align: center;">
-  <strong>Junos BTLB binary without the BTLB_FLAG env set</strong><strong>.</strong>
+  <strong>NAT Rules for MikroTik routers</strong><strong>.</strong>
 </h2>
 
-<!-- <h4">
-  <strong>Junos BTLB binary without the BTLB_FLAG env set</strong><strong>.</strong>
-</h4> -->
-
-<pre>Nov 19 07:31:26  SRX-01 /kernel: exec_elf32_imgact: Running BTLB binary without the BTLB_FLAG env set
-Nov 19 07:31:28  SRX-01 mgd[4433]: UI_CHILD_EXITED: Child exited: PID 4466, status 1, command '/usr/sbin/wmic'
-Nov 19 07:31:29  SRX-01 mgd[4433]: UI_CHILD_EXITED: Child exited: PID 4467, status 1, command '/proc/1931/file'
-Nov 19 07:31:29  SRX-01 mgd[4433]: UI_CHILD_EXITED: Child exited: PID 4471, status 1, command '/usr/sbin/webapid'</pre>
-
-  I have been observing the above log messages on SRX-550 every hour, and at first I was quite concerned,  
-  after some research, it turns out to be nothing to worry about.<br/>
-  The message is produced every time you do a <code>show version detail</code><br/>
-  What happens is that a new forwarding process is started up in parallel to the one that is already running 
-  (and doing the forwarding). The new process is started without a flag being set, and is only running for 
-  long enough to get the binary version from it and then shuts down.<br/>
-  The reason it happened every hour for me is because; we have Rancid collecting configuration backup from 
-  the device every hour and part of the Rancid script runs the <code>show version detail</code>
-
+<p>This guide covers different NAT cases for the RouterOS.</p>
+<blockquote>
+<p>RouterOS is the softwares that powers MikroTik devices</p>
+</blockquote>
+<h2 id="nat-for-internet-access">NAT for Internet access</h2>
+<p><strong>Command:</strong><br><code>/ip firewall nat add chain=srcnat action=masquerade out-interface=&lt;WAN_INTERFACE&gt;</code>  </p>
+<p>The masquerading will change the source IP address and port of the packets to the IP address of WAN interface when the packet is routed through it. </p>
+<p>You can also specify interface list instead of specific WAN interface  </p>
+<blockquote>
+<p>Interface-list is a feature in RouterOS where you can group several interfaces together and use the list to reference all interfaces in that group   </p>
+</blockquote>
+<p>Below command does the same thing the first does only using an interface list instead of specific interface  </p>
+<p><strong>Command:</strong><br><code>/ip firewall nat add chain=srcnat action=masquerade out-interface-list=&lt;WAN_INTERFACE_LIST&gt;</code></p>
+<h3 id="altenative-method">Altenative method</h3>
+<p>You can also use a specific WAN IP to do NAT with instead of using interface address</p>
+<p><strong>Command:</strong>  </p>
+<pre><code>/ip firewall nat
+add <span class="hljs-attr">chain=srcnat</span> <span class="hljs-attr">src-address=&lt;LAN_BLOCK&gt;</span> <span class="hljs-attr">action=src-nat</span> <span class="hljs-attr">to-addresses=&lt;PUBLIC_IP&gt;</span> <span class="hljs-attr">out-interface=&lt;WAN_INTERFACE&gt;</span>
+</code></pre><p>Or use an interface list<br><strong>Command:</strong> </p>
+<pre><code>/ip firewall nat
+<span class="hljs-built_in">add</span> chain=srcnat src-address=<span class="hljs-symbol">&lt;LAN_BLOCK&gt;</span> action=src-nat <span class="hljs-keyword">to</span>-addresses=<span class="hljs-symbol">&lt;PUBLIC_IP&gt;</span> out-interface-<span class="hljs-keyword">list</span>=<span class="hljs-symbol">&lt;WAN_INTERFACE_LIST&gt;</span>
+</code></pre><p>This will change the source IP address and port of the packets from LAN_BLOCK to the IP address PUBLIC_IP</p>
+<h2 id="port-forwarding-wan-to-lan">Port Forwarding WAN to LAN</h2>
+<p>Below WAN port 5901 is forwarded to LAN IP address 192.168.3.100<br><strong>Command:</strong></p>
+<pre><code>/ip firewall nat
+add <span class="hljs-attr">chain=dstnat</span> <span class="hljs-attr">protocol=tcp</span> <span class="hljs-attr">dst-address=&lt;PUBLIC_IP&gt;</span> <span class="hljs-attr">dst-port=5901</span> <span class="hljs-attr">action=dst-nat</span> <span class="hljs-attr">to-addresses=192.168.3.100</span>
+</code></pre><p>Below WAN port 5901 is forwarded to LAN ip 192.168.3.100 port 80<br><strong>Command:</strong></p>
+<pre><code>/ip firewall nat
+add <span class="hljs-attr">chain=dstnat</span> <span class="hljs-attr">protocol=tcp</span> <span class="hljs-attr">dst-port=5901</span> <span class="hljs-attr">action=dst-nat</span> <span class="hljs-attr">to-addresses=192.168.3.100</span> <span class="hljs-attr">to-ports=80</span>
+</code></pre><p>This means when an incoming connection requests TCP port 5901 use the DST-NAT action and redirect it to local address 192.168.3.100 and the port 80</p>
+<h2 id="mapping">Mapping</h2>
+<h3 id="one-to-one-mapping-ip-to-ip">One to One Mapping: IP to IP</h3>
+<p><strong>Command:</strong></p>
+<pre><code>/ip firewall nat add <span class="hljs-attr">chain=dstnat</span> <span class="hljs-attr">dst-address=&lt;PUBLIC_IP&gt;</span> <span class="hljs-attr">action=dst-nat</span> <span class="hljs-attr">to-addresses=&lt;PRIVATE_IP&gt;</span>
+/ip firewall nat add <span class="hljs-attr">chain=srcnat</span> <span class="hljs-attr">src-address=&lt;PRIVATE_IP&gt;</span> <span class="hljs-attr">action=src-nat</span> <span class="hljs-attr">to-addresses=&lt;PUBLIC_IP&gt;</span>
+</code></pre><h3 id="one-to-one-mapping-subnet-to-subnet">One to One Mapping: Subnet to Subnet</h3>
+<p><strong>Command:</strong></p>
+<pre><code>/ip firewall nat add <span class="hljs-attr">chain=dstnat</span> <span class="hljs-attr">dst-address=&lt;SUBNET_1&gt;</span> <span class="hljs-attr">action=netmap</span> <span class="hljs-attr">to-addresses=&lt;SUBNET_2&gt;</span>
+/ip firewall nat add <span class="hljs-attr">chain=srcnat</span> <span class="hljs-attr">src-address=&lt;SUBNET_2&gt;</span> <span class="hljs-attr">action=src-nat</span> <span class="hljs-attr">to-addresses=&lt;SUBNET_1&gt;</span>
+</code></pre><h2 id="port-translation">Port Translation</h2>
+<p>Below incoming port 2222 is translated to 22</p>
+<p><strong>Command:</strong><br><code>/ip firewall nat add action=dst-nat chain=dstnat dst-address=&lt;PUBLIC_IP&gt; dst-port=2222 protocol=tcp to-ports=22</code></p>
 
 
                       </div>
