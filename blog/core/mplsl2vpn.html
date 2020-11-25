@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js no-svg">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+
+<title>basondole.io &#8211; Network design and development, 2x JNCIP (ENT/SP) 1x CCNP (RS), BSc.</title>
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link crossorigin="anonymous" rel='stylesheet' id='alia-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700%2C700i%7CPoppins%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+
+<link rel='stylesheet' id='wp-block-library-css'  href='../../karneliuk/style.min.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='github-embed-css'  href='../../karneliuk/github-embed.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-lightbox-swipebox-css'  href='../../karneliuk/swipebox.min.2.2.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='alia-style-css'  href='../../karneliuk/alia.style.1.35.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-css'  href='../../karneliuk/all.min.1.0.css' type='text/css' media='all' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' id='codecolorer-css'  href='../../karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
+<link rel="stylesheet" href="../../css/style1.css" />
+
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-192x192.jpg" sizes="192x192" />
+
+<link rel='https://api.w.org/' href='../../karneliuk/wp-json' />
+
+
+<script type='text/javascript' src='../../karneliuk/jquery-1.12.4-wp.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/jquery-migrate.min-1.4.1.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/ouibounce-5.3.2.js' class="local-root-js"></script>
+
+
+<script type="text/javascript">
+  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"karneliuk/wp-emoji-release.min.5.3.2.js"}};
+  !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+
+
+
+<meta name="generator" content="WordPress 5.3.2" />
+
+</head>
+
+
+
+
+
+
+
+
+
+<body class="home blog sticky_header header_logo_rounded text_posts_unbordered masonry_effect_enabled show_menu_circle_idicator sliding_sidebar_inactive">
+
+<div id="page" class="site">
+
+  <div class="site_main_container">
+
+    <header class="site_header">
+      
+    <div class="gray_header"  >
+      <div class="container site_header">
+        <div class="header_square_logo">
+          <style>.site_logo_image { width : 120px; }.site_logo_image { height : 120px; }</style>
+          <a class="alia_logo retina_logo" title="basondole.io" href="index.html" rel="home">
+            <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+    
+          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="index.html" rel="home">
+          <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+
+          <h1 class="screen-reader-text site_logo site-title clearfix">basondole.io</h1>
+
+        </div>
+
+        <div class="header_tagline">
+          Multivendor network design, development and automation for enterprise and service provider fabrics. Skills that matter
+        </div>
+
+        <div class="social_icons_list header_social_icons">
+          <a rel="nofollow" target="" href="https://twitter.com/misterbigpaul" title="Twitter" class="social_icon widget_social_icon social_twitter social_icon_twitter"><i class="fa fa-twitter"></i></a>
+          <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/paul-i-2b3013108" title="Linked In" class="social_icon widget_social_icon social_linkedin social_icon_linkedin"><i class="fa fa-linkedin"></i></a>
+          <a rel="nofollow" target="_blank" href="https://github.com/basondole" title="Github" class="social_icon widget_social_icon social_github social_icon_github"><i class="fa fa-github"></i></a>
+
+          <a rel="nofollow" target="_blank" href="https://stackoverflow.com/users/12078639/bassosimons" title="stackoverflow" class="social_icon widget_social_icon"><i class="fa fa-rss"></i></a>
+
+        </div>
+      </div>
+
+    </div>
+        
+    <div class="header_nav_wrapper">
+
+      <div class="header_nav">
+
+        <div class="container">
+          <div class="site_branding">
+          <h1 class="text_logo"><a href="index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
+          </div>
+          
+
+          <!-- Place header control before main menu if site title is enabled -->
+          <div class="header_controls">
+
+            <div class="header_sliding_sidebar_control header_control_wrapper">
+              <a id="user_control_icon" class="sliding_sidebar_button" href="#">
+                <i class="fa fa-bars header_control_icon"></i>
+              </a>
+            </div>
+        
+          </div>
+    
+
+          <div class="main_menu">
+            <ul id="top-menu" class="navbar">
+              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html" class="local-root-page">Home</a></li>
+              <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li>
+              <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">NET2CODE</a></li>
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                <ul role="menu" class=" dropdown-menu">
+                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
+                  <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Misc</a></li>
+                </ul>
+              </li>
+              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html" class="local-root-page">About</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="contact.html" class="local-root-page">Contact</a></li>
+              <!-- <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="http://karneliuk.com/donate/">Donate</a></li> -->
+            </ul>
+            <span class="menu_mark_circle hidden_mark_circle"></span>
+          </div>
+              
+        <!-- Place header control after main menu if site title is enabled -->
+          
+        </div><!-- end .container -->
+      </div><!-- end .header_nav -->
+    </div><!-- end .header_nav_wrapper -->
+    </header>
+
+    <main id="content" class="site-content">
+      <section id="primary" class="container main_content_area">
+        <!-- end check for post layout -->
+        <div class="row full_width_page_single no_sidebar_post_single">
+          <div>
+            <!-- <article id="post-182" class="blog_page_container post-182 page type-page status-publish"> -->
+
+              <div class="page_body">
+                    <div class="post_info_wrapper">
+                      <div class="entry-content blog_page_text blog_page_description">
+
+
+
+<!-- ============================ START CONTENT ============================================ -->
+<h1 id="mpls-l2vpns">MPLS L2VPNs</h1>
+<p>L2VPNs offer a means to tunnel layer 2 traffic over MPLS network. The L2VPNs can be point to point or point to multipoint. Let’s take a look on what options are available to us</p>
+<h1 id="point-to-point-l2vpns">Point to point L2VPNs</h1>
+<p>The point to point L2VPNS are technically referred to as Virtual Private Wire Service (VPWS) and they are of three types</p>
+<ul>
+<li>Martini L2VPN</li>
+<li>VPWS Kompella using BGP auto-discovery and signalling</li>
+<li>VPWS BGP Auto discovery and LDP signalling FEC129;</li>
+</ul>
+<h3 id="1-martini-l2vpns">1. Martini L2VPNs</h3>
+<p>This type of VPWS uses LDP as its signalling protocol. They are mostly referred to as layer 2 circuit or cross-connect. This implementation does not offer auto discovery features and both ends of the connections have to be configured manually to establish targeted LDP sessions. There is another implementation of this that uses IP instead of MPLS to tunnel layer 2 traffic called L2TPv3 in Cisco.</p>
+<h3 id="2-vpws-kompella-using-bgp-auto-discovery-and-signalling">2. VPWS Kompella using BGP auto-discovery and signalling</h3>
+<p>This type of VPWS uses BGP instead of LDP, the neighbours participating in a layer 2 connection can be discovered automatically and sessions will be established using BGP as a signalling protocol. BGP is used as both neighbor discovery protocol and signalling protocol.
+To accommodate these features a new BGP NLRI was introduced to the NLRI is l2vpn. This design uses the concept of site-ids to establish sessions, the site ids are supposed to be on contagious blocks also uses extended BGP communities to carry neighbour and layer 2 route information such as route-target, route-distinguisher, site-id and remote-site-id.</p>
+<blockquote>
+<p>Note: Cisco does not support this implementation</p>
+</blockquote>
+<h3 id="3-vpws-bgp-auto-discovery-and-ldp-signalling-fec129-">3. VPWS BGP Auto discovery and LDP signalling FEC129;</h3>
+<p>Very much like the previous design, this type of VPWS uses BGP for neighbour discovery only then LDP is used for signalling. This implementation uses BGP NLRI l2vpn for auto-discovery-only as well as extended BGP communities; route targets and l2vpn-id.
+The presence of the l2vpn-id designates that FEC 129 LDP signaling is used for the routing instance. The absence of l2vpn-id indicates that BGP signaling is used instead</p>
+<h1 id="point-to-multipoint-l2vpns">Point to multipoint L2VPNs</h1>
+<p>The point to point L2VPNS are technically referred to as Virtual Private Line Service (VPLS) in this type of configuration the provider networks acts as a switch and the PEs involved will be learning mac-address information.</p>
+<h3 id="1-vpls-manual-discovery-and-ldp-signalling-fec128">1. VPLS Manual discovery and LDP signalling FEC128</h3>
+<p>This implementation requires neighbouring routers participating in the VPLS instance to be explicitly configured on each of the participating routers and it uses LDP as the signalling protocol.</p>
+<h3 id="2-vpls-bgp-auto-discovery-and-ldp-signalling-fec129">2. VPLS BGP Auto discovery and LDP signalling FEC129</h3>
+<p>This is an enhancement to the above implementation that offers auto discovery of neighbors participating in a VPLS instance. Uses the BGP NLRI l2vpn for auto-discovery-only as well as extended BGP communities; route targets and l2vpn-id.
+FEC 129 uses BGP autodiscovery to convey endpoint information, so you do not need to manually configure pseudowires. BGP is responsible for distributing the local autodiscovery routes created on each PE device to all other PE devices. LDP is responsible for using the autodiscovery information provided by BGP to set up targeted LDP sessions over which to signal the pseudowires.</p>
+<h3 id="3-vpls-bgp-auto-discovery-and-bgp-signalling">3. VPLS BGP Auto discovery and BGP signalling</h3>
+<p>This implementation uses BGP for both neighbors discovery and signalling.</p>
+<h3 id="4-vpls-mixed-ldp-and-bgp">4. VPLS Mixed LDP and BGP</h3>
+<p>This is a hybrid implementation where both VPWS and VPLS are combined to offer the best of both worlds.</p>
+<h1 id="configuration-samples">Configuration samples</h1>
+<h2 id="martini-l2vpn">Martini L2VPN</h2>
+<p>Below configuration between Cisco IOS XE and JunOS with existing IP and MPLS underlying configuration<br><img width="646" alt="Martini L2VPN" src="https://user-images.githubusercontent.com/50369643/62411474-f8607300-b5fb-11e9-98cf-f2f2c0c9f447.png"></p>
+<h3 id="cisco-config-and-verification">Cisco config and verification</h3>
+<pre>
+interface Gi0/0/0.1001
+  encapsulation dot1q 1001
+  xconnect 10.2.2.2 1001 encapsulation mpls
+!
+show xconnect interface Gi0/0/0.1001
+show mpls l2transport vc 1001
+show l2vpn atom vc vcid 1001
+</pre>
+
+<p>Altenatively using manual pseudowires</p>
+<pre>
+interface Gi0/0/0
+  service instance 1001 ethernet
+    encapsulation dot1q 1001
+!
+interface pseudowire 1001
+  neighbor 10.2.2.2 1001
+  encapsulation mpls
+  signaling protocol ldp
+! 
+l2vpn xconnect context L2C-1001 
+  member Gi0/0/0 service-instance 1001
+  member pseudowire 1001
+
+show l2vpn service xconnect all
+show l2vpn atom vc
+</pre>
+
+<h3 id="cisco-iosxr">Cisco IOSXR</h3>
+<pre>
+interface GigabitEthernet0/0/0/0.1001 l2transport
+ encapsulation dot1q 1001
+!
+l2vpn
+ xconnect group L2CIRCUIT
+  p2p VLAN-1001
+   interface GigabitEthernet0/0/0/0.1001
+   neighbor 10.2.2.2 pw-id 1
+
+ sh l2vpn xconnect 
+ </pre>
+
+<h3 id="junos-config-and-verification">JunOS config and verification</h3>
+<pre>
+set interface ge-0/0/0.1001 vlan-id 1001
+set interface ge-0/0/0.1001 encapsulation vlan-ccc
+set protocols l2cicuit neighbour 10.1.1.1 interface ge-0/0/0.1001 virtual-circuit-id 1001
+
+show l2circuit connection interface ge-0/0/0.1001
+</pre>
+
+<h2 id="local-layer-2-circuit">Local layer 2 circuit</h2>
+<p>For L2 circuit whose ends terminate on the same router, that is, two different logical interfaces(or physical) for both ends are configured on the same router there is a number of options to go about it as listed below:</p>
+<ul>
+<li>Interface-switch</li>
+<li>Bridge-domain</li>
+<li>local-switching</li>
+</ul>
+<h3 id="interface-switch">Interface-switch</h3>
+<p>This JunOS feature allows for configuration of Layer 2 switching cross-connects. The cross-connect is  bidirectional, so packets received on the first interface are transmitted out the second interface, and those received on the second interface are  transmitted out the first.  For Layer 2 switching cross-connects to work, you must also configure MPLS.
+The interface-switch can only be configured between two interfaces not more as it does not involve learning of mac addresses and it simply mirrors traffic between the two interfaces if you will.</p>
+<h4 id="configuration-">Configuration:</h4>
+<pre>
+ set protocols connections interface-switch SAMPLE interface ge-1/0/8.259
+ set protocols connections interface-switch SAMPLE interface ge-1/1/2.259
+ set interfaces ge-1/0/8 unit 259 description SITE1
+ set interfaces ge-1/0/8 unit 259 encapsulation vlan-ccc
+ set interfaces ge-1/0/8 unit 259 family ccc
+ set interfaces ge-1/1/2 unit 259 description SITE2
+ set interfaces ge-1/1/2 unit 259 encapsulation vlan-ccc
+ set interfaces ge-1/1/2 unit 259 family ccc
+
+show connections interface-switch SAMPLE    
+  Connection/Circuit                Type        St      Time last up     # Up trans
+ SAMPLE                        if-sw       Up      Sep 11 18:05:38           1
+   ge-1/0/8.259                     intf  Up
+   ge-1/1/2.259                     intf  Up
+</pre>
+
+
+<h3 id="local-switching">Local-switching</h3>
+<h4 id="junos-configuration">JunOS Configuration</h4>
+<pre>
+set protocols l2circuit local-switching interface ge-0/1/3.4094 end-interface interface ge-0/0/2.4094
+set interfaces ge-0/1/3.4094 vlan-id 4094 encapsulation vlan-ccc family ccc
+set interfaces ge-0/0/2.4094 vlan-id 4094 encapsulation vlan-ccc family ccc
+</pre>
+
+<h4 id="cisco-ios-configuration">Cisco IOS configuration</h4>
+<pre>
+interface GigabitEthernet1.4094
+  encapsulation dot1q 4094
+!
+interface Gigabitthernet2.4094
+  encapsulation dot1q 4094
+!
+connect TEST Gig1.4094 Gig2.4094
+
+sh connection name TEST
+Connection: 4 - TEST
+ Current State: ADMIN UP
+ Segment 1: GigabitEthernet1.4094 up
+ Segment 2: GigabitEthernet2.4094 up
+
+sh xconnect name TEST
+</pre>
+
+<h4 id="cisco-iosxr-configuration">Cisco IOSXR configuration</h4>
+<pre>
+interface GigabitEthernet0/0/0/0.1000 l2transport
+ encapsulation dot1q 1000
+!
+interface GigabitEthernet0/0/0/1.1000 l2transport
+ encapsulation dot1q 1000
+!
+l2vpn
+ xconnect group LOCAL
+  p2p SWITCH
+   interface GigabitEthernet0/0/0/0.1000
+   interface GigabitEthernet0/0/0/1.1000
+
+ sh l2vpn xconnect 
+ </pre>
+
+
+
+<h3 id="vpws-kompella-using-bgp-auto-discovery-and-signalling">VPWS Kompella using BGP auto-discovery and signalling</h3>
+<blockquote><p>This implementation is not supported by Cisco</p></blockquote>
+<h4 id="junos-configuration">JunOS Configuration</h4>
+<p><pre>
+set protocols bgp group ibgp family l2vpn signaling</p>
+set routing-instances l2vpn instance-type l2vpn
+set routing-instances l2vpn interface ge-0/0/1.0
+set routing-instances l2vpn route-distinguisher 64512:1000
+set routing-instances l2vpn vrf-target target:64512:1000
+set routing-instances l2vpn protocols l2vpn encapsulation-type ethernet
+set routing-instances l2vpn protocols l2vpn site 1 site-identifier 1
+set routing-instances l2vpn protocols l2vpn site 1 interface ge0/0/1.0 remote-site-id 2</p>
+show route table L2VPN.l2vpn.0
+show l2vpn connections up
+</pre>
+<h2 id="vpls-manual-discovery-and-ldp-signalling-fec128">VPLS Manual discovery and LDP signalling FEC128</h2>
+<p><img width="646" alt="VPLS Manual ldp" src="https://user-images.githubusercontent.com/50369643/62411862-758ee680-b602-11e9-9024-18ec973a257e.png">  </p>
+<h3 id="cisco-ios-config-and-verification">Cisco IOS config and verification</h3>
+<pre>
+l2 vfi VPLS manual 
+ vpn id 1000
+ bridge-domain 1000
+ mtu 1500
+ neighbor 10.2.2.2 encapsulation mpls 
+ neighbor 10.3.3.3 encapsulation mpls
+
+interface GigabitEthernet1
+ no ip address
+service instance 1000 ethernet
+  encapsulation dot1q 1000
+  rewrite ingress tag pop 1 symmetric
+  bridge-domain 1000
+
+show l2vpn vfi name VPLS
+show mpls l2transport vc 1000
+show xconnect name VPLS
+show bridge-domain 1000 mac dynamic address
+</pre>
+
+<p>Altenatively using manual pseudowires</p>
+<pre>
+interface GigabitEthernet1
+  service instance 1000 ethernet
+    encapsulation dot1q 1000
+!
+interface pseudowire 2
+  neighbor 10.2.2.2 1000
+  encapsulation mpls
+!
+interface pseudowire 3
+  neighbor 10.3.3.3 1000
+  encapsulation mpls
+!
+l2vpn vfi context VPLS
+  vpn id 1000
+  member pseudowire 2
+  member pseudowire 3
+!
+bridge-domain 1000
+  member GigabitEthernet1 service-instance 1000
+  member vfi VPLS
+
+show l2vpn service xconnect all
+show l2vpn atom vc
+</pre>
+
+<h3 id="cisco-iosxr">Cisco IOSXR</h3>
+<pre>
+l2vpn
+ bridge group VPLS
+  bridge-domain VLAN-1000
+   interface GigabitEthernet0/0/0/1.1000
+   !
+   vfi VPLS-VLAN-1000
+    neighbor 10.2.2.2 pw-id 3
+    neighbor 10.3.3.3 pw-id 3
+
+</pre>
+
+<h3 id="junos-config-and-verification">JunOS config and verification</h3>
+<pre>
+set interfaces ge-0/0/2 vlan-tagging
+set interfaces ge-0/0/2 encapsulation flexible-ethernet-services
+set interfaces ge-0/0/2 unit 1000 encapsulation vlan-vpls
+set interfaces ge-0/0/2 unit 1000 vlan-id 1000
+set interfaces ge-0/0/2 unit 1000 input-vlan-map pop
+set interfaces ge-0/0/2 unit 1000 output-vlan-map push
+set interfaces ge-0/0/2 unit 1000 family vpls
+set routing-instances VPLS instance-type vpls
+set routing-instances VPLS interface ge-0/0/2.1000
+set routing-instances VPLS protocols vpls encapsulation-type ethernet
+set routing-instances VPLS protocols vpls no-control-word
+set routing-instances VPLS protocols vpls no-tunnel-services
+set routing-instances VPLS protocols vpls vpls-id 1000
+set routing-instances VPLS protocols vpls mtu 1500
+set routing-instances VPLS protocols vpls neighbor 10.1.1.1
+set routing-instances VPLS protocols vpls neighbor 10.3.3.3
+
+show vpls connections instance VPLS
+show vpls mac-table instance VPLS
+</pre>
+
+
+<h2 id="vpls-bgp-auto-discovery-and-ldp-signalling-fec129">VPLS BGP Auto discovery and LDP signalling FEC129</h2>
+<h3 id="junos-config">JunOS config</h3>
+<pre>
+set protocols bgp group ibgp type internal
+set protocols bgp group ibgp local-address 1.1.1.1
+set protocols bgp group ibgp family inet-vpn unicast
+set protocols bgp group ibgp family l2vpn auto-discovery-only
+set protocols bgp group ibgp neighbor 1.1.1.2 local-as 65000
+
+set interfaces ge-1/3/2 encapsulation ethernet-vpls
+set interfaces ge-1/3/2 unit 0 family vpls
+
+set routing-instances vlan100 instance-type vpls
+set routing-instances vlan100 interface ge-1/3/2.0
+set routing-instances vlan100 route-distinguisher 1.1.1.1:100
+set routing-instances vlan100 l2vpn-id l2vpn-id:65000:100
+set routing-instances vlan100 vrf-target target:65000:100
+set routing-instances vlan100 protocols vpls no-tunnel-services
+</pre>
+
+<h3 id="ios-config">IOS config</h3>
+<pre>
+l2vpn vfi context vpls1 
+ vpn id 100
+ autodiscovery bgp signaling ldp
+ exit
+
+router bgp 1
+ no bgp default ipv4-unicast
+ bgp log-neighbor-changes
+ bgp update-delay 1
+ neighbor 10.1.1.2 remote-as 1
+ neighbor 10.1.1.2 update-source Loopback1  
+ address-family l2vpn vpls
+ neighbor 10.1.1.2 activate
+ neighbor 10.1.1.2 send-community extended  
+exit-address-family 
+</pre>
+> The RD is taken from [ASN:vpn id], unless a RD is explicitely configured. Here, the RD is 1:100.
+
+### IOSXR config
+<pre>
+router bgp 65000
+ neighbor-group ibgp-pe
+  remote-as 65000
+  update-source Loopback0
+  address-family l2vpn vpls-vpws
+  exit
+ !
+ neighbor 1.1.1.1
+  use neighbor-group ibgp-pe
+!
+l2vpn
+ bridge group v100
+  bridge-domain v100
+   interface Gig0/0/0/0.100
+   vfi v100
+    vpn-id 100
+    autodiscovery bgp
+     rd auto
+     route-target import 65000:100
+     route-target export 65000:100
+     signaling-protocol ldp
+      vpls-id 65000:100
+!
+interface Gig0/0/0/0.100 l2transport
+ encapsulation dot1q 100
+ rewrite ingress tag pop 1 symmetric
+</pre>
+
+
+<h3 id="vpls-bgp-auto-discovery-and-bgp-signalling">VPLS BGP Auto discovery and BGP signalling</h3>
+<h3 id="junos-config">JunOS config</h3>
+<pre>
+set protocols mpls interface ge-1/3/0.0
+set protocols ldp interface ge-1/3/0.0
+set protocols ldp interface lo0.0
+
+set protocols bgp group ibgp type internal
+set protocols bgp group ibgp local-address 1.1.1.1
+set protocols bgp group ibgp family inet-vpn unicast
+set protocols bgp group ibgp family l2vpn signaling
+set protocols bgp group ibgp neighbor 1.1.1.2 local-as 65000
+
+set interfaces ge-1/3/2 encapsulation ethernet-vpls
+set interfaces ge-1/3/2 unit 0 family vpls
+
+set routing-instance vlan100 instance-type vpls
+set routing-instance vlan100 interface ge-1/3/2.0
+set routing-instance vlan100 route-distinguisher 1.1.1.1:100
+set routing-instance vlan100 vrf-target target:65000:100
+set routing-instance vlan100 protocols vpls
+set routing-instance vlan100 protocols vpls site-range 8
+set routing-instance vlan100 protocols vpls no-tunnel-service
+set routing-instance vlan100 protocols vpls site my_site site-identifier 2
+set routing-instance vlan100 protocols vpls site my_site interface ge-1/3/2.0
+</pre>
+
+
+<h3 id="iosxr-config">IOSXR config</h3>
+<pre>
+router bgp 65000
+ neighbor-group ibgp-pe
+  remote-as 65000
+  update-source Loopback0
+  address-family l2vpn vpls-vpws
+   signalling ldp disable
+!
+ neighbor 1.1.1.1
+  use neighbor-group ibgp-pe
+!
+l2vpn
+ autodiscovery bgp
+  signaling-protocol bgp
+   mtu mismatch ignore
+!
+ bridge group v100
+  bridge-domain v100
+   interface TenGigE0/0/0/0.100
+   vfi v100
+    vpn-id 100
+    autodiscovery bgp
+     rd auto
+     route-target import 65000:100
+     route-target export 65000:100
+     signaling-protocol bgp
+      ve-id 5
+      ve-range 11
+!
+interface TenGigE0/0/0/0.100 l2transport
+ encapsulation dot1q 100
+ rewrite ingress tag pop 1 symmetric
+</pre>
+
+<h3 id="ios-config">IOS Config</h3>
+<pre>
+l2vpn vfi context one
+ vpn id 100
+ autodiscovery bgp signaling bgp 
+  ve id 1001
+  ve range 50
+  route-target export 32:64
+  route-target import 32:64
+!
+mpls label range 10000 20000
+!
+bridge-domain 1
+ member Ethernet0/0 service-instance 100
+ member vfi one
+!
+l2 router-id 10.100.1.1
+!
+interface Ethernet0/0
+ no ip address
+ service instance 100 ethernet
+!
+router bgp 1
+ bgp log-neighbor-changes
+ neighbor 10.100.1.4 remote-as 1
+ neighbor 10.100.1.4 update-source Loopback0
+ !
+ address-family l2vpn vpls
+  neighbor 10.100.1.4 activate
+  neighbor 10.100.1.4 send-community extended
+  neighbor 10.100.1.4 suppress-signaling-protocol ldp
+ exit-address-family
+ </pre>
+
+
+<h4 id="references">References</h4>
+<p><a href="https://blog.marquis.co/layer-2-vpns-on-junos/">https://blog.marquis.co/layer-2-vpns-on-junos/</a><br><a href="https://mellowd.co.uk/ccie/l2vpn-on-junos-using-cccmartinikompella/">https://mellowd.co.uk/ccie/l2vpn-on-junos-using-cccmartinikompella/</a><br><a href="https://www.inetzero.com/vpls-some-simples-configurations/">https://www.inetzero.com/vpls-some-simples-configurations/</a><br><a href="https://networkzblogger.com/2017/05/03/mpls-l2vpn-configuration-example-juniper-l2circuit-mpls-l2vpn-tutorial-what-is-l2vpn-l2vpn-wiki-how-l2vpn-works-l2vpn-juniper-kompella/">https://networkzblogger.com/2017/05/03/mpls-l2vpn-configuration-example-juniper-l2circuit-mpls-l2vpn-tutorial-what-is-l2vpn-l2vpn-wiki-how-l2vpn-works-l2vpn-juniper-kompella/</a><br><a href="https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/virtual-private-lan-services-vpls/116121-tech-vpls-bgp-00.html#anc7">https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/virtual-private-lan-services-vpls/116121-tech-vpls-bgp-00.html#anc7</a><br><a href="https://null.53bits.co.uk/index.php?page=vpls-ios-xr-to-junos">https://null.53bits.co.uk/index.php?page=vpls-ios-xr-to-junos</a></p>
+
+
+
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
+                  <!-- end post_body -->
+
+                </article>
+
+<!-- ============================ END CONTENT ============================================ -->
+
+                <div class="author_info_container author_single_box">
+                  <div class="row">
+                    <div class="author_avatar_col col">
+                      <a class="author_avatar_url" href="about"><img alt='' src='../../img/all-baggy.jpg' srcset='../../img/all-baggy.jpg' class='avatar avatar-150 photo' height='150' width='150' /></a>
+                    </div>
+                    <div class="author_info_col col">
+                      <div class="author_box_info_header">
+                        <h2 class="author_display_name title">
+                          <a class="author_name_url url fn n" href="">Paul S.I. Basondole </a>
+                        </h2>
+
+                      </div>
+                      <div class="author_description">
+IT &amp; Network Expert / Lead <br>
+Network & Automation designer; <br>
+2x JNCIP (RS/SP) 1x CCNP (RS) <br>
+BSc Telecommunications Eng.
+                      </div>
+                      <div class="stories_circles_wrapper"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- close col12 just inside .full_width_list -->
+            </div>
+            <!-- close .full_width_list -->
+            <!-- close col and row in case of sidebar layout -->
+            <!-- end check for post layout -->
+          </section>
+          <!-- #primary -->
+        </main>
+        <!-- #content -->
+        <footer id="colophon" class="site_footer container" role="contentinfo">
+          <div class="footer_credits footers_active_sidebars_0">
+            &copy; 2020 basondole.io
+          </div>
+          <div id="aliagototop" title="Scroll To Top" class="alia_gototop_button footer_button">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </footer>
+
+        <!-- #colophon -->
+      </div>
+      <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+     <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+      <div class="sliding_close_helper_overlay"></div>
+      <div class="site_side_container">
+        <h3 class="screen-reader-text">
+          Sliding Sidebar
+        </h3>
+        <div class="info_sidebar">
+          <div class="top_header_items_holder mobile_menu_opened">
+            <div class="main_menu">
+              <ul id="mobile-menu" class="navbar">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu">
+                  <a href="index.html" class="local-root-page">Home</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu">
+                  <a href="https://github.com/basondole/mpls#introduction">Design</a>
+                </li>
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu">
+                  <a href="https://github.com/basondole/open#hocid">NET2CODE</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu">
+                  <a href="blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                  <ul role="menu" class=" dropdown-menu">
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
+                      <a href="index.html">Collaboration</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
+                      <a href="../networkauto/index.html">Network Automation</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/tutorials">Network Servers</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/netmanagement">Misc</a>
+                    </li>
+                  </ul>
+                </li>
+                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
+                  <a href="about.html" class="local-root-page">About</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-145 menu-item-412 default_menu">
+                  <a href="contact.html" class="local-root-page">Contact</a>
+                </li>
+                <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
+                  <a href="http://karneliuk.com/donate/">Donate</a> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- end .top_header_items_holder -->
+        </div>
+      </div>
+      <!-- end sliding sidebar content -->
+      <!-- start footer static content -->
+      <!-- start footer static content -->
+    </div>
+    <!-- #page -->
+    <div id="ajax_modal_story" class="ajax_modal ajax_modal_story modal enable_rotate">
+      <div class="story_modal_overlay_helper"></div>
+    </div>
+
+
+    </script>
+
+    <script type='text/javascript' src='../../karneliuk/global.1.35.js' class="local-root-js"></script>
+
+
+    <script type='text/javascript'>
+/* <![CDATA[ */
+var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-load-story.php", "ajax_rotate_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-rotate-story.php" };
+/* ]]> */
+    </script>
+
+
+    <script type='text/javascript' src='../../karneliuk/alia-core.1.13.js' class="local-root-js"></script>
+    <script type='text/javascript' src='../../karneliuk/wp-embed.min.5.3.2.js' class="local-root-js"></script>
+
+    
+<script type="text/javascript">
+  // edit the level variable, the load the page and copy the loaded DOM, NOT the source
+  // to get updated paths throughout the dom
+  
+  var 
+  localPagesFiles = document.getElementsByClassName("local-root-page"),
+  localJsFiles = document.getElementsByClassName("local-root-js"),
+  localCssFiles = document.getElementsByClassName("local-root-css"),
+  localImagesFiles = document.getElementsByClassName("local-root-image");
+
+  var level = "../../";
+
+  function updatePaths() { 
+    for (var i=0; i<localPagesFiles.length; i++) {
+          var path = level + localPagesFiles[i].getAttribute("href");
+          localPagesFiles[i].setAttribute("href",path);
+          console.log(localPagesFiles[i].getAttribute("href"));
+    }
+
+    for (var i=0; i<localJsFiles.length; i++) {
+          var path = level + localJsFiles[i].getAttribute("src");
+          localJsFiles[i].setAttribute("src",path);
+          console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localCssFiles.length; i++) {
+          var path = level + localCssFiles[i].getAttribute("src");
+          localCssFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localImagesFiles.length; i++) {
+          var path = level + localImagesFiles[i].getAttribute("src");
+          localImagesFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+  }
+
+  window.onload = function () {
+   updatePaths();
+  };
+
+</script>
+
+<script type="text/javascript">
+  var localPagesFiles = document.getElementsByClassName("local-root-page");
+function printId(event) {
+  var myId = this.Id;
+  console.log(myId);
+}
+for (var i=0; i<localPagesFiles.length; i++) {
+       localPagesFiles[i].addEventListener("click",printId);
+}
+</script>
+
+
+
+
+  </body>
+</html>

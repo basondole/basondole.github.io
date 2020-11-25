@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js no-svg">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+
+<title>basondole.io &#8211; Network design and development, 2x JNCIP (ENT/SP) 1x CCNP (RS), BSc.</title>
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link crossorigin="anonymous" rel='stylesheet' id='alia-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700%2C700i%7CPoppins%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+
+<link rel='stylesheet' id='wp-block-library-css'  href='../../karneliuk/style.min.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='github-embed-css'  href='../../karneliuk/github-embed.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-lightbox-swipebox-css'  href='../../karneliuk/swipebox.min.2.2.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='alia-style-css'  href='../../karneliuk/alia.style.1.35.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-css'  href='../../karneliuk/all.min.1.0.css' type='text/css' media='all' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' id='codecolorer-css'  href='../../karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
+<link rel="stylesheet" href="../../css/style1.css" />
+
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-192x192.jpg" sizes="192x192" />
+
+<link rel='https://api.w.org/' href='../../karneliuk/wp-json' />
+
+
+<script type='text/javascript' src='../../karneliuk/jquery-1.12.4-wp.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/jquery-migrate.min-1.4.1.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/ouibounce-5.3.2.js' class="local-root-js"></script>
+
+
+<script type="text/javascript">
+  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"karneliuk/wp-emoji-release.min.5.3.2.js"}};
+  !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+
+
+
+<meta name="generator" content="WordPress 5.3.2" />
+
+</head>
+
+
+
+
+
+
+
+
+
+<body class="home blog sticky_header header_logo_rounded text_posts_unbordered masonry_effect_enabled show_menu_circle_idicator sliding_sidebar_inactive">
+
+<div id="page" class="site">
+
+  <div class="site_main_container">
+
+    <header class="site_header">
+      
+    <div class="gray_header"  >
+      <div class="container site_header">
+        <div class="header_square_logo">
+          <style>.site_logo_image { width : 120px; }.site_logo_image { height : 120px; }</style>
+          <a class="alia_logo retina_logo" title="basondole.io" href="index.html" rel="home">
+            <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+    
+          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="index.html" rel="home">
+          <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+
+          <h1 class="screen-reader-text site_logo site-title clearfix">basondole.io</h1>
+
+        </div>
+
+        <div class="header_tagline">
+          Multivendor network design, development and automation for enterprise and service provider fabrics. Skills that matter
+        </div>
+
+        <div class="social_icons_list header_social_icons">
+          <a rel="nofollow" target="" href="https://twitter.com/misterbigpaul" title="Twitter" class="social_icon widget_social_icon social_twitter social_icon_twitter"><i class="fa fa-twitter"></i></a>
+          <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/paul-i-2b3013108" title="Linked In" class="social_icon widget_social_icon social_linkedin social_icon_linkedin"><i class="fa fa-linkedin"></i></a>
+          <a rel="nofollow" target="_blank" href="https://github.com/basondole" title="Github" class="social_icon widget_social_icon social_github social_icon_github"><i class="fa fa-github"></i></a>
+
+          <a rel="nofollow" target="_blank" href="https://stackoverflow.com/users/12078639/bassosimons" title="stackoverflow" class="social_icon widget_social_icon"><i class="fa fa-rss"></i></a>
+
+        </div>
+      </div>
+
+    </div>
+        
+    <div class="header_nav_wrapper">
+
+      <div class="header_nav">
+
+        <div class="container">
+          <div class="site_branding">
+          <h1 class="text_logo"><a href="index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
+          </div>
+          
+
+          <!-- Place header control before main menu if site title is enabled -->
+          <div class="header_controls">
+
+            <div class="header_sliding_sidebar_control header_control_wrapper">
+              <a id="user_control_icon" class="sliding_sidebar_button" href="#">
+                <i class="fa fa-bars header_control_icon"></i>
+              </a>
+            </div>
+        
+          </div>
+    
+
+          <div class="main_menu">
+            <ul id="top-menu" class="navbar">
+              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html" class="local-root-page">Home</a></li>
+              <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li>
+              <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">NET2CODE</a></li>
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                <ul role="menu" class=" dropdown-menu">
+                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
+                  <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Misc</a></li>
+                </ul>
+              </li>
+              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html" class="local-root-page">About</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="contact.html" class="local-root-page">Contact</a></li>
+              <!-- <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="http://karneliuk.com/donate/">Donate</a></li> -->
+            </ul>
+            <span class="menu_mark_circle hidden_mark_circle"></span>
+          </div>
+              
+        <!-- Place header control after main menu if site title is enabled -->
+          
+        </div><!-- end .container -->
+      </div><!-- end .header_nav -->
+    </div><!-- end .header_nav_wrapper -->
+    </header>
+
+    <main id="content" class="site-content">
+      <section id="primary" class="container main_content_area">
+        <!-- end check for post layout -->
+        <div class="row full_width_page_single no_sidebar_post_single">
+          <div>
+            <!-- <article id="post-182" class="blog_page_container post-182 page type-page status-publish"> -->
+
+              <div class="page_body">
+                    <div class="post_info_wrapper">
+                      <div class="entry-content blog_page_text blog_page_description">
+
+
+
+<!-- ============================ START CONTENT ============================================ -->
+<h1 id="ldp-mpls-forwarding">LDP &amp; MPLS forwarding</h1>
+<h2 id="common-terms-in-mpls">Common terms in MPLS</h2>
+<ul>
+<li>FEC Forwarding Equivalent Class is the equivalent of an IP subnet or IP prefix  </li>
+<li>LSP Label switced path is an end-to-end path composed of LSR from the ingress to the egress LSRs</li>
+<li>LSR Label Switch Router is router that participates in the exchange and distribution of labels and is part of a LSP  </li>
+</ul>
+<h2 id="operation">Operation</h2>
+<p>An LDP neighbor announces all LDP enabled interfaces (direct connected IP networks) to its LDP neighbors
+With Cisco IOS each router (LSR) then assigns labels to all networks that are learnt by the means of IGP (OSPF or ISIS) Cisco IOS always prefers the labelled path if an entry exists in the LFIB which can be accessed via
+<code>sh mpls forwarding-table</code></p>
+<p>JunOS only assigns label to host routes (/32) learnt via IGP. By default in JunOS LDP has a preference of 9 and routes learnt via LDP are stored in a separate routing table called inet.3 which is used by BGP to resolve next hops for MPLS VPNs and it is not used by normal routing. So the inet.3 table is populated by MPLS protocols (LDP) and used by BGP for next-hop resolution for label path, same as it would use inet.0 for IP path
+    <code>sh route table inet.3</code></p>
+<p>The default behaviours of both Cisco IOS and JunOS can be changed.</p>
+<h2 id="label-control-mode-">Label Control Mode:</h2>
+<ul>
+<li>Ordered Control:<br>In this approach, an LSR doesn’t advertise a FEC unless it’s the egress LSR for that FEC or until it has received a label for the FEC from its downstream peer. This is used by RSVP, LDP (JunOS)</li>
+<li>Independent Control:<br>This means that the LSR sending the label acts independently of its downstream peer. It does not wait for a label from the downstream LSR before it sends a label to its peers. This mode has the potential of black holing the traffic. For instance, when operating in independent Downstream on Demand mode, an LSR may answer requests for label mappings immediately, without waiting for a label mapping from the next hop. This mode is used by LDP (IOS/IOS-XR)</li>
+</ul>
+<h2 id="enhancements">Enhancements</h2>
+<h3 id="junos">JunOS</h3>
+<p>LDP IGP sync
+Makes an IGP interface that is not running LDP to have a higher metric so as it is not used and break LSPs if it becomes the preferred path</p>
+<pre><code><span class="hljs-keyword">set</span> protocols isis <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">all</span> <span class="hljs-title">point</span>-<span class="hljs-title">to</span>-<span class="hljs-title">point</span></span>
+<span class="hljs-keyword">set</span> protocols isis <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">all</span> <span class="hljs-title">ldp</span>-<span class="hljs-title">synchronization</span></span>
+show isis <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">extensive</span> | <span class="hljs-title">match</span> <span class="hljs-title">ldp</span></span>
+</code></pre><p>LDP IGP metric tracking
+LDP metric is always 1 by default, metric-tracking makes LDP use IGP metric in JunOS<br><code>set protocol ldp track-igp-metric</code></p>
+<p>LDP egress-policy<br>Make JunOS create and assign label to a non /32 or non IGP route<br><code>set protocol ldp egress-policy &lt;POLICY&gt;</code></p>
+<p>MPLS forwarding<br>By default only BGP uses the inet.3 table for MPLS. To make normal routing also use mpls<br>    <code>set protocols mpls traffic-engineering mpls-forwarding</code></p>
+<h3 id="cisco">Cisco</h3>
+<p>Make router advertise labels for specific prefixes<br><code>mpls ldp advertise-labels for ACL-NAME</code></p>
+
+<h1 id="how-is-the-best-label-selected-">How is the best label selected?</h1>
+<p>First all connected prefixes are assigned implicit-null local label. in Junos are assigned output label 3 or pop-tag then the router assigns local labels to all the routes learned via IGP.<br>Note when the local label is implicit-null the prefix is not installed in the LFIB</p>
+<p>For outgoing labels the below process is followed:<br></p>
+<strong>Cisco IOS</strong>
+<ol>
+<li>the router checks the IP routing table for the next hop from
+  sh ip route a.b.c.d</li>
+<li>the router checks the ldp neighbors to see which neighbor has that next hop from below
+  sh mpls ldp nei | i <ip-of-next-hop></li>
+<li>the router chooses the label from the ldp neighbor that has the next hop from below
+  sh mpls ldp binding | be a.b.c.d</li>
+<li>the router pushes the selected label as an outgoing label on the prefix a.b.c.d
+  sh mpls forwarding table | i a.b.c.d
+the command above shows the prefix its local/outgoing label egress interface and next-hop address</li>
+</ol>
+
+<blockquote>
+<p>NB: only routes that are advertised in IGP get a remote binding.<br>routes connected to interfaces that are ldp enbled do not get remote binding</p>
+</blockquote>
+
+<strong>JunOS</strong>
+<p>Only prefixes with /32 are assigned labels. The local assigned labels are termed output labels while labels from neighbors are termed input labels.  </p>
+<ol>
+<li>the router checks the IP routing table for the next hop
+  <code>sh route table inet.0 a.b.c.d</code></li>
+<li>the router checks the ldp neighbors to see which neighbor has that next hop
+  <code>sh ldp session details | m &lt;ip-of-next-hop&gt;</code></li>
+<li>the router chooses the label from the ldp neighbor that has the next hop
+  <code>sh ldp database</code></li>
+<li>the router pushes the selected label as an outgoing label on the prefix a.b.c.d
+  <code>sh route table inet.3 | find &lt;prefix|incoming label&gt;</code>
+ OR 
+<code>sh route table mpls.0 | find &lt;local-label&gt;</code>
+this command shows labels only without the respective IP prefixes</li>
+</ol>
+<h1 id="label-operations-for-mpls-vpns-examples">Label operations for MPLS VPNs Examples</h1>
+<p><img width="790" alt="Labels in MPLS VPN" src="https://user-images.githubusercontent.com/50369643/62413165-59e10b80-b615-11e9-88f1-1da53167d496.png"></p>
+<p>PE1 and PE2 are members of VRF_A both send routes to each other via route reflector. Below is an analysis of what happens in details.</p>
+<pre>
+PE2#sh bgp vpnv4 unicast all labels  
+----output omitted------
+   Network          Next Hop      In label/Out label     
+Route Distinguisher: 100:199 (VRF_A)
+   192.168.22.0     10.188.128.36   nolabel/55   
+   192.168.199.0    10.41.199.2     126/nolabel 
+</pre>
+
+<p>The above output shows the VPN labels. PE1 with IP 10.188.128.36  is the ingress router for prefix  192.168.22.0 from PE1; 55 is outgoing label meaning this PE advertises to other PEs to use this label for traffic destined to VRF_A on PE1
+PE2 is the egress router for prefix 192.168.199.0 which it receives from a CE (10.41.199.2 via dynamic routing). PE2 has a local in label 126 meaning this PE will announce this label to other PEs to use it as outgoing label. When PE2 receives packets it will check the local LFIB to see what to do with this label (as shown later this will remove the label and forward to CE) From what is seen so far inlabels are only assigned on locally originated routes; BGP queries the LFIB to get the label to use as inlabel. Note that a VPNv4 route will be distributed only if it has a valid MPLS label. Thus in label in one PE is outlabel on the other PE at the end of the LSP</p>
+<pre>
+PE2#show mpls forwarding-table | i 126 
+126        No Label   192.168.199.0/24[V]   \
+                                       2098227488    Gi0/0/3.528  10.41.199.2
+</pre>
+The above shows the in label to be 126 with an no outgoing label since the prefix is local it is just forwarded to the CE via Gi0/0/3.528
+
+For the prefix 192.168.22.0 which is received from PE2 the next hop decides the LSP for remote received routes
+
+<pre>
+PE2#sh mpls forwarding-table | i 10.188.128.36  
+21         299792     10.188.128.36/32 0             Gi0/0/0.6  172.16.0.245
+</pre>
+
+<p>The PE have already exchanged VPNV4 info and the know the respective labels for the routes to be put in VRF using inner labels assigned and exchanged by BGP in this case in label is 126 for the VRF_A on PE2 perspective and the in label is 55 for VRF_A on PE1 perspective
+The LSP is just used to forward the packets in MPLS using transport labels assigned by MPLS whc=ich will be stacked on top of VPN labels assigned by BGP (126 and 55 in this example)</p>
+<p>Thus traffic from CE (connected to PE2) to (CE connected to PE1) will have 299792 as the transport label which will be swapped along the LSP and will have inner VPN label of 55
+At the last LSR before PE1 the transport label will be popped from the label stack (since PE1 advertises an implicit null for 10.188.128.36 as this is directly connected and PE1 is the egress router) 
+The packet will then be forwarded to PE1 without the outer transport label but with only the inner VPN label of 55 
+PE1 sees this label and it knows it assigned that label to the 192.168.22.0/24 route in a vrf (VRF_A) and forwards to that VRF which then removes the label stack altogether and forwards the packet to the VRF instance where an IP lookup is performed and the packet is forwarded to the CE</p>
+<pre>
+PE1> show route table mpls.0 | find 55
+55                 *[VPN/0] 69w5d 21:57:44
+                      to table VRF_A.inet.0, Pop   
+</pre>
+On PE1 when a packets is sent towards 192.168.199.0 which is a from PE2 two labels are placed the inner VPN label received from PE2 (55) and the outer transport label assigned by MPLS 
+<pre>
+PE1> show route table bgp.l3vpn.0 rd-prefix 100:199:192.168.199.0/24  active-path              
+100:199:192.168.199.0/24                
+                   *[BGP/170] 14w4d 02:11:01, MED 100, localpref 100, from 10.188.128.29
+                      AS path: ?
+                    > to 172.16.1.57 via xe-0/0/0.0, Push 126, Push 300976(top)
+
+</pre>
+
+<p>To see what labels have been assigned by the router to the FEC in VRF and what labels are received from remote PEs for those FEC</p>
+<pre>
+PE2#sh ip bgp vpnv4 vrf VRF_A labels 
+   Network          Next Hop      In label/Out label
+Route Distinguisher: 1004:199 (VRF_A)
+   192.168.199.0    10.41.199.2     126/nolabel-----------------------advertised routes
+   10.41.199.0/30   0.0.0.0         356/nolabel(VRF_A)
+   10.56.90.0/29    10.188.128.56   nolabel/27------------------------received routes
+   10.79.1.18/32    10.188.128.36   nolabel/55
+   10.1.10.0/30     10.188.128.38   nolabel/769315
+                    10.188.128.38   nolabel/769267
+                    10.188.128.27   nolabel/19
+   10.1.10.2/32     10.188.128.38   nolabel/769315
+                    10.188.128.38   nolabel/769267
+                    10.188.128.27   nolabel/19
+</pre>
+
+<p>Juniper assigns one local label per VRF if the VRF is configured with vrf-table-label, routing-instances configured with vrf-table-lable will be assigned one label since they are using a single LSI. When you include the vrf-table-label statement in the configuration of a VRF routing instance, a label-switched interface (LSI) logical interface label is created and mapped to the VRF routing table the current JunOS label allocation implementation for VRFs starts assigning labels from 16 onwards</p>
+<pre>
+PE2> show route table mpls.0 protocol vpn 
+16                 *[VPN/0] 69w3d 23:50:23
+                      to table VRF.inet.0, Pop
+</pre>
+
+<p>Without the LSI one label is assigned per egress interface thus different interfaces on the same PE and the same VRF will have different labels. Example below interface xe-0/0/3.642 and xe-0/0/3.643 are in same VRF but local labels are assigned per interface.</p>
+<pre>
+PE1> show route table mpls.0 protocol vpn | find 49856     
+498560             *[VPN/170] 13w1d 00:35:35
+                    > to 10.36.217.22 via xe-0/0/3.642, Pop      
+498576             *[VPN/170] 13w1d 00:35:35
+                    > to 10.36.217.18 via xe-0/0/3.643, Pop
+</pre>
+
+<p>To see VPN label received from remote PEs for route-distinguisher 199:100</p>
+<pre>
+junOS> sh route table bgp.l3vpn | ma 199:100
+ciscoIOS# sh bgp vpnv4 unicast rd 199:100 labels
+</pre>
+
+<p>To see the outgoing transport label or egress interface</p>
+<pre>
+ciscoIOS# sh mpls for | i &lt;VPN-LABEL&gt;
+</pre>
+> Note: the VPN in-label and the local-transport-label are similar
+
+MPLS FEC for L3 VRF routes are assigned local VPN label which can be seen as follows
+The route in a VRF is 192.168.199.0/24
+<pre>
+PE2#sh bgp vpnv4 uni all labels |  i 192.168.199.0
+   192.168.199.0    10.41.199.2     126/nolabel
+PE2#sh mpls forwarding-table labels 126
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop    
+Label      Label      or Tunnel Id     Switched      interface              
+126        No Label   192.168.199.0/24[V]   \
+                                       2172694358    Gi0/0/3.528  10.41.199.2 
+</pre>
+
+<p>For routes received from remote PEs here FEC 192.168.22.0/24 is received from 10.188.128.36</p>
+<pre>
+PE2#sh ip bgp vpnv4 vrf VRF_A labels | i 192.168.22.0|Net
+   Network          Next Hop      In label/Out label
+   192.168.22.0     10.188.128.36   nolabel/55
+</pre>
+No local label will be assigned but the FEC will have an /out label from remote PE which is 55 in this case
+Thus 55 is the L3-VPN-label and the transport label will be that of the next-hop which is 10.188.128.36. This can also be seen in the label stack below
+
+<pre>
+PE2#sh mpls for vrf VRF_A 192.168.22.0 detail | i Label
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop    
+Label      Label      or Tunnel Id     Switched      interface              
+        MAC/Encaps=18/26, MRU=9212, Label Stack{299792 55}
+</pre>
+Here 299792 is the transport label and 55 is the VPN label.
+The transport label 299792 should translate to IP 10.188.128.36. This can be confirmed below by checking the ldp binding OR checking the LFIB
+<pre>
+PE2#sh mpls ldp binding | i lib.*10.188.128.36|10.188.128.35.*299792
+  lib entry: 10.188.128.36/32, rev 766
+        remote binding: lsr: 10.188.128.35:0, label: 299792
+
+PE2#sh mpls for 10.188.128.36
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop    
+Label      Label      or Tunnel Id     Switched      interface              
+21         299792     10.188.128.36/32 0             Gi0/0/0.6  172.16.0.245
+</pre>
+
+<h1 id="l2mpls">L2MPLS</h1>
+<p>For L2-MPLS, no outgoing labels are assigned as well</p>
+<pre>
+PE2#sh l2v atom vc vcid 3019 detail | i Dest|Next|Out|label
+    Last label FSM state change time: 17:43:07
+  Destination address: 10.188.128.114 VC ID: 3019
+    Output interface: Gi0/0/1.64, imposed label stack {589136 299776}
+    Next hop: 172.16.0.249
+  SSO Descriptor: 10.188.128.114/3019, local label: 282
+</pre>
+
+
+<p>To check for the local label in the LFIB</p>
+<pre>
+PE2#sh mpls forwarding-table labels 282
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop    
+Label      Label      or Tunnel Id     Switched      interface              
+282        No Label   l2ckt(32)        22392021597   Gi0/0/2.3019  point2point 
+</pre>
+
+
+<p>No outgoing labels are assigned because the LSP is determined by the Next-hop. On the imposed stack {589136 299776} 589136 is the transport-label and 299776 is the L2-VPN label on the other end and according to the imposed stack the transport label of 589136 is assigned by the upstream router for the Next-hop FEC this can be seen in the LFIB</p>
+<pre>
+PE2#sh mpls forwarding-table | be 589136
+57         589136     10.188.128.114/32   \
+                                       0             Gi0/0/1.64  172.16.0.249
+</pre>
+
+<p>Moreover local VPN (L2 or L3) labels will not be seen in the LIB as shown below, they are only stored in the LFIB</p>
+<pre>
+PE2#sh mpls ldp binding | i 282
+PE2#sh mpls ldp binding | i 126
+</pre>
+
+
+<p>To see the label assigned to L2-VPN</p>
+<pre>
+PE3> show route table mpls.0 protocol l2circuit 
+mpls.0: 118 destinations, 118 routes (118 active, 0 holddown, 0 hidden)
+299776             *[L2CKT/7] 17:51:47
+                    > via ge-0/0/1.3019, Pop      
+ge-0/0/1.3019      *[L2CKT/7] 17:51:47, metric2 1
+                    > to 172.18.129.169 via ge-0/0/0.32, Push 282, Push 573872(top)
+</pre>
+
+
+<p>Packets coming from remote PE2 to PE3 with VPN label 299776 will have the label popped and be forwarded to interface  ge-0/0/1.3019 to client
+Incoming packets coming from client received on ge-0/0/1.3019 will have the remote VPN label 282 assigned (received from PE2) and the transport label to reach the next-hop is 573872</p>
+<p>In contrary to Cisco IOS, these VPN label will be present in the LIB. We can see both input (remote) and  outgoing (local) L2-VPN labels on the LIB</p>
+<pre>
+PE3> show ldp database | match "(3019|10.188.128.46:0)" 
+Input label database, 10.188.128.114:0--10.188.128.46:0
+    282     L2CKT NoCtrlWord VLAN VC 3019
+Output label database, 10.188.128.114:0--10.188.128.46:0
+ 299776     L2CKT NoCtrlWord VLAN VC 3019
+</pre>
+
+
+<p>We can check the binding table to see what FEC has that transport label of 573872 as and it should be 10.188.128.46</p>
+<pre>
+PE3> show ldp database | match "(573872|in|out)"
+Input label database, 10.188.128.114:0--10.188.128.29:0
+ 573872     10.188.128.46/32
+</pre>
+
+
+<p>For L3-VPN in JunOS the VPN-label is only present in the LFIB not in the FIB</p>
+<pre>
+PE4> show route table mpls.0 protocol vpn  | can match the VRF-name(in case there is lsi) or an interface in the VRF
+mpls.0: 108 destinations, 108 routes (108 active, 0 holddown, 0 hidden)
+16                 *[VPN/0] 69w5d 18:16:56
+                      to table VRF.inet.0, Pop
+483168             *[VPN/170] 12w3d 05:32:52
+                    > to 10.120.106.2 via ge-0/0/3.701, Pop
+</pre>
+
+
+<p>Similar to Cisco the local L3-VPN labels do not exist in the FIB, if it does it will be associated with a different prefix and will have nothing to do with the MPLS-VPN</p>
+<pre>
+PE4> show ldp database | match 16 
+PE4> show ldp database | match 483168 
+</pre>
+
+
+<p>Example of a FEC in the BTT VRF locally on PE4 is 10.5.24.0/24 and from another PE5 in the same VRF FEC is 10.5.36.0/24
+VRF in PE4 will receive the FEC 10.5.36.0/24 with VPN label 19 from PE5 and a transport label will be that of 10.188.128.31 which is the protocol-next-hop (PE5 loopback IP) See below VPN label assigned to all FECs from VRF BTT at PE5</p>
+<pre>
+PE5> show route table mpls.0 protocol vpn         
+19                 *[VPN/0] 71w2d 00:02:41
+                      to table BTT.inet.0, Pop       
+</pre>
+
+
+<p>Thus PE4 has to add the VPN label 19 for FECs from PE5 as seen with the push operation below. The transport label is 518912, we can check the label database to see what FEC has that label as input label and it should be 10.188.128.31 (PE5 loopback IP)</p>
+<pre>
+PE4> show route 10.5.36.0/24 table BTT active | find 10.5.36.0/24 
+10.5.36.0/24       *[BGP/170] 2d 00:08:12, MED 0, localpref 100, from 10.188.128.29
+                      AS path: I
+                    > to 177.16.1.5 via ge-0/0/0.3203, Push 19, Push 518912(top)
+
+PE4> show ldp database | match "(518912|in)"
+Input label database, 10.188.128.120:0--10.188.128.47:0
+ 518912     10.188.128.31/32
+</pre>
+
+
+<p>PE5 will receive FEC 10.5.24.0/24 from PE4 (loopback 10.188.128.120) with a VPN-label 16</p>
+<pre>
+PE5> show route 10.5.24.0/24 table BTT  active
+10.5.24.0/24       *[BGP/170] 1w1d 22:02:53, MED 0, localpref 100, from 10.188.128.29
+                      AS path: 64730 I, validation-state: unverified
+                    > to 172.16.0.85 via ge-0/0/0.3, Push 16, Push 564176(top)
+</pre>
+
+
+<p>The transport label will be 564176 which should translate to protocol-next-hop 10.188.128.120 (PE4 loopback)</p>
+<pre>
+PE5> show ldp database | match "(in|564176)"
+Input label database, 10.188.128.31:0--10.188.128.29:0
+ 564176      10.188.128.120/32
+</pre>
+
+
+
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
+                  <!-- end post_body -->
+
+                </article>
+
+<!-- ============================ END CONTENT ============================================ -->
+
+                <div class="author_info_container author_single_box">
+                  <div class="row">
+                    <div class="author_avatar_col col">
+                      <a class="author_avatar_url" href="about"><img alt='' src='../../img/all-baggy.jpg' srcset='../../img/all-baggy.jpg' class='avatar avatar-150 photo' height='150' width='150' /></a>
+                    </div>
+                    <div class="author_info_col col">
+                      <div class="author_box_info_header">
+                        <h2 class="author_display_name title">
+                          <a class="author_name_url url fn n" href="">Paul S.I. Basondole </a>
+                        </h2>
+
+                      </div>
+                      <div class="author_description">
+IT &amp; Network Expert / Lead <br>
+Network & Automation designer; <br>
+2x JNCIP (RS/SP) 1x CCNP (RS) <br>
+BSc Telecommunications Eng.
+                      </div>
+                      <div class="stories_circles_wrapper"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- close col12 just inside .full_width_list -->
+            </div>
+            <!-- close .full_width_list -->
+            <!-- close col and row in case of sidebar layout -->
+            <!-- end check for post layout -->
+          </section>
+          <!-- #primary -->
+        </main>
+        <!-- #content -->
+        <footer id="colophon" class="site_footer container" role="contentinfo">
+          <div class="footer_credits footers_active_sidebars_0">
+            &copy; 2020 basondole.io
+          </div>
+          <div id="aliagototop" title="Scroll To Top" class="alia_gototop_button footer_button">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </footer>
+
+        <!-- #colophon -->
+      </div>
+      <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+     <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+      <div class="sliding_close_helper_overlay"></div>
+      <div class="site_side_container">
+        <h3 class="screen-reader-text">
+          Sliding Sidebar
+        </h3>
+        <div class="info_sidebar">
+          <div class="top_header_items_holder mobile_menu_opened">
+            <div class="main_menu">
+              <ul id="mobile-menu" class="navbar">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu">
+                  <a href="index.html" class="local-root-page">Home</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu">
+                  <a href="https://github.com/basondole/mpls#introduction">Design</a>
+                </li>
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu">
+                  <a href="https://github.com/basondole/open#hocid">NET2CODE</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu">
+                  <a href="blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                  <ul role="menu" class=" dropdown-menu">
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
+                      <a href="index.html">Collaboration</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
+                      <a href="../networkauto/index.html">Network Automation</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/tutorials">Network Servers</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/netmanagement">Misc</a>
+                    </li>
+                  </ul>
+                </li>
+                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
+                  <a href="about.html" class="local-root-page">About</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-145 menu-item-412 default_menu">
+                  <a href="contact.html" class="local-root-page">Contact</a>
+                </li>
+                <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
+                  <a href="http://karneliuk.com/donate/">Donate</a> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- end .top_header_items_holder -->
+        </div>
+      </div>
+      <!-- end sliding sidebar content -->
+      <!-- start footer static content -->
+      <!-- start footer static content -->
+    </div>
+    <!-- #page -->
+    <div id="ajax_modal_story" class="ajax_modal ajax_modal_story modal enable_rotate">
+      <div class="story_modal_overlay_helper"></div>
+    </div>
+
+
+    </script>
+
+    <script type='text/javascript' src='../../karneliuk/global.1.35.js' class="local-root-js"></script>
+
+
+    <script type='text/javascript'>
+/* <![CDATA[ */
+var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-load-story.php", "ajax_rotate_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-rotate-story.php" };
+/* ]]> */
+    </script>
+
+
+    <script type='text/javascript' src='../../karneliuk/alia-core.1.13.js' class="local-root-js"></script>
+    <script type='text/javascript' src='../../karneliuk/wp-embed.min.5.3.2.js' class="local-root-js"></script>
+
+    
+<script type="text/javascript">
+  // edit the level variable, the load the page and copy the loaded DOM, NOT the source
+  // to get updated paths throughout the dom
+  
+  var 
+  localPagesFiles = document.getElementsByClassName("local-root-page"),
+  localJsFiles = document.getElementsByClassName("local-root-js"),
+  localCssFiles = document.getElementsByClassName("local-root-css"),
+  localImagesFiles = document.getElementsByClassName("local-root-image");
+
+  var level = "../../";
+
+  function updatePaths() { 
+    for (var i=0; i<localPagesFiles.length; i++) {
+          var path = level + localPagesFiles[i].getAttribute("href");
+          localPagesFiles[i].setAttribute("href",path);
+          console.log(localPagesFiles[i].getAttribute("href"));
+    }
+
+    for (var i=0; i<localJsFiles.length; i++) {
+          var path = level + localJsFiles[i].getAttribute("src");
+          localJsFiles[i].setAttribute("src",path);
+          console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localCssFiles.length; i++) {
+          var path = level + localCssFiles[i].getAttribute("src");
+          localCssFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localImagesFiles.length; i++) {
+          var path = level + localImagesFiles[i].getAttribute("src");
+          localImagesFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+  }
+
+  window.onload = function () {
+   updatePaths();
+  };
+
+</script>
+
+<script type="text/javascript">
+  var localPagesFiles = document.getElementsByClassName("local-root-page");
+function printId(event) {
+  var myId = this.Id;
+  console.log(myId);
+}
+for (var i=0; i<localPagesFiles.length; i++) {
+       localPagesFiles[i].addEventListener("click",printId);
+}
+</script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js no-svg">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+
+<title>basondole.io &#8211; Network design and development, 2x JNCIP (ENT/SP) 1x CCNP (RS), BSc.</title>
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link crossorigin="anonymous" rel='stylesheet' id='alia-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700%2C700i%7CPoppins%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+
+<link rel='stylesheet' id='wp-block-library-css'  href='../../karneliuk/style.min.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='github-embed-css'  href='../../karneliuk/github-embed.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-lightbox-swipebox-css'  href='../../karneliuk/swipebox.min.2.2.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='alia-style-css'  href='../../karneliuk/alia.style.1.35.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-css'  href='../../karneliuk/all.min.1.0.css' type='text/css' media='all' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' id='codecolorer-css'  href='../../karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
+<link rel="stylesheet" href="../../css/style1.css" />
+
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-192x192.jpg" sizes="192x192" />
+
+<link rel='https://api.w.org/' href='../../karneliuk/wp-json' />
+
+
+<script type='text/javascript' src='../../karneliuk/jquery-1.12.4-wp.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/jquery-migrate.min-1.4.1.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/ouibounce-5.3.2.js' class="local-root-js"></script>
+
+
+<script type="text/javascript">
+  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"karneliuk/wp-emoji-release.min.5.3.2.js"}};
+  !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+
+
+
+<meta name="generator" content="WordPress 5.3.2" />
+
+</head>
+
+
+
+
+
+
+
+
+
+<body class="home blog sticky_header header_logo_rounded text_posts_unbordered masonry_effect_enabled show_menu_circle_idicator sliding_sidebar_inactive">
+
+<div id="page" class="site">
+
+  <div class="site_main_container">
+
+    <header class="site_header">
+      
+    <div class="gray_header"  >
+      <div class="container site_header">
+        <div class="header_square_logo">
+          <style>.site_logo_image { width : 120px; }.site_logo_image { height : 120px; }</style>
+          <a class="alia_logo retina_logo" title="basondole.io" href="index.html" rel="home">
+            <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+    
+          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="index.html" rel="home">
+          <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+
+          <h1 class="screen-reader-text site_logo site-title clearfix">basondole.io</h1>
+
+        </div>
+
+        <div class="header_tagline">
+          Multivendor network design, development and automation for enterprise and service provider fabrics. Skills that matter
+        </div>
+
+        <div class="social_icons_list header_social_icons">
+          <a rel="nofollow" target="" href="https://twitter.com/misterbigpaul" title="Twitter" class="social_icon widget_social_icon social_twitter social_icon_twitter"><i class="fa fa-twitter"></i></a>
+          <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/paul-i-2b3013108" title="Linked In" class="social_icon widget_social_icon social_linkedin social_icon_linkedin"><i class="fa fa-linkedin"></i></a>
+          <a rel="nofollow" target="_blank" href="https://github.com/basondole" title="Github" class="social_icon widget_social_icon social_github social_icon_github"><i class="fa fa-github"></i></a>
+
+          <a rel="nofollow" target="_blank" href="https://stackoverflow.com/users/12078639/bassosimons" title="stackoverflow" class="social_icon widget_social_icon"><i class="fa fa-rss"></i></a>
+
+        </div>
+      </div>
+
+    </div>
+        
+    <div class="header_nav_wrapper">
+
+      <div class="header_nav">
+
+        <div class="container">
+          <div class="site_branding">
+          <h1 class="text_logo"><a href="index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
+          </div>
+          
+
+          <!-- Place header control before main menu if site title is enabled -->
+          <div class="header_controls">
+
+            <div class="header_sliding_sidebar_control header_control_wrapper">
+              <a id="user_control_icon" class="sliding_sidebar_button" href="#">
+                <i class="fa fa-bars header_control_icon"></i>
+              </a>
+            </div>
+        
+          </div>
+    
+
+          <div class="main_menu">
+            <ul id="top-menu" class="navbar">
+              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html" class="local-root-page">Home</a></li>
+              <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li>
+              <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">NET2CODE</a></li>
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                <ul role="menu" class=" dropdown-menu">
+                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
+                  <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Misc</a></li>
+                </ul>
+              </li>
+              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html" class="local-root-page">About</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="contact.html" class="local-root-page">Contact</a></li>
+              <!-- <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="http://karneliuk.com/donate/">Donate</a></li> -->
+            </ul>
+            <span class="menu_mark_circle hidden_mark_circle"></span>
+          </div>
+              
+        <!-- Place header control after main menu if site title is enabled -->
+          
+        </div><!-- end .container -->
+      </div><!-- end .header_nav -->
+    </div><!-- end .header_nav_wrapper -->
+    </header>
+
+    <main id="content" class="site-content">
+      <section id="primary" class="container main_content_area">
+        <!-- end check for post layout -->
+        <div class="row full_width_page_single no_sidebar_post_single">
+          <div>
+            <!-- <article id="post-182" class="blog_page_container post-182 page type-page status-publish"> -->
+
+              <div class="page_body">
+                    <div class="post_info_wrapper">
+                      <div class="entry-content blog_page_text blog_page_description">
+
+
+
+<!-- ============================ START CONTENT ============================================ -->
+<h2 style="text-align: center;">
+  <strong>Implementing QoS in JunOS</strong><strong>.</strong>
+</h2>
+
+<p>Quality of Service (QoS) is the manipulation of traffic such that a network device, such as a router or switch, forwards it in a fashion consistent with the required behaviors of the applications generating that traffic. In other words, QoS enables a network device to differentiate traffic and then apply different behaviors to the traffic.
+QoS includes these capabilities:  </p>
+<ul>
+<li>Prioritizing traffic over other traffic based on protocol, address and port number.  </li>
+<li>Filtering traffic upon ingress or egress.  </li>
+<li>Controlling the allowed bandwidth transmitted or received on the device.  </li>
+<li>Reading and writing QoS behavior requirements in the packet header.  </li>
+<li>Controlling congestion so that the device sends the highest priority traffic based on scheduler priorities.  </li>
+<li>Controlling packet loss using algorithms, so that the device knows the packets to drop or process.</li>
+</ul>
+<p>Below diagram shows the building blocks of QoS</p>
+<pre>
+
+    +-----------------------------------------------------------------------------------------------------+      
+    |                                            NETWORK DEVICE                                           |      
+    |                                                                                                     |      
+    |  +--------------+   +------------+   +---------+    +----------+    +----------+     +----------+   |      
+    |  |              |   |   input    |   |         |    |          |    |  shaper  |     |          |   |      
+-------|classification|---|  policing  |---| queuing |----|scheduling|----|(optional)|-----|remarking |------->
+    |  |              |   | (optional) |   |         |    |          |    |          |     |          |   |      
+    |  +--------------+   +------------+   +---------+    +----------+    +----------+     +----------+   |      
+    |                                                                                                     |      
+    |                                                                                                     |      
+    +-----------------------------------------------------------------------------------------------------+      
+    |<-----------   ingress  ----------->||<-------------------------  egress  -------------------------->|
+
+</pre>
+
+
+<h2 id="classification">Classification</h2>
+<p>Classifiers map traffic to a forwarding class at ingress. Classifiers match ingress traffic that already has COS markings and depending on the observed mark traffic is assigned to a forwarding class (queue) this type of classification is called Behavior Aggregate (BA)
+Classifiers can also match on protocol, port, addresses etc this classification type is called Multifield classification (MF) BA is considered to be good for high volume devices  and more efficient than MF.
+Fixed Classification is another form of classification. This method assigns a single forwarding class to all ingress packets with no regard to their markings (if any)<br>CoS marking can be of different types as described below  </p>
+<ul>
+<li>IPv4 packet: Uses DSCP(6 bit) with up to 64 classes of service</li>
+<li>IPv6 packet: Uses DSCP(6 bit) with up to 64 classes of service</li>
+<li>Ethernet frame: Uses priority code point (3 bit) with up to 8 classes of service</li>
+<li>MPLS:  Uses EXP bits (3 bit) with up to 8 classes of service</li>
+</ul>
+<p>These marking are used with BA classification to assign packets to desired forwarding classes. Classifiers also define the Packet Loss Probability (PLP) which determines the likelihood of packet being dropped under congestion essentially helping policers and schedulers determine which traffic to drop first during congestion.
+In below example ingress packets on interface    ge-0/0/0  witch DSCP marking 011010 will be assigned to network-control class and assigned PLP of high while ingress labeled packets with EXP marking 001 will be assigned to expedited-forwarding class and assigned a PLP of high.
+Different classifiers can be assigned on an interface to match different type of markings schemes such as 802.1/DSCP/EXP etc</p>
+<p>Configuring and applying a BA classifier on an interface</p>
+<pre>
+paul@big# show class-of-service                             
+classifiers {
+    dscp CLASSIFIER-CUSTOM-DSCP {
+        import default;
+        forwarding-class network-control {
+            loss-priority high code-points 011010;
+        }
+    }
+}
+interfaces {
+    ge-0/0/0 {
+        unit 0 {
+            classifiers {
+                dscp CLASSIFIER-CUSTOM-DSCP;
+            }
+        }
+    }
+}
+</pre>
+
+<p>The keyword import default causes the classifier to inherit unspecified values from the default class. For example in this case we have only specified code point 011010 to be mapped to network-control class and since DSCP has 64 values the remaining 63 values (which we have not specified) will be mapped to different classes following the default DSCP scheme</p>
+<p>Verification</p>
+<pre>
+paul@big# run show class-of-service interface ge-0/0/0.0    
+  Logical interface: ge-0/0/0.0, Index: 70
+    Object                  Name                   Type                    Index
+    Classifier              CLASSIFIER-CUSTOM-DSCP dscp                    62414
+</pre>
+
+<p>BA classifier without import statement</p>
+<pre>
+paul@big# run show class-of-service classifier name CLASSIFIER-CUSTOM-DSCP      
+Classifier: CLASSIFIER-CUSTOM-DSCP, Code point type: dscp, Index: 62414
+  Code point         Forwarding class                    Loss priority
+  011010             network-control                     high
+</pre>
+
+<p>BA classifier with import statement</p>
+<pre>
+paul@big# run show class-of-service classifier name CLASSIFIER-CUSTOM-DSCP    
+Classifier: CLASSIFIER-CUSTOM-DSCP, Code point type: dscp, Index: 62414
+  Code point         Forwarding class                    Loss priority
+  000000             best-effort                         low         
+  000001             best-effort                         low         
+  001011             best-effort                         low         
+  001100             assured-forwarding                  high        
+{Output omitted}      
+  001110             assured-forwarding                  high        
+  010010             best-effort                         low         
+  010011             best-effort                         low         
+  010100             best-effort                         low
+  011010             network-control                     high
+{Output omitted}      
+</pre>
+
+<p>Configuring and applying a MF</p>
+<pre>
+paul@big# show firewall 
+filter APPLY-COS-MARK {
+    term 1 {
+        from {
+            source-address {
+                192.168.56.0/24;
+            }
+        }
+        then {
+            forwarding-class assured-forwarding;
+            accept;
+        }
+    }
+    term all-other-traffic {
+        then accept;
+    }
+}
+paul@big# show interfaces ge-0/0/0.0  
+family inet {
+    filter {
+        input APPLY-COS-MARK;
+    }
+}
+</pre>
+
+<p>Verification</p>
+<pre>
+paul@big# run show class-of-service interface ge-0/0/0.0  
+  Logical interface: ge-0/0/0.0, Index: 70
+    Object                  Name                   Type                    Index
+    Classifier              ipprec-compatibility   ip                         13 
+
+
+Configuring fixed classification
+paul@big# show class-of-service                                
+interfaces {
+    ge-0/0/1 {
+        unit 1000 {
+            forwarding-class expedited-forwarding;
+        }
+    }
+}
+</pre>
+
+<p>Verification</p>
+<pre>
+paul@big# run show class-of-service interface ge-0/0/1.1000    
+  Logical interface: ge-0/0/1.1000, Index: 76
+    Object                  Name                   Type                    Index
+    Classifier              expedited-forwarding   fixed                       1
+</pre>
+
+
+<h2 id="queues">Queues</h2>
+<p>Forwarding classes determine the queue to which a packet is assigned. By default there are 4 forwarding classes in junos  </p>
+<ol>
+<li>BE (Best effort) Basic services </li>
+<li>EF (Expedited Forwarding) Premium services</li>
+<li>AF (Assured forwarding)</li>
+<li>NC (Network control) Control Traffic</li>
+</ol>
+<pre>
+paul@big# run show class-of-service forwarding-class
+Forwarding class        ID      Queue  Policing priority    SPU priority
+  best-effort            0        0           normal           low    
+  expedited-forwarding   1        1           normal           low    
+  assured-forwarding     2        2           normal           low    
+  network-control        3        3           normal           low    
+</pre>
+
+<p>Configuring forwarding classes</p>
+<pre>
+paul@big# show class-of-service forwarding-classes
+class MYOWNCLASS queue-num 4;
+
+paul@big# run show class-of-service forwarding-class
+Forwarding class        ID      Queue  Policing priority    SPU priority
+  best-effort            0        0           normal           low    
+  expedited-forwarding   1        1           normal           low    
+  assured-forwarding     2        2           normal           low    
+  network-control        3        3           normal           low    
+  MYOWNCLASS             4        4           normal           low
+</pre>
+
+<p>After creating a forwarding class we use classifiers to assign ingress packets to that forwarding class</p>
+<h2 id="scheduling">Scheduling</h2>
+<p>Schedulers define the prioritization properties of forwarding classes (queues) on egress. These properties include  </p>
+<ul>
+<li>Order in which packets are transmitted</li>
+<li>Rate at which packets are transmitted</li>
+<li>Number of packets that can be transmitted</li>
+<li>Differential treatment of packets in the event of congestion</li>
+</ul>
+<h3 id="components-of-scheduling">Components of scheduling</h3>
+<h4 id="transmission-rate">Transmission rate</h4>
+<p>This component specifies the amount of bandwidth allocated to a queue. Transmission rate has the following control options  </p>
+<ol>
+<li>Exact, where traffic exceeding transmission rate is buffered (functions as queue&#39;s shaper)</li>
+<li>Rate-limit, where traffic exceeding transmission rate is dropped (functions as hard policer)
+If none of the control options is specified queue can exceed transmission rate if unused bandwidth exists. The scheduler shares unallocated bandwidth equally among eligible queues in a round-robin fashion on per packet basis</li>
+</ol>
+<h4 id="priority">Priority</h4>
+<p>Priority defines relative importance of a queue compared to other queues by ensuring certain queues are served before other queues when congestion occurs. There a five priority levels  </p>
+<ol>
+<li>low</li>
+<li>medium-low</li>
+<li>medium-high</li>
+<li>high</li>
+<li>strict-high<br>Strict-high level has the top priority; traffic in this level is considered to always be in-profile and receives precedence over all other queues except queue with high priority. Other queues are serviced using weighted round-robin
+The strict high queue may starve lower priority queues, for this reason we configure transmission-rate with rate-limit to stop strict-high queues from using the entire interface bandwidth and starve other queues. In my opinion it is very important you evaluate what traffic you want to assign to this queue and strictly specify the bandwidth allocated to the strict high queue.</li>
+</ol>
+<h3 id="delay-buffers">Delay buffers</h3>
+<p>The egress interface has a buffer with finite capacity, when there is congestion packets are temporarily stored in the buffer (memory) before getting transmitted. This component specifies the amount of data that can be stored when congestion occurs and to be transmitted when bandwidth utilization goes down, large buffer means many packets stored. The buffer size is determined by the interface hardware.
+     Example: 1Gbps port with 100ms buffer size provides a 12.5Mbytes of stored bytes
+              1Gbps x 100ms = 100Mb or 12.5MBytes</p>
+<p>Delay buffer can be configure as  </p>
+<ul>
+<li><p>Percentage of ports available buffer. This option allows buffer to expand when queue exceeds transmission rate<br><code>buffer-size (MB) = buffer-size (%) x max-port-buffer-size (ms) x interface-bandwidth (Mbps) / 8</code></p>
+</li>
+<li><p>Temporal time value relative to queue&#39;s transmission rate (not interface bandwidth). This option drops traffic exceeding buffer<br>With  fixed transition rate on the queue;<br> <code>buffer-size (MB) = buffer-size(s) * transmit-rate(Mbps) / 8</code><br>With transmission rate specified as percentage;<br>  <code>buffer-size (MB) = buffer-size (s) x interface-bandwidth (Mbps) x transmit-rate (%) / 8</code></p>
+</li>
+<li><p>Remainder. This option assigns to the queue the remaining available buffer on the interface</p>
+</li>
+</ul>
+<p>During configuration the best practice is to match buffer-size and transmission-rate values </p>
+<h4 id="red-drop-profiles">RED drop profiles</h4>
+<p>Random early detection declares how to drop traffic during congestion, this affects packets in buffer essentially determining how to selectively drop packets as delay buffers fill, using PLP values. Drop profiles alter buffer-size when drop probability is 100% while fill level is less than 100%, meaning can influence buffer to drop packets before it gets filled 100% hence can reduces effective maximum buffer size.
+This mechanism allows us to avoid the buffer from filling up to capacity, when the buffer is full not only all the new packets get dropped but also causes global synchronization caused by TCP slow start. TCP slow start causes inefficient use of bandwidth and in order to prevent this we discard traffic after a certain threshold is reached thus throwing away some packets so that other packets don’t suffer global synchronization. “Sacrificing a few for the good of the many”
+Drop profiles can be configured with below threshold mapping methods  </p>
+<ul>
+<li>Segmented method: creates threshold map based on configured values (default method)</li>
+<li>Interpolate method: creates threshold map automatically (generating 64 data points) influenced by some configured values</li>
+</ul>
+<p>Drop profile maps are used to associate drop profiles with a scheduler. They map PLP-marked packets to drop profiles.</p>
+<h3 id="configuring-scheduling">Configuring scheduling</h3>
+<p>Configure drop profile</p>
+<pre>
+paul@big# show class-of-service drop-profiles     
+MY-PROFILE {
+    interpolate {
+        fill-level [ 50 70 ];
+        drop-probability [ 0 10 ];
+    }
+}
+</pre>
+
+<p>Configure scheduler</p>
+<pre>
+paul@big# show class-of-service schedulers   
+EF-SCHEDULER {
+    /* traffic exceeding 15% of interface speed is buffered */
+    transmit-rate {
+        percent 15;
+        exact;
+    }
+    /* when buffer (5k x 1us x 15% x interface speed) is full traffic is dropped */
+    buffer-size temporal 5k;
+    priority high;
+}
+AF-SCHEDULER {
+    /* traffic exceeding 20% can be transmitted if unused bandwidth exists */
+    transmit-rate percent 20;
+    /* buffer is 20% of interface's available buffer and can expand dynamically */
+    buffer-size percent 20;
+    priority medium-low;
+}
+BE-SCHEDULER {
+    transmit-rate {
+        remainder;
+    }
+    buffer-size {
+        remainder;
+    }
+    priority low;
+    drop-profile-map loss-priority any protocol any drop-profile MY-PROFILE;
+}
+</pre>
+
+<p>Configure scheduler map</p>
+<pre>
+paul@big# show class-of-service scheduler-maps 
+SCHEDULER-MAP-CORE {
+    forwarding-class AF-CLASS scheduler AF-SCHEDULER;
+    forwarding-class BE-CLASS scheduler BE-SCHEDULER;
+    forwarding-class EF-CLASS scheduler EF-SCHEDULER;
+}
+</pre>
+
+
+<p>Applying scheduler map to interface</p>
+<pre>
+paul@big# show class-of-service interfaces 
+ge-* {
+    scheduler-map SCHEDULER-MAP-CORE;
+}
+</pre>
+
+<p>Applying scheduler map to logical interface</p>
+<pre>
+paul@big# show class-of-service interfaces 
+ge-0/0/0 {
+    unit 0 {
+        scheduler-map SCHEDULER-MAP-CORE;
+
+paul@big# show interfaces ge-0/0/0 
+per-unit-scheduler;
+unit 0;
+</pre>
+
+<p>Verification</p>
+<pre>
+root# run show class-of-service scheduler-map SCHEDULER-MAP-CORE    
+Scheduler map: SCHEDULER-MAP-CORE, Index: 6015
+
+  Scheduler: BE-SCHEDULER, Forwarding class: BE-CLASS, Index: 59266
+    Transmit rate: remainder, Rate Limit: none, Buffer size: remainder,
+    Buffer Limit: none, Priority: low
+    Excess Priority: unspecified
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any         13743    MY-PROFILE          
+      Medium low      any         13743    MY-PROFILE
+      Medium high     any         13743    MY-PROFILE
+      High            any         13743    MY-PROFILE
+
+  Scheduler: EF-SCHEDULER, Forwarding class: EF-CLASS, Index: 58382
+    Transmit rate: 15 percent, Rate Limit: exact, Buffer size: 5000 us,
+    Buffer Limit: exact, Priority: high
+    Excess Priority: unspecified
+    Drop profiles:
+      Loss priority   Protocol    Index    Name
+      Low             any             1    <default-drop-profile>      
+      Medium low      any             1    <default-drop-profile>            
+      Medium high     any             1    <default-drop-profile>      
+      High            any             1    <default-drop-profile>   
+{Output omitted}      
+</pre>
+
+
+<h2 id="rewrite-markers">Rewrite Markers</h2>
+<p>This is how the router tells the next router how to process the incoming packets. We configure rewrite rules to alter CoS values in outgoing packets on the egress interfaces of an edge router to meet the policies of the next router in the path. Rewrite rule checks the current forwarding class and PLP of a packet, perform a lookup in the rewrite table and apply that CoS value to the packet leaving the router thus Conveying a packet&#39;s CoS profile to the next-hop device.
+This allows the downstream routing device in a neighboring network to classify each packet into the appropriate service group. In effect, the rewrite rule performs the opposite function of the behavior aggregate (BA) classifier used when the packet enters the routing device.</p>
+<p>Supported rewrite markings  </p>
+<ul>
+<li>ipv4 dscp</li>
+<li>ipv6 dscp</li>
+<li>ip precedence bits</li>
+<li>MPLS EXP bits</li>
+<li>802.1p CoS bits</li>
+<li>802.1ad Drop Eligible Indicator (DEI) bit</li>
+</ul>
+<p>For Multiprotocol Label Switching (MPLS) EXP and IEEE 802.1 rewrite markers, values are derived from the forwarding class and PLP values in rewrite rules. MPLS EXP and IEEE 802.1 markers are not preserved because they are part of the Layer 2 encapsulation.
+For IP precedence and DiffServ code point (DSCP) rewrite markers, the marker alters the first three bits on the type-of-service (ToS) byte while leaving the last three bits unchanged. 
+Same forwarding-class and PLP can map to different CoS values. There is a default rewrite-rule applied when mpls is enabled on interface</p>
+<p>Configuration</p>
+<pre>
+paul@big# show class-of-service rewrite-rules 
+ieee-802.1 PRI {
+    forwarding-class expedited-forwarding {
+        loss-priority low code-point 110;
+        loss-priority high code-point 110;
+        loss-priority medium-high code-point 110;
+        loss-priority medium-low code-point 110;
+    }
+}
+paul@big# show class-of-service interfaces 
+ge-0/0/0 {
+    unit 1000 {
+        rewrite-rules {
+            ieee-802.1 PRI;
+        }
+    }
+}
+</pre>
+
+<p>Verfication</p>
+<pre>
+paul@big# run show class-of-service rewrite-rule name PRI 
+Rewrite rule: PRI, Code point type: ieee-802.1, Index: 5137
+  Forwarding class                    Loss priority       Code point
+  expedited-forwarding                low                 110            
+  expedited-forwarding                high                110            
+  expedited-forwarding                medium-low          110            
+  expedited-forwarding                medium-high         110            
+
+paul@big# run show class-of-service interface ge-0/0/0.1000 
+  Logical interface: ge-0/0/0.1000, Index: 69
+    Object                  Name                   Type                    Index
+    Rewrite                 PRI                    ieee8021p (outer)        5137
+</pre>
+
+
+<h2 id="summary-with-network-scenario-and-configuration">Summary with network scenario and configuration</h2>
+<pre><code>                    +-----------------------+
+                    |<span class="hljs-string">                       </span>|
+                    |<span class="hljs-string">                       </span>|
+                +---+---+              +----+---+
+        +-------+  PE   |<span class="hljs-string">   MPLS CORE  </span>|<span class="hljs-string">   PE   +------+
+        </span>|<span class="hljs-string">       +---+---+              +----+---+      </span>|
+        |<span class="hljs-string">           </span>|<span class="hljs-string">                       </span>|<span class="hljs-string">          </span>|
+        |<span class="hljs-string">           </span>|<span class="hljs-string">                       </span>|<span class="hljs-string">          </span>|
+     +--+---+       +-----------------------+      +---+--+
+     |<span class="hljs-string"> CE1  </span>|<span class="hljs-string">                                      </span>|<span class="hljs-string">  CE2 </span>|
+     +------+                                      +------+
+
+                     Fig: MPLS PE-CE network
+</code></pre><p>In this scenario the MPLS core network is configured with 4 queues with markings as described in the below table.</p>
+<table>
+<thead>
+<tr>
+<th>CLASS OF SERVICE</th>
+<th>QUEUE</th>
+<th>LOSS PRIORITY</th>
+<th>EXP COS MARKING</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Expedited Forwarding</td>
+<td>0</td>
+<td>Low</td>
+<td>101 (5)</td>
+</tr>
+<tr>
+<td>Assured Forwarding</td>
+<td>1</td>
+<td>Low</td>
+<td>100 (4)</td>
+</tr>
+<tr>
+<td>Network Control</td>
+<td>2</td>
+<td>Low</td>
+<td>110 (6)</td>
+</tr>
+<tr>
+<td>Best Effort</td>
+<td>3</td>
+<td>Low</td>
+<td>000 (0)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Note: All of the configuration displayed below are under the class-of-service stanza  </p>
+</blockquote>
+<p>CLASSESS &amp; CLASSIFIERS: MAP TRAFFIC TO QUEUES<br>This configuration is done in all routers in the provider network</p>
+<pre>
+forwarding-classes {
+     class EF queue-num 0 priority low;
+     class AF queue-num 1 priority low;
+     class NC queue-num 2 priority low;
+     class BE queue-num 3 priority low;
+}
+classifiers {
+     exp MPLS-In {
+         import default;
+         forwarding-class EF {
+             loss-priority low code-points 101;
+         }
+         forwarding-class AF {
+             loss-priority low code-points 100;
+         }
+         forwarding-class NC {
+             loss-priority low code-points 110;
+         }
+         forwarding-class BE {
+             loss-priority low code-points 000;
+         }
+     }
+     ieee-802.1 LAYER2-In {
+         import default;
+         forwarding-class EF {
+             loss-priority low code-points 101;
+         }
+         forwarding-class AF {
+             loss-priority low code-points 100;
+         }
+         forwarding-class NC {
+             loss-priority low code-points 110;
+         }
+         forwarding-class BE {
+             loss-priority low code-points 000;
+         }
+     }
+}
+</pre>
+
+<p>SCHEDULER &amp; SCHEDULER-MAPS: TREATMENT OF PACKETS DURING CONGESTION ON EGRESS<br>This configuration is done in all routers in the provider network</p>
+<pre>
+schedulers {
+     EF-scheduler {
+         transmit-rate percent 15 exact;
+         buffer-size temporal 5k;
+         priority high;
+     }
+     AF-scheduler {
+         transmit-rate percent 20;
+         buffer-size percent 20;
+         priority medium-low;
+     }
+     NC-scheduler {
+         transmit-rate percent 5;
+         buffer-size percent 5;
+         priority medium-low;
+     }
+     BE-scheduler {
+         transmit-rate remainder;
+         buffer-size remainder;
+         priority medium-low;
+         drop-profile-map loss-priority low protocol any drop-profile DP-aggressive;
+     }
+}
+drop-profiles {
+     DP-aggressive {
+         interpolate {
+             fill-level [ 50 70 ];
+             drop-probability [ 0 10 ];
+         }
+     }
+}
+scheduler-maps {
+     scheduler-map-core {
+         forwarding-class EF scheduler EF-scheduler;
+         forwarding-class AF scheduler AF-scheduler;
+         forwarding-class NC scheduler NC-scheduler;
+         forwarding-class BE scheduler BE-scheduler;
+     }
+}
+</pre>
+
+<p>REWRITE RULES: CONVEYING COS TO DOWNSTREAM ROUTERS<br>This configuration is done in all routers in the provider network</p>
+<pre>
+rewrite-rules {
+    exp MPLS-out {
+        import default;
+        forwarding-class EF {
+            loss-priority low code-point 101;
+        }
+        forwarding-class AF {
+            loss-priority low code-point 100;
+        }
+        forwarding-class NC {
+            loss-priority low code-point 110;
+        }
+        forwarding-class BE {
+            loss-priority low code-point 000;
+        }
+    }
+}
+</pre>
+
+<p>CORE FACING INTERFACES: PE &amp; P ROUTER&#39;S CORE FACING MPLS INTERFACES</p>
+<pre>
+interfaces {
+    $interface_identifier$ {
+        unit 0 {
+            scheduler-map scheduler-map-core;
+            classifiers {
+                exp MPLS-In;
+            }
+            rewrite-rules {
+                exp EXP-out;
+            }
+        }
+    }
+}
+</pre>
+
+<p>CUSTOMER FACING INTERFACES<br>This configuration is done on PE routers with customers requiring QoS. To be configured using Fixed, BA or MF classifiers and mapped to forwarding classes as see fit. Below example uses fixed classification to put all the traffic from CE to the assured forwarding class.</p>
+<pre>
+interfaces {                            
+    ge-0/0/1 {
+        unit 100 {
+            forwarding-class AF-CLASS;  
+       }
+   }
+}
+</pre>
+
+
+
+
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
+                  <!-- end post_body -->
+
+                </article>
+
+<!-- ============================ END CONTENT ============================================ -->
+
+                <div class="author_info_container author_single_box">
+                  <div class="row">
+                    <div class="author_avatar_col col">
+                      <a class="author_avatar_url" href="about"><img alt='' src='../../img/all-baggy.jpg' srcset='../../img/all-baggy.jpg' class='avatar avatar-150 photo' height='150' width='150' /></a>
+                    </div>
+                    <div class="author_info_col col">
+                      <div class="author_box_info_header">
+                        <h2 class="author_display_name title">
+                          <a class="author_name_url url fn n" href="">Paul S.I. Basondole </a>
+                        </h2>
+
+                      </div>
+                      <div class="author_description">
+IT &amp; Network Expert / Lead <br>
+Network & Automation designer; <br>
+2x JNCIP (RS/SP) 1x CCNP (RS) <br>
+BSc Telecommunications Eng.
+                      </div>
+                      <div class="stories_circles_wrapper"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- close col12 just inside .full_width_list -->
+            </div>
+            <!-- close .full_width_list -->
+            <!-- close col and row in case of sidebar layout -->
+            <!-- end check for post layout -->
+          </section>
+          <!-- #primary -->
+        </main>
+        <!-- #content -->
+        <footer id="colophon" class="site_footer container" role="contentinfo">
+          <div class="footer_credits footers_active_sidebars_0">
+            &copy; 2020 basondole.io
+          </div>
+          <div id="aliagototop" title="Scroll To Top" class="alia_gototop_button footer_button">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </footer>
+
+        <!-- #colophon -->
+      </div>
+      <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+     <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+      <div class="sliding_close_helper_overlay"></div>
+      <div class="site_side_container">
+        <h3 class="screen-reader-text">
+          Sliding Sidebar
+        </h3>
+        <div class="info_sidebar">
+          <div class="top_header_items_holder mobile_menu_opened">
+            <div class="main_menu">
+              <ul id="mobile-menu" class="navbar">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu">
+                  <a href="index.html" class="local-root-page">Home</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu">
+                  <a href="https://github.com/basondole/mpls#introduction">Design</a>
+                </li>
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu">
+                  <a href="https://github.com/basondole/open#hocid">NET2CODE</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu">
+                  <a href="blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                  <ul role="menu" class=" dropdown-menu">
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
+                      <a href="index.html">Collaboration</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
+                      <a href="../networkauto/index.html">Network Automation</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/tutorials">Network Servers</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/netmanagement">Misc</a>
+                    </li>
+                  </ul>
+                </li>
+                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
+                  <a href="about.html" class="local-root-page">About</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-145 menu-item-412 default_menu">
+                  <a href="contact.html" class="local-root-page">Contact</a>
+                </li>
+                <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
+                  <a href="http://karneliuk.com/donate/">Donate</a> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- end .top_header_items_holder -->
+        </div>
+      </div>
+      <!-- end sliding sidebar content -->
+      <!-- start footer static content -->
+      <!-- start footer static content -->
+    </div>
+    <!-- #page -->
+    <div id="ajax_modal_story" class="ajax_modal ajax_modal_story modal enable_rotate">
+      <div class="story_modal_overlay_helper"></div>
+    </div>
+
+
+    </script>
+
+    <script type='text/javascript' src='../../karneliuk/global.1.35.js' class="local-root-js"></script>
+
+
+    <script type='text/javascript'>
+/* <![CDATA[ */
+var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-load-story.php", "ajax_rotate_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-rotate-story.php" };
+/* ]]> */
+    </script>
+
+
+    <script type='text/javascript' src='../../karneliuk/alia-core.1.13.js' class="local-root-js"></script>
+    <script type='text/javascript' src='../../karneliuk/wp-embed.min.5.3.2.js' class="local-root-js"></script>
+
+    
+<script type="text/javascript">
+  // edit the level variable, the load the page and copy the loaded DOM, NOT the source
+  // to get updated paths throughout the dom
+  
+  var 
+  localPagesFiles = document.getElementsByClassName("local-root-page"),
+  localJsFiles = document.getElementsByClassName("local-root-js"),
+  localCssFiles = document.getElementsByClassName("local-root-css"),
+  localImagesFiles = document.getElementsByClassName("local-root-image");
+
+  var level = "../../";
+
+  function updatePaths() { 
+    for (var i=0; i<localPagesFiles.length; i++) {
+          var path = level + localPagesFiles[i].getAttribute("href");
+          localPagesFiles[i].setAttribute("href",path);
+          console.log(localPagesFiles[i].getAttribute("href"));
+    }
+
+    for (var i=0; i<localJsFiles.length; i++) {
+          var path = level + localJsFiles[i].getAttribute("src");
+          localJsFiles[i].setAttribute("src",path);
+          console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localCssFiles.length; i++) {
+          var path = level + localCssFiles[i].getAttribute("src");
+          localCssFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localImagesFiles.length; i++) {
+          var path = level + localImagesFiles[i].getAttribute("src");
+          localImagesFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+  }
+
+  window.onload = function () {
+   updatePaths();
+  };
+
+</script>
+
+<script type="text/javascript">
+  var localPagesFiles = document.getElementsByClassName("local-root-page");
+function printId(event) {
+  var myId = this.Id;
+  console.log(myId);
+}
+for (var i=0; i<localPagesFiles.length; i++) {
+       localPagesFiles[i].addEventListener("click",printId);
+}
+</script>
+
+
+
+
+  </body>
+</html>
