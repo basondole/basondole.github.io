@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js no-svg">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+
+<title>basondole.io &#8211; Network design and development, 2x JNCIP (ENT/SP) 1x CCNP (RS), BSc.</title>
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link crossorigin="anonymous" rel='stylesheet' id='alia-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700%2C700i%7CPoppins%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+
+<link rel='stylesheet' id='wp-block-library-css'  href='../../karneliuk/style.min.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='github-embed-css'  href='../../karneliuk/github-embed.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-lightbox-swipebox-css'  href='../../karneliuk/swipebox.min.2.2.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='alia-style-css'  href='../../karneliuk/alia.style.1.35.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-css'  href='../../karneliuk/all.min.1.0.css' type='text/css' media='all' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' id='codecolorer-css'  href='../../karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
+<link rel="stylesheet" href="../../css/style1.css" />
+
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-192x192.jpg" sizes="192x192" />
+
+<link rel='https://api.w.org/' href='../../karneliuk/wp-json' />
+
+
+<script type='text/javascript' src='../../karneliuk/jquery-1.12.4-wp.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/jquery-migrate.min-1.4.1.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/ouibounce-5.3.2.js' class="local-root-js"></script>
+
+
+<script type="text/javascript">
+  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"karneliuk/wp-emoji-release.min.5.3.2.js"}};
+  !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+
+
+
+<meta name="generator" content="WordPress 5.3.2" />
+
+</head>
+
+
+
+
+
+
+
+
+
+<body class="home blog sticky_header header_logo_rounded text_posts_unbordered masonry_effect_enabled show_menu_circle_idicator sliding_sidebar_inactive">
+
+<div id="page" class="site">
+
+  <div class="site_main_container">
+
+    <header class="site_header">
+      
+    <div class="gray_header"  >
+      <div class="container site_header">
+        <div class="header_square_logo">
+          <style>.site_logo_image { width : 120px; }.site_logo_image { height : 120px; }</style>
+          <a class="alia_logo retina_logo" title="basondole.io" href="index.html" rel="home">
+            <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+    
+          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="index.html" rel="home">
+          <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+
+          <h1 class="screen-reader-text site_logo site-title clearfix">basondole.io</h1>
+
+        </div>
+
+        <div class="header_tagline">
+          Multivendor network design, development and automation for enterprise and service provider fabrics. Skills that matter
+        </div>
+
+        <div class="social_icons_list header_social_icons">
+          <a rel="nofollow" target="" href="https://twitter.com/misterbigpaul" title="Twitter" class="social_icon widget_social_icon social_twitter social_icon_twitter"><i class="fa fa-twitter"></i></a>
+          <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/paul-i-2b3013108" title="Linked In" class="social_icon widget_social_icon social_linkedin social_icon_linkedin"><i class="fa fa-linkedin"></i></a>
+          <a rel="nofollow" target="_blank" href="https://github.com/basondole" title="Github" class="social_icon widget_social_icon social_github social_icon_github"><i class="fa fa-github"></i></a>
+
+          <a rel="nofollow" target="_blank" href="https://stackoverflow.com/users/12078639/bassosimons" title="stackoverflow" class="social_icon widget_social_icon"><i class="fa fa-rss"></i></a>
+
+        </div>
+      </div>
+
+    </div>
+        
+    <div class="header_nav_wrapper">
+
+      <div class="header_nav">
+
+        <div class="container">
+          <div class="site_branding">
+          <h1 class="text_logo"><a href="index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
+          </div>
+          
+
+          <!-- Place header control before main menu if site title is enabled -->
+          <div class="header_controls">
+
+            <div class="header_sliding_sidebar_control header_control_wrapper">
+              <a id="user_control_icon" class="sliding_sidebar_button" href="#">
+                <i class="fa fa-bars header_control_icon"></i>
+              </a>
+            </div>
+        
+          </div>
+    
+
+          <div class="main_menu">
+            <ul id="top-menu" class="navbar">
+              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html" class="local-root-page">Home</a></li>
+              <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li>
+              <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">NET2CODE</a></li>
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                <ul role="menu" class=" dropdown-menu">
+                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
+                  <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Misc</a></li>
+                </ul>
+              </li>
+              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html" class="local-root-page">About</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="contact.html" class="local-root-page">Contact</a></li>
+              <!-- <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="http://karneliuk.com/donate/">Donate</a></li> -->
+            </ul>
+            <span class="menu_mark_circle hidden_mark_circle"></span>
+          </div>
+              
+        <!-- Place header control after main menu if site title is enabled -->
+          
+        </div><!-- end .container -->
+      </div><!-- end .header_nav -->
+    </div><!-- end .header_nav_wrapper -->
+    </header>
+
+    <main id="content" class="site-content">
+      <section id="primary" class="container main_content_area">
+        <!-- end check for post layout -->
+        <div class="row full_width_page_single no_sidebar_post_single">
+          <div>
+            <!-- <article id="post-182" class="blog_page_container post-182 page type-page status-publish"> -->
+
+              <div class="page_body">
+                    <div class="post_info_wrapper">
+                      <div class="entry-content blog_page_text blog_page_description">
+
+
+
+<!-- ============================ START CONTENT ============================================ -->
+<h1 id="traffic-engineering-lsp-cisco-x-junos">Traffic Engineering LSP Cisco X JunOS</h1>
+<p>Traffic engineering Label Switched Paths (LSPs) allows for granular control over what LSPs are used for MPLS traffic by analysing bandwidth available on different LSPs and choosing desirable paths based on resource  availability by using the Resource Reservation Protocol (RSVP) instead of the LDP. Generally these LSPs are unidirectional and require to be configured on both egress and ingress Label Switch Routers (LSR)</p>
+<h2 id="objective">Objective</h2>
+<p>In the network below it is required that traffic from END6 destined to END7 take the path PE1 to PE3 to PE5 to PE4 and PE2. Traffic from END7 destined to END6 should take the path PE2 to PE4 and PE1. VRF traffic from PE1 to PE2 should take the path PE1 to PE3 to PE5 to PE4 and PE2 while VRF traffic from PE2 to PE1 takes the path PE2 to PE5 to PE3 and PE1.  </p>
+<p><img width="714" alt="MPLSTE" src="https://user-images.githubusercontent.com/50369643/62410280-5b4a0e00-b5ec-11e9-999c-9a6254c15c3e.png">  </p>
+<h2 id="configuration">Configuration</h2>
+<h3 id="pe1-config">PE1 config</h3>
+<pre>
+ip vrf L3VPN-TE
+ rd 100:100
+ route-target export 100:100
+ route-target import 100:100
+!
+mpls traffic-eng tunnels
+!         
+interface Loopback0
+ ip address 10.1.1.1 255.255.255.255
+ ip ospf 1 area 0
+!
+interface Loopback100
+ ip vrf forwarding L3VPN-TE
+ ip address 10.1.1.1 255.255.255.255
+!
+interface Tunnel1
+ description TE_TUNNEL_R1_R3_R4_R5_R2
+ ip unnumbered Loopback0
+ mpls traffic-eng tunnels
+ tunnel mode mpls traffic-eng
+ tunnel destination 10.2.2.2
+ tunnel mpls traffic-eng autoroute announce
+ tunnel mpls traffic-eng path-option 1 explicit name te-tunnel-R3-R4-R5-R2
+!
+interface Tunnel2
+ description TE_TUNNEL_R1_R4_R3
+ ip unnumbered Loopback0
+ tunnel mode mpls traffic-eng
+ tunnel destination 10.3.3.3
+ tunnel mpls traffic-eng forwarding-adjacency
+ tunnel mpls traffic-eng priority 7 7
+ tunnel mpls traffic-eng bandwidth 500
+ tunnel mpls traffic-eng path-option 1 explicit name tunnel-R1-R4-R3
+!
+interface Tunnel3
+ description TE_TUNNEL_R3_R5_R4_R2
+ ip unnumbered Loopback0
+ tunnel mode mpls traffic-eng
+ tunnel destination 10.2.2.2
+ tunnel mpls traffic-eng autoroute announce
+ tunnel mpls traffic-eng path-option 1 explicit name tunnel-R3-R5-R4-R2
+!         
+interface FastEthernet0/0
+ description connection to pe3
+ ip address 10.13.31.1 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+mpls ip
+ mpls traffic-eng tunnels
+ ip rsvp bandwidth 100000
+!
+interface FastEthernet1/0
+ description connection to pe4
+ ip address 10.14.41.1 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+mpls ip
+ mpls traffic-eng tunnels
+ ip rsvp bandwidth 100000
+!
+interface FastEthernet2/0
+ description connection to end6
+ ip address 10.16.61.1 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 1
+!
+router ospf 1
+ auto-cost reference-bandwidth 10
+ mpls traffic-eng router-id Loopback0
+ mpls traffic-eng area 0
+!
+router bgp 64512
+ neighbor iBGP peer-group
+ neighbor iBGP remote-as 64512
+ neighbor iBGP update-source Loopback0
+ neighbor 10.3.3.3 peer-group iBGP
+ !
+ address-family ipv4
+  neighbor iBGP next-hop-self
+  neighbor 10.3.3.3 activate
+ exit-address-family
+ !
+ address-family vpnv4
+  neighbor iBGP send-community extended
+  neighbor iBGP next-hop-self
+  neighbor 10.3.3.3 activate
+ exit-address-family
+ !
+ address-family ipv4 vrf L3VPN-TE
+  redistribute connected
+ exit-address-family
+!
+ip explicit-path name te-tunnel-R3-R4-R5-R2 enable
+ next-address 10.13.31.3
+ next-address 10.34.43.4
+ next-address 10.45.54.5
+ next-address 10.25.52.2
+!
+ip explicit-path name tunnel-R1-R4-R3 enable
+ next-address 10.14.41.4
+ next-address 10.34.43.3
+!
+ip explicit-path name tunnel-R3-R5-R4-R2 enable
+ next-address 10.13.31.3
+ next-address 10.35.53.5
+ next-address 10.45.54.4
+ next-address 10.24.42.2
+</pre>
+
+
+<h3 id="pe3-config">PE3 config</h3>
+<pre>
+mpls traffic-eng tunnels
+!
+interface Loopback0
+ ip address 3.3.3.3 255.255.255.255
+ ip ospf 1 area 0
+!
+interface FastEthernet0/0
+ description connection to pe1
+ ip address 10.13.31.3 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+ mpls ip
+ mpls traffic-eng tunnels
+ ip rsvp bandwidth 100000
+!
+interface FastEthernet1/0
+ description connection to pe5
+ ip address 10.35.53.3 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+ mpls ip
+ mpls traffic-eng tunnels
+ ip rsvp bandwidth 100000
+!
+interface FastEthernet2/0
+ description connection to pe4
+ ip address 155.34.43.3 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+mpls ip
+ mpls traffic-eng tunnels
+ ip rsvp bandwidth 100000
+!
+interface FastEthernet3/0
+ description connection to pe2
+ ip address 10.23.32.3 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+mpls ip
+ mpls traffic-eng tunnels
+ ip rsvp bandwidth 100000
+!
+router ospf 1
+ auto-cost reference-bandwidth 10
+ mpls traffic-eng router-id Loopback0
+ mpls traffic-eng area 0
+!
+router bgp 64512
+neighbor iBGP peer-group
+ neighbor iBGP remote-as 64512
+ neighbor iBGP update-source Loopback0
+ neighbor 10.1.1.1 peer-group iBGP
+ neighbor 10.2.2.2 peer-group iBGP
+ neighbor 10.4.4.4 peer-group iBGP
+ neighbor 10.5.5.5 peer-group iBGP
+ !
+ address-family ipv4
+  neighbor iBGP route-reflector-client
+  neighbor 10.1.1.1 activate
+  neighbor 10.2.2.2 activate
+  neighbor 10.4.4.4 activate
+  neighbor 10.5.5.5 activate
+ exit-address-family
+ !
+ address-family vpnv4
+  neighbor iBGP send-community extended
+  neighbor iBGP route-reflector-client
+  neighbor 10.1.1.1 activate
+  neighbor 10.2.2.2 activate
+  neighbor 10.4.4.4 activate
+  neighbor 10.5.5.5 activate
+ exit-address-family
+ip explicit-path name tunnel-R3-R4-R1 enable
+ next-address 10.34.43.4
+ next-address 10.14.41.1
+</pre>
+
+
+<h3 id="pe4-config">PE4 config</h3>
+<pre>
+mpls traffic-eng tunnels
+!
+interface Loopback0
+ ip address 10.4.4.4 255.255.255.255
+ ip ospf 1 area 0
+!
+interface FastEthernet0/0
+ description connection to pe5
+ ip address 10.45.54.4 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+ mpls ip
+ mpls traffic-eng tunnels
+!
+interface FastEthernet1/0
+ description connection to pe1
+ ip address 10.14.41.4 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+ mpls ip
+ mpls traffic-eng tunnels
+ ip rsvp bandwidth 100000
+!
+interface FastEthernet2/0
+ description connection to pe3
+ ip address 10.34.43.4 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+ mpls ip
+ mpls traffic-eng tunnels
+ ip rsvp bandwidth 100000
+!
+interface FastEthernet4/0
+ description connection to pe2
+ ip address 10.24.42.4 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+ mpls ip
+ mpls traffic-eng tunnels
+!
+router ospf 1
+ auto-cost reference-bandwidth 10
+ mpls traffic-eng router-id Loopback0
+ mpls traffic-eng area 0
+!
+router bgp 64512
+ neighbor iBGP peer-group
+ neighbor iBGP remote-as 64512
+ neighbor iBGP update-source Loopback0
+ neighbor 10.3.3.3 peer-group iBGP
+ !
+ address-family ipv4
+  neighbor iBGP next-hop-self
+  neighbor 10.3.3.3 activate
+ exit-address-family
+ !
+ address-family vpnv4
+  neighbor iBGP send-community extended
+  neighbor iBGP next-hop-self
+  neighbor 10.3.3.3 activate
+ exit-address-family
+</pre>
+
+
+<h3 id="pe5-config">PE5 config</h3>
+<pre>
+interfaces {
+    em0 {
+        unit 0 {
+            description "connection to pe4";
+            family inet {
+                address 10.45.54.5/24;
+            }
+            family mpls;
+        }
+    }
+    em1 {
+        unit 0 {
+            description "connection to pe3";
+            family inet {
+                address 10.35.53.5/24;
+            }
+            family mpls;
+        }
+    }
+    em2 {
+        unit 0 {
+            description "connection to pe2";
+            family inet {
+                address 10.25.52.5/24;
+            }
+            family mpls;
+        }                               
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 10.5.5.5/32;
+            }
+        }
+    }
+}
+routing-options {
+    autonomous-system 64512;
+}
+protocols {
+    rsvp {
+        interface em0.0;
+        interface em1.0;
+        interface em2.0;
+    }
+    mpls {
+        interface em0.0;
+        interface em1.0;
+        interface em2.0;
+    }                                   
+    bgp {
+        group iBGP {
+            type internal;
+            local-address 10.5.5.5;
+            family inet {
+                unicast;
+            }
+            family inet-vpn {
+                unicast;
+            }
+            export export-iBGP;
+            peer-as 64512;
+            neighbor 10.3.3.3 {
+                description route-reflector;
+            }
+        }
+    }
+    ospf {
+        traffic-engineering;
+        area 0.0.0.0 {
+            interface lo0.0 {
+                passive;
+            }                           
+            interface em0.0 {
+                interface-type p2p;
+            }
+            interface em1.0 {
+                interface-type p2p;
+            }
+            interface em2.0 {
+                interface-type p2p;
+            }
+        }
+    }
+    ldp {
+        interface em0.0;
+        interface em1.0;
+        interface em2.0;
+    }
+}
+policy-options {
+    policy-statement export-iBGP {
+        term next-hop {
+            then {
+                next-hop self;
+                accept;                 
+            }
+        }
+    }
+}
+</pre>
+
+
+<h3 id="pe2-config">PE2 config</h3>
+<pre>
+interfaces {
+    em0 {
+        unit 0 {
+            description "connection to end7";
+            family inet {
+                address 10.27.72.2/24;
+            }
+        }
+    }
+    em2 {
+        unit 0 {
+            description "connection to pe5";
+            family inet {
+                address 10.25.52.2/24;
+            }
+            family mpls;
+        }
+    }
+    em3 {
+        unit 0 {
+            description "connection to pe3";
+            family inet {
+                address 10.23.32.2/24;
+            }
+            family mpls;
+        }
+    }                                   
+    em4 {
+        unit 0 {
+            description "connection to pe4";
+            family inet {
+                address 10.24.42.2/24;
+            }
+            family mpls;
+        }
+    }
+    lo0 {
+        unit 0 {
+            family inet {
+                address 10.2.2.2/32;
+            }
+        }
+        unit 100 {
+            family inet {
+                address 10.2.2.2/32;
+            }
+        }
+    }
+}
+routing-options {                       
+    autonomous-system 64512;
+}
+protocols {
+    rsvp {
+        interface em2.0;
+        interface em3.0 {
+            bandwidth 100m;
+        }
+        interface em4.0;
+    }
+    mpls {
+        label-switched-path tunnel-R2-R4-R1 {
+            to 10.1.1.1;
+            install 10.6.6.1/32 active;
+            primary R2-R4-R1;
+        }
+        label-switched-path tunnel-R2-R5-R3-R1 {
+            from 10.2.2.2;
+            to 10.1.1.1;
+            /* assigning prefixes to be reached via the LSP */
+            install 10.6.6.0/32 active;
+            preference 6;
+            /* allocating an explicit-path */
+            primary R2-R5-R3-R1;
+        }
+        path R2-R4-R1 {
+            10.24.42.4;
+            10.14.41.1;
+        }
+        path R2-R5-R3-R1 {
+            10.25.52.5 strict;
+            10.35.53.3 strict;
+            10.13.31.1 strict;
+        }
+        interface em2.0;
+        interface em3.0;
+        interface em4.0;
+    }
+    bgp {
+        group iBGP {
+            type internal;
+            local-address 10.2.2.2;
+            family inet {
+                unicast;
+            }
+            family inet-vpn {           
+                unicast;
+            }
+            export export-iBGP;
+            peer-as 64512;
+            neighbor 10.3.3.3 {
+                description route-reflector;
+            }
+        }
+    }
+    ospf {
+        traffic-engineering;
+        area 0.0.0.0 {
+            interface lo0.0 {
+                passive;
+            }
+            interface em2.0 {
+                interface-type p2p;
+                priority 1;
+            }
+            interface em4.0 {
+                interface-type p2p;
+            }
+            interface em3.0 {           
+                interface-type p2p;
+            }
+        }
+        area 0.0.0.1 {
+            interface em0.0 {
+                interface-type p2p;
+            }
+        }
+    }
+    ldp {
+        interface em2.0;
+        interface em3.0;
+        interface em4.0;
+    }
+}
+policy-options {
+    policy-statement export-iBGP {
+        term nex-hop {
+            then {
+                next-hop self;
+                accept;
+            }
+        }                               
+    }
+}
+routing-instances {
+    L3-VPN-TE {
+        instance-type vrf;
+        interface lo0.100;
+        route-distinguisher 100:100;
+        vrf-target target:100:100;
+        vrf-table-label;
+    }
+}
+</pre>
+
+
+<h3 id="end6-config">END6 config</h3>
+<pre>
+interface Loopback0
+ ip address 10.6.6.0 255.255.255.255
+ ip ospf 1 area 1
+!
+interface Loopback1
+ ip address 10.6.6.1 255.255.255.255
+ ip ospf 1 area 1
+!
+interface Loopback2
+ ip address 10.6.6.2 255.255.255.255
+ ip ospf 1 area 1
+!
+interface Loopback3
+ ip address 10.6.6.3 255.255.255.255
+ ip ospf 1 area 1
+!
+interface FastEthernet2/0
+ description connection to pe1
+ ip address 10.16.61.6 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 1
+!
+router ospf 1
+ auto-cost reference-bandwidth 10
+</pre>
+
+
+<h3 id="end7-config">END7 config</h3>
+<pre>
+interface Loopback0
+ ip address 10.7.7.0 255.255.255.255
+ ip ospf 1 area 1
+!
+interface Loopback1
+ ip address 10.7.7.1 255.255.255.255
+ ip ospf 1 area 1
+!
+interface Loopback2
+ ip address 10.7.7.2 255.255.255.255
+ ip ospf 1 area 1
+!
+interface Loopback3
+ ip address 10.7.7.3 255.255.255.255
+ ip ospf 1 area 1
+!
+interface FastEthernet0/0
+ description connection to pe2
+ ip address 10.27.72.6 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf 1 area 1
+!
+router ospf 1
+ auto-cost reference-bandwidth 10
+</pre>
+
+<h2 id="verification">Verification</h2>
+<h3 id="routing-tables">Routing tables</h3>
+<h4 id="pe2">PE2</h4>
+<pre>
+root@pe2# run show route table inet.0 10.6/16 
+inet.0: 28 destinations, 33 routes (28 active, 0 holddown, 0 hidden)
+10.6.6.0/32         *[RSVP/6/1] 00:09:14, metric 3
+                    <b>> to 10.25.52.5 via em2.0, label-switched-path tunnel-R2-R5-R3-R1</b>
+                    [OSPF/10] 00:09:39, metric 4
+                      to 10.23.32.3 via em3.0
+                    > to 10.24.42.4 via em4.0
+10.6.6.1/32         *[RSVP/7/1] 03:19:36, metric 3
+                    <b>> to 10.24.42.4 via em4.0, label-switched-path tunnel-R2-R4-R1</b>
+                    [OSPF/10] 00:09:39, metric 4
+                      to 10.23.32.3 via em3.0
+                    > to 10.24.42.4 via em4.0
+10.6.6.2/32         *[OSPF/10] 00:09:39, metric 4
+                      to 10.23.32.3 via em3.0
+                    > to 10.24.42.4 via em4.0
+10.6.6.3/32         *[OSPF/10] 00:09:39, metric 4
+                      to 10.23.32.3 via em3.0
+                    > to 10.24.42.4 via em4.0
+</pre>  
+
+<h3 id="pe1">PE1</h3>
+<pre>
+pe1#sh ip route 10.7.0.0
+Routing entry for 10.7.0.0/32, 4 known subnets
+O IA     10.7.7.0 [110/4] via 10.2.2.2, 00:04:55, Tunnel1
+                 [110/4] via 10.2.2.2, 00:04:55, Tunnel3
+O IA     10.7.7.1 [110/4] via 10.2.2.2, 00:04:55, Tunnel1
+                 [110/4] via 10.2.2.2, 00:04:55, Tunnel3
+O IA     10.7.7.2 [110/4] via 10.2.2.2, 00:04:55, Tunnel1
+                 [110/4] via 10.2.2.2, 00:04:55, Tunnel3
+O IA     10.7.7.3 [110/4] via 10.2.2.2, 00:04:55, Tunnel1
+                 [110/4] via 10.2.2.2, 00:04:55, Tunnel3
+</pre>
+
+<h3 id="traceroute-from-end6-to-end7">Traceroute from END6 to END7</h3>
+<pre>
+end6#trace 10.7.7.0
+Type escape sequence to abort.
+Tracing the route to 10.7.7.0
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.16.61.1 56 msec 48 msec 56 msec
+  2 10.13.31.3 [MPLS: Label 40 Exp 0] 544 msec 144 msec * 
+  3 10.35.53.5 [MPLS: Label 300288 Exp 0] 424 msec 160 msec * 
+  4  * 
+    10.45.54.4 [MPLS: Label 44 Exp 0] 176 msec 2312 msec
+  5 10.24.42.2 88 msec 84 msec 68 msec
+  6 10.27.72.6 88 msec 116 msec 88 msec
+</pre>
+
+<h3 id="trace-from-end7-to-end6">Trace from END7 to END6</h3>
+<pre>
+end7#trace 10.6.6.0
+Type escape sequence to abort.
+Tracing the route to 10.6.6.0
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.27.72.2 28 msec 28 msec 36 msec
+  2 10.25.52.5 [MPLS: Label 300304 Exp 0] 28 msec 44 msec 28 msec
+  3 10.35.53.3 [MPLS: Label 30 Exp 0] 68 msec 48 msec 72 msec
+  4 10.13.31.1 72 msec 68 msec 44 msec
+  5 10.16.61.6 68 msec 48 msec 68 msec
+</pre>
+
+<p>10.6.6.2 is not directed to the LSP on PE2 and therefore will follow the IGP path</p>
+<pre>
+end7#trace 10.6.6.2
+Type escape sequence to abort.
+Tracing the route to 10.6.6.2
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.27.72.2 36 msec 24 msec 28 msec
+  2 10.24.42.4 48 msec 48 msec 48 msec
+  3 10.14.41.1 [MPLS: Label 28 Exp 0] 92 msec 48 msec 52 msec
+  4 10.16.61.6 76 msec 76 msec 72 msec
+</pre>
+
+<h2 id="vrf-traffic">VRF Traffic</h2>
+<h3 id="pe2-routing">PE2 routing</h3>
+<pre>
+root@pe2# run show route table L3-VPN-TE 
+L3-VPN-TE.inet.0: 2 destinations, 2 routes (2 active, 0 holddown, 0 hidden)
+10.1.1.1/32         *[BGP/170] 00:13:45, MED 0, localpref 100, from 10.3.3.3
+                      AS path: ?
+                    > to 10.25.52.5 via em2.0, label-switched-path tunnel-R2-R5-R3-R1
+10.2.2.2/32         *[Direct/0] 04:05:00
+                    > via lo0.100
+
+[edit]
+root@pe2# run traceroute routing-instance L3-VPN-TE 10.1.1.1 
+traceroute to 10.1.1.1 (10.1.1.1), 30 hops max, 40 byte packets
+ 1  10.25.52.5 (10.25.52.5)  0.400 ms  0.602 ms  0.957 ms
+     MPLS Label=300304 CoS=0 TTL=1 S=0
+     MPLS Label=23 CoS=0 TTL=1 S=1
+ 2  10.35.53.3 (10.35.53.3)  49.839 ms  20.097 ms  22.342 ms
+     MPLS Label=30 CoS=0 TTL=1 S=0
+     MPLS Label=23 CoS=0 TTL=1 S=1
+ 3  10.1.1.1 (10.1.1.1)  30.427 ms  19.988 ms  20.866 ms
+</pre>
+
+
+<h3 id="pe1-routing">PE1 routing</h3>
+<pre>
+pe1#sh ip route vrf L3VPN-TE
+Routing Table: L3VPN-TE
+Gateway of last resort is not set
+
+      10.0.0.0/32 is subnetted, 1 subnets
+C        10.1.1.1 is directly connected, Loopback100
+      10.0.0.0/32 is subnetted, 1 subnets
+B        10.2.2.2 [200/0] via 10.2.2.2, 00:06:47
+
+pe1#sh mpls forwarding-table 10.2.2.2 32
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop    
+Label      Label      or Tunnel Id     Switched      interface              
+24    [T]  Pop Label  10.2.2.2/32       0             Tu1        point2point 
+      [T]  Pop Label  10.2.2.2/32       0             Tu3        point2point 
+
+[T]     Forwarding through a LSP tunnel.
+        View additional labelling info with the 'detail' option
+
+pe1#trace vrf L3VPN-TE 10.2.2.2
+Type escape sequence to abort.
+Tracing the route to 10.2.2.2
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.13.31.3 [MPLS: Labels 40/16 Exp 0] 104 msec 32 msec 36 msec
+  2 10.34.43.4 [MPLS: Labels 45/16 Exp 0] 28 msec
+    10.35.53.5 [MPLS: Labels 300288/16 Exp 0] 16 msec
+    10.34.43.4 [MPLS: Labels 45/16 Exp 0] 24 msec
+  3 10.45.54.4 [MPLS: Labels 44/16 Exp 0] 36 msec
+    10.45.54.5 [MPLS: Labels 300272/16 Exp 0] 24 msec
+    10.45.54.4 [MPLS: Labels 44/16 Exp 0] 20 msec
+  4 10.2.2.2 20 msec 28 msec 36 msec
+</pre>  
+
+<p>PE1 is load balancing between Tunnel1 and Tunnel3 both of terminate on PE2 with active LSPs from PE1.</p>
+
+
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
+                  <!-- end post_body -->
+
+                </article>
+
+<!-- ============================ END CONTENT ============================================ -->
+
+                <div class="author_info_container author_single_box">
+                  <div class="row">
+                    <div class="author_avatar_col col">
+                      <a class="author_avatar_url" href="about"><img alt='' src='../../img/all-baggy.jpg' srcset='../../img/all-baggy.jpg' class='avatar avatar-150 photo' height='150' width='150' /></a>
+                    </div>
+                    <div class="author_info_col col">
+                      <div class="author_box_info_header">
+                        <h2 class="author_display_name title">
+                          <a class="author_name_url url fn n" href="">Paul S.I. Basondole </a>
+                        </h2>
+
+                      </div>
+                      <div class="author_description">
+IT &amp; Network Expert / Lead <br>
+Network & Automation designer; <br>
+2x JNCIP (RS/SP) 1x CCNP (RS) <br>
+BSc Telecommunications Eng.
+                      </div>
+                      <div class="stories_circles_wrapper"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- close col12 just inside .full_width_list -->
+            </div>
+            <!-- close .full_width_list -->
+            <!-- close col and row in case of sidebar layout -->
+            <!-- end check for post layout -->
+          </section>
+          <!-- #primary -->
+        </main>
+        <!-- #content -->
+        <footer id="colophon" class="site_footer container" role="contentinfo">
+          <div class="footer_credits footers_active_sidebars_0">
+            &copy; 2020 basondole.io
+          </div>
+          <div id="aliagototop" title="Scroll To Top" class="alia_gototop_button footer_button">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </footer>
+
+        <!-- #colophon -->
+      </div>
+      <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+     <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+      <div class="sliding_close_helper_overlay"></div>
+      <div class="site_side_container">
+        <h3 class="screen-reader-text">
+          Sliding Sidebar
+        </h3>
+        <div class="info_sidebar">
+          <div class="top_header_items_holder mobile_menu_opened">
+            <div class="main_menu">
+              <ul id="mobile-menu" class="navbar">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu">
+                  <a href="index.html" class="local-root-page">Home</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu">
+                  <a href="https://github.com/basondole/mpls#introduction">Design</a>
+                </li>
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu">
+                  <a href="https://github.com/basondole/open#hocid">NET2CODE</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu">
+                  <a href="blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                  <ul role="menu" class=" dropdown-menu">
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
+                      <a href="index.html">Collaboration</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
+                      <a href="../networkauto/index.html">Network Automation</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/tutorials">Network Servers</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/netmanagement">Misc</a>
+                    </li>
+                  </ul>
+                </li>
+                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
+                  <a href="about.html" class="local-root-page">About</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-145 menu-item-412 default_menu">
+                  <a href="contact.html" class="local-root-page">Contact</a>
+                </li>
+                <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
+                  <a href="http://karneliuk.com/donate/">Donate</a> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- end .top_header_items_holder -->
+        </div>
+      </div>
+      <!-- end sliding sidebar content -->
+      <!-- start footer static content -->
+      <!-- start footer static content -->
+    </div>
+    <!-- #page -->
+    <div id="ajax_modal_story" class="ajax_modal ajax_modal_story modal enable_rotate">
+      <div class="story_modal_overlay_helper"></div>
+    </div>
+
+
+    </script>
+
+    <script type='text/javascript' src='../../karneliuk/global.1.35.js' class="local-root-js"></script>
+
+
+    <script type='text/javascript'>
+/* <![CDATA[ */
+var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-load-story.php", "ajax_rotate_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-rotate-story.php" };
+/* ]]> */
+    </script>
+
+
+    <script type='text/javascript' src='../../karneliuk/alia-core.1.13.js' class="local-root-js"></script>
+    <script type='text/javascript' src='../../karneliuk/wp-embed.min.5.3.2.js' class="local-root-js"></script>
+
+    
+<script type="text/javascript">
+  // edit the level variable, the load the page and copy the loaded DOM, NOT the source
+  // to get updated paths throughout the dom
+  
+  var 
+  localPagesFiles = document.getElementsByClassName("local-root-page"),
+  localJsFiles = document.getElementsByClassName("local-root-js"),
+  localCssFiles = document.getElementsByClassName("local-root-css"),
+  localImagesFiles = document.getElementsByClassName("local-root-image");
+
+  var level = "../../";
+
+  function updatePaths() { 
+    for (var i=0; i<localPagesFiles.length; i++) {
+          var path = level + localPagesFiles[i].getAttribute("href");
+          localPagesFiles[i].setAttribute("href",path);
+          console.log(localPagesFiles[i].getAttribute("href"));
+    }
+
+    for (var i=0; i<localJsFiles.length; i++) {
+          var path = level + localJsFiles[i].getAttribute("src");
+          localJsFiles[i].setAttribute("src",path);
+          console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localCssFiles.length; i++) {
+          var path = level + localCssFiles[i].getAttribute("src");
+          localCssFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localImagesFiles.length; i++) {
+          var path = level + localImagesFiles[i].getAttribute("src");
+          localImagesFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+  }
+
+  window.onload = function () {
+   updatePaths();
+  };
+
+</script>
+
+<script type="text/javascript">
+  var localPagesFiles = document.getElementsByClassName("local-root-page");
+function printId(event) {
+  var myId = this.Id;
+  console.log(myId);
+}
+for (var i=0; i<localPagesFiles.length; i++) {
+       localPagesFiles[i].addEventListener("click",printId);
+}
+</script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js no-svg">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+
+<title>basondole.io &#8211; Network design and development, 2x JNCIP (ENT/SP) 1x CCNP (RS), BSc.</title>
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link crossorigin="anonymous" rel='stylesheet' id='alia-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700%2C700i%7CPoppins%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+
+<link rel='stylesheet' id='wp-block-library-css'  href='../../karneliuk/style.min.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='github-embed-css'  href='../../karneliuk/github-embed.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-lightbox-swipebox-css'  href='../../karneliuk/swipebox.min.2.2.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='alia-style-css'  href='../../karneliuk/alia.style.1.35.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-css'  href='../../karneliuk/all.min.1.0.css' type='text/css' media='all' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' id='codecolorer-css'  href='../../karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
+<link rel="stylesheet" href="../../css/style1.css" />
+
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-192x192.jpg" sizes="192x192" />
+
+<link rel='https://api.w.org/' href='../../karneliuk/wp-json' />
+
+
+<script type='text/javascript' src='../../karneliuk/jquery-1.12.4-wp.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/jquery-migrate.min-1.4.1.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/ouibounce-5.3.2.js' class="local-root-js"></script>
+
+
+<script type="text/javascript">
+  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"karneliuk/wp-emoji-release.min.5.3.2.js"}};
+  !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+
+
+
+<meta name="generator" content="WordPress 5.3.2" />
+
+</head>
+
+
+
+
+
+
+
+
+
+<body class="home blog sticky_header header_logo_rounded text_posts_unbordered masonry_effect_enabled show_menu_circle_idicator sliding_sidebar_inactive">
+
+<div id="page" class="site">
+
+  <div class="site_main_container">
+
+    <header class="site_header">
+      
+    <div class="gray_header"  >
+      <div class="container site_header">
+        <div class="header_square_logo">
+          <style>.site_logo_image { width : 120px; }.site_logo_image { height : 120px; }</style>
+          <a class="alia_logo retina_logo" title="basondole.io" href="index.html" rel="home">
+            <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+    
+          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="index.html" rel="home">
+          <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+
+          <h1 class="screen-reader-text site_logo site-title clearfix">basondole.io</h1>
+
+        </div>
+
+        <div class="header_tagline">
+          Multivendor network design, development and automation for enterprise and service provider fabrics. Skills that matter
+        </div>
+
+        <div class="social_icons_list header_social_icons">
+          <a rel="nofollow" target="" href="https://twitter.com/misterbigpaul" title="Twitter" class="social_icon widget_social_icon social_twitter social_icon_twitter"><i class="fa fa-twitter"></i></a>
+          <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/paul-i-2b3013108" title="Linked In" class="social_icon widget_social_icon social_linkedin social_icon_linkedin"><i class="fa fa-linkedin"></i></a>
+          <a rel="nofollow" target="_blank" href="https://github.com/basondole" title="Github" class="social_icon widget_social_icon social_github social_icon_github"><i class="fa fa-github"></i></a>
+
+          <a rel="nofollow" target="_blank" href="https://stackoverflow.com/users/12078639/bassosimons" title="stackoverflow" class="social_icon widget_social_icon"><i class="fa fa-rss"></i></a>
+
+        </div>
+      </div>
+
+    </div>
+        
+    <div class="header_nav_wrapper">
+
+      <div class="header_nav">
+
+        <div class="container">
+          <div class="site_branding">
+          <h1 class="text_logo"><a href="index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
+          </div>
+          
+
+          <!-- Place header control before main menu if site title is enabled -->
+          <div class="header_controls">
+
+            <div class="header_sliding_sidebar_control header_control_wrapper">
+              <a id="user_control_icon" class="sliding_sidebar_button" href="#">
+                <i class="fa fa-bars header_control_icon"></i>
+              </a>
+            </div>
+        
+          </div>
+    
+
+          <div class="main_menu">
+            <ul id="top-menu" class="navbar">
+              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html" class="local-root-page">Home</a></li>
+              <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li>
+              <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">NET2CODE</a></li>
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                <ul role="menu" class=" dropdown-menu">
+                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
+                  <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Misc</a></li>
+                </ul>
+              </li>
+              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html" class="local-root-page">About</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="contact.html" class="local-root-page">Contact</a></li>
+              <!-- <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="http://karneliuk.com/donate/">Donate</a></li> -->
+            </ul>
+            <span class="menu_mark_circle hidden_mark_circle"></span>
+          </div>
+              
+        <!-- Place header control after main menu if site title is enabled -->
+          
+        </div><!-- end .container -->
+      </div><!-- end .header_nav -->
+    </div><!-- end .header_nav_wrapper -->
+    </header>
+
+    <main id="content" class="site-content">
+      <section id="primary" class="container main_content_area">
+        <!-- end check for post layout -->
+        <div class="row full_width_page_single no_sidebar_post_single">
+          <div>
+            <!-- <article id="post-182" class="blog_page_container post-182 page type-page status-publish"> -->
+
+              <div class="page_body">
+                    <div class="post_info_wrapper">
+                      <div class="entry-content blog_page_text blog_page_description">
+
+
+
+<!-- ============================ START CONTENT ============================================ -->
+<h1 style="text-align: center;">
+  <strong>MPLS Inter AS Option C IPv4 VPNs</strong><strong>.</strong>
+</h1>
+
+<p>The objective is to set up L3VPN that spans different autonomous systems to serve customers with sites on different service provider domains. In this case with reference to below topology, customers of AS64512 require to be connected to their other sites which are in AS64515.</p>
+<p><img width="720" alt="Inter AS Option C" src="https://user-images.githubusercontent.com/50369643/62412179-8e4dcb00-b607-11e9-89e3-3d642b00a260.png"></p>
+<h1 id="design">Design</h1>
+<p>The design implemented in this case is known as Inter AS Option C in which the route reflectors from each AS will peer directly and exchange vpnv4 routes. For forwarding the ASBRs will be exchanging MPLS labels via BGP as more than often two different AS will not be running LDP or RSVP but BGP. 
+ASBR64515 will redistribute the IP of RR64515 from OSPF to eBGP and redistribute to OSPF the IP of RR64512 received via eBGP from ASBR64512 as well as generate labels. ASBR64512 will redistribute the IP of RR64512 from OSPF to eBGP and redistribute to OSPF the IP of RR64515 received via eBGP from ASBR64515.
+The RRs will exchange routing information with each other making VRF routes from AS64512 available in AS64515 and vice versa. In this design case AS64512 is an all Cisco gear networks while AS64515 is an all Juniper network both ASs use OSPF as IGP and LDP for label distribution both protocols are preconfigured.</p>
+<h1 id="configuration">Configuration</h1>
+<h2 id="asbr64512">ASBR64512</h2>
+<pre>
+interface FastEthernet0/0.100
+ encapsulation dot1Q 100
+ ip address 10.100.100.2 255.255.255.252
+ <b>mpls bgp forwarding</b>
+
+router ospf 1
+ router-id 10.11.11.33
+ <b>redistribute bgp 64512 subnets route-map MAP_IGP_OUT</b>
+!
+router bgp 64512
+ neighbor iBGP peer-group
+ neighbor iBGP remote-as 64512
+ neighbor iBGP update-source Loopback0
+ neighbor eBGP peer-group
+ neighbor eBGP remote-as 64515
+ neighbor 10.11.11.29 peer-group iBGP
+ neighbor 10.100.100.1 peer-group eBGP
+ !
+ address-family ipv4
+  <b>redistribute ospf 1 route-map MAP_eBGP_OUT</b>
+  neighbor iBGP next-hop-self
+  neighbor iBGP soft-reconfiguration inbound
+  neighbor iBGP route-map MAP_iBGP_OUT out
+  neighbor eBGP soft-reconfiguration inbound
+  <b>neighbor eBGP send-label</b>
+  neighbor 10.11.11.29 activate
+  neighbor 10.100.100.1 activate
+ exit-address-family
+ !
+ address-family vpnv4
+  neighbor iBGP send-community both
+  neighbor iBGP next-hop-self
+  neighbor 10.11.11.29 activate
+ exit-address-family
+!
+ip prefix-list AS64515-RR seq 5 permit 10.33.33.29/32
+!
+ip prefix-list RR_IP seq 5 permit 10.11.11.29/32
+!
+route-map MAP_eBGP_OUT permit 10
+ description ADVERTISE RR IP
+ match ip address prefix-list RR_IP
+!
+route-map MAP_iBGP_OUT deny 10
+ description DO NOT ADVERTISE RR IP FROM AS64515
+ match ip address prefix-list AS64515-RR
+route-map MAP_iBGP_OUT permit 20
+ description PERMIT OTHERS
+!
+route-map MAP_IGP_OUT permit 10
+ description ADVERTISE AS64515 RR IN IGP
+ match ip address prefix-list AS64515-RR
+</pre>
+
+<h2 id="rr64512">RR64512</h2>
+<pre>
+router bgp 64512
+neighbor iBGP peer-group
+ neighbor iBGP remote-as 64512
+ neighbor iBGP update-source Loopback0
+ neighbor eBGP-MPLS peer-group
+ neighbor eBGP-MPLS remote-as 64515
+ <b>neighbor eBGP-MPLS ebgp-multihop 255</b>
+ <b>neighbor eBGP-MPLS update-source Loopback0</b>
+ neighbor 10.11.11.33 peer-group iBGP
+ neighbor 10.11.11.36 peer-group iBGP
+ neighbor 10.33.33.29 peer-group eBGP-MPLS
+ !
+ address-family ipv4
+  neighbor iBGP route-reflector-client
+  neighbor iBGP soft-reconfiguration inbound
+  neighbor 10.11.11.33 activate
+  neighbor 10.11.11.36 activate
+  <b>no neighbor 10.33.33.29 activate</b>
+ exit-address-family
+ !
+ address-family vpnv4
+  neighbor iBGP send-community both
+  neighbor iBGP route-reflector-client
+  <b>neighbor eBGP-MPLS send-community both</b>
+  neighbor 10.11.11.33 activate
+  neighbor 10.11.11.36 activate
+  <b>neighbor 10.33.33.29 activate</b>
+ exit-address-family
+</pre>
+
+<h2 id="asbr64515">ASBR64515</h2>
+<pre>
+protocols {
+    mpls {
+        interface em0.5;
+        interface em3.100;
+    }
+    bgp {
+        local-as 64515;
+        group iBGP {
+            type internal;
+            local-address 10.33.33.33;
+            family inet {
+                unicast;
+            }
+            family inet-vpn {
+                unicast;
+            }
+            export POL_iBGP_EXPORT;
+            neighbor 10.33.33.29;       
+        }
+        group eBGP {
+            type external;
+            family inet {
+                labeled-unicast;
+            }
+            export POL_eBGP_EXPORT;
+            peer-as 64512;
+            local-as 64515;
+            neighbor 10.100.100.2;
+        }
+    }
+    ospf {
+        export POL_IGP_EXPORT;
+        area 0.0.0.0 {
+            interface lo0.300 {
+                passive;
+            }
+            interface em0.5;
+        }
+    }
+    ldp {
+        egress-policy POL_GENERATE_LABELS;
+        interface em0.5;
+        interface lo0.300;
+    }
+}
+policy-options {
+    policy-statement POL_GENERATE_LABELS {
+        term GENERATE_LABEL_FOR_MY_LOOPBACK {
+            from {
+                protocol direct;
+                route-filter 10.33.33.33/32 exact;
+            }
+            then accept;
+        }
+        term GENERATE_LABEL_FOR_AS64512_RR {
+            from {
+                protocol bgp;
+                route-filter 10.11.11.29/32 exact;
+            }
+            then accept;
+        }
+    }
+    policy-statement POL_IGP_EXPORT {
+        term ADVERTISE_RR_IP_FROM_AS64512 {
+            from {
+                protocol bgp;
+                route-filter 10.11.11.29/32 exact;
+            }
+            then accept;
+        }
+    }
+    policy-statement POL_eBGP_EXPORT {
+        term ADVERTISE_RR_LOOPBACK {
+            from {
+                protocol ospf;
+                route-filter 10.33.33.29/32 exact;
+            }
+            then accept;
+        }
+    }
+    policy-statement POL_iBGP_EXPORT {  
+        term NEXT_HOP {
+            then {
+                next-hop self;
+            }
+        }
+        term DENY_RR_IP_FROM_AS64512 {
+            from {
+                route-filter 10.11.11.29/32 exact;
+            }
+            then reject;
+        }
+    }
+}
+routing-options {
+    router-id 10.33.33.33;
+    autonomous-system 64515;
+}
+</pre>
+
+<h2 id="rr64515">RR64515</h2>
+<pre>
+protocols {
+    mpls {
+        interface em0.5;
+        interface em1.10;
+    }
+    bgp {
+        group iBGP {
+            type internal;
+            local-address 10.33.33.29;
+            family inet {
+                unicast;
+            }
+            family inet-vpn {
+                unicast;
+            }
+            cluster 10.33.33.29;
+            neighbor 10.33.33.33;
+            neighbor 10.33.33.36;       
+        }
+        group eBGP-MPLS {
+            <b>multihop {
+                ttl 255;
+            }</b>
+            local-address 10.33.33.29;
+           <b> family inet-vpn {
+                unicast;
+            }</b>
+            peer-as 64512;
+            neighbor 10.11.11.29;
+        }
+    }
+    ospf {
+        area 0.0.0.0 {
+            interface em0.5;
+            interface lo0.300 {
+                passive;
+            }
+            interface em1.10;
+        }
+    }
+    ldp {                               
+        interface em0.5;
+        interface em1.10;
+    }
+}
+routing-options {
+    router-id 10.33.33.29;
+    autonomous-system 64515;
+}
+</pre>
+
+<p>The route reflectors and other PEs are configured with standard MPLS/IP support.</p>
+<h1 id="verification">Verification</h1>
+<h2 id="asbr64515">ASBR64515</h2>
+<pre>
+show mpls interface logical-system
+Interface        State       Administrative groups (x: extended)
+em0.5            Up         <none>
+em3.100          Up         <none>
+
+show bgp neighbor 10.100.100.2 | match NLRI
+  NLRI for restart configured on peer: inet-labeled-unicast
+  NLRI advertised by peer: inet-unicast inet-labeled-unicast
+  <b>NLRI for this session: inet-labeled-unicast</b>
+
+show route 10.11.11.29
+inet.0: 10 destinations, 10 routes (10 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+10.11.11.29/32     *[BGP/170] 00:58:12, MED 2, localpref 100
+                      AS path: 64512 ?
+                    > to 10.100.100.2 via em3.100, Push 21
+
+</pre>
+
+
+<h2 id="asbr64512">ASBR64512</h2>
+<pre>
+sh mpls interfaces 
+Interface              IP            Tunnel   BGP Static Operational
+FastEthernet0/1        Yes (ldp)     No       No  No     Yes        
+FastEthernet0/0.100    No            No       Yes No     Yes        
+
+sh bgp neighbor 10.100.100.1 | i ^BGP|v4
+BGP neighbor is 10.100.100.1,  remote AS 64515, external link
+    Address family IPv4 Unicast: advertised
+    <b>ipv4 MPLS Label capability: advertised and received</b>
+
+sh ip route 10.33.33.29
+Routing entry for 10.33.33.29/32
+  Known via "bgp 64512", distance 20, metric 1
+  <b>Tag 64515, type external</b>
+  <b>Redistributing via ospf 1</b>
+  Advertised by ospf 1 subnets route-map MAP_IGP_OUT
+  Last update from 10.100.100.1 01:03:54 ago
+  Routing Descriptor Blocks:
+  * 10.100.100.1, from 10.100.100.1, 01:03:54 ago
+      Route metric is 1, traffic share count is 1
+      AS Hops 1
+      Route tag 64515
+      MPLS label: 300656
+
+</pre>
+
+<p>The ASBRs on both ASs are learning the IP address of the RR on the other AS via BGP and they are redistributing to their IGP</p>
+<h2 id="rr64515">RR64515</h2>
+<pre>
+show route 10.11.11.29    # route to RR in AS64512
+<b>inet.0:</b> 9 destinations, 9 routes (9 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+10.11.11.29/32     *[OSPF/150] 01:27:59, metric 2, tag 0
+                    > to 172.18.1.33 via em0.5
+
+<b>inet.3:</b> 3 destinations, 3 routes (3 active, 0 holddown, 0 hidden)
++ = Active Route, - = Last Active, * = Both
+10.11.11.29/32     *[LDP/9] 01:10:53, metric 1
+                    > to 172.18.1.33 via em0.5, Push 300672
+
+show bgp neighbor 10.11.11.29 | match "^Peer|NLRI"
+Peer: 10.11.11.29+30637 <b>AS 64512</b> Local: 10.33.33.29+179 <b>AS 64515</b>
+  NLRI for restart configured on peer: inet-vpn-unicast
+  NLRI advertised by peer: inet-vpn-unicast
+  <b>NLRI for this session: inet-vpn-unicast</b>
+
+show bgp summary | find ^peer 
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.11.11.29           <b>64512</b>        103         94       0       3       41:35 Establ
+  <b>bgp.l3vpn.0: 1/1/1/0</b>
+show route table bgp.l3vpn.0 receive-protocol bgp 10.11.11.29
+bgp.l3vpn.0: 2 destinations, 2 routes (2 active, 0 holddown, 0 hidden)
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  100:1:10.10.0.36/32                    
+*                         10.11.11.29                             64512 ?
+
+show route table bgp.l3vpn.0 advertising-protocol bgp 10.11.11.29
+bgp.l3vpn.0: 2 destinations, 2 routes (2 active, 0 holddown, 0 hidden)
+  Prefix                  Nexthop              MED     Lclpref    AS path
+  100:1:10.30.0.36/32                    
+*                         Self                                    I
+
+</pre>
+
+<h2 id="rr64512">RR64512</h2>
+<pre>
+sh ip route 10.33.33.29 # route to RR in AS64515
+Routing entry for 10.33.33.29/32
+  <b>Known via "ospf 1", distance 110, metric 1</b>
+  Tag 64515, type extern 2, forward metric 1
+  Last update from 172.16.1.33 on FastEthernet0/1, 01:17:55 ago
+  Routing Descriptor Blocks:
+  * 172.16.1.33, from 10.11.11.33, 01:17:55 ago, via FastEthernet0/1
+      Route metric is 1, traffic share count is 1
+      Route tag 64515
+
+sh mpls forwarding-table 10.33.33.29 32
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop    
+Label      Label      or Tunnel Id     Switched      interface              
+16         16         10.33.33.29/32   1750          Fa0/1      172.16.1.33
+
+
+sh bgp vpnv4 unicast all neighbor 10.33.33.29 | include ^BGP|v4         
+<b>BGP neighbor is 10.33.33.29,  remote AS 64515, external link</b>
+    <b>Address family VPNv4 Unicast: advertised and received</b>
+
+sh bgp vpnv4 unicast all peer-group eBGP-MPLS summary | begin Neighbor
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.33.33.29     4        <b>64515</b>      89      98       11    0    0 00:42:05        </b1>
+
+sh bgp vpnv4 unicast all neighbor 10.33.33.29  advertised-routes | begin Network      
+     Network          Next Hop            Metric LocPrf Weight Path
+Route Distinguisher: 100:1
+ *>i 10.10.0.36/32    10.11.11.36              0    100      0 ?
+
+Total number of prefixes 1 
+</pre>
+
+<p>The route reflectors on both ASs are learning about each other via IGP (assigning MPLS labels as well) and are exchanging VRF routes via the eBGP session.
+The routes will then be advertised by the route reflectors to the rest of the PEs in each AS</p>
+
+
+
+<h1 style="text-align: center;">
+  <strong>Inter AS MPLS VPN Option C for IPv6 (6PE)</strong><strong>.</strong>
+</h1>
+
+<h2 id="objective">Objective</h2>
+<p>The objective is to tunnel IPv6 (6PE) traffic that spans different autonomous systems. This implementation offers the ability to tunnel IPv6 across segments that do not support IPv6.
+In this case with reference to below topology, the NNI between AS64512 and AS64515 does not support IPv6 yet both systems support IPv6 in their core network, therefore we need to tunnel IPv6 across the NNI which does not support IPv6 so as to bridge the IPv6 core networks from AS64512 and AS64515</p>
+<p><img width="727" alt="6PE Inter AS Option C" src="https://user-images.githubusercontent.com/50369643/62412530-8e9c9500-b60c-11e9-8473-9f11104817c8.png"></p>
+<h1 id="design">Design</h1>
+<p>This design follows the principles of inter AS MPLS Option C in which ASBR64515 will redistribute the IP of RR64515 from OSPF to eBGP and redistribute to OSPF the IP of RR64512 received via eBGP from ASBR64512 as well as generate labels. ASBR64512 will redistribute the IP of RR64512 from OSPF to eBGP and redistribute to OSPF the IP of RR64515 received via eBGP from ASBR64515.
+The RRs will exchange routing information with each other making IPv6 routes from AS64512 available in AS64515 and vice versa.</p>
+<h1 id="configuration">Configuration</h1>
+<h3 id="pe64512">PE64512</h3>
+<pre>
+interface Loopback0
+ ip address 11.11.11.36 255.255.255.255
+ ip ospf 1 area 0
+!
+interface FastEthernet0/0
+ description CONNECTION TO RR
+ ip address 155.12.0.36 255.255.255.0
+ ip ospf 1 area 0
+mpls ip
+!
+interface FastEthernet0/1
+description SAMPLE CUSTOMER
+ipv6 address 2001:ABCD:100::36/128
+!
+router ospf 1
+!
+router bgp 100
+neighbor iBGP peer-group
+ neighbor iBGP remote-as 100
+ neighbor iBGP update-source Loopback0
+ neighbor 10.11.11.29 peer-group iBGP
+ !
+ address-family ipv4
+  neighbor iBGP next-hop-self
+  neighbor 10.11.11.29 activate
+ exit-address-family
+ !
+ address-family ipv6
+  redistribute connected
+  redistribute static
+  neighbor iBGP send-community both
+  neighbor iBGP next-hop-self
+  neighbor iBGP send-label
+  <b>neighbor 10.11.11.29 activate</b>
+ exit-address-family
+!
+ip bgp-community new-format
+!
+ipv6 route 2002::/64 Null0
+</pre>
+
+<h3 id="pe64515">PE64515</h3>
+<pre>
+interfaces {
+    em0 {
+        unit 200 {
+            description "SAMPLE CUSTOMER";
+            vlan-id 200;
+            family inet6 {
+                address 2001:abcd:300::36/128;
+            }
+        }
+    }
+    em1 {
+        unit 10 {
+            description "CONNECTION TO RR";
+            vlan-id 10;
+            family inet {
+                address 172.17.0.36/24;
+            }
+            family inet6;
+            family mpls;
+        }
+    }
+    lo0 {
+        unit 300 {
+            family inet {               
+                address 10.33.33.36/32;
+            }
+        }
+    }
+}
+protocols {
+    mpls {
+        ipv6-tunneling;
+        interface em1.10;
+    }
+    bgp {
+        group iBGP {
+            type internal;
+            local-address 10.33.33.36;
+            family inet {
+                unicast;
+            }
+            <b>family inet6 {
+                labeled-unicast {
+                    explicit-null;
+                }
+            }</b>
+            export POL_iBGP_EXPORT;     
+            local-as 64515;
+            neighbor 10.33.33.29;
+        }
+    }
+    ospf {
+        area 0.0.0.0 {
+            interface lo0.300 {
+                passive;
+            }
+            interface em1.10;
+        }
+    }
+    ldp {
+        interface em1.10;
+        interface lo0.300;
+    }
+}
+policy-options {
+    policy-statement POL_iBGP_EXPORT {
+        term NEXT_HOP {
+            then {
+                next-hop self;
+            }                           
+        }
+        term IPV6_TUNNELLING {
+            from family inet6;
+            then accept;
+        }
+    }
+}
+routing-options {
+    rib inet6.0 {
+        static {
+            route 2003::/64 discard;
+        }
+    }
+    router-id 10.33.33.36;
+    autonomous-system 64515;
+}
+</pre>
+
+<h3 id="rr64512">RR64512</h3>
+<pre>
+interface Loopback0
+ ip address 10.11.11.29 255.255.255.255
+ ip ospf 1 area 0
+!
+interface FastEthernet0/0
+ description CONNECTION TO PE1
+ ip address 172.16.0.29 255.255.255.0
+ ip ospf 1 area 0
+mpls ip
+!
+interface FastEthernet0/1
+ description CONNECTION TO ASBR1
+ ip address 172.16.1.29 255.255.255.0
+ ip ospf 1 area 0
+mpls ip  
+!
+router ospf 1
+!
+router bgp 64512
+ neighbor iBGP peer-group
+ neighbor iBGP remote-as 100
+ neighbor iBGP update-source Loopback0
+ neighbor eBGP-6PE peer-group
+ neighbor eBGP-6PE remote-as 64515
+ neighbor eBGP-6PE ebgp-multihop 255
+ neighbor eBGP-6PE update-source Loopback0
+ neighbor 10.11.11.33 peer-group iBGP
+ neighbor 10.11.11.36 peer-group iBGP
+ neighbor 10.33.33.29 peer-group eBGP-6PE
+ !
+ address-family ipv4
+  neighbor iBGP soft-reconfiguration inbound
+  neighbor 10.11.11.33 activate
+  neighbor 10.11.11.36 activate
+  no neighbor 10.33.33.29 activate
+ exit-address-family
+ !        
+ address-family ipv6
+  neighbor iBGP send-community both
+  neighbor iBGP route-reflector-client
+  neighbor iBGP soft-reconfiguration inbound
+  neighbor iBGP send-label
+  neighbor eBGP-6PE send-label
+  neighbor 10.11.11.33 activate
+  neighbor 10.11.11.36 activate
+  neighbor 10.33.33.29 activate
+ exit-address-family
+</pre>
+
+<h3 id="rr64515">RR64515</h3>
+<pre>
+interfaces {
+    em0 {
+        unit 5 {
+            description "CONNECTION TO ASBR";
+            vlan-id 5;
+            family inet {
+                address 172.17.1.29/24;
+            }
+            family inet6;
+            family mpls;
+        }
+    }
+    em1 {
+        unit 10 {
+            description "CONNECTION TO PE";
+            vlan-id 10;
+            family inet {
+                address 172.17.0.29/24;
+            }
+            family inet6;
+            family mpls;
+        }
+    }
+    lo0 {                               
+        unit 300 {
+            family inet {
+                address 10.33.33.29/32;
+            }
+        }
+    }
+}
+protocols {
+    mpls {
+        <b>ipv6-tunneling;</b>
+        interface em0.5;
+        interface em1.10;
+    }
+    bgp {
+        group iBGP {
+            type internal;
+            local-address 10.33.33.29;
+            family inet {
+                unicast;
+            }
+            <b>family inet6 {
+                labeled-unicast {
+                    explicit-null;      
+                }
+            }</b>
+            cluster 10.33.33.29;
+            neighbor 10.33.33.36;
+            neighbor 10.33.33.33;
+        }
+        group eBGP-6PE {
+            type external;
+            <b>multihop {
+                ttl 255;
+            }</b>
+            local-address 10.33.33.29;
+            <b>family inet6 {
+                labeled-unicast {
+                    explicit-null;
+                }</b>
+            }
+            peer-as 64512;
+            neighbor 10.11.11.29;
+        }
+    }
+    ospf {
+        area 0.0.0.0 {                  
+            interface em0.5;
+            interface lo0.300 {
+                passive;
+            }
+            interface em1.10;
+        }
+    }
+    ldp {
+        interface em0.5;
+        interface em1.10;
+    }
+}
+routing-options {
+    router-id 10.33.33.29;
+    autonomous-system 64515;
+}
+</pre>
+
+<h3 id="asbr64512">ASBR64512</h3>
+<pre>
+interface Loopback0
+ ip address 10.11.11.33 255.255.255.255
+ ip ospf 1 area 0
+!
+interface Loopback100
+ description SAMPLE CUSTOMER
+ipv6 address 2001:ABCD:100::33/128
+!
+interface FastEthernet0/0
+ description INTER-AS LINK
+ no ip address
+!
+interface FastEthernet0/0.100
+ encapsulation dot1Q 100
+ ip address 10.100.100.1 255.255.255.252
+ <b>mpls bgp forwarding</b>
+!
+interface FastEthernet0/1
+ description CONNECTION TO RR
+ ip address 172.16.1.33 255.255.255.0
+ ip ospf 1 area 0
+mpls ip
+!
+auto
+!
+router ospf 1
+ <b>redistribute bgp 100 subnets route-map MAP_IGP_OUT</b>
+!
+router bgp  64512
+ neighbor iBGP peer-group
+ neighbor iBGP remote-as 100
+ neighbor iBGP update-source Loopback0
+ neighbor eBGP peer-group
+ neighbor eBGP remote-as 300
+ neighbor 10.11.11.29 peer-group iBGP
+ neighbor 10.100.100.2 peer-group eBGP
+ !
+ address-family ipv4
+  network 10.11.11.29 mask 255.255.255.255
+  neighbor iBGP next-hop-self
+  neighbor iBGP route-map MAP_iBGP_OUT out
+  <b>neighbor eBGP send-label</b>
+  neighbor 10.11.11.29 activate
+  neighbor 10.100.100.2 activate
+ exit-address-family
+ !
+ address-family ipv6
+  neighbor iBGP send-community both
+  neighbor iBGP next-hop-self
+  neighbor iBGP send-label
+  neighbor 10.11.11.29 activate
+ exit-address-family
+!
+ip prefix-list AS_64515_RR seq 5 permit 10.33.33.29/32
+!
+route-map MAP_iBGP_OUT deny 10
+ description DENY AS64515 RR IN iBGP
+ match ip address prefix-list AS_64515_RR
+route-map MAP_iBGP_OUT permit 20
+ description PERMIT OTHERS
+!
+route-map MAP_IGP_OUT permit 10
+ description ALLOW AS64515 RR IN IGP
+ match ip address prefix-list AS_64515_RR
+</pre>
+
+<h3 id="asbr64515">ASBR64515</h3>
+<pre>
+interfaces {
+    em0 {
+        unit 5 {
+            description "CONNECTION TO RR";
+            vlan-id 5;
+            family inet {
+                address 172.17.1.33/24;
+            }
+            family inet6;
+            family mpls;
+        }
+    }
+    em1 {
+        unit 100 {
+            description "NNI TO AS100";
+            vlan-id 100;
+            family inet {
+                address 10.100.100.2/30;
+            }
+            family inet6;
+            family mpls;
+        }
+    }
+    lo0 {                               
+        unit 300 {
+            family inet {
+                address 10.33.33.33/32;
+            }
+        }
+    }
+}
+protocols {
+    mpls {
+        <b>ipv6-tunneling;</b>
+        interface em0.5;
+    }
+    bgp {
+        group iBGP {
+            type internal;
+            local-address10.33.33.33;
+            family inet {
+                unicast;
+            }
+            <b>family inet6 {
+                labeled-unicast {
+                    explicit-null;
+                }</b>                       
+            }
+            export POL_iBGP_EXPORT;
+            local-as 64515;
+            neighbor 10.33.33.29;
+        }
+        group eBGP-6PE {
+            type external;
+            family inet {
+                <b>labeled-unicast;</b>
+            }
+            export POL_eBGP_EXPORT;
+            peer-as 64512;
+            local-as 64515;
+            neighbor 10.100.100.1;
+        }
+    }
+    ospf {
+        export POL_IGP_EXPORT;
+        area 0.0.0.0 {
+            interface lo0.300 {
+                passive;
+            }
+            interface em0.5;            
+        }
+    }
+    ldp {
+        egress-policy LABELS;
+        interface em0.5;
+        interface lo0.300;
+    }
+}
+policy-options {
+    policy-statement LABELS {
+        from {
+            protocol [ bgp direct ];
+            route-filter 0.0.0.0/0 prefix-length-range /32-/32;
+        }
+        then accept;
+    }
+    policy-statement POL_IGP_EXPORT {
+        term AS64512_RR_IP {
+            from {
+                protocol bgp;
+                route-filter 10.11.11.29/32 exact;
+            }
+            then accept;                
+        }
+    }
+    policy-statement POL_eBGP_EXPORT {
+        term AS64515_RR {
+            from {
+                protocol ospf;
+                route-filter 10.33.33.29/32 exact;
+            }
+            then accept;
+        }
+    }
+    policy-statement POL_iBGP_EXPORT {
+        term NEXT_HOP {
+            then {
+                next-hop self;
+            }
+        }
+        term AS64512_RR_IP {
+            from {
+                route-filter 10.11.11.29/32 exact;
+            }
+            then reject;
+        }                               
+    }
+}
+routing-options {
+    router-id 10.33.33.33;
+    autonomous-system 64515;
+}
+</pre>
+
+<h2 id="verification">Verification</h2>
+<h3 id="asbr64515">ASBR64515</h3>
+<pre>
+show bgp summary | find ^peer 
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.33.33.29             64515        172        163       0       0     1:11:45 Establ
+  inet.0: 0/0/0/0
+  inet6.0: 4/4/4/0
+10.100.100.1            <b>64512</b>        165        173       0       1        3:27 Establ
+  <b>inet.0: 1/1/1/0</b>
+show route advertising-protocol bgp 10.100.100.1
+inet.0: 10 destinations, 10 routes (10 active, 0 holddown, 0 hidden)
+  Prefix                  Nexthop              MED     Lclpref    AS path
+* 10.33.33.29/32          Self                 1                  I
+</pre>
+
+<h3 id="asbr64512">ASBR64512</h3>
+<pre>
+sh bgp summary | b N
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.11.11.29     4          64512      81      94        5    0    0 01:13:03        0
+10.100.100.2    4          <b>64515</b>      15      16        5    0    0 00:05:15        <b>1</b>
+
+sh bgp neighbor 10.100.100.2 advertised-route | b Net
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>  10.11.11.29/32   172.16.1.29              2         32768 i
+
+Total number of prefixes 1
+</pre>
+
+<h3 id="rr64512">RR64512</h3>
+<pre>
+sh bgp * all summary     
+For address family: IPv4 Unicast
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.11.11.33     4          64512     102      88        6    0    0 01:12:06        1
+10.11.11.36     4          64512      92      89        6    0    0 01:11:08        0
+
+For address family: IPv6 Unicast
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+10.11.11.33     4          64512     102      88       15    0    0 01:12:07        0
+10.11.11.36     4          64512      92      89       15    0    0 01:11:08        2
+10.33.33.29     4          <b>64515</b>      64      66       15    0    0 00:27:32        <b>2</b>
+
+sh bgp ipv6 uni | b Net
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>i 2001:ABCD:100::36/128
+                       ::FFFF:10.11.11.36
+                                                0    100      0 ?
+ *>  <b>2001:ABCD:300::36/128
+                       ::FFFF:10.33.33.29
+                                                              0 64515 i</b>
+ *>i 2002::/64        ::FFFF:10.11.11.36
+                                                0    100      0 ?
+ *>  <b>2003::/64        ::FFFF:10.33.33.29
+                                                              0 64515 i</b>
+
+sh mpls forwarding-table 10.33.33.29
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop    
+Label      Label      or Tunnel Id     Switched      interface              
+17         17         10.33.33.29/32   976           Fa0/1      172.16.1.33
+</pre>
+
+
+<h3 id="rr64515">RR64515</h3>
+<pre>
+show bgp summary | find ^peer 
+Peer                     AS      InPkt     OutPkt    OutQ   Flaps Last Up/Dwn State|#Active/Received/Accepted/Damped...
+10.11.11.29             64512         81         81       0       1       34:45 Establ
+  <b>inet6.0: 2/2/2/0</b>
+10.33.33.33             64512        198        206       0       0     1:27:51 Establ
+  inet.0: 0/0/0/0
+  inet6.0: 0/0/0/0
+10.33.33.36             64512        200        197       0       0     1:25:56 Establ
+  inet.0: 0/0/0/0
+  inet6.0: 2/2/2/0
+
+show route protocol bgp table inet6.0
+inet6.0: 7 destinations, 8 routes (7 active, 0 holddown, 0 hidden)
+2001:abcd:100::36/128
+                   *[BGP/170] 00:37:06, localpref 100, from 10.11.11.29
+                      AS path: 64512 ?
+                    > to 172.17.1.33 via em0.5, Push 19, <b>Push 299904(top)</b>
+2001:abcd:300::36/128
+                   *[BGP/170] 00:56:08, localpref 100, from 10.33.33.36
+                      AS path: I
+                    > to 172.17.0.36 via em1.10, Push 2
+2002::/64          *[BGP/170] 00:37:06, localpref 100, from 10.11.11.29
+                      AS path: 64512 ?
+                    > to 172.17.1.33 via em0.5, Push 20, <b>Push 299904(top)</b>
+2003::/64          *[BGP/170] 00:56:09, localpref 100, from 10.33.33.36
+                      AS path: I
+                    > to 172.17.0.36 via em1.10, Push 2
+
+show ldp path 10.11.11.29 
+Output Session (label)          Input Session (label)
+10.33.33.36:0(299824)           10.33.33.33:0<b>(299904)</b>
+10.33.33.33:0(299824)
+  Attached route:  10.11.11.29/32, Ingress route
+</pre>
+
+<h1 id="label-analysis">Label analysis</h1>
+<p>PE64512 announces 2001:ABCD: 100::36/128 to RR64512 which then advertises the prefix to RR64515 which then advertises the prefix to PE64515</p>
+
+<pre>
+PE64512#sh run int lo100
+interface Loopback100
+ipv6 address 2001:ABCD:100::36/128
+end
+
+PE64512#sh ipv6 route 2001:ABCD:100::36/128                
+Routing entry for 2001:ABCD:100::36/128
+  Known via <b>"connected"</b>, distance 0, metric 0, type receive, connected, bgp 64512
+  Route count is 1/1, share count 0
+  Routing paths:
+    <b>receive via Loopback100</b>
+      Last updated 01:49:12 ago
+
+PE64512#sh bgp ipv6 unicast 2001:ABCD:100::36/128
+BGP routing table entry for 2001:ABCD:100::36/128, version 2
+Paths: (1 available, best #1, table default)
+  Advertised to update-groups:
+     1         
+  Refresh Epoch 1
+  Local
+    :: from 0.0.0.0 (10.11.11.36)
+      Origin incomplete, metric 0, localpref 100, weight 32768, valid, sourced, best
+      <b>mpls labels in/out 20/nolabel</b>
+      rx pathid: 0, tx pathid: 0x0
+
+PE64512#show mpls forwarding-table labels <b>20</b>
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop    
+Label      Label      or Tunnel Id     Switched      interface              
+20         <b>Pop Label</b>  2001:ABCD:100::36/128   \
+                                       2876          <b>aggregate</b>
+
+</pre>
+
+<pre>
+RR64512# sh bgp ipv6 uni 2001:ABCD:100::36/128  
+BGP routing table entry for 2001:ABCD:100::36/128, version 3
+Paths: (1 available, best #1, table default)
+  Advertised to update-groups:
+     1          5         
+  Refresh Epoch 1
+  Local, (Received from a RR-client), (received & used)
+    ::FFFF:10.11.11.36 (metric 2) from 10.11.11.36 (10.11.11.36)
+      Origin incomplete, metric 0, localpref 100, valid, internal, best
+      <b>mpls labels in/out 19/20</b>
+      rx pathid: 0, tx pathid: 0x0
+
+RR64512#show mpls forwarding-table labels <b>19</b>
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop    
+Label      Label      or Tunnel Id     Switched      interface              
+19         20         2001:ABCD:100::36/128   \
+                                       3398          Fa0/0      172.16.0.36 
+RR64512#show ip route 10.11.11.36
+Routing entry for 10.11.11.36/32
+  Known via "ospf 1", distance 110, metric 2, type intra area
+  Last update from 172.16.0.36 on FastEthernet0/0, 01:43:26 ago
+  Routing Descriptor Blocks:
+  * 172.16.0.36, from 10.11.11.36, 01:43:26 ago, via FastEthernet0/0
+      Route metric is 2, traffic share count is 1 
+
+</pre>
+
+<pre>
+RR64515# run show route table inet6.0 2001:ABCD:100::36/128 extensive
+inet6.0: 8 destinations, 9 routes (8 active, 0 holddown, 0 hidden)
+2001:abcd:100::36/128 (1 entry, 1 announced)
+TSI:
+KRT in-kernel 2001:abcd:100::36/128 -> {indirect(131072)}
+Page 0 idx 0 Type 1 val 9364cb0
+    <b>Flags: Nexthop Change</b>
+    Nexthop: Self
+    Localpref: 100
+    <b>AS path: [64512] 64515 ?</b>
+    Communities:
+Path 2001:abcd:100::36 from 11.11.11.29 Vector len 4.  Val: 0
+        *BGP    Preference: 170/-101
+                <b>Next hop type: Indirect</b>
+                Address: 0x9334dd8
+                Next-hop reference count: 3
+                <b>Source: 10.11.11.29</b>
+                Next hop type: Router, Next hop index: 696
+                Next hop: 172.17.1.33 via em0.5, selected
+                <b>Label operation: Push 19, Push 299904(top)</b>
+                Label TTL action: prop-ttl, prop-ttl(top)
+                <b>Protocol next hop: ::ffff:10.11.11.29</b>
+                <b>Push 19</b>
+                Indirect next hop: 94b01f8 131072
+                State: <Active Ext>
+                <b>Local AS:   64512 Peer AS:   64512</b>
+                Age: 55:57      Metric2: 1 
+                Task: BGP_100.10.11.11.29+35003
+                Announcement bits (3): 0-KRT 1-BGP_RT_Background 2-Resolve tree 3 
+                AS path: 100 ?
+                Accepted
+                Route Label: 19
+                Localpref: 100
+                Router ID: 10.11.11.29
+                Indirect next hops: 1
+                        <b>Protocol next hop: ::ffff:10.11.11.29 Metric: 1</b>
+                        <b>Push 19</b>
+                        Indirect next hop: 94b01f8 131072
+                        Indirect path forwarding next hops: 1
+                                Next hop type: Router
+                                Next hop: 172.17.1.33 via em0.5
+                        ::ffff:10.11.11.29/128 Originating RIB: inet6.3
+                          Metric: 1                       Node path count: 1
+                          Forwarding nexthops: 1
+                                Nexthop: 172.17.1.33 via em0.5
+
+RR64515# run show route ::ffff:10.11.11.29 
+inet6.3: 3 destinations, 3 routes (3 active, 0 holddown, 0 hidden)
+::ffff:10.11.11.29/128
+                   *[LDP/9] 01:03:02, metric 1
+                    > to 172.17.1.33 via em0.5, <b>Push 299904</b>
+
+RR64515# run show ldp path 10.11.11.29 
+Output Session (label)          Input Session (label)
+10.33.33.36:0(299824)           10.33.33.33:0<b>(299904)</b>
+10.33.33.33:0(299824)
+  Attached route:  10.11.11.29/32, Ingress route
+
+</pre>
+
+<pre>
+PE64515# run show route table inet6.0 2001:ABCD:100::36/128 extensive
+inet6.0: 8 destinations, 10 routes (8 active, 0 holddown, 0 hidden)
+2001:abcd:100::36/128 (1 entry, 1 announced)
+TSI:
+KRT in-kernel 2001:abcd:100::36/128 -> {indirect(131070)}
+        *BGP    Preference: 170/-101
+                Next hop type: Indirect
+                Address: 0x9334b08
+                Next-hop reference count: 9
+                <b>Source: 10.33.33.29</b>
+                Next hop type: Router, Next hop index: 708
+                Next hop: 172.17.0.29 via em1.10, selected
+                <b>Label operation: Push 2</b>
+                Label TTL action: prop-ttl
+                <b>Protocol next hop: ::ffff:10.33.33.29</b>
+                <b>Push 2</b>
+                Indirect next hop: 948c000 131070
+                State: <Active Int Ext>
+                <b>Local AS:   64515 Peer AS:   64515</b>
+                Age: 44:39      Metric2: 1 
+                Task: BGP_300.10.33.33.29+179
+                Announcement bits (2): 0-KRT 2-Resolve tree 3 
+                AS path: 64515 ?
+                Accepted                
+                Route Label: 2
+                Localpref: 100
+                Router ID: 10.33.33.29
+                Indirect next hops: 1
+                        <b>Protocol next hop: ::ffff:10.33.33.29 Metric: 1</b>
+                        <b>Push 2</b>
+                        Indirect next hop: 948c000 131070
+                        Indirect path forwarding next hops: 1
+                                Next hop type: Router
+                                Next hop: 172.17.0.29 via em1.10
+                        <b>::ffff:10.33.33.29/128 Originating RIB: inet6.3</b>
+                          Metric: 1                       Node path count: 1
+                          Forwarding nexthops: 1
+                                Nexthop: 172.17.0.29 via em1.10
+
+# run show route ::ffff:10.33.33.29/128 
+inet6.3: 3 destinations, 3 routes (3 active, 0 holddown, 0 hidden)
+::ffff:10.33.33.29/128
+                   *[LDP/9] 01:46:54, metric 1
+                    > to 172.17.0.29 via em1.10
+</pre>
+
+<p>PE64515 Pushes label 2 because of the bgp protocol configuration</p>
+<pre>
+    family inet6 {
+        labeled-unicast {
+            <b>explicit-null;</b>
+        }
+</pre>
+
+
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
+                  <!-- end post_body -->
+
+                </article>
+
+<!-- ============================ END CONTENT ============================================ -->
+
+                <div class="author_info_container author_single_box">
+                  <div class="row">
+                    <div class="author_avatar_col col">
+                      <a class="author_avatar_url" href="about"><img alt='' src='../../img/all-baggy.jpg' srcset='../../img/all-baggy.jpg' class='avatar avatar-150 photo' height='150' width='150' /></a>
+                    </div>
+                    <div class="author_info_col col">
+                      <div class="author_box_info_header">
+                        <h2 class="author_display_name title">
+                          <a class="author_name_url url fn n" href="">Paul S.I. Basondole </a>
+                        </h2>
+
+                      </div>
+                      <div class="author_description">
+IT &amp; Network Expert / Lead <br>
+Network & Automation designer; <br>
+2x JNCIP (RS/SP) 1x CCNP (RS) <br>
+BSc Telecommunications Eng.
+                      </div>
+                      <div class="stories_circles_wrapper"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- close col12 just inside .full_width_list -->
+            </div>
+            <!-- close .full_width_list -->
+            <!-- close col and row in case of sidebar layout -->
+            <!-- end check for post layout -->
+          </section>
+          <!-- #primary -->
+        </main>
+        <!-- #content -->
+        <footer id="colophon" class="site_footer container" role="contentinfo">
+          <div class="footer_credits footers_active_sidebars_0">
+            &copy; 2020 basondole.io
+          </div>
+          <div id="aliagototop" title="Scroll To Top" class="alia_gototop_button footer_button">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </footer>
+
+        <!-- #colophon -->
+      </div>
+      <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+     <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+      <div class="sliding_close_helper_overlay"></div>
+      <div class="site_side_container">
+        <h3 class="screen-reader-text">
+          Sliding Sidebar
+        </h3>
+        <div class="info_sidebar">
+          <div class="top_header_items_holder mobile_menu_opened">
+            <div class="main_menu">
+              <ul id="mobile-menu" class="navbar">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu">
+                  <a href="index.html" class="local-root-page">Home</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu">
+                  <a href="https://github.com/basondole/mpls#introduction">Design</a>
+                </li>
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu">
+                  <a href="https://github.com/basondole/open#hocid">NET2CODE</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu">
+                  <a href="blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                  <ul role="menu" class=" dropdown-menu">
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
+                      <a href="index.html">Collaboration</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
+                      <a href="../networkauto/index.html">Network Automation</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/tutorials">Network Servers</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/netmanagement">Misc</a>
+                    </li>
+                  </ul>
+                </li>
+                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
+                  <a href="about.html" class="local-root-page">About</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-145 menu-item-412 default_menu">
+                  <a href="contact.html" class="local-root-page">Contact</a>
+                </li>
+                <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
+                  <a href="http://karneliuk.com/donate/">Donate</a> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- end .top_header_items_holder -->
+        </div>
+      </div>
+      <!-- end sliding sidebar content -->
+      <!-- start footer static content -->
+      <!-- start footer static content -->
+    </div>
+    <!-- #page -->
+    <div id="ajax_modal_story" class="ajax_modal ajax_modal_story modal enable_rotate">
+      <div class="story_modal_overlay_helper"></div>
+    </div>
+
+
+    </script>
+
+    <script type='text/javascript' src='../../karneliuk/global.1.35.js' class="local-root-js"></script>
+
+
+    <script type='text/javascript'>
+/* <![CDATA[ */
+var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-load-story.php", "ajax_rotate_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-rotate-story.php" };
+/* ]]> */
+    </script>
+
+
+    <script type='text/javascript' src='../../karneliuk/alia-core.1.13.js' class="local-root-js"></script>
+    <script type='text/javascript' src='../../karneliuk/wp-embed.min.5.3.2.js' class="local-root-js"></script>
+
+    
+<script type="text/javascript">
+  // edit the level variable, the load the page and copy the loaded DOM, NOT the source
+  // to get updated paths throughout the dom
+  
+  var 
+  localPagesFiles = document.getElementsByClassName("local-root-page"),
+  localJsFiles = document.getElementsByClassName("local-root-js"),
+  localCssFiles = document.getElementsByClassName("local-root-css"),
+  localImagesFiles = document.getElementsByClassName("local-root-image");
+
+  var level = "../../";
+
+  function updatePaths() { 
+    for (var i=0; i<localPagesFiles.length; i++) {
+          var path = level + localPagesFiles[i].getAttribute("href");
+          localPagesFiles[i].setAttribute("href",path);
+          console.log(localPagesFiles[i].getAttribute("href"));
+    }
+
+    for (var i=0; i<localJsFiles.length; i++) {
+          var path = level + localJsFiles[i].getAttribute("src");
+          localJsFiles[i].setAttribute("src",path);
+          console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localCssFiles.length; i++) {
+          var path = level + localCssFiles[i].getAttribute("src");
+          localCssFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localImagesFiles.length; i++) {
+          var path = level + localImagesFiles[i].getAttribute("src");
+          localImagesFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+  }
+
+  window.onload = function () {
+   updatePaths();
+  };
+
+</script>
+
+<script type="text/javascript">
+  var localPagesFiles = document.getElementsByClassName("local-root-page");
+function printId(event) {
+  var myId = this.Id;
+  console.log(myId);
+}
+for (var i=0; i<localPagesFiles.length; i++) {
+       localPagesFiles[i].addEventListener("click",printId);
+}
+</script>
+
+
+
+
+  </body>
+</html>
