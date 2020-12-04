@@ -161,7 +161,13 @@
 <h1 id="mpls-l2vpns">MPLS L2VPNs</h1>
 <p>L2VPNs offer a means to tunnel layer 2 traffic over MPLS network. The L2VPNs can be point to point or point to multipoint. Let’s take a look on what options are available to us</p>
 <h1 id="point-to-point-l2vpns">Point to point L2VPNs</h1>
-<p>The point to point L2VPNS are technically referred to as Virtual Private Wire Service (VPWS) and they are of three types</p>
+<p>The point to point L2VPNS are technically referred to as Virtual Private Wire Service (VPWS).
+  VPWS has a lot of other names. In Nokia (Alcatel-Lucent) SR OS they are called “x”pipe, where “x” represent type of traffic being transported,
+ like epipe – Ethernet VPWS, cpipe – CESoPSN VPWS and etc. Cisco world has another marvelous name AToM, which stands for Any Transport over MPLS.
+ There are also a lot of other abbreviations like PW (PseudoWire),
+  PWE3 (PseudoWire End-to-End Emulation), VLL (virtual Leased Line) and so on.
+  
+  VPWS can be categorized in three types:</p>
 <ul>
 <li>Martini L2VPN</li>
 <li>VPWS Kompella using BGP auto-discovery and signalling</li>
