@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js no-svg">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+
+<title>basondole.io &#8211; Network design and development, 2x JNCIP (ENT/SP) 1x CCNP (RS), BSc.</title>
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel='dns-prefetch' href='//www.google.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link crossorigin="anonymous" rel='stylesheet' id='alia-fonts-css'  href='https://fonts.googleapis.com/css?family=Roboto%3A400%2C400i%2C700%2C700i%7CPoppins%3A400%2C400i%2C700%2C700i&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+
+
+<link rel='stylesheet' id='wp-block-library-css'  href='../../karneliuk/style.min.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='github-embed-css'  href='../../karneliuk/github-embed.5.3.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-lightbox-swipebox-css'  href='../../karneliuk/swipebox.min.2.2.2.css' type='text/css' media='all' />
+<link rel='stylesheet' id='alia-style-css'  href='../../karneliuk/alia.style.1.35.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-css'  href='../../karneliuk/all.min.1.0.css' type='text/css' media='all' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' id='codecolorer-css'  href='../../karneliuk/codecolorer.0.9.16.css' type='text/css' media='screen' />
+<link rel="stylesheet" href="../../css/style1.css" />
+
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="http://karneliuk.com/wp-content/uploads/2019/10/cropped-logo_karneliuk_square-192x192.jpg" sizes="192x192" />
+
+<link rel='https://api.w.org/' href='../../karneliuk/wp-json' />
+
+
+<script type='text/javascript' src='../../karneliuk/jquery-1.12.4-wp.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/jquery-migrate.min-1.4.1.js' class="local-root-js"></script>
+<script type='text/javascript' src='../../karneliuk/ouibounce-5.3.2.js' class="local-root-js"></script>
+
+
+<script type="text/javascript">
+  window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"karneliuk/wp-emoji-release.min.5.3.2.js"}};
+  !function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+
+
+
+<meta name="generator" content="WordPress 5.3.2" />
+
+</head>
+
+
+
+
+
+
+
+
+
+<body class="home blog sticky_header header_logo_rounded text_posts_unbordered masonry_effect_enabled show_menu_circle_idicator sliding_sidebar_inactive">
+
+<div id="page" class="site">
+
+  <div class="site_main_container">
+
+    <header class="site_header">
+      
+    <div class="gray_header"  >
+      <div class="container site_header">
+        <div class="header_square_logo">
+          <style>.site_logo_image { width : 120px; }.site_logo_image { height : 120px; }</style>
+          <a class="alia_logo retina_logo" title="basondole.io" href="index.html" rel="home">
+            <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+    
+          <a class="alia_logo default_logo  has_retina_logo" title="basondole.io" href="index.html" rel="home">
+          <img  width=120 height=120 src="../../img/all-baggy.jpg" class="site_logo img-responsive site_logo_image clearfix" alt="basondole.github.io" /></a>
+
+          <h1 class="screen-reader-text site_logo site-title clearfix">basondole.io</h1>
+
+        </div>
+
+        <div class="header_tagline">
+          Multivendor network design, development and automation for enterprise and service provider fabrics. Skills that matter
+        </div>
+
+        <div class="social_icons_list header_social_icons">
+          <a rel="nofollow" target="" href="https://twitter.com/misterbigpaul" title="Twitter" class="social_icon widget_social_icon social_twitter social_icon_twitter"><i class="fa fa-twitter"></i></a>
+          <a rel="nofollow" target="_blank" href="https://www.linkedin.com/in/paul-i-2b3013108" title="Linked In" class="social_icon widget_social_icon social_linkedin social_icon_linkedin"><i class="fa fa-linkedin"></i></a>
+          <a rel="nofollow" target="_blank" href="https://github.com/basondole" title="Github" class="social_icon widget_social_icon social_github social_icon_github"><i class="fa fa-github"></i></a>
+
+          <a rel="nofollow" target="_blank" href="https://stackoverflow.com/users/12078639/bassosimons" title="stackoverflow" class="social_icon widget_social_icon"><i class="fa fa-rss"></i></a>
+
+        </div>
+      </div>
+
+    </div>
+        
+    <div class="header_nav_wrapper">
+
+      <div class="header_nav">
+
+        <div class="container">
+          <div class="site_branding">
+          <h1 class="text_logo"><a href="index.html" rel="home">basondole.io<span class="logo_dot"></span></a></h1>
+          </div>
+          
+
+          <!-- Place header control before main menu if site title is enabled -->
+          <div class="header_controls">
+
+            <div class="header_sliding_sidebar_control header_control_wrapper">
+              <a id="user_control_icon" class="sliding_sidebar_button" href="#">
+                <i class="fa fa-bars header_control_icon"></i>
+              </a>
+            </div>
+        
+          </div>
+    
+
+          <div class="main_menu">
+            <ul id="top-menu" class="navbar">
+              <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html" class="local-root-page">Home</a></li>
+              <!-- <li id="menu-item-2788" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu"><a href="https://github.com/basondole/mpls#introduction">Design</a></li> -->
+              <!-- <li id="menu-item-2534" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu"><a href="https://github.com/basondole/open#hocid">NET2CODE</a></li> -->
+              <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                <ul role="menu" class=" dropdown-menu">
+                  <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
+                  <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
+                  <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Misc</a></li>
+                </ul>
+              </li>
+              <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+              <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html" class="local-root-page">About</a></li>
+              <li id="menu-item-412" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-412 default_menu"><a href="contact.html" class="local-root-page">Contact</a></li>
+              <!-- <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="http://karneliuk.com/donate/">Donate</a></li> -->
+            </ul>
+            <span class="menu_mark_circle hidden_mark_circle"></span>
+          </div>
+              
+        <!-- Place header control after main menu if site title is enabled -->
+          
+        </div><!-- end .container -->
+      </div><!-- end .header_nav -->
+    </div><!-- end .header_nav_wrapper -->
+    </header>
+
+    <main id="content" class="site-content">
+      <section id="primary" class="container main_content_area">
+        <!-- end check for post layout -->
+        <div class="row full_width_page_single no_sidebar_post_single">
+          <div>
+            <!-- <article id="post-182" class="blog_page_container post-182 page type-page status-publish"> -->
+
+              <div class="page_body">
+                    <div class="post_info_wrapper">
+                      <div class="entry-content blog_page_text blog_page_description">
+
+
+
+<!-- ============================ START CONTENT ============================================ -->
+<h1>BGP Large Communities</h1>
+<p>A BGP community is bit of “extra information” that you can add to prefixes which are advertised to BGP neighbors. This extra information can be used for things like traffic engineering or dynamic routing policies. In order to understand BGP community we need to first understand the Autonomous System Numbers (ASN)</p>  
+
+<h3>BGP AS Range</h3>
+ASNs (Autonomous System Numbers) have to be unique on the Internet. The main reason for this is that BGP uses the AS number for its loop prevention mechanism. IANA is in control of the AS numbers (similar to public IP addresses). They started with 16-bit AS numbers (also called 2-octet AS numbers) that were assigned like this:
+<ul style="padding-left: 30px;">
+  <li>0: reserved.</li>
+  <li>1-64.495: public AS numbers.</li>
+  <li>64.496 – 64.511 – reserved to use in documentation.</li>
+  <li>64.512 – 65.534 – private AS numbers.</li>
+  <li>65.535 – reserved.</li>
+</ul>
+The 1-64.495 public AS range is pretty small so there are similar issues to the IPv4 public IP addresses, there aren’t enough numbers. To get more AS numbers, an extension has been created that supports 32-bit AS numbers (also called 4-octet AS numbers). This means we have about 4.294.967.296 AS numbers that we can use.
+
+
+<h3>BGP Communities</h3>
+Communities are 32-bit values. By default, the display format of communities is two 16-bit values separated by a colon. The well-known communities show up as <code>no-export</code> for <code>NO_EXPORT</code> etc.
+The first 16-bit number is normally the AS number of the network that sets the community or looks for it, and there are 4 well known BGP communities that you can use or you can pick a numeric value that you can use for your own policies.
+Here are the 4 well known BGP communities:
+<ul style="padding-left: 30px;">
+  <li> <code>Internet</code> advertise the prefix to all BGP neighbors.</li>
+  <li> <code>no-advertise</code> don’t advertise the prefix to any BGP neighbors.</li>
+  <li> <code>no-export</code> don’t advertise the prefix to any eBGP neighbors.</li>
+  <li> <code>local-as</code> don’t advertise the prefix outside of the sub-AS (this one is used for BGP confederations).</li>
+</ul>
+
+<h5>Regular communities</h5>
+<p>The regular community attribute is four octets (32 bit). The first 16 bits of the value encode the AS number of the network that originated the community, while the last 16 bits carry a unique number assigned by the AS, the second number is one that conveys the intended information. A notation of <code>as-number:community-value</code>, is used where each value is a decimal number. For example, a community value of <code>64510:1111</code>.</p>
+
+<h5>Extended communities</h5>
+<p>Networking enhancements, such as MPLS VPNs, have functionality requirements that require an attribute such as a community. However, the regular 4-octet (32 bit) community value does not provide enough expansion to accommodate VPN requirements. This leads to the creation of extended communities.
+An extended community is an 8-octet (64 bit) value that is also divided into two main sections. The first 2 octets of the community encode a type field while the last 6 octets carry a unique set of data in a format defined by the type field.
+</p>
+
+<p>The BGP extended communities attribute format has three fields: <code>type:administrator:assigned-number</code>. The routing device expects you to use the words <code>target</code> or <code>origin</code> to represent the type field. The administrator field uses a decimal number for the AS or an IPv4 address, while the assigned number field expects a decimal number no larger than the size of the field (65,535 for 2 octets or 4,294,967,295 for 4 octets).
+</p>
+
+<h5>Large communities</h5>
+<p>Since the adoption of 4-byte ASNs, the 4-byte BGP regular community and 6-byte BGP extended community can no longer support BGP community attributes. Operators often encode AS number in the local portion of the BGP community that means that sometimes the format of the community is <code>ASN:ASN</code>. With the 4-byte ASN , you need 8-bytes to encode it. Although BGP extended community permits a 4-byte AS to be encoded as the global administrator field, the local administrator field has only 2-byte of available space. Thus, 6-byte extended community attribute is also unsuitable.
+</p>
+
+<p>To overcome this, come RFC 8195, BGP allows to configure optional transitive path attribute - a 12-byte BGP large community; composed of three 4-byte integers separated by a colon; that provides the most significant 4-byte value to encode autonomous system number as the global administrator and the remaining two 4-byte assigned numbers to encode the local values as defined in RFC 8092. The BGP large community attributes format has four fields: <code>large:global-administrator:assigned-number:assigned-number</code>. An example of Large Communities is: <code>2914:65400:38016</code>
+</p>
+
+<h3>Configuration</h3>
+<blockquote>
+Cisco IOS XR Configuration
+</blockquote>
+<pre>
+route-policy SET-LARGE
+  set large-community (65535:1:1) additive
+end-policy
+
+route-policy MATCH-LARGE
+  if large-community matches-any (65535:1:2) then
+    set local-preference 90
+  endif
+end-policy
+  
+route-policy DELETE-LARGE
+  delete large-community in (65535:*:*)
+  delete large-community in (65535:1:1)
+end-policy
+</pre>
+
+<blockquote>
+Juniper Junos Configuration
+</blockquote>
+<pre>
+# Define
+basondole@junos# show policy-options community LARGE-COMMUNITY
+members large:65535:1:1
+
+# Actions
+basondole@junos# show policy-options policy-statement POLICY-LARGE
+term MATCH
+    from {
+        community LARGE-COMMUNITY;
+    }
+    then accept;
+}
+term DELETE
+    then {
+        community delete LARGE-COMMUNITY;
+        accept;
+    }
+}
+term SET
+    then {
+        community add LARGE-COMMUNITY;
+        accept;
+    }
+}
+</pre>
+
+
+<blockquote>
+Nokia SR OS Configuration (Classic CLI)
+</blockquote>
+<pre>
+  A:vRR>config>router>policy-options# info 
+----------------------------------------------
+      community "LARGE" members "65535:1:1"
+      policy-statement "POLICY-LARGE"
+          entry 10
+              description "MATCH"
+              from
+                  community "LARGE"
+              exit
+              action accept
+                  local-preference 120
+              exit
+          exit
+          entry 20
+              description "DELETE"
+              action accept
+                  community remove "LARGE"
+              exit
+          exit65535:1:1
+          entry 30
+              description "SET"
+              action accept
+                  community add "LARGE"
+              exit              
+          exit
+      exit
+----------------------------------------------
+
+</pre>
+
+<blockquote>
+Nokia SR OS Configuration (MD-CLI)
+</blockquote>
+<pre>
+policy-options {
+    community "LARGE" {
+        member "65535:1:1" { }
+    }
+    policy-statement "POLICY-LARGE" {
+        entry 10 {
+            description "MATCH"
+            action {
+                action-type accept
+                local-preference "120"
+            }
+            from {
+                community {
+                    name "LARGE"
+                }
+            }
+        }
+        entry 20 {
+            description "DELETE"
+            action {
+                action-type accept
+                community {
+                    remove ["LARGE"]
+                }
+            }
+        }
+        entry 30 {
+            description "SET"
+            action {
+                action-type accept
+                community {
+                    add ["LARGE"]
+                }
+            }
+        }
+    }
+}
+</pre>
+
+<br/>
+Packet capture shows the optional transitive path attribute - a 12-byte BGP large community
+<br/>
+<br/>
+<img alt='' src='img/pcap.png'/ style="padding-left: 60px;">
+
+
+                      </div>
+                    </div>
+                    <!-- end post_info_wrapper -->
+                  </div>
+                  <!-- end post_body -->
+
+                </article>
+
+<!-- ============================ END CONTENT ============================================ -->
+
+                <div class="author_info_container author_single_box">
+                  <div class="row">
+                    <div class="author_avatar_col col">
+                      <a class="author_avatar_url" href="about"><img alt='' src='../../img/all-baggy.jpg' srcset='../../img/all-baggy.jpg' class='avatar avatar-150 photo' height='150' width='150' /></a>
+                    </div>
+                    <div class="author_info_col col">
+                      <div class="author_box_info_header">
+                        <h2 class="author_display_name title">
+                          <a class="author_name_url url fn n" href="">Paul S.I. Basondole </a>
+                        </h2>
+
+                      </div>
+                      <div class="author_description">
+IT &amp; Network Expert / Lead <br>
+Network & Automation designer; <br>
+2x JNCIP (RS/SP) 1x CCNP (RS) <br>
+BSc Telecommunications Eng.
+                      </div>
+                      <div class="stories_circles_wrapper"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- close col12 just inside .full_width_list -->
+            </div>
+            <!-- close .full_width_list -->
+            <!-- close col and row in case of sidebar layout -->
+            <!-- end check for post layout -->
+          </section>
+          <!-- #primary -->
+        </main>
+        <!-- #content -->
+        <footer id="colophon" class="site_footer container" role="contentinfo">
+          <div class="footer_credits footers_active_sidebars_0">
+            &copy; 2020 basondole.io
+          </div>
+          <div id="aliagototop" title="Scroll To Top" class="alia_gototop_button footer_button">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+        </footer>
+
+        <!-- #colophon -->
+      </div>
+      <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+     <!-- .site_main_container -->
+      <!-- start sliding sidebar content -->
+      <div class="sliding_close_helper_overlay"></div>
+      <div class="site_side_container">
+        <h3 class="screen-reader-text">
+          Sliding Sidebar
+        </h3>
+        <div class="info_sidebar">
+          <div class="top_header_items_holder mobile_menu_opened">
+            <div class="main_menu">
+              <ul id="mobile-menu" class="navbar">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu">
+                  <a href="index.html" class="local-root-page">Home</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2788 default_menu">
+                  <a href="https://github.com/basondole/mpls#introduction">Design</a>
+                </li>
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2534 default_menu">
+                  <a href="https://github.com/basondole/open#hocid">NET2CODE</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu">
+                  <a href="blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
+                  <ul role="menu" class=" dropdown-menu">
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
+                      <a href="index.html">Collaboration</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
+                      <a href="../networkauto/index.html">Network Automation</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/tutorials">Network Servers</a>
+                    </li>
+                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
+                      <a href="https://github.com/basondole/netmanagement">Misc</a>
+                    </li>
+                  </ul>
+                </li>
+                <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
+                  <a href="about.html" class="local-root-page">About</a>
+                </li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-145 menu-item-412 default_menu">
+                  <a href="contact.html" class="local-root-page">Contact</a>
+                </li>
+                <!-- <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
+                  <a href="http://karneliuk.com/donate/">Donate</a> -->
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- end .top_header_items_holder -->
+        </div>
+      </div>
+      <!-- end sliding sidebar content -->
+      <!-- start footer static content -->
+      <!-- start footer static content -->
+    </div>
+    <!-- #page -->
+    <div id="ajax_modal_story" class="ajax_modal ajax_modal_story modal enable_rotate">
+      <div class="story_modal_overlay_helper"></div>
+    </div>
+
+
+    </script>
+
+    <script type='text/javascript' src='../../karneliuk/global.1.35.js' class="local-root-js"></script>
+
+
+    <script type='text/javascript'>
+/* <![CDATA[ */
+var alia_core_vars = { "ajax_load_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-load-story.php", "ajax_rotate_story": "http:\/\/karneliuk.com\/wp-content\/plugins\/alia-core\/ajax-rotate-story.php" };
+/* ]]> */
+    </script>
+
+
+    <script type='text/javascript' src='../../karneliuk/alia-core.1.13.js' class="local-root-js"></script>
+    <script type='text/javascript' src='../../karneliuk/wp-embed.min.5.3.2.js' class="local-root-js"></script>
+
+    
+<script type="text/javascript">
+  // edit the level variable, the load the page and copy the loaded DOM, NOT the source
+  // to get updated paths throughout the dom
+  
+  var 
+  localPagesFiles = document.getElementsByClassName("local-root-page"),
+  localJsFiles = document.getElementsByClassName("local-root-js"),
+  localCssFiles = document.getElementsByClassName("local-root-css"),
+  localImagesFiles = document.getElementsByClassName("local-root-image");
+
+  var level = "../../";
+
+  function updatePaths() { 
+    for (var i=0; i<localPagesFiles.length; i++) {
+          var path = level + localPagesFiles[i].getAttribute("href");
+          localPagesFiles[i].setAttribute("href",path);
+          console.log(localPagesFiles[i].getAttribute("href"));
+    }
+
+    for (var i=0; i<localJsFiles.length; i++) {
+          var path = level + localJsFiles[i].getAttribute("src");
+          localJsFiles[i].setAttribute("src",path);
+          console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localCssFiles.length; i++) {
+          var path = level + localCssFiles[i].getAttribute("src");
+          localCssFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+
+    for (var i=0; i<localImagesFiles.length; i++) {
+          var path = level + localImagesFiles[i].getAttribute("src");
+          localImagesFiles[i].setAttribute("src",path);
+          // console.log(localJsFiles[i].getAttribute("src"));
+    }
+  }
+
+  window.onload = function () {
+   updatePaths();
+  };
+
+</script>
+
+<script type="text/javascript">
+  var localPagesFiles = document.getElementsByClassName("local-root-page");
+function printId(event) {
+  var myId = this.Id;
+  console.log(myId);
+}
+for (var i=0; i<localPagesFiles.length; i++) {
+       localPagesFiles[i].addEventListener("click",printId);
+}
+</script>
+
+
+
+
+  </body>
+</html>
