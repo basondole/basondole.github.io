@@ -159,7 +159,7 @@
 
 <!-- ============================ START CONTENT ============================================ -->
 <h1>BGP Large Communities</h1>
-<p>A BGP community is bit of “extra information” that you can add to prefixes which are advertised to BGP neighbors. This extra information can be used for things like traffic engineering or dynamic routing policies. In order to understand BGP community we need to first understand the Autonomous System Numbers (ASN)</p>  
+<p>A BGP community is bit of "extra information" that you can add to prefixes which are advertised to BGP neighbors. This extra information can be used for things like traffic engineering or dynamic routing policies. In order to understand BGP community we need to first understand the Autonomous System Numbers (ASN)</p>  
 
 <h3>BGP AS Range</h3>
 ASNs (Autonomous System Numbers) have to be unique on the Internet. The main reason for this is that BGP uses the AS number for its loop prevention mechanism. IANA is in control of the AS numbers (similar to public IP addresses). They started with 16-bit AS numbers (also called 2-octet AS numbers) that were assigned like this:
@@ -174,30 +174,33 @@ The 1-64.495 public AS range is pretty small so there are similar issues to the 
 The 4-bytes AS number can be written in AS-plain or AS-dot format.
 AS-plain defines the 4-byte AS Number as a basic 32-bit integer.
 <ul style="padding-left: 30px;">
-  “2-byte only AS Numbers” refers to AS Numbers in the range 0 – 65535<br/>
-  “4-byte only AS Numbers” refers to AS Numbers in the range 65536 – 4294967295<br/>
-  “4-byte AS Numbers” refers to AS Numbers in the range 0 – 4294967295<br/>
+  "2-byte only AS Numbers" refers to AS Numbers in the range 0 – 65535<br/>
+  "4-byte only AS Numbers" refers to AS Numbers in the range 65536 – 4294967295<br/>
+  "4-byte AS Numbers" refers to AS Numbers in the range 0 – 4294967295<br/>
 </ul>
 
 In AS-dot notation, the full binary 4-byte AS number is split two words of 16 bits each. It is proposed to identify 4-byte AS Numbers using a syntax of <code>high-order-16-bit-value-in-decimal.low-order-16-bit-value-in-decimal</code>:
 <ul style="padding-left: 30px;">
-  “2-byte only AS Numbers” refers to AS Numbers in the range 0 – 65535<br/>
-  ”4-byte only AS Numbers” refers to AS Numbers in the range 1.0 – 65535.65535<br/>
-  “4-byte AS Numbers” refers to AS Numbers in the range 0.0 – 65535.65535<br/>
+  "2-byte only AS Numbers" refers to AS Numbers in the range 0 – 65535<br/>
+  "4-byte only AS Numbers" refers to AS Numbers in the range 1.0 – 65535.65535<br/>
+  "4-byte AS Numbers" refers to AS Numbers in the range 0.0 – 65535.65535<br/>
 </ul>
 
-<h7>Converting 4-bytes ASN from ASPLAIN to ASDOT</h7>
+<h6>Converting 4-bytes ASN from AS-plain to AS-dot</h6>
 Take the 4 bytes ASN and divide by 65535, the last 2-byte ASN, you get the quotient and a remainder.
 The high order 16 bits will be represented by the quotient. The low order 16 bits will be the quotient minus the remainder.
 The AS-dot notation is therefore <code>$QUOTIENT.$REMAINDER-$QUOTIENT</code>
 <br/>
-Example; ASN <code>194534</code> in the AS-dot format is <code>2.63462</code> since <code>194534/65535 = 2 remainder 63646</code>
+Example; ASN <code>194534</code> in the AS-dot format is <code>2.63462</code> <br/>
+Because <code>194534/65535 = 2 remainder 63646</code>
 and <code>63646 - 2 = 63642</code>
 
 <br/>
+<br/>
 Altenatively take the 4 bytes ASN and divide by 65536, the total number of 2-byte ASNs, you get the quotient and a remainder.
 The AS-dot notation is therefore <code>$QUOTIENT.$REMAINDER</code>
-The example becomes <code>194534/65536 = 2 remainder 63642</code> and the AS-dot <code>63646 - 2 = 63642</code>
+<br/>
+The example becomes <code>194534/65536 = 2 remainder 63642</code> and the AS-dot <code>2.63642</code>
 <br/>
 
 <br/>
