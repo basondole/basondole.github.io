@@ -193,26 +193,26 @@ ip policy route-map MAP-GLOBAL-to-VRF
 
 ! permit all the traffic here which needs to go to vrf
 ip access-list extended ACL-GLOBAL-to-VRF
- permit ip host <sorce from global> host <destination in vrf>
+ permit ip host $SOURCE-FROM-GLOBAL host $DESTINATION-IN-VRF
 
 route-map MAP-GLOBAL-to-VRF permit 10
 match ip address ACL-GLOBAL-to-VRF
 set ip vrf VRF next-hop 192.168.1.1
- </pre>
+</pre>
 
 <p>The command <code>ip vrf receive VRF1</code> adds the connected subnet of global interface to the vrf routing table
 and traffic from global to vrf is policy routed by the route-map applied under the global interface.</p>
 <h3 id="ios-method-2">ios:method 2</h3>
 <p>Using static routes between the two tables</p>
 <pre>
-ip route <network A> <mask> ethernet 01
-ip route vrf VRF <network B> <mask> ethernet 00 172.16.1.1 global
+ip route $NETWORK-A $NETWORK-A-MASK ethernet 01
+ip route vrf VRF $NETWORK-B $NETWORK-B-MASK ethernet 00 172.16.1.1 global
 </pre>
 
 <p>We can also combine the trick used in method 1 and method 2 <code>vrf receive</code> command and static route</p>
 <pre>
-ip route <network A> <mask> <interface 01>
-interface interface 00
+ip route $NETWORK-A $NETWORK-A-MASK ethernet 01
+interface ethernet 00
   vrf receive VRF
   ip address  172.16.1.2 255.255.255.0
 </pre>
