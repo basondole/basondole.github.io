@@ -203,6 +203,24 @@ The AS-dot notation is therefore <code>$QUOTIENT.$REMAINDER</code>
 The example becomes <code>194534/65536 = 2 remainder 63642</code> and the AS-dot <code>2.63642</code>
 <br/>
 
+<p>When a BGP session is being formed between a device with support for 4-bytes ASN and one with support for 2-bytes ASN only, the device with 2-bytes ASN will use the reserved ASN 23456 in place of the 4-bytes ASN.
+</p>
+Say we have R1 with 4-bytes ASN 65536 and R2 with ASN 64512 without 4-bytes ASN support. Configuration on Cisco IOS will be as shown below
+
+<blockquote>
+  Note R2 is using AS-dot notation
+</blockquote>
+
+<pre>
+R1#
+router bgp 1.1
+  neighbor 10.10.10.1 remote-as 64512
+
+R2#
+router bgp 64512
+  neighbor 10.10.10.1 remote-as 23456
+</pre>
+
 <br/>
 
 
