@@ -1504,7 +1504,7 @@ main.site-content {
 .blog_page_container .page_body {
   margin-left: 120px;
   margin-right: 120px;
-  max-width: 640px;
+  max-width: 720px;
 }
 
 body.pages_wide_text_content .blog_page_container .page_body {
@@ -1514,7 +1514,7 @@ body.pages_wide_text_content .blog_page_container .page_body {
 }
 
 .blog_page_container .single_page_body {
-  max-width: 640px;
+  max-width: 720px;
   margin-left: 120px;
   margin-right: 120px;
 }
@@ -6181,13 +6181,13 @@ start responsive design
   }
 
   .blog_post_container .post_body {
-    max-width: 640px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
   }
 
   .blog_post_container .single_post_body {
-    max-width: 640px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
@@ -6287,7 +6287,7 @@ start responsive design
   }
 
   .blog_post_container.format-standard .single_post_body.no_post_banner {
-    max-width: 640px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -6301,7 +6301,7 @@ start responsive design
   .full_width_post_single .blog_post_container .post_body.no_post_banner {
     padding-left: 0;
     padding-right: 0;
-    max-width: 640px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -6309,7 +6309,7 @@ start responsive design
   .full_width_post_single .blog_post_container.format-aside .post_body {
     padding-left: 0;
     padding-right: 0;
-    max-width: 640px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -6362,7 +6362,7 @@ start responsive design
 
 
   .blog_post_container .post_body.no_post_banner .entry-title, .blog_post_container .post_body.no_post_banner .post_meta_container, .blog_post_container .post_body.no_post_banner .post_info_wrapper {
-    max-width: 640px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -6380,7 +6380,7 @@ start responsive design
   }
 
   .blog_post_container.format-aside .post_body .entry-title, .blog_post_container.format-aside .post_body .post_meta_container, .blog_post_container.format-aside .post_body .post_info_wrapper {
-    max-width: 640px;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
   }
