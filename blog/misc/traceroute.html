@@ -157,19 +157,21 @@
 
 <!-- ============================ START CONTENT ============================================ -->
 <h2 style="text-align: center;">
-  <strong>Don't be confused with traceroute behaviour</strong><strong>.</strong>
+  <strong>Confused with traceroute behaviour</strong><strong>.</strong>
 </h2>
-
+<p>
 Over the course of the years I have observed; many times; traceroute failure even when the device is up.
 Sometimes traceroute from a customer PC to some destination does not work, and It would work with another PC when connected to the same network.
 What I failed to ask the customer is what OS are they running on their computers. See we often think traceroute is just ICMP messages
-but this is not always the case.<br/>
+but this is not always the case.
+</p>
+<p>
 Traceroutes on Windows machines uses ICMP Echo Request while on Linux and Unix machines, 
 traceroute uses UDP packets. This means if there device is discarding UDP in the network path and you are performing traceroute from a linux machine 
 packets the traceoute response will not be sent back to the source, and you would see the same effect as if the node was not reachable.
 Similarly if you traceroute from Windows PC and somefirewall in the path is blocking ICMP trace would fail.
-For extensive details on this behaviour check out <a href="https://www.networkfuntimes.com/a-qurik-of-traceroute-that-youll-want-to-know-about/">this post</a>
-
+For extensive analysis of the traceoute behaviour please check out <a href="https://www.networkfuntimes.com/a-qurik-of-traceroute-that-youll-want-to-know-about/">this post</a>
+</p>
 
                       </div>
                     </div>
