@@ -178,6 +178,9 @@
                       <h3 style="text-align: center;">
                       <strong># Guide To Network Automation</strong>
                       </h3>
+                      <p>
+                        Network automation refers to the automation of network management tasks, including provisioning, configuration, deployment, and security of both physical and virtual network devices. The goal of network automation is maximizing  network efficiency and while increasing reliability. Below are some methods used for network automation.
+                      </p>
 
                       <div id="accordion" class="entry-content blog_page_text blog_page_description">
 
@@ -186,7 +189,7 @@
                         </a></h3>
                         <div>
 
-<h4>Raw Python</h4>
+<h4>Python</h4>
 Python offers support to interact with our network devices for management and administration by using different sets of libraries. On machine with python install we can use the raw python interpreter from Windows cmd or terminal for Mac and Linux to send commands and retrieve information or send configuration to devices. Python also comes with an IDE which can be used as well. 
 In order to be able to interface with the devices we need to have appropriate libraries installed. Think of libraries as add-ons that adds features to the native python. Python by default ships with core modules for basic functionality however you can install additional modules to extend the functionality.
 Generally we can interact with our devices by using the native CLI using telnet and SSH or by using APIs such as NETCONF and RESTCONF. Luckily there are libraries for all these methods in python.
@@ -479,6 +482,10 @@ print(shell. recv(65535).decode())
 session.close()
 
 </pre>
+
+Once you know a little Python and you start doing more, you're going to start getting annoyed by all the screen scraping and RegEx you have to deal with. 
+This is because the data you get from CLI "show commands" is not structured data, so it's time to look at some nice modules to help you.
+
 
 <h5 id="Genie">Genie</h5>
 <p>
@@ -2188,7 +2195,7 @@ fisi@big> show system commit
 </pre>
 
 When we re-run the playbook again no changes are made, this is what is referred to as idempotency which essentially means only make changes when they are needed.
-
+Ansible is not the only option in its category, two other popular tools that are used along with Ansible are <a href="https://puppet.com/blog/how-automate-network-configurations-puppet/">puppet</a> and chef.
 
 
 
@@ -2526,10 +2533,13 @@ To check what documentation is availbale<br/>
 <code>$ ansible-doc -l</code>
 
 
+When we re-run the playbook again no changes are made, this is what is referred to as idempotency which essentially means only make changes when they are needed.
+Ansible is not the only option in its category, two other popular tools that are used along with Ansible are <a href="https://puppet.com/blog/how-automate-network-configurations-puppet/">puppet</a> and chef.
+
 </div>
 
 
-<h3 id="Ansible" style="text-align: center;"><a href="#">
+<h3 id="nso" style="text-align: center;"><a href="#">
   <strong>NSO</strong><strong>.</strong>
 </a></h3>
 
@@ -4103,6 +4113,332 @@ admin@ncs%
 
 </div>
 
+<h3 id="salt" style="text-align: center;"><a href="#">
+  <strong>Salt</strong><strong>.</strong>
+</a></h3>
+
+<div>
+  <h1 id="nso">Salt</h1>
+  <p>The nice thing about Salt is that you can have it react on events, rather that run only user-initiated jobs like Ansible.
+    Salt functions on a master/minion topology. A master server acts as a central control bus for the clients, which are called minions. The minions connect back to the master.
+  </p>
+  <h5>Install salt and its components</h5>
+<pre>
+baggy@focalfossa:~$ wget -O - https://repo.saltstack.com/py3/ubuntu/20.04/amd64/3001/SALTSTACK-GPG-KEY.pub | sudo apt-key add -baggy@focalfossa:~$
+baggy@focalfossa:~$ sudo nano /etc/apt/sources.list.d/saltstack.list
+baggy@focalfossa:~$ sudo cat /etc/apt/sources.list.d/saltstack.list
+deb http://repo.saltstack.com/py3/ubuntu/20.04/amd64/3001 focal main
+baggy@focalfossa:~$
+baggy@focalfossa:~$ sudo apt-get update
+.
+.
+baggy@focalfossa:~$ sudo pip3 install napalm
+baggy@focalfossa:~$ sudo apt-get install salt-api salt-cloud salt-master salt-minion salt-ssh salt-syndic -y
+.
+.
+</pre>
+
+<h5>Salt configuration</h5>
+After the installation completes, edit the proxy configuration file <code>/etc/salt/proxy</code> and add below lines
+
+<pre>
+master: localhost
+multiprocessing: false
+mine_enabled: true
+pki_dir: /etc/salt/pki/proxy
+</pre>
+
+Verify
+<pre>
+baggy@focalfossa:~$ sudo cat /etc/salt/proxy | egrep "^[a-z]"
+master: localhost
+pki_dir: /etc/salt/pki/proxy
+multiprocessing: False
+</pre>
+
+
+Edit the minion configuration file <code>/etc/salt/minion</code> and define the master as local because we are using the local server for the master role in this implementation, otherwise this iswhere you would point to your salt master.
+<pre>
+baggy@focalfossa:~$ sudo nano /etc/salt/minion
+baggy@focalfossa:~$ sudo cat /etc/salt/minion | grep "^[a-z]"
+master: localhost
+</pre>
+
+Create a pillar directory via command <code>sudo mkdir -p /srv/pillar</code> 
+Then add the top.sls and the other sls files according to the devices you have, the sls files contain respective devices parameters while the <code>top.sls</code> file ties everything together as shown below
+<pre>
+baggy@focalfossa:~$ sudo mkdir -p /srv/pillar
+baggy@focalfossa:~$ sudo nano /srv/pillar/vbox_junos_36.sls
+proxy:
+  proxytype: napalm
+  driver: junos
+  host: 192.168.56.36
+  username: fisi
+  passwd: fisi123
+
+baggy@focalfossa:~$ sudo nano /srv/pillar/gns3_ios_63.sls
+proxy:
+  proxytype: napalm
+  driver: ios
+  host: 192.168.56.63
+  username: fisi
+  passwd: fisi123
+
+baggy@focalfossa:~$ sudo nano /srv/pillar/top.sls
+base:
+  gns3.ios.63:
+    - gns3_ios_63
+  vbox.junos.36:
+    - vbox_junos_36
+baggy@focalfossa:~$
+</pre>
+
+Restart the minion and master services
+<pre>
+baggy@focalfossa:~$ sudo service salt-master start
+baggy@focalfossa:~$ sudo service salt-minion start
+baggy@focalfossa:~$ sudo service salt-master status
+● salt-master.service - The Salt Master Server
+     Loaded: loaded (/lib/systemd/system/salt-master.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2020-06-21 14:38:49 UTC; 20min ago
+       Docs: man:salt-master(1)
+             file:///usr/share/doc/salt/html/contents.html
+             https://docs.saltstack.com/en/latest/contents.html
+   Main PID: 4880 (salt-master)
+      Tasks: 32 (limit: 1041)
+     Memory: 213.5M
+.
+.
+baggy@focalfossa:~$ sudo service salt-minion status
+● salt-minion.service - The Salt Minion
+     Loaded: loaded (/lib/systemd/system/salt-minion.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2020-06-21 14:38:41 UTC; 20min ago
+       Docs: man:salt-minion(1)
+             file:///usr/share/doc/salt/html/contents.html
+             https://docs.saltstack.com/en/latest/contents.html
+   Main PID: 4707 (salt-minion)
+      Tasks: 4 (limit: 1041)
+     Memory: 64.8M
+.
+.
+</pre>
+
+To configure the minion to run as a service create the file <code>salt-proxy@.service</code>
+<code>sudo nano /etc/systemd/system/salt-proxy@.service</code> and add the contents as shown in snapshot then reload the system so it picks up the new unit
+<pre>
+baggy@focalfossa:~$ sudo cat /etc/systemd/system/salt-proxy@.service
+[Unit]
+Description=Salt proxy minion
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/salt-proxy -l debug --proxyid=%i
+User=root
+Group=root
+Restart=always
+RestartPreventExitStatus=SIGHUP
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+
+baggy@focalfossa:~$ sudo systemctl daemon-reload
+</pre>
+
+
+We then run the the proxy minions
+<pre>
+baggy@focalfossa:~$ sudo salt-proxy --proxyid=gns3.ios.63 -l debug
+.
+.
+baggy@focalfossa:~$ sudo salt-proxy --proxyid=vbox.junos.36 -l debug
+.
+.
+</pre>
+
+You will note the error message on both minions debug output
+<pre>
+[ERROR   ] The Salt Master has cached the public key for this node, this salt minion will wait for 10 seconds before attempting to re-authenticate
+[INFO    ] Waiting 10 seconds before retry.
+</pre>
+This is normal and is due to the salt key from the minion not being accepted by the master. Quit the minion with <code>CTRL+C</code>
+We will need to accept the minion key and re-run the proxy.
+
+<pre>
+baggy@focalfossa:~$ sudo salt-key
+Accepted Keys:
+Denied Keys:
+Unaccepted Keys:
+gns3.ios.63
+vbox.junos.36
+Rejected Keys:
+
+baggy@focalfossa:~$ sudo salt-key -a gns3.ios.63
+The following keys are going to be accepted:
+Unaccepted Keys:
+gns3.ios.63
+Proceed? [n/Y] y
+Key for minion gns3.ios.63 accepted.
+
+baggy@focalfossa:~$ sudo salt-key -a vbox.junos.36
+The following keys are going to be accepted:
+Unaccepted Keys:
+vbox.junos.36
+Proceed? [n/Y] y
+Key for minion vbox.junos.36 accepted.
+
+baggy@focalfossa:~$ sudo salt-proxy --proxyid=gns3.ios.63 -l debug & sudo salt-proxy --proxyid=vbox.junos.36 -l debug
+</pre>
+
+ On a different terminal window test the configuration by ping as shown below
+
+<pre>
+baggy@focalfossa:~$ sudo salt vbox.junos.36 test.ping
+vbox.junos.36:
+    True
+baggy@focalfossa:~$ sudo salt gns3.ios.63 test.ping
+gns3.ios.63:
+    True
+baggy@focalfossa:~$
+</pre>
+
+It return <code>True</code> means everything is well set. On the original terminal window where we ran the minions, we can end the process by <code>CTRL+C</code>
+Then we restart the minions as a daemon and sync the packages
+
+<pre>
+baggy@focalfossa:~$ sudo salt-proxy --proxyid=vbox.junos.36 -d
+baggy@focalfossa:~$ sudo salt-proxy --proxyid=gns3.ios.63 -d
+
+baggy@focalfossa:~$ sudo salt gns3.ios.63 saltutil.sync_all
+.
+.
+baggy@focalfossa:~$ sudo salt vbox.junos.36 saltutil.sync_all
+.
+.
+baggy@focalfossa:~$ sudo salt "*" test.ping
+gns3.ios.63:
+    True
+vbox.junos.36:
+    True
+baggy@focalfossa:~$
+</pre>
+
+The catch with salt is the fact that each proxy-minion is run as a separate process and consumes memory so in setups with large number of devices resources must be considered.
+
+<h5>Salt in action</h5>
+
+<p>
+Using salt to check arp table; in below command the "*" means act on all devices defined in the <code>top.sls</code> file.
+Otherwise salt offers multiple ways of matching devices to act upon. You can match devices by serial numbers, models and software versions among others.
+</p>
+<pre>
+baggy@focalfossa:~$ sudo salt "*" net.arp --out=table
+vbox.junos.36:
+----------
+    comment:
+    ----------
+    out:
+    ----------
+        ----------------------------------------------------------
+        |  Age   | Interface |       Ip      |        Mac        |
+        ----------------------------------------------------------
+        |  29.0  |   em0.0   |  192.168.56.1 | 0A:00:27:00:00:23 |
+        ----------------------------------------------------------
+        | 1057.0 |   em0.0   |  192.168.56.2 | 08:00:27:88:C9:8E |
+        ----------------------------------------------------------
+        | 1070.0 |   em0.0   |  192.168.56.3 | 00:0C:29:C6:39:09 |
+        ----------------------------------------------------------
+        | 1409.0 |   em0.0   | 192.168.56.63 | CA:01:AD:18:00:08 |
+        ----------------------------------------------------------
+    result:
+    ----------
+gns3.ios.63:
+----------
+    comment:
+    ----------
+    out:
+    ----------
+        -------------------------------------------------------------------
+        |  Age  |      Interface      |       Ip      |        Mac        |
+        -------------------------------------------------------------------
+        |  0.0  | FastEthernet0/1.200 |  172.17.13.63 | CA:01:AD:18:00:06 |
+        -------------------------------------------------------------------
+        |  0.0  | FastEthernet0/1.100 |  172.17.23.63 | CA:01:AD:18:00:06 |
+        -------------------------------------------------------------------
+        |  0.0  | FastEthernet0/1.400 |  172.17.34.63 | CA:01:AD:18:00:06 |
+        -------------------------------------------------------------------
+        |  0.0  | FastEthernet0/1.600 |  172.17.35.63 | CA:01:AD:18:00:06 |
+        -------------------------------------------------------------------
+        |  33.0 |   FastEthernet0/0   |  192.168.56.1 | 0A:00:27:00:00:23 |
+        -------------------------------------------------------------------
+        |  23.0 |   FastEthernet0/0   |  192.168.56.2 | 08:00:27:88:C9:8E |
+        -------------------------------------------------------------------
+        | 225.0 |   FastEthernet0/0   |  192.168.56.3 | 00:0C:29:C6:39:09 |
+        -------------------------------------------------------------------
+        |  0.0  |   FastEthernet0/0   | 192.168.56.36 | 08:00:27:C6:60:F8 |
+        -------------------------------------------------------------------
+        |  0.0  |   FastEthernet0/0   | 192.168.56.63 | CA:01:AD:18:00:08 |
+        -------------------------------------------------------------------
+    result:
+    ----------
+</pre>
+
+Salt introduces the concept of grains. Essentially grains store different data collected from the devices.
+In below example we use the grain switch <code>G</code> to match the <code>os</code> grain; matching devices with <code>ios</code> operating system and then use the <code>grains.get</code> function to grab the serial number of the matched device.
+<pre>
+baggy@focalfossa:~$ sudo salt -G os:ios grains.get serial
+gns3.ios.63:
+    4279256517
+baggy@focalfossa:~$
+</pre>
+
+Salt also allows to use regular expression when matching on devices. In below example we match devices with names containing the characters "gns" then we use salt function to get lldp neighbors also we specify the output format of the output data to be in "json" 
+<pre>
+baggy@focalfossa:~$ sudo salt gns\* napalm.call get_lldp_neighbors --out json
+{
+    "gns3.ios.63": {
+        "out": {},
+        "result": true,
+        "comment": ""
+    }
+}
+</pre>
+
+In below example we use compound matching, here we say match devices of model OLIVE that's also running version 12
+<pre>
+baggy@focalfossa:~$ sudo salt -C 'G@model:OLIVE and G@version:12*' test.ping
+vbox.junos.36:
+    True
+baggy@focalfossa:~$
+</pre>
+
+In below example we use compound matching, here we say match devices of model OLIVE that's also running version 12; or device of model 7206VX.
+Resulting to both our devices being matched.
+<pre>
+baggy@focalfossa:~$ sudo salt -C 'G@model:OLIVE and G@version:12* or G@model:7206VXR' test.ping
+vbox.junos.36:
+    True
+gns3.ios.63:
+    True
+baggy@focalfossa:~$
+</pre>
+
+There are many other functions some are;
+<pre>
+ bgp.neighbors 
+ net.interfaces --out=json
+ net.ipaddrs --out=json
+ net.lldp
+ net.mac vlan=10
+ net.optics
+ net.ping 8.8.8.8 ttl=3 size=1500 count=5
+ net.environment
+ net.facts
+</pre>
+
+Salt has many other features such as reactors and beacons that takes the automation functionality to a whole new level. For example reactors can be intergrated with syslog engines and have salt reat to certain syslog messages received from the network devices. <a href="https://mirceaulinic.net/2018-09-27-network-automation-at-scale/">Learn more</a> about salt.
+</div>
 
                       </div>
                     </div>
@@ -4171,26 +4507,12 @@ BSc Telecommunications Eng.
                   <a href="../../index.html">Home</a>
                 </li>
                 <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu">
-                  <a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle">Blog</a>
-                  <ul role="menu" class=" dropdown-menu">
-                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu">
-                      <a href="../collaboration/index.html">Collaboration</a>
-                    </li>
-                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu">
-                      <a href="../networkauto/index.html">Network Automation</a>
-                    </li>
-                    
-                    <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu">
-                      <a href="https://github.com/basondole/netmanagement">Misc</a>
-                    </li>
-                  </ul>
+                  <a href="../../blog.html">Blog</a>
+                  
                 </li>
                 <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="../../bgp.html">BGP</a></li>
                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu current-menu-item current_page_item active">
                   <a href="../../about.html">About</a>
-                </li>
-                <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-145 current_page_item menu-item-412 default_menu active">
-                  <a href="../../contact.html.html">Contact</a>
                 </li>
                 
                 </li>
