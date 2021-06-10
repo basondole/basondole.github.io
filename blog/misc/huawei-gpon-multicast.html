@@ -120,12 +120,12 @@
               <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-318 default_menu"><a href="index.html" class="local-root-page">Home</a></li>
               
               <li id="menu-item-320" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-320 dropdown default_menu current-menu-item current_page_item active"><a href="../../blog.html" data-hover="dropdown" class="dropdown-toggle" class="local-root-page">Blog</a>
-                <ul role="menu" class=" dropdown-menu">
+               <!--  <ul role="menu" class=" dropdown-menu">
                   <li id="menu-item-424" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-424 default_menu"><a href="index.html">Collaboration</a></li>
                   <li id="menu-item-3124" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3124 default_menu"><a href="../networkauto/index.html">Network Automation</a></li>
                   <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="">Tools</a></li>
                   <li id="menu-item-425" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-425 default_menu"><a href="index.html">Misc</a></li>
-                </ul>
+                </ul> -->
               </li>
               <li id="menu-item-2056" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2056 default_menu"><a href="bgp.html" class="local-root-page">BGP</a></li>
               <li id="menu-item-413" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-413 default_menu"><a href="about.html" class="local-root-page">About</a></li>
@@ -407,6 +407,122 @@ MA5680T#undo terminal monitor
 MA5680T#undo terminal debugging 
 % Current terminal debugging is off
 </pre>
+<br/>
+<br/>
+
+
+<h4>Alt: transparently forward multicast traffic through the OLT</h4>
+<p>
+In order to allow the OLT to pass through transparently to and from the ONT. In this example here below; port LAN1 of ONT is provisioned with internet; vlan 72 and the ONT is doing routing for this internet service while port LAN2 is provisioned with vlan 73 and the ONT is forwarding multicast traffic through the OLT on this service.
+</p>
+
+<pre>
+  INTERNET-PC          
+    ┌──────┐
+    │      ├────────────┐    
+    └──────┘            │                         
+                   LAN1 │                          MPLS & INTERNET               
+                     ┌──────┐       ┌───────┐        ┌────────┐           ┌────────┐
+                     │ ONT  ├───────┤  OLT  ├────────┤CORE NET├───────────┤        │
+                     └──┬───┘       └───────┘        └────────┘           └────────┘
+                   LAN2 │                                             MULITICAST-RECEIVER
+    ┌──────┐            │                                         
+    │      ├────────────┘
+    └──────┘
+MULITICAST-SOURCE
+</pre>
+
+<p>
+To allow the OLT to receive or forward multicast traffic to the ONT, make the service-port transparent with respect to multicast.
+</p>
+
+1. Get the service-port associated with a vlan
+<pre>
+MA5600T(config)#display service-port vlan 73 
+ Switch-Oriented Flow List
+ ----------------------------------------------------------------------------
+ INDEX VLAN VLAN     PORT F/ S/ P VPI  VCI   FLOW  FLOW       RX   TX   STATE
+       ID   ATTR     TYPE                    TYPE  PARA            
+ ----------------------------------------------------------------------------
+  1235   73 common   gpon 0/2 /7  9    2     vlan  102        21   21   up   
+ ----------------------------------------------------------------------------
+  Total : 1  (Up/Down :    1/0)
+</pre>
+
+2. Enable multicast forwarding on service port
+<pre>
+MA5600T(config)#multicast-unknown policy service-port 1235 transparent
+MA5600T(config)#display current-configuration section btv
+#
+ [btv-config]
+  <btv-config>
+ btv
+ multicast-unknown policy service-port-list 1235 transparent
+#
+</pre>
+
+3. It is also essential to make the service profile associated with the ONT enbaled for transparency
+
+<pre>
+MA5600T(config)#ont-srvprofile gpon profile-name PAUL-MCAST
+MA5600T(config-gpon-srvprofile-76)#transparent enable 
+MA5600T(config-gpon-srvprofile-76)#commit 
+MA5600T(config-gpon-srvprofile-76)#quit
+MA5600T(config)#display ont-srvprofile gpon profile-name PAUL-MCAST
+ -----------------------------------------------------------------------------
+ Profile-ID  : 76
+ Profile-name: PAUL-MCAST
+ Access-type : GPON
+ -----------------------------------------------------------------------------
+ Port-type     Port-number
+ -----------------------------------------------------------------------------
+ POTS          0
+ ETH           0
+ TDM           0
+ MOCA          0
+ CATV          0
+ -----------------------------------------------------------------------------
+ TDM port type                     : E1
+ TDM service type                  : TDMoGem
+ MAC learning function switch      : Enable
+ ONT transparent function switch   : Enable
+</pre>
+
+<h5>Important:</h5> To allow a ONT to operate as a router and forward multicast as well, the port provisioned with multicast forwarding must be excluded from LAN configuration within the ONT GUI
+
+
+In this example port LAN1 is provisioned with vlan 72 and ONT is doing routing for internet
+
+<h5>Note:</h5> MAC address is leant on VLAN4095 which is special reserved VLAN for routed ONT port
+
+<pre>
+MA5600T#display ont-learned-mac 0/2/7 9 eth 1 
+---------------------------------------------------------------
+F/S/P   ONTID    ONT        ONT       MAC-ADDRESS        VLAN
+                 port-type  port-ID
+---------------------------------------------------------------
+0/ 2/7   9       ETH        1         705a-0f2a-47cc     4095
+0/ 2/7   9       ETH        1         705a-0f2a-47cc     0
+---------------------------------------------------------------
+Total: 2
+</pre>
+
+In this example port LAN2 is provisioned with vlan 73 and ONT forwarding muliticast traffic to OLT
+
+<h5>Note:</h5> MAC address is learn on VLAN102 which is the standard configuration based on service-profile.
+
+<pre>
+MA5600T#display ont-learned-mac 0/2/7 9 eth 2
+---------------------------------------------------------------
+F/S/P   ONTID    ONT        ONT       MAC-ADDRESS        VLAN
+                 port-type  port-ID
+---------------------------------------------------------------
+0/ 2/7   9       ETH        2         10e7-c6eb-9d4c     0
+0/ 2/7   9       ETH        2         10e7-c6eb-9d4c     102
+---------------------------------------------------------------
+Total: 2
+</pre>
+
 
 
 <h5>References</h5>
