@@ -1,0 +1,1077 @@
+Huawei SRv6 Solution Notes
+++++++++++++++++++++++++++
+
+The major difference between SR-MPLS and SRv6 is that the SID in SR-MPLS is MPLS label where as SID in SRv6 is encoded as a native IPv6 address.
+SRv6 solution completely deletes the MPLS data plane, services are encapsulated in native ipv6 addresses.
+While nodes terminating the servies require SRv6 support, the intermediate nodes only require native IPv6 support. No need to change anything on the intermediate nodes.
+
+
+SRv6 encapsulation
+++++++++++++++++++
+
+Best Effort Forwarding
+======================
+This implementation takes advantage of the native IPv6 address.
+
+		   SR/MPLS                 SRv6
+
+	___ +-----------+     ---  +-------------+
+	 |  | SR LABEL  |     40B  | IPv6 HEADER |
+	 8B +-----------+     ---  +-------------+
+	 |	| VPN LABEL |          |   PAYLOAD   |
+	--- +-----------+          +-------------+
+		|  PAYLOAD  |
+		+-----------+
+
+
+Traffic engineering forwarding
+==============================
+TE requires the use of the Segment Routing header, SRH, this is an extension header added to IPv6 packets to implement Segment Routing IPv6 (SRv6) based on the IPv6 forwarding plane. It specifies an IPv6 explicit path and stores IPv6 segment lists that function in the same way as segment lists in SR-MPLS.
+The fields in SRH are 8 bytes in total nevertheless in additional to that is 16 bytes for each IPv6 added in the segment list field of the SRH.
+
+
+		   SR-MPLS                     SRv6
+
+	___ +--------------+     ---  +-------------+
+	 |  | SR LABEL * 3 |     40B  | IPv6 HEADER |
+	16B +--------------+     ---  +-------------+
+	 |	|   VPN LABEL  |     56B  |SRH IPV6 * 3 |
+	--- +--------------+     ---  +-------------+
+		|    PAYLOAD   |		  |   PAYLOAD   |
+		+--------------+		  +-------------+
+
+
+NB: SRv6 does have more overhead than traditional SR/MPLS
+
+For large packets, at least 1024 bytes, SRv6 encapsulation efficiency is not a concern with about 2% loss in efficiency fo BE forwarding. However for small packets 128 bytes or less encapsulation efficiency is not good, down by 30% compared to SR/MPLS
+Nevertheless in backbone or mobile backhaul networks lare packets occupy more than 80% of overall traffic.
+Small size packets are mostly upstream traffic which is usually much less than downstream.
+The encapsulation overhead will not be the bottleneck for network throughput.
+
+
+SRv6 segments
++++++++++++++
+SRv6 segments are identified using segment identifiers (SIDs) encoded as IPv6 addresses. An SRv6 SID consists of two parts: Locator and Function,  function. In general, each locator value must be unique in an SR domain.
+example ipv6-prefix fd12:3456:886a:1:6000:D40::/92
+ 
+Each SRv6-capable node keeps a local SID table containing all SRv6 SIDs generated on the node
+An SRv6 forwarding table (FIB) can be generated based on this table. There are a wide range of SRv6 SIDs associated with different functions.
+
+Codename	Behaviour												Remark
+End			Endpoint												SID that identifies a destination node, similar to a node SID in SR-MPLS
+End.x		Endpoint w\ L3 cross-connect							SID that identifies a link, similar to an adjacency SID in SR-MPLS.
+End.DT4		Endpoint w\ decapsulation + ipv4 table lookup			SID that identifies an IPv4 VPN instance, equivalent to per-VRF VPN label in L3VPNv4 scenarios
+End.DT6		Endpoint w\ decapsulation + ipv6 table lookup			SID that identifies an IPv6 VPN instance, equivalent to per-VRF VPN label in L3VPNv6 scenarios
+End.DT46	Endpoint w\ decapsulation + ipv4/6 table lookup			per-VRF VPN label
+End.DX4		Endpoint w\ decapsulation + ipv4 cross-conect			SID that identifies an IPv4 CE, equivalent to per-CE VPN label in L3VPNv4 scenarios.
+End.DX6		Endpoint w\ decapsulation + ipv6 cross-conect			SID that identifies an IPv6 CE, equivalent to per-CE VPN label in L3VPNv6 scenarios.
+End.DX2		Endpoint w\ decapsulation + L2 cross-conect				Layer 2 cross-connect endpoint SID that identifies an endpoint, used in EVPN VPWS scenarios.
+End.DX2L															If a bypass tunnel exists on the network, SID is generated automatically when a CE is dual-homed to PEs in EVPN VPWS scenarios.
+End.DX2V	Endpoint w\ decapsulation + VLAN L2 table lookup
+End.DT2U	Endpoint w\ decapsulation + unicast MAC L2 table lookup	Layer 2 cross-connect endpoint SID to which unicast MAC table lookup is bound, used in EVPN VPLS unicast scenarios.
+End.DT2UL															Generated automatically. The SID can be used to send unicast traffic over the bypass tunnel when a CE is dual-homed to PEs in EVPN VPLS unicast scenarios.
+End.DT2M	Endpoint w\ decapsulation + L2 table flooding			Layer 2 cross-connect endpoint SID to which broadcast-based flooding is bound, used in EVPN VPLS BUM scenarios.
+End.OP																OAM SID that specifies the punt behavior to be implemented for OAM packets in ping and tracert scenarios.
+
+
+https://support.huawei.com/enterprise/en/doc/EDOC1100142680/6420a43f/srv6-segment
+
+
+
+https://support.huawei.com/hedex/pages/DOC1100733054AEJ1214J/05/DOC1100733054AEJ1214J/05/resources/software/nev8r10_vrpv8r16/user/vrp/dc_vrp_srv6_cfg_all_0010.html?ft=0&fe=10&hib=6.11.3.22&id=EN-US_TASK_0172368967&text=Configuration%2520Examples%2520for%2520SRv6%2520BE&docid=DOC1100733054
+
+
+Software requirement
+++++++++++++++++++++
+V1R19C00
+
+
+L3VPNv4 over SRv6 BE
+++++++++++++++++++++
+
+   [CE1]--------[PE1]----------------[P]--------------[PE2]-----------------[CE2]
+
+                  |<----------------SRv6--------------->|
+
+The configuration roadmap is as follows:
+  - Enable IPv6 forwarding and configure an IPv6 address for each interface on PE1, the P, and PE2.
+  - Enable IS-IS, configure an IS-IS level, and specify a network entity title (NET) on PE1, the P, and PE2.
+  - Configure VPN instances on PE1 and PE2.
+  - Establish an EBGP peer relationship between each PE and its connected CE.
+  - Establish an MP-IBGP peer relationship between PEs.
+  - Configure SRv6 on PE1 and PE2, and enable IS-IS SRv6.
+
+PE1 configuration file
+======================
+#
+sysname PE1
+#
+ip vpn-instance vpna
+ ipv4-family
+  route-distinguisher 100:1
+  vpn-target 111:1 export-extcommunity
+  vpn-target 111:1 import-extcommunity
+#               
+segment-routing ipv6
+ encapsulation source-address 2001:DB8:1::1
+ locator as1 ipv6-prefix 2001:DB8:100:: 64 static 32
+#               
+isis 1          
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0001.00
+ #              
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator as1
+ #              
+#               
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ipv6 enable    
+ ipv6 address 2001:DB8:10::1/96
+ isis ipv6 enable 1
+#               
+interface GigabitEthernet2/0/0
+ undo shutdown  
+ ip binding vpn-instance vpna
+ ip address 10.1.1.1 255.255.255.0
+#               
+interface LoopBack1
+ ipv6 enable    
+ ipv6 address 2001:DB8:1::1/128
+ isis ipv6 enable 1
+#               
+bgp 100         
+ router-id 1.1.1.1
+ peer 2001:DB8:3::3 as-number 100
+ peer 2001:DB8:3::3 connect-interface LoopBack1
+ #              
+ ipv4-family unicast
+  undo synchronization
+ #              
+ ipv6-family unicast
+  undo synchronization
+ #              
+ ipv4-family vpnv4
+  policy vpn-target
+  peer 2001:DB8:3::3 enable
+  peer 2001:DB8:3::3 prefix-sid
+ #              
+ ipv4-family vpn-instance vpna
+  import-route direct
+  segment-routing ipv6 locator as1
+  segment-routing ipv6 best-effort
+  peer 10.1.1.2 as-number 65410
+#               
+return
+
+P configuration file
+====================
+#
+sysname P        
+#               
+isis 1          
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0002.00
+ #              
+ ipv6 enable topology ipv6
+ #
+#               
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ipv6 enable    
+ ipv6 address 2001:DB8:10::2/96
+ isis ipv6 enable 1 
+# 
+interface GigabitEthernet2/0/0
+ undo shutdown  
+ ipv6 enable    
+ ipv6 address 2001:DB8:20::1/96
+ isis ipv6 enable 1  
+#               
+interface LoopBack1
+ ipv6 enable    
+ ipv6 address 2001:DB8:2::2/128
+ isis ipv6 enable 1
+#               
+return 
+
+
+PE2 configuration file
+======================
+#
+sysname PE2
+#
+ip vpn-instance vpna
+ ipv4-family
+  route-distinguisher 200:1
+  vpn-target 111:1 export-extcommunity
+  vpn-target 111:1 import-extcommunity
+#               
+segment-routing ipv6
+ encapsulation source-address 2001:DB8:3::3
+ locator as1 ipv6-prefix 2001:DB8:300:: 64 static 32
+#               
+isis 1          
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0003.00
+ #              
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator as1
+ #              
+#               
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ipv6 enable    
+ ipv6 address 2001:DB8:20::2/96
+ isis ipv6 enable 1
+#               
+interface GigabitEthernet2/0/0
+ undo shutdown  
+ ip binding vpn-instance vpna
+ ip address 10.2.1.1 255.255.255.0
+#               
+interface LoopBack1
+ ipv6 enable    
+ ipv6 address 2001:DB8:3::3/128
+ isis ipv6 enable 1
+#               
+bgp 100         
+ router-id 2.2.2.2
+ peer 2001:DB8:1::1 as-number 100
+ peer 2001:DB8:1::1 connect-interface LoopBack1
+ #              
+ ipv4-family unicast
+  undo synchronization
+ #              
+ ipv6-family unicast
+  undo synchronization
+ #              
+ ipv4-family vpnv4
+  policy vpn-target
+  peer 2001:DB8:1::1 enable
+  peer 2001:DB8:1::1 prefix-sid
+ #              
+ ipv4-family vpn-instance vpna
+  import-route direct
+  segment-routing ipv6 locator as1
+  segment-routing ipv6 best-effort
+  peer 10.2.1.2 as-number 65420
+#               
+return
+
+
+CE1 configuration file
+======================
+#
+sysname CE1
+#
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ip address 10.1.1.2 255.255.255.0
+#               
+interface LoopBack1
+ ip address 11.11.11.11 255.255.255.255
+#               
+bgp 65410       
+ peer 10.1.1.1 as-number 100
+ #              
+ ipv4-family unicast
+  undo synchronization
+  network 11.11.11.11 255.255.255.255
+  peer 10.1.1.1 enable
+#               
+return 
+
+
+CE2 configuration file
+======================
+#
+sysname CE2
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ip address 10.2.1.2 255.255.255.0
+#
+interface LoopBack1
+ ip address 22.22.22.22 255.255.255.255
+#
+bgp 65420
+ peer 10.2.1.1 as-number 100
+#
+ ipv4-family unicast
+  undo synchronization
+  network 22.22.22.22 255.255.255.255
+  peer 10.2.1.1 enable
+#
+return
+
+
+display isis peer
+display isis route
+display ip vpn-instance verbose
+display bgp vpnv4 vpn-instance vpna peer
+display bgp vpnv4 all peer
+display segment-routing ipv6 locator verbose
+display segment-routing ipv6 local-sid end-dt4 forwarding
+display bgp vpnv4 all routing-table
+display ip routing-table vpn-instance vpna
+display ip routing-table vpn-instance vpna 22.22.22.22 verbose
+
+
+
+
+EVPN L3VPNv4 over SRv6 BE
++++++++++++++++++++++++++
+
+   [SITE1]---------[CE1]--------[PE1]----------------[P]--------------[PE2]-------------[CE2]------[SITE2]
+
+
+
+The configuration roadmap is as follows:
+  - Enable IPv6 forwarding and configure an IPv6 address for each interface on PE1, the P, and PE2.
+  - Enable IS-IS, configure an IS-IS level, and specify a network entity title (NET) on PE1, the P, and PE2.
+  - Configure an IPv4 L3VPN instance on each PE and bind the IPv4 L3VPN instance to an access-side interface.
+  - Establish an EBGP peer relationship between each PE and its connected CE.
+  - Establish a BGP EVPN peer relationship between PEs.
+  - Configure SRv6 BE on PEs, and enable IS-IS SRv6
+
+PE1 configuration file
+
+#
+sysname PE1
+#
+ip vpn-instance vpn1
+ ipv4-family
+  route-distinguisher 100:1
+  vpn-target 1:1 export-extcommunity evpn
+  vpn-target 1:1 import-extcommunity evpn
+#
+segment-routing ipv6
+ encapsulation source-address 2001:DB8:1::1
+ locator PE1 ipv6-prefix 2001:DB8:100:: 64 static 32
+ opcode ::100 end-dt4 vpn-instance vpn1 evpn
+#
+isis 1
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0001.00
+ #
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator PE1
+ #
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:10::1/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown
+ ip binding vpn-instance vpn1
+ ip address 10.1.1.1 255.255.255.0
+#
+interface LoopBack1
+ ipv6 enable
+ ipv6 address 2001:DB8:1::1/128
+ isis ipv6 enable 1
+#
+bgp 100
+ router-id 1.1.1.1
+ peer 2001:DB8:3::3 as-number 100
+ peer 2001:DB8:3::3 connect-interface LoopBack1
+ #
+ ipv4-family unicast
+  undo synchronization
+ #
+ ipv4-family vpn-instance vpn1
+  import-route direct
+  advertise l2vpn evpn
+  segment-routing ipv6 locator PE1 evpn
+  segment-routing ipv6 best-effort evpn
+  peer 10.1.1.2 as-number 65410
+ #
+ l2vpn-family evpn
+  undo policy vpn-target
+  peer 2001:DB8:3::3 enable
+  peer 2001:DB8:3::3 advertise encap-type srv6
+#
+return
+P configuration file
+
+#
+sysname P
+#
+isis 1
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0002.00
+ #
+ ipv6 enable topology ipv6
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:10::2/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:20::1/64
+ isis ipv6 enable 1
+#
+interface LoopBack1
+ ipv6 enable
+ ipv6 address 2001:DB8:2::2/128
+ isis ipv6 enable 1
+#
+return
+PE2 configuration file
+
+#
+sysname PE2
+#
+ip vpn-instance vpn1
+ ipv4-family
+  route-distinguisher 200:1
+  vpn-target 1:1 export-extcommunity evpn
+  vpn-target 1:1 import-extcommunity evpn
+#
+segment-routing ipv6
+ encapsulation source-address 2001:DB8:3::3
+ locator PE2 ipv6-prefix 2001:DB8:130:: 64 static 32
+ opcode ::200 end-dt4 vpn-instance vpn1 evpn
+#
+isis 1
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0003.00
+ #
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator PE2
+ #
+#
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ipv6 enable
+ ipv6 address 2001:DB8:20::2/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown
+ ip binding vpn-instance vpn1
+ ip address 10.2.1.1 255.255.255.0
+#
+interface LoopBack1
+ ipv6 enable
+ ipv6 address 2001:DB8:3::3/128
+ isis ipv6 enable 1
+#
+bgp 100
+ router-id 3.3.3.3
+ peer 2001:DB8:1::1 as-number 100
+ peer 2001:DB8:1::1 connect-interface LoopBack1
+ #
+ ipv4-family unicast
+  undo synchronization
+ #
+ ipv4-family vpn-instance vpn1
+  import-route direct
+  advertise l2vpn evpn
+  segment-routing ipv6 locator PE2 evpn
+  segment-routing ipv6 best-effort evpn
+  peer 10.2.1.2 as-number 65420
+ #
+ l2vpn-family evpn
+  undo policy vpn-target
+  peer 2001:DB8:1::1 enable
+  peer 2001:DB8:1::1 advertise encap-type srv6
+#
+return
+CE1 configuration file
+
+#
+sysname CE1
+#
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ip address 10.1.1.2 255.255.255.0
+#               
+interface LoopBack1
+ ip address 11.11.11.11 255.255.255.255
+#               
+bgp 65410       
+ peer 10.1.1.1 as-number 100
+ #              
+ ipv4-family unicast
+  undo synchronization
+  network 11.11.11.11 255.255.255.255
+  peer 10.1.1.1 enable
+#               
+return 
+CE2 configuration file
+
+#
+sysname CE2
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ip address 10.2.1.2 255.255.255.0
+#
+interface LoopBack1
+ ip address 22.22.22.22 255.255.255.255
+#
+bgp 65420
+ peer 10.2.1.1 as-number 100
+#
+ ipv4-family unicast
+  undo synchronization
+  network 22.22.22.22 255.255.255.255
+  peer 10.2.1.1 enable
+#
+return
+
+display bgp evpn peer
+display bgp evpn all routing-table prefix-route
+display ip routing-table vpn-instance vpn1
+display segment-routing ipv6 local-sid end-dt4 forwarding
+
+
+EVPN L3VPNv6 over SRv6 BE
++++++++++++++++++++++++++
+
+   [SITE1]--------[PE1]----------------[P]--------------[PE2]-----------------[SITE2]
+
+                  |<----------------SRv6--------------->|
+
+The configuration roadmap is as follows:
+  - Enable IPv6 forwarding and configure an IPv6 address for each interface on PE1, the P, and PE2.
+  - Enable IS-IS, configure an IS-IS level, and specify a network entity title (NET) on PE1, the P, and PE2.
+  - Configure an IPv6 L3VPN instance on each PE and bind the IPv6 L3VPN instance to an access-side interface.
+  - Establish a BGP EVPN peer relationship between PEs.
+  - Configure SRv6 BE on PEs, and enable IS-IS SRv6.
+
+
+PE1 configuration file
+
+#
+sysname PE1
+#
+ip vpn-instance vpn1
+ ipv6-family
+  route-distinguisher 100:1
+  apply-label per-instance
+  vpn-target 1:1 export-extcommunity evpn
+  vpn-target 1:1 import-extcommunity evpn
+#
+segment-routing ipv6
+ encapsulation source-address 2001:DB8:1::1
+ locator PE1 ipv6-prefix 2001:DB8:100:: 64 static 32
+#
+isis 1
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0001.00
+ #
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator PE1
+ #
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:10::1/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown
+ ip binding vpn-instance vpn1
+ ipv6 enable
+ ipv6 address 2001:DB8:11::1/64
+#
+interface LoopBack1
+ ipv6 enable
+ ipv6 address 2001:DB8:1::1/128
+ isis ipv6 enable 1
+#
+bgp 100
+ router-id 1.1.1.1
+ peer 2001:DB8:3::3 as-number 100
+ peer 2001:DB8:3::3 connect-interface LoopBack1
+ #
+ ipv4-family unicast
+  undo synchronization
+ #
+ ipv6-family vpn-instance vpn1
+  import-route direct
+  advertise l2vpn evpn
+  segment-routing ipv6 locator PE1 evpn
+  segment-routing ipv6 best-effort evpn
+ #
+ l2vpn-family evpn
+  undo policy vpn-target
+  peer 2001:DB8:3::3 enable
+  peer 2001:DB8:3::3 advertise encap-type srv6
+#
+return
+P configuration file
+
+#
+sysname P
+#
+isis 1
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0002.00
+ #
+ ipv6 enable topology ipv6
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:10::2/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:20::1/64
+ isis ipv6 enable 1
+#
+interface LoopBack1
+ ipv6 enable
+ ipv6 address 2001:DB8:2::2/128
+ isis ipv6 enable 1
+#
+return
+PE2 configuration file
+
+#
+sysname PE2
+#
+ip vpn-instance vpn1
+ ipv6-family
+  route-distinguisher 200:1
+  apply-label per-instance
+  vpn-target 1:1 export-extcommunity evpn
+  vpn-target 1:1 import-extcommunity evpn
+#
+segment-routing ipv6
+ encapsulation source-address 2001:DB8:3::3
+ locator PE2 ipv6-prefix 2001:DB8:130:: 64 static 32
+#
+isis 1
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0003.00
+ #
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator PE2
+ #
+#
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ipv6 enable
+ ipv6 address 2001:DB8:20::2/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown
+ ip binding vpn-instance vpn1
+ ipv6 enable
+ ipv6 address 2001:DB8:22::1/64
+#
+interface LoopBack1
+ ipv6 enable
+ ipv6 address 2001:DB8:3::3/128
+ isis ipv6 enable 1
+#
+bgp 100
+ router-id 3.3.3.3
+ peer 2001:DB8:1::1 as-number 100
+ peer 2001:DB8:1::1 connect-interface LoopBack1
+ #
+ ipv4-family unicast
+  undo synchronization
+ #
+ ipv6-family vpn-instance vpn1
+  import-route direct
+  advertise l2vpn evpn
+  segment-routing ipv6 locator PE2 evpn
+  segment-routing ipv6 best-effort evpn
+ #
+ l2vpn-family evpn
+  undo policy vpn-target
+  peer 2001:DB8:1::1 enable
+  peer 2001:DB8:1::1 advertise encap-type srv6
+#
+return
+
+display bgp evpn all routing-table prefix-route
+display ipv6 routing-table vpn-instance vpn1
+>>> visioned by Big Paul display segment-routing ipv6 local-sid end-dt6 forwarding
+
+
+
+EVPN VPWS over SRv6 BE
+++++++++++++++++++++++
+
+   [SITE1]--------[PE1]----------------[P]--------------[PE2]-----------------[SITE2]
+
+                  |<----------------SRv6--------------->|
+
+The configuration roadmap is as follows:
+  - Enable IPv6 forwarding and configure an IPv6 address for each interface on PE1, the P, and PE2.
+  - Enable IS-IS, configure an IS-IS level, and specify a network entity title (NET) on PE1, the P, and PE2.
+  - Configure EVPN VPWS and EVPL instances on each PE and bind the EVPL instance to an access-side sub-interface.
+  - Establish a BGP EVPN peer relationship between PEs.
+  - Configure SRv6 BE on PEs.
+
+PE1 configuration file
+
+#
+sysname PE1
+#
+evpn vpn-instance evrf1 vpws
+ route-distinguisher 100:1
+ segment-routing ipv6 best-effort
+ vpn-target 1:1 export-extcommunity
+ vpn-target 1:1 import-extcommunity
+#
+evpl instance 1 srv6-mode
+ evpn binding vpn-instance evrf1
+ local-service-id 100 remote-service-id 200
+ segment-routing ipv6 locator PE1 
+#
+segment-routing ipv6
+ encapsulation source-address 2001:DB8:1::1
+ locator PE1 ipv6-prefix 2001:DB8:11:: 64 static 32
+#
+isis 1
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0001.00
+ #
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator PE1
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:10::1/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0.1 mode l2
+ encapsulation dot1q vid 1
+ evpl instance 1
+#
+interface LoopBack1
+ ipv6 enable
+ ip address 1.1.1.1 255.255.255.255
+ ipv6 address 2001:DB8:1::1/128
+ isis ipv6 enable 1
+#
+bgp 100
+ router-id 1.1.1.1
+ peer 2001:DB8:3::3 as-number 100
+ peer 2001:DB8:3::3 connect-interface LoopBack1
+ #
+ ipv4-family unicast
+  undo synchronization
+ #              
+ l2vpn-family evpn
+  undo policy vpn-target
+  peer 2001:DB8:3::3 enable
+  peer 2001:DB8:3::3 advertise encap-type srv6
+#
+evpn source-address 1.1.1.1
+#
+return
+P configuration file
+
+#
+sysname P
+#
+isis 1
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0002.00
+ #
+ ipv6 enable topology ipv6
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:10::2/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:20::1/64
+ isis ipv6 enable 1
+#
+interface LoopBack1
+ ipv6 enable
+ ipv6 address 2001:DB8:2::2/128
+ isis ipv6 enable 1
+#
+return
+PE2 configuration file
+
+#
+sysname PE2
+#
+evpn vpn-instance evrf1 vpws
+ route-distinguisher 200:1
+ segment-routing ipv6 best-effort
+ vpn-target 1:1 export-extcommunity
+ vpn-target 1:1 import-extcommunity
+#
+evpl instance 1 srv6-mode
+ evpn binding vpn-instance evrf1
+ local-service-id 200 remote-service-id 100
+ segment-routing ipv6 locator PE2 
+#
+segment-routing ipv6
+ encapsulation source-address 2001:DB8:3::3
+ locator PE2 ipv6-prefix 2001:DB8:30:: 64 static 32
+#
+isis 1
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0003.00
+ #
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator PE2
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ipv6 enable
+ ipv6 address 2001:DB8:20::2/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0.1 mode l2
+ encapsulation dot1q vid 1
+ evpl instance 1
+#
+interface LoopBack1
+ ipv6 enable
+ ip address 3.3.3.3 255.255.255.255
+ ipv6 address 2001:DB8:3::3/128
+ isis ipv6 enable 1
+#
+bgp 100
+ router-id 3.3.3.3
+ peer 2001:DB8:1::1 as-number 100
+ peer 2001:DB8:1::1 connect-interface LoopBack1
+ #
+ ipv4-family unicast
+  undo synchronization
+ #              
+ l2vpn-family evpn
+  undo policy vpn-target
+  peer 2001:DB8:1::1 enable
+  peer 2001:DB8:1::1 advertise encap-type srv6
+#
+evpn source-address 3.3.3.3
+#
+return
+
+display segment-routing ipv6 local-sid end-dx2 forwarding
+display bgp evpn peer
+display bgp evpn evpl
+display bgp evpn evpl instance-id 1
+display bgp evpn all routing-table
+display bgp evpn all routing-table ad-route 0000.0000.0000.0000.0000:200 
+
+ 
+
+EVPN VPLS over SRv6 BE
+++++++++++++++++++++++
+
+   [SITE1]--------[PE1]----------------[P]--------------[PE2]-----------------[SITE2]
+
+                  |<----------------SRv6--------------->|
+
+
+The configuration roadmap is as follows:
+  - Enable IPv6 forwarding and configure an IPv6 address for each interface on PE1, the P, and PE2.
+  - Enable IS-IS, configure an IS-IS level, and specify a network entity title (NET) on PE1, the P, and PE2.
+  - Configure an EVPN instance in BD mode on each PE and bind the EVPN instance to an access-side sub-interface.
+  - Establish a BGP EVPN peer relationship between PEs.
+  - Configure SRv6 BE on PEs.
+
+
+PE1 configuration file
+
+#
+sysname PE1
+#
+evpn vpn-instance evrf1 bd-mode
+ route-distinguisher 100:1
+ segment-routing ipv6 best-effort
+ segment-routing ipv6 locator PE1_ARG unicast-locator PE1 
+ vpn-target 1:1 export-extcommunity
+ vpn-target 1:1 import-extcommunity
+#
+bridge-domain 100
+ evpn binding vpn-instance evrf1
+#               
+segment-routing ipv6
+ encapsulation source-address 2001:db8:1::1
+ locator PE1 ipv6-prefix 2001:DB8:11:: 64
+ locator PE1_ARG ipv6-prefix 2001:DB8:12:: 64 args 10
+#               
+isis 1          
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0001.00
+ #              
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator PE1
+ segment-routing ipv6 locator PE1_ARG auto-sid-disable
+ #              
+# 
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ipv6 enable    
+ ipv6 address 2001:DB8:10::1/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown
+#
+interface GigabitEthernet2/0/0.1 mode l2
+ encapsulation dot1q vid 1
+ rewrite pop single
+ bridge-domain 100
+#
+interface LoopBack1
+ ipv6 enable    
+ ip address 1.1.1.1 255.255.255.255
+ ipv6 address 2001:DB8:1::1/128
+ isis ipv6 enable 1
+#               
+bgp 100         
+ router-id 1.1.1.1
+ peer 2001:DB8:3::3 as-number 100
+ peer 2001:DB8:3::3 connect-interface LoopBack1
+ #              
+ ipv4-family unicast
+  undo synchronization
+ #              
+ l2vpn-family evpn
+  policy vpn-target
+  peer 2001:DB8:3::3 enable
+  peer 2001:DB8:3::3 advertise encap-type srv6
+#
+evpn source-address 1.1.1.1
+#
+return
+P configuration file
+#
+sysname P
+#               
+isis 1          
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0002.00
+ #              
+ ipv6 enable topology ipv6
+ #              
+#
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ipv6 enable    
+ ipv6 address 2001:DB8:10::2/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown  
+ ipv6 enable    
+ ipv6 address 2001:DB8:20::1/64
+ isis ipv6 enable 1
+#
+interface LoopBack1
+ ipv6 enable    
+ ip address 2.2.2.2 255.255.255.255
+ ipv6 address 2001:DB8:2::2/128
+ isis ipv6 enable 1
+#
+return
+PE2 configuration file
+
+#
+sysname PE2
+#
+evpn vpn-instance evrf1 bd-mode
+ route-distinguisher 100:1
+ segment-routing ipv6 best-effort
+ segment-routing ipv6 locator PE2_ARG unicast-locator PE2 
+ vpn-target 1:1 export-extcommunity
+ vpn-target 1:1 import-extcommunity
+#
+bridge-domain 100
+ evpn binding vpn-instance evrf1
+#               
+segment-routing ipv6
+ encapsulation source-address 2001:db8:3::3
+ locator PE2 ipv6-prefix 2001:DB8:21:: 64
+ locator PE2_ARG ipv6-prefix 2001:DB8:22:: 64 args 10
+#               
+isis 1          
+ is-level level-1
+ cost-style wide
+ network-entity 10.0000.0000.0003.00
+ #              
+ ipv6 enable topology ipv6
+ segment-routing ipv6 locator PE2
+ segment-routing ipv6 locator PE2_ARG auto-sid-disable
+ #              
+# 
+interface GigabitEthernet1/0/0
+ undo shutdown  
+ ipv6 enable    
+ ipv6 address 2001:DB8:20::2/64
+ isis ipv6 enable 1
+#
+interface GigabitEthernet2/0/0
+ undo shutdown
+#
+interface GigabitEthernet2/0/0.1 mode l2
+ encapsulation dot1q vid 1
+ rewrite pop single
+ bridge-domain 100
+#
+interface LoopBack1
+ ipv6 enable    
+ ip address 3.3.3.3 255.255.255.255
+ ipv6 address 2001:DB8:3::3/128
+ isis ipv6 enable 1
+#               
+bgp 100         
+ router-id 3.3.3.3
+ peer 2001:DB8:1::1 as-number 100
+ peer 2001:DB8:1::1 connect-interface LoopBack1
+ #              
+ ipv4-family unicast
+  undo synchronization
+ #              
+ l2vpn-family evpn
+  policy vpn-target
+  peer 2001:DB8:1::1 enable
+  peer 2001:DB8:1::1 advertise encap-type srv6
+# 
+evpn source-address 3.3.3.3
+#
+return
+
+display segment-routing ipv6 local-sid end-dt2m forwarding
+display segment-routing ipv6 local-sid end-dt2u forwarding
+display bgp evpn all routing-table
+
