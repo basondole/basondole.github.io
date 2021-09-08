@@ -1,9 +1,13 @@
 Huawei SRv6 Solution Notes
 ++++++++++++++++++++++++++
 
-The major difference between SR-MPLS and SRv6 is that the SID in SR-MPLS is MPLS label where as SID in SRv6 is encoded as a native IPv6 address.
+The major difference between SR/MPLS and SRv6 is that the SID in SR/MPLS is MPLS label where as SID in SRv6 is encoded as a native IPv6 address.
 SRv6 solution completely deletes the MPLS data plane, services are encapsulated in native ipv6 addresses.
 While nodes terminating the servies require SRv6 support, the intermediate nodes only require native IPv6 support. No need to change anything on the intermediate nodes.
+Segment routing (SR) uses an IGP to advertise topology, prefix, locator, and SID information. ISIS uses the extension, SRv6 Locator TLV which Advertises an SRv6 locator and the End SIDs associated with it.
+After receiving the TLV, SRv6-capable IS-IS devices install corresponding locator route entries to their local forwarding tables, but SRv6-incapable IS-IS devices do not.
+SRv6 locators can also be advertised using the Prefix Reachability TLV 236 or 237. In this advertisement mode, SRv6-incapable devices can install corresponding locator route entries to their local forwarding tables, thereby achieving interworking with SRv6-capable devices.
+However, IGP for SR does not work if paths cross multiple ASs on a large-scale network. BGP for SRv6 is an extension of BGP for Segment Routing.
 
 
 SRv6 encapsulation
@@ -49,13 +53,24 @@ Small size packets are mostly upstream traffic which is usually much less than d
 The encapsulation overhead will not be the bottleneck for network throughput.
 
 
+SRv6 Nodes
+++++++++++
+
+- Source SRv6 node: a source node that encapsulates packets into SRv6 packets
+- Transit node: an IPv6 node that forwards SRv6 packets but does not perform SRv6 processing
+- SRv6 segment endpoint node: a node that receives and processes SRv6 packets in which the destination IPv6 address is the node's local SID or local interface address
+The SRv6 source node encapsulates packets into SRv6 packets, the transit node processes and forwards the packets as common IPv6 packets, and the endpoint nodes process SRv6 SIDs and SRHs in the packets.
+
+
 SRv6 segments
 +++++++++++++
 SRv6 segments are identified using segment identifiers (SIDs) encoded as IPv6 addresses. An SRv6 SID consists of two parts: Locator and Function,  function. In general, each locator value must be unique in an SR domain.
-example ipv6-prefix fd12:3456:886a:1:6000:D40::/92
- 
+example ipv6-prefix fd12:3456:886a:1:6000:D40::/92. The locator is advertised to other nodes via IGP.
+
 Each SRv6-capable node keeps a local SID table containing all SRv6 SIDs generated on the node
 An SRv6 forwarding table (FIB) can be generated based on this table. There are a wide range of SRv6 SIDs associated with different functions.
+
+Behaviors performed by endpoint nodes are determined by instructions specified by SIDs. Such instructions include data packet forwarding, encapsulation, and decapsulation. They are called End series instructions because they are executed by SRv6 endpoints.
 
 Codename	Behaviour												Remark
 End			Endpoint												SID that identifies a destination node, similar to a node SID in SR-MPLS
@@ -74,8 +89,14 @@ End.DT2M	Endpoint w\ decapsulation + L2 table flooding			Layer 2 cross-connect e
 End.OP																OAM SID that specifies the punt behavior to be implemented for OAM packets in ping and tracert scenarios.
 
 
-https://support.huawei.com/enterprise/en/doc/EDOC1100142680/6420a43f/srv6-segment
+Flavors are behaviors defined to enhance the End series instructions.
 
+Flavor		Function Description
+PSP			Penultimate segment pop of the SRH (PSP). This function pops the SRH from a packet on the penultimate segment, improving forwarding efficiency. It is similar to penultimate hop popping (PHP) in MPLS.
+USP			Ultimate segment pop of the SRH (USP). This function pops the SRH from a packet on the last segment.
+
+
+https://support.huawei.com/enterprise/en/doc/EDOC1100142680/6420a43f/srv6-segment
 
 
 https://support.huawei.com/hedex/pages/DOC1100733054AEJ1214J/05/DOC1100733054AEJ1214J/05/resources/software/nev8r10_vrpv8r16/user/vrp/dc_vrp_srv6_cfg_all_0010.html?ft=0&fe=10&hib=6.11.3.22&id=EN-US_TASK_0172368967&text=Configuration%2520Examples%2520for%2520SRv6%2520BE&docid=DOC1100733054
@@ -88,6 +109,12 @@ V1R19C00
 
 L3VPNv4 over SRv6 BE
 ++++++++++++++++++++
+
+Uses SRv6 BE to encapsulate and transmit IPv4 VPN data packets.
+VPN label are not required. VPN labels are replaced with SRv6 VPN SIDs that is, End.DT4 SID
+An egress node identifies a VPN instance based on an SRv6 VPN SID and searches the IP routing table of the VPN instance.
+
+
 
    [CE1]--------[PE1]----------------[P]--------------[PE2]-----------------[CE2]
 
@@ -125,18 +152,18 @@ isis 1
  segment-routing ipv6 locator as1
  #              
 #               
-interface GigabitEthernet1/0/0
+interface Ethernet3/0/0
  undo shutdown  
  ipv6 enable    
  ipv6 address 2001:DB8:10::1/96
  isis ipv6 enable 1
 #               
-interface GigabitEthernet2/0/0
+interface Ethernet3/0/2
  undo shutdown  
  ip binding vpn-instance vpna
  ip address 10.1.1.1 255.255.255.0
 #               
-interface LoopBack1
+interface LoopBack0
  ipv6 enable    
  ipv6 address 2001:DB8:1::1/128
  isis ipv6 enable 1
@@ -144,7 +171,7 @@ interface LoopBack1
 bgp 100         
  router-id 1.1.1.1
  peer 2001:DB8:3::3 as-number 100
- peer 2001:DB8:3::3 connect-interface LoopBack1
+ peer 2001:DB8:3::3 connect-interface LoopBack0
  #              
  ipv4-family unicast
   undo synchronization
@@ -178,19 +205,19 @@ isis 1
  ipv6 enable topology ipv6
  #
 #               
-interface GigabitEthernet1/0/0
+interface Ethernet3/0/0
  undo shutdown  
  ipv6 enable    
  ipv6 address 2001:DB8:10::2/96
  isis ipv6 enable 1 
 # 
-interface GigabitEthernet2/0/0
+interface Ethernet3/0/1
  undo shutdown  
  ipv6 enable    
  ipv6 address 2001:DB8:20::1/96
  isis ipv6 enable 1  
 #               
-interface LoopBack1
+interface LoopBack0
  ipv6 enable    
  ipv6 address 2001:DB8:2::2/128
  isis ipv6 enable 1
@@ -222,18 +249,18 @@ isis 1
  segment-routing ipv6 locator as1
  #              
 #               
-interface GigabitEthernet1/0/0
+interface Ethernet3/0/1
  undo shutdown  
  ipv6 enable    
  ipv6 address 2001:DB8:20::2/96
  isis ipv6 enable 1
 #               
-interface GigabitEthernet2/0/0
+interface Ethernet3/0/2
  undo shutdown  
  ip binding vpn-instance vpna
  ip address 10.2.1.1 255.255.255.0
 #               
-interface LoopBack1
+interface LoopBack0
  ipv6 enable    
  ipv6 address 2001:DB8:3::3/128
  isis ipv6 enable 1
@@ -241,7 +268,7 @@ interface LoopBack1
 bgp 100         
  router-id 2.2.2.2
  peer 2001:DB8:1::1 as-number 100
- peer 2001:DB8:1::1 connect-interface LoopBack1
+ peer 2001:DB8:1::1 connect-interface LoopBack0
  #              
  ipv4-family unicast
   undo synchronization
@@ -268,7 +295,7 @@ CE1 configuration file
 #
 sysname CE1
 #
-interface GigabitEthernet1/0/0
+interface GE0/0/2
  undo shutdown  
  ip address 10.1.1.2 255.255.255.0
 #               
@@ -291,7 +318,7 @@ CE2 configuration file
 #
 sysname CE2
 #
-interface GigabitEthernet1/0/0
+interface GE0/0/2
  undo shutdown
  ip address 10.2.1.2 255.255.255.0
 #
@@ -300,7 +327,6 @@ interface LoopBack1
 #
 bgp 65420
  peer 10.2.1.1 as-number 100
-#
  ipv4-family unicast
   undo synchronization
   network 22.22.22.22 255.255.255.255
@@ -325,6 +351,11 @@ display ip routing-table vpn-instance vpna 22.22.22.22 verbose
 
 EVPN L3VPNv4 over SRv6 BE
 +++++++++++++++++++++++++
+
+Ethernet virtual private network (EVPN) L3VPNv4 over SRv6 BE, uses EVPN address family instead of VPNv4.
+After learning the IPv4 route advertised by CEs, PEs installs the route in its VPNv4 routing table and converts it into a type 5 EVPN route (IP prefix route).
+Each PE advertises the EVPN route to its respective BGP EVPN peer through update messages carrying RT and SRv6 VPN SID attributes, that is, End.DT4 SID
+
 
    [SITE1]---------[CE1]--------[PE1]----------------[P]--------------[PE2]-------------[CE2]------[SITE2]
 
@@ -544,9 +575,16 @@ display segment-routing ipv6 local-sid end-dt4 forwarding
 EVPN L3VPNv6 over SRv6 BE
 +++++++++++++++++++++++++
 
+Ethernet virtual private network (EVPN) L3VPNv6 over SRv6 BE, uses EVPN address family instead of VPNv6.
+After learning the IPv6 route advertised by CEs, PEs installs the route in its VPNv6 routing table and converts it into a type 5 EVPN route (IP prefix route).
+Each PE advertises the EVPN route to its respective BGP EVPN peer through update messages carrying RT and SRv6 VPN SID attributes, that is, End.DT6 SID
+
+
+
    [SITE1]--------[PE1]----------------[P]--------------[PE2]-----------------[SITE2]
 
                   |<----------------SRv6--------------->|
+
 
 The configuration roadmap is as follows:
   - Enable IPv6 forwarding and configure an IPv6 address for each interface on PE1, the P, and PE2.
@@ -713,12 +751,16 @@ return
 
 display bgp evpn all routing-table prefix-route
 display ipv6 routing-table vpn-instance vpn1
->>> visioned by Big Paul display segment-routing ipv6 local-sid end-dt6 forwarding
+display segment-routing ipv6 local-sid end-dt6 forwarding
 
 
 
 EVPN VPWS over SRv6 BE
 ++++++++++++++++++++++
+
+EVPN virtual private wire service (VPWS) uses SRv6 BE over a backbone network to simplify EVPN VPWS — a technology that provides a P2P L2VPN service based on the EVPN service architecture.
+This solution allows Layer 2 packets to be forwarded along access circuit (AC) connections without the need to search for MAC forwarding entries.
+
 
    [SITE1]--------[PE1]----------------[P]--------------[PE2]-----------------[SITE2]
 
@@ -893,6 +935,9 @@ display bgp evpn all routing-table ad-route 0000.0000.0000.0000.0000:200
 
 EVPN VPLS over SRv6 BE
 ++++++++++++++++++++++
+
+EVPN VPLS uses the EVPN E-LAN model to carry MP2MP VPLS services.
+
 
    [SITE1]--------[PE1]----------------[P]--------------[PE2]-----------------[SITE2]
 
