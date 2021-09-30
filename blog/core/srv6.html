@@ -1197,7 +1197,10 @@ bgp 100
 evpn source-address 1.1.1.1
 #
 return
-P configuration file
+</pre>
+
+<b>P configuration file</b>
+<pre>
 #
 sysname P
 #               
@@ -1228,8 +1231,10 @@ interface LoopBack1
  isis ipv6 enable 1
 #
 return
-PE2 configuration file
+</pre>
 
+<b>PE2 configuration file</b>
+<pre>
 #
 sysname PE2
 #
@@ -1294,11 +1299,14 @@ bgp 100
 evpn source-address 3.3.3.3
 #
 return
+</pre>
 
+<b>Verification</b>
+<pre>
 display segment-routing ipv6 local-sid end-dt2m forwarding
 display segment-routing ipv6 local-sid end-dt2u forwarding
 display bgp evpn all routing-table
-
+</pre>
 
 
 
