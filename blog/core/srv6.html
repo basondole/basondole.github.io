@@ -140,8 +140,6 @@
   <strong>SRv6</strong>
 </h2>
 
-
-
 The major difference between SR/MPLS and SRv6 is that the SID in SR/MPLS is MPLS label where as SID in SRv6 is encoded as a native IPv6 address.
 SRv6 solution completely deletes the MPLS data plane, services are encapsulated in native ipv6 addresses.
 While nodes terminating the servies require SRv6 support, the intermediate nodes only require native IPv6 support. No need to change anything on the intermediate nodes.
@@ -163,10 +161,10 @@ This implementation takes advantage of the native IPv6 address.
 	___ +-----------+     ---  +-------------+
 	 |  | SR LABEL  |     40B  | IPv6 HEADER |
 	 8B +-----------+     ---  +-------------+
-	 |	| VPN LABEL |          |   PAYLOAD   |
+	 |  | VPN LABEL |          |   PAYLOAD   |
 	--- +-----------+          +-------------+
-		|  PAYLOAD  |
-		+-----------+
+	    |  PAYLOAD  |
+	    +-----------+
 </pre>
 
 <h4>Traffic engineering forwarding</h4>
@@ -180,10 +178,10 @@ The fields in SRH are 8 bytes in total nevertheless in additional to that is 16 
 	___ +--------------+     ---  +-------------+
 	 |  | SR LABEL * 3 |     40B  | IPv6 HEADER |
 	16B +--------------+     ---  +-------------+
-	 |	|   VPN LABEL  |     56B  |SRH IPV6 * 3 |
+	 |  |   VPN LABEL  |     56B  |SRH IPV6 * 3 |
 	--- +--------------+     ---  +-------------+
-		|    PAYLOAD   |		  |   PAYLOAD   |
-		+--------------+		  +-------------+
+	    |    PAYLOAD   |	      |   PAYLOAD   |
+	    +--------------+	      +-------------+
 </pre>
 
 NB: SRv6 does have more overhead than traditional SR/MPLS
