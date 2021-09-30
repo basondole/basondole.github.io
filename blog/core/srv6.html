@@ -143,8 +143,10 @@
 <p>
 The major difference between SR/MPLS and SRv6 is that the SID in SR/MPLS is MPLS label where as SID in SRv6 is encoded as a native IPv6 address.
 SRv6 solution completely deletes the MPLS data plane, services are encapsulated in native ipv6 addresses.
+<br/>
 While nodes terminating the servies require SRv6 support, the intermediate nodes only require native IPv6 support. No need to change anything on the intermediate nodes.
 Segment routing (SR) uses an IGP to advertise topology, prefix, locator, and SID information. ISIS uses the extension, SRv6 Locator TLV which Advertises an SRv6 locator and the End SIDs associated with it.
+<br/>
 After receiving the TLV, SRv6-capable IS-IS devices install corresponding locator route entries to their local forwarding tables, but SRv6-incapable IS-IS devices do not.
 SRv6 locators can also be advertised using the Prefix Reachability TLV 236 or 237. In this advertisement mode, SRv6-incapable devices can install corresponding locator route entries to their local forwarding tables, thereby achieving interworking with SRv6-capable devices.
 However, IGP for SR does not work if paths cross multiple ASs on a large-scale network. BGP for SRv6 is an extension of BGP for Segment Routing.
@@ -195,20 +197,20 @@ The encapsulation overhead will not be the bottleneck for network throughput.
 </p>
 
 <h3>SRv6 Nodes</h3>
-
-- Source SRv6 node: a source node that encapsulates packets into SRv6 packets
-- Transit node: an IPv6 node that forwards SRv6 packets but does not perform SRv6 processing
-- SRv6 segment endpoint node: a node that receives and processes SRv6 packets in which the destination IPv6 address is the node's local SID or local interface address
+<ul>
+	<li>Source SRv6 node: a source node that encapsulates packets into SRv6 packets</li>
+	<li>Transit node: an IPv6 node that forwards SRv6 packets but does not perform SRv6 processing</li>
+	<li>SRv6 segment endpoint node: a node that receives and processes SRv6 packets in which the destination IPv6 address is the node's local SID or local interface address</li>
+</ul>
 The SRv6 source node encapsulates packets into SRv6 packets, the transit node processes and forwards the packets as common IPv6 packets, and the endpoint nodes process SRv6 SIDs and SRHs in the packets.
-
 
 <h3>SRv6 segments</h3>
 SRv6 segments are identified using segment identifiers (SIDs) encoded as IPv6 addresses. An SRv6 SID consists of two parts: Locator and Function,  function. In general, each locator value must be unique in an SR domain.
 example ipv6-prefix <code>fd12:3456:886a:1:6000:D40::/92</code>. The locator is advertised to other nodes via IGP.
-
+<br/>
 Each SRv6-capable node keeps a local SID table containing all SRv6 SIDs generated on the node
 An SRv6 forwarding table (FIB) can be generated based on this table. There are a wide range of SRv6 SIDs associated with different functions.
-
+<br/>
 Behaviors performed by endpoint nodes are determined by instructions specified by SIDs. Such instructions include data packet forwarding, encapsulation, and decapsulation. They are called End series instructions because they are executed by SRv6 endpoints.
 
 <pre>
@@ -255,19 +257,22 @@ An egress node identifies a VPN instance based on an SRv6 VPN SID and searches t
 
 <pre>
 
-   [CE1]--------[PE1]----------------[P]--------------[PE2]-----------------[CE2]
+   [CE1]--------[PE1]--------[P]--------[PE2]--------[CE2]
 
-                  |<----------------SRv6--------------->|
+                |<----------SRv6---------->|
 
 </pre>
 
-The configuration roadmap is as follows:</br>
-  - Enable IPv6 forwarding and configure an IPv6 address for each interface on PE1, the P, and PE2.
-  - Enable IS-IS, configure an IS-IS level, and specify a network entity title (NET) on PE1, the P, and PE2.
-  - Configure VPN instances on PE1 and PE2.
-  - Establish an EBGP peer relationship between each PE and its connected CE.
-  - Establish an MP-IBGP peer relationship between PEs.
-  - Configure SRv6 on PE1 and PE2, and enable IS-IS SRv6.
+The configuration roadmap is as follows:
+<ul>
+<li>Enable IPv6 forwarding and configure an IPv6 address for each interface on PE1, the P, and PE2.</li>
+<li>Enable IS-IS, configure an IS-IS level, and specify a network entity title (NET) on PE1, the P, and PE2.</li>
+<li>Configure VPN instances on PE1 and PE2.</li>
+<li>Establish an EBGP peer relationship between each PE and its connected CE.</li>
+<li>Establish an MP-IBGP peer relationship between PEs.</li>
+<li>Configure SRv6 on PE1 and PE2, and enable IS-IS SRv6.</li>
+</ul>
+
 
 <b>PE1 configuration</b>
 <pre>
