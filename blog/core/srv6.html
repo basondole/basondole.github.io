@@ -212,32 +212,36 @@ An SRv6 forwarding table (FIB) can be generated based on this table. There are a
 Behaviors performed by endpoint nodes are determined by instructions specified by SIDs. Such instructions include data packet forwarding, encapsulation, and decapsulation. They are called End series instructions because they are executed by SRv6 endpoints.
 
 <pre>
-Codename	Behaviour												Remark
-End			Endpoint												SID that identifies a destination node, similar to a node SID in SR-MPLS
-End.x		Endpoint w\ L3 cross-connect							SID that identifies a link, similar to an adjacency SID in SR-MPLS.
+Codename	Behaviour							Remark
+End		Endpoint							SID that identifies a destination node, similar to a node SID in SR-MPLS
+End.x		Endpoint w\ L3 cross-connect					SID that identifies a link, similar to an adjacency SID in SR-MPLS.
 End.DT4		Endpoint w\ decapsulation + ipv4 table lookup			SID that identifies an IPv4 VPN instance, equivalent to per-VRF VPN label in L3VPNv4 scenarios
 End.DT6		Endpoint w\ decapsulation + ipv6 table lookup			SID that identifies an IPv6 VPN instance, equivalent to per-VRF VPN label in L3VPNv6 scenarios
 End.DT46	Endpoint w\ decapsulation + ipv4/6 table lookup			per-VRF VPN label
 End.DX4		Endpoint w\ decapsulation + ipv4 cross-conect			SID that identifies an IPv4 CE, equivalent to per-CE VPN label in L3VPNv4 scenarios.
 End.DX6		Endpoint w\ decapsulation + ipv6 cross-conect			SID that identifies an IPv6 CE, equivalent to per-CE VPN label in L3VPNv6 scenarios.
-End.DX2		Endpoint w\ decapsulation + L2 cross-conect				Layer 2 cross-connect endpoint SID that identifies an endpoint, used in EVPN VPWS scenarios.
-End.DX2L															If a bypass tunnel exists on the network, SID is generated automatically when a CE is dual-homed to PEs in EVPN VPWS scenarios.
+End.DX2		Endpoint w\ decapsulation + L2 cross-conect			Layer 2 cross-connect endpoint SID that identifies an endpoint, used in EVPN VPWS scenarios.
+End.DX2L									If a bypass tunnel exists on the network, SID is generated automatically when a CE is dual-homed to PEs in EVPN VPWS scenarios.
 End.DX2V	Endpoint w\ decapsulation + VLAN L2 table lookup
-End.DT2U	Endpoint w\ decapsulation + unicast MAC L2 table lookup	Layer 2 cross-connect endpoint SID to which unicast MAC table lookup is bound, used in EVPN VPLS unicast scenarios.
-End.DT2UL															Generated automatically. The SID can be used to send unicast traffic over the bypass tunnel when a CE is dual-homed to PEs in EVPN VPLS unicast scenarios.
+End.DT2U	Endpoint w\ decapsulation + unicast MAC L2 table lookup		Layer 2 cross-connect endpoint SID to which unicast MAC table lookup is bound, used in EVPN VPLS unicast scenarios.
+End.DT2UL									Generated automatically. The SID can be used to send unicast traffic over the bypass tunnel when a CE is dual-homed to PEs in EVPN VPLS unicast scenarios.
 End.DT2M	Endpoint w\ decapsulation + L2 table flooding			Layer 2 cross-connect endpoint SID to which broadcast-based flooding is bound, used in EVPN VPLS BUM scenarios.
-End.OP																OAM SID that specifies the punt behavior to be implemented for OAM packets in ping and tracert scenarios.
+End.OP										OAM SID that specifies the punt behavior to be implemented for OAM packets in ping and tracert scenarios.
 </pre>
 
 
 Flavors are behaviors defined to enhance the End series instructions.
 
-</pre>
-Flavor		Function Description
-PSP			Penultimate segment pop of the SRH (PSP). This function pops the SRH from a packet on the penultimate segment, improving forwarding efficiency. It is similar to penultimate hop popping (PHP) in MPLS.
-USP			Ultimate segment pop of the SRH (USP). This function pops the SRH from a packet on the last segment.
-</pre>
-
+<table>
+<tr>
+	<th>Flavor</th>		<th>Function Description</th>
+</tr>
+<tr>
+	<td>PSP</td>		<td>Penultimate segment pop of the SRH (PSP). This function pops the SRH from a packet on the penultimate segment, improving forwarding efficiency. It is similar to penultimate hop popping (PHP) in MPLS.</td>
+</tr>
+	<td>USP</td>		<td>Ultimate segment pop of the SRH (USP). This function pops the SRH from a packet on the last segment.</td>
+</tr>
+</table>
 
 <h3>Configuration</h3>
 The demo is based on Huawei Software V1R19C00
