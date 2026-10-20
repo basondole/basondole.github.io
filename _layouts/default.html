@@ -3,40 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page</title>
+    <title>{{ page.title | default: "Documentation" }}</title>
+    
+    <!-- 1. PULL IN NATIVE GITHUB SYNTAX HIGH-LIGHTING STYLES -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    
+    <!-- 2. PULL IN HIGHLIGHT.JS ENGINE FOR NON-MERMAID BLOCKS -->
+    <script src="https://cloudflare.com"></script>
+
     <style>
+        /* Exact Typography Stack used on GitHub Markdown views */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.5;
+            max-width: 980px;
             margin: 0 auto;
-            padding: 20px;
-            color: #333;
+            padding: 45px 20px;
+            color: #1f2328;
+            background-color: #ffffff;
         }
-        h1, h2, h3 { margin-top: 24px; }
-        code {
-            background: #f5f5f5;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: monospace;
+
+        h1, h2, h3 { 
+            font-weight: 600;
+            line-height: 1.25;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            padding-bottom: .3em;
+            border-bottom: 1px solid #hsla(210,18%,87%,1);
         }
+
+        /* Clean code alignment imitating GitHub Repository views */
+        code:not(.hljs) {
+            background-color: rgba(175, 184, 193, 0.2);
+            padding: .2em .4em;
+            border-radius: 6px;
+            font-size: 85%;
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+        }
+
         pre {
-            background: #f5f5f5;
-            padding: 12px;
+            background-color: #f6f8fa;
+            padding: 16px;
             border-radius: 6px;
             overflow-x: auto;
         }
+
+        pre code.hljs {
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+            font-size: 85%;
+            background: transparent;
+            padding: 0;
+        }
+
+        /* Center visual layout canvases perfectly */
+        .mermaid { 
+            background: transparent !important; 
+            text-align: center; 
+            margin: 24px 0; 
+        }
     </style>
-    <script type="module">
-        Array.from(document.getElementsByClassName("language-mermaid")).forEach(element => {
-          element.classList.add("mermaid");
-        });
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-    </script>
 </head>
 <body>
+
+    <!-- Target insertion point where compiled Markdown drops in safely -->
     {{ content }}
+
+    <!-- 3. COMPILER LOGIC CONTROLLER -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        
+        // Disable automatic start to give the converter script priority
+        mermaid.initialize({ startOnLoad: false, theme: 'default' });
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            // STEP A: Isolate and process only the Mermaid blocks
+            const targetCodes = document.querySelectorAll("pre > code.language-mermaid");
+
+            targetCodes.forEach((codeElement) => {
+                const preElement = codeElement.parentElement;
+                const diagramSyntax = codeElement.textContent.trim();
+
+                // Create the clean div container required by the Mermaid layout engine
+                const canvasContainer = document.createElement("div");
+                canvasContainer.className = "mermaid";
+                canvasContainer.textContent = diagramSyntax;
+
+                // Replace the restrictive block element completely
+                preElement.parentNode.replaceChild(canvasContainer, preElement);
+            });
+
+            // STEP B: Safely fire the diagram engine across the clean containers
+            await mermaid.run();
+
+            // STEP C: Initialize syntax highlighting across all remaining programming language text blocks
+            hljs.highlightAll();
+        });
+    </script>
 </body>
 </html>
