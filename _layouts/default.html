@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: "Documentation" }}</title>
     
-    <!-- 1. PULL IN NATIVE GITHUB SYNTAX HIGH-LIGHTING STYLES -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <!-- 1. PULL IN NATIVE GITHUB SYNTAX HIGH-LIGHTING LIGHT MODE THEME -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     
-    <!-- 2. PULL IN HIGHLIGHT.JS ENGINE FOR NON-MERMAID BLOCKS -->
+    <!-- 2. PULL IN HIGHLIGHT.JS ENGINE FOR CODE BLOCKS -->
     <script src="https://cloudflare.com"></script>
 
     <style>
@@ -29,10 +29,10 @@
             margin-top: 24px;
             margin-bottom: 16px;
             padding-bottom: .3em;
-            border-bottom: 1px solid #hsla(210,18%,87%,1);
+            border-bottom: 1px solid rgba(175, 184, 193, 0.2);
         }
 
-        /* Clean code alignment imitating GitHub Repository views */
+        /* Inline code snippets (e.g. `git status`) matching GitHub views */
         code:not(.hljs) {
             background-color: rgba(175, 184, 193, 0.2);
             padding: .2em .4em;
@@ -41,6 +41,7 @@
             font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
         }
 
+        /* Multi-line code block boxes matching GitHub views */
         pre {
             background-color: #f6f8fa;
             padding: 16px;
@@ -48,10 +49,10 @@
             overflow-x: auto;
         }
 
+        /* Ensure font properties match GitHub without stripping color tokens */
         pre code.hljs {
             font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
             font-size: 85%;
-            background: transparent;
             padding: 0;
         }
 
@@ -70,13 +71,13 @@
 
     <!-- 3. COMPILER LOGIC CONTROLLER -->
     <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        import mermaid from 'https://jsdelivr.net';
         
-        // Disable automatic start to give the converter script priority
+        // Disable automatic start to give the converter script execution priority
         mermaid.initialize({ startOnLoad: false, theme: 'default' });
 
         document.addEventListener("DOMContentLoaded", async function () {
-            // STEP A: Isolate and process only the Mermaid blocks
+            // STEP A: Isolate and transform only the Mermaid blocks
             const targetCodes = document.querySelectorAll("pre > code.language-mermaid");
 
             targetCodes.forEach((codeElement) => {
@@ -95,7 +96,7 @@
             // STEP B: Safely fire the diagram engine across the clean containers
             await mermaid.run();
 
-            // STEP C: Initialize syntax highlighting across all remaining programming language text blocks
+            // STEP C: Initialize syntax highlighting across all remaining programming languages
             hljs.highlightAll();
         });
     </script>
