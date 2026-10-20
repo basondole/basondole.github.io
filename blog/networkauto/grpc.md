@@ -1,6 +1,6 @@
 ---
 title: GRPC
-permalink: /blog/networkauto/grpc
+permalink: /blog/networkauto/grpc/
 mermaid: true
 ---
 
