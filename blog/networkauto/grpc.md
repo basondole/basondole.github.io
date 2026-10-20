@@ -1,3 +1,8 @@
+---
+title: GRPC
+permalink: /blog/networkauto/grpc
+---
+
 # GRPC
 
 By definition, gRPC is an open-source framework developed by Google that allows
