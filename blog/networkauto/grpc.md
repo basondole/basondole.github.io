@@ -41,7 +41,6 @@ When functionA calls functionB, that execution happen in memory of the
 machine in the call stack using pointers/memory addresses as both functions
 are likely to be running within the same process that is executing the program.
 
-
 ```mermaid
 stateDiagram-v2
 direction LR
@@ -58,6 +57,7 @@ state Machine {
 If the functions were in different programs within the same machine. This communication
 would happen via Inter-Process Communication (IPC) using mechanism such as; signals, 
 message queues or pipes.
+
 ```mermaid
 stateDiagram
   direction LR
@@ -73,7 +73,6 @@ stateDiagram
     }
   }
   functionA() --> functionB(): Pipe connection
-
 ```
 
 With RPCs we bring about the idea that these 2 functions can live in different
@@ -117,7 +116,7 @@ the client and server is often generated using grpc tools. I say "often"
 because you can actually implement it yourself though I don't see why you would
 want to torture yourself like that. We'll see later on.
 
-> With the use of grpc tools and a [[#Proto file|proto]] file we will create the grpc server and
+> With the use of grpc tools and a [proto](#proto-file) file we will create the grpc server and
 > client classes that handle data serialization and RPC communication.
 > This auto generated code will be used when developing the server and client
 > modules for the service.
@@ -194,7 +193,7 @@ operable program or batch file.
 ```
 
 Note: In the above the `protoc` compiler doesn't work for python, so we use a
-python module instead. More on this behaviour [here](https://stackoverflow.com/questions/62649353/difference-between-protoc-and-python-m-grpc-tools-protoc)
+python module instead. More on this behaviour [here](https://stackoverflow.com/questions/62649353/difference-between-protoc-and-python-m-grpc-tools-protoc).
 
 ```shell
 basondole% pip install grpcio-tools
@@ -226,7 +225,8 @@ We write code for the server and use the `pb` file generated previously as
 our imports
 
 ## Python implementation
-**Server**
+
+### Server
 
 ```python
 # server.py
@@ -270,7 +270,7 @@ Server is running on port 50051...
 
 ```
 
-**Client**
+### Client
 
 ```python
 # client.py
@@ -312,8 +312,10 @@ Received: PyWorld
 
 
 The entire HTTP data stream below is **660** *bytes*, on the headers portion
-we can see `user-agent grpc-python`
+we can see `user-agent grpc-python`.
+
 > The indented parts are the responses from the server
+
 ```
 00000000  50 52 49 20 2a 20 48 54  54 50 2f 32 2e 30 0d 0a   PRI * HT TP/2.0..
 00000010  0d 0a 53 4d 0d 0a 0d 0a  00 00 24 04 00 00 00 00   ..SM.... ..$.....
@@ -365,6 +367,7 @@ we can see `user-agent grpc-python`
 ```
 
 **TCP stream conversation details**
+
 ```json
 [
     {
@@ -417,8 +420,10 @@ HTTP/2 stream, excluding TCP stuff i.e, excluding SYN, ACK, FIN
 
 
 **HTTP/2 frame count with Python client**
+
 > Frame count is not to be confused with packet count, a single packet can have
 multiple HTTP/2 frames of different types.
+
 ```
 ================================================================================================================================
 HTTP2:
@@ -468,7 +473,7 @@ basondole% ls
 hello   hello.proto   hello_client.go
 ```
 
-**Go client code**
+### Go client code
 
 ```go
 // hello_client.go
@@ -528,6 +533,7 @@ Received: GoWorld
 HTTP/2 data stream when using Go client.
 
 > The indented parts are the responses from the server
+
 ```
 00000000  50 52 49 20 2a 20 48 54  54 50 2f 32 2e 30 0d 0a   PRI * HT TP/2.0..
 00000010  0d 0a 53 4d 0d 0a 0d 0a                            ..SM.... 
@@ -601,6 +607,7 @@ HTTP/2 data stream when using Go client.
 ```
 
 HTTP/2 stream, excluding TCP stuff i.e, excluding SYN, ACK, FIN
+
 ```json
 [
     {
@@ -627,6 +634,7 @@ HTTP/2 stream, excluding TCP stuff i.e, excluding SYN, ACK, FIN
 
 
 **HTTP/2 frame count with Go client**
+
 > Frame count is not to be confused with packet count, a single packet can have
 multiple HTTP/2 frames of different types
 
@@ -708,6 +716,7 @@ to be decompressed using HPACK. When decompressed that stream of bytes becomes:
 00d0   69 6d 65 6f 75 74 00 00 00 08 31 30 30 30 30 30   imeout....100000
 00e0   30 75                                             0u
 ```
+
 > Note: In the above view before decompressing, the offsets are shown in an
 8-digit format which is an offset of each line starting from the beginning of
 the stream. Wireshark uses 8 digits in order to accommodate large stream.
@@ -760,7 +769,7 @@ Similar to what we saw with the python client we can see the user agent for Go
 
 
 
-**Go server**
+### Go server
 
 For completion sake below is the server written in Go using the protocol buffer
 code that we generated [before](#golang-implementation) from the proto file and
@@ -922,7 +931,6 @@ Received: GoWorld
 Received: ExplicitWorld
 ```
 
-
 The entire HTTP/2 stream with this method is **503** *bytes*, the request is
 much lighter compared to the request when using the Python protocol buffers but
 is identical to what we saw with Go protocol buffers.
@@ -968,6 +976,7 @@ is identical to what we saw with Go protocol buffers.
 
 
 TCP stream details from pcap analysis
+
 ```json
 [
     {
@@ -999,7 +1008,8 @@ TCP stream details from pcap analysis
 The above service we implemented using gRPC can be implemented in REST API
 as follows:
 
-**Server code**
+### Server code
+
 ```python
 # server.py
 from flask import (
@@ -1034,7 +1044,8 @@ Press CTRL+C to quit
 
 ```
 
-**Client code**
+### Client code
+
 ```python
 # client.py
 import requests
@@ -1059,13 +1070,15 @@ if __name__ == "__main__":
     run()
 ```
 
-Running the client
+Running the client.
+
 ```sh
 basondole% python ./client.py
 Greeter client received: Hello, RESTWorld!
 ```
 
 On the server terminal we see a POST request received `RESTWorld`
+
 ```sh
 basondole% python ./server.py
  * Serving Flask app 'server'
@@ -1117,7 +1130,8 @@ Connection: close\r\n
 
 
 
-HTTP/1.1 data stream is **430** *bytes*
+HTTP/1.1 data stream is **430** *bytes*.
+
 ```
 00000000  50 4f 53 54 20 2f 73 61  79 48 65 6c 6c 6f 20 48   POST /sa yHello H
 00000010  54 54 50 2f 31 2e 31 0d  0a 48 6f 73 74 3a 20 31   TTP/1.1. .Host: 1
@@ -1150,7 +1164,8 @@ HTTP/1.1 data stream is **430** *bytes*
     000000B6  6f 2c 20 52 45 53 54 57  6f 72 6c 64 21 22 7d 0a   o, RESTW orld!"}.
 ```
 
-TCP stream details
+TCP stream details.
+
 ```json
 [
     {
@@ -1177,6 +1192,7 @@ TCP stream details
 
 
 HTTP/1.1 frame count analysis
+
 ```
 =======================================================================================================================================
 HTTP/Packet Counter:
@@ -1251,7 +1267,7 @@ Both JSON and XML involve additional character tags, introducing extra
 overhead. Network transmission involves converting the JSON or XML object to
 text and parsing.
 
->With gRPC the field names are not sent over the network.
+> With gRPC the field names are not sent over the network.
 
 gRPC's binary serialization is more efficient for network communication due to
 its compactness and direct representation. While both binary and non-binary
@@ -1268,14 +1284,12 @@ gRPC stub know the field names if it doesn't encode as json/xml?
 > In protobuf, each field is identified by a unique numeric tag (field number).
 The stub knows the field numbers based on the `.proto` file definition.
 
-
 When you serialize a message (e.g., `HelloRequest`), the stub encodes the field
 numbers along with the values. The binary representation includes the field
 numbers and their corresponding data. The server, upon receiving the binary
 data, decodes it using the same field numbers to reconstruct the message, being
 that both the server and the client use the same field numbers as defined by
 the proto file.
-
 
 
 Let's break it down by comparing to JSON:
@@ -1318,6 +1332,7 @@ whereas Protobuf is binary from the outset.
 
 When serialized using Protocol Buffers, `HelloRequest(name="World")`
 will look like this in binary:
+
 ```hex
 0A 05 57 6F 72 6C 64
 ```
@@ -1342,6 +1357,7 @@ efficient for transmission and storage.
 
 When sent over the network, our `HelloRequest(name="World")` would look like
 this:
+
 ```
 [HTTP/2 Headers]
 :method: POST
@@ -1393,11 +1409,13 @@ To summarize
 
 
 The same data represented in **JSON** would look like this:
+
 ```json
 {"name": "World"}
 ```
 
 The same request in JSON format would look like this:
+
 ```
 [HTTP Headers]
 POST /sayHello HTTP/1.1
@@ -1410,9 +1428,11 @@ Content-Type: application/json
 
 When this JSON payload is transmitted in a network packet, it is sent as a
 sequence of bytes encoded in UTF-8 which will be
+
 ```
 7B 22 6E 61 6D 65 22 3A 22 57 6F 72 6C 64 22 7D
 ```
+
 This JSON payload is **17 bytes** in size
 
 To summarize:
@@ -1455,6 +1475,7 @@ multiple programming languages
 
 
 ## GRPC applications
+
 gRPC sees its usefulness mostly in microservices environments and web apps.
 For Network engineers (which I am) the most interesting application of gRPC is
 the gNMI protocol (and its child variant gNOI).
@@ -1484,11 +1505,13 @@ basondole%
 
 
 Creating the `.proto` file to define a Service and a streaming RPC:
+
 ```sh
 basondole%  vi stream.proto
 ```
 
-Contents of proto file
+Contents of proto file.
+
 ```proto
 syntax = "proto3";
 
@@ -1532,7 +1555,8 @@ def my_func(stop_time) -> Iterator[dict]:
             return
 ```
 
-Generate the protocol buffer classes
+Generate the protocol buffer classes.
+
 ```sh
 basondole% python -m grpc_tools.protoc --proto_path=. --python_out=. --grpc_python_out=. stream.proto
 basondole% ls
@@ -1576,12 +1600,14 @@ if __name__ == '__main__':
 ```
 
 
-Implement the client to receive and process the stream
+Implement the client to receive and process the stream.
+
 ```sh
 basondole% vi client.py
 ```
 
-Contents of the file
+Contents of the file.
+
 ```python
 import grpc
 import stream_pb2
@@ -1603,7 +1629,8 @@ if __name__ == '__main__':
 
 ```
 
-Start the service
+Start the service.
+
 ```sh
 basondole% ls
 client.py  code.py  server.py   stream.proto  stream_pb2.py  stream_pb2_grpc.py
@@ -1613,7 +1640,8 @@ Running server
 
 ```
 
-Run the client
+Run the client (on a different terminal).
+
 ```sh
 basondole% python ./client.py
 Received: counter 0
@@ -1638,9 +1666,9 @@ gRPC server based on the same proto schema.
 
 gRPC supports four types of communication:
 1. Unary RPC: A single request followed by a single response. What we did
-[here](#python)
+[here](#python-implementation).
 2. Server Streaming RPC: A single request followed by a stream of responses.
-Like what we did [here](#practical-example)
+Like what we did [here](#practical-example).
 3. Client Streaming RPC: A stream of requests followed by a single response.
 4. Bidirectional Streaming RPC: Both the client and server send a stream of
 messages in both directions.
