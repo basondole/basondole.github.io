@@ -1,7 +1,7 @@
 ---
 title: GRPC
 permalink: /blog/networkauto/grpc/
-mermaid: true
+layout: default
 ---
 
 # Covers
