@@ -34,16 +34,14 @@ machine. This means the functions communicate in-memory of your computer.
 Each function is loaded into memory and can be called via that memory
 reference within the same machine.
 
-Imagine the world where your source code is broken down into smaller
-independent functional units (which are called microservices by the way) that
-run on different machines, VMs or containers. This means instead of all your
-functions from different packages/modules being loaded into memory and
-communicate that way, you will have the communication happening over a network
-connection. Simply put instead of having functions calling each other in memory
-gRPC provides a framework for functions from different modules
-(or services depending on who you are talking to) to be called over a network
-connection.
-
+Imagine a world where your code base is broken down into smaller, independent
+functional units called microservices, each running on different machines,
+VMs, or containers. This means instead of all your functions from different
+packages/modules being loaded into memory and communicate that way, you will
+have the communication happening over a network connection. Simply put
+instead of having functions calling each other in memory gRPC provides a
+framework for functions from different modules (or services depending) to be
+called over a network connection.
 
 Say we have a program that has 2 functions; functionA and functionB.
 When functionA calls functionB, that execution happen in memory of the
