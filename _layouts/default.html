@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>
-        mermaid.contentLoaderOptions = { startOnLoad: true, theme: 'default' };
-        mermaid.initialize({ startOnLoad: true, theme: 'default' });
-        mermaid.contentLoaderOptions.startOnLoad = true;
-        mermaid.contentLoaderOptions.theme = 'default';
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    <!-- Use a modern, stable version of Mermaid via ESM modules -->
+    <script type="module">
+        import mermaid from 'https://jsdelivr.net';
+        
+        // Turn off auto-start so our custom converter code can run first
+        mermaid.initialize({ startOnLoad: false, theme: 'default' });
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            // Find all compiled markdown code blocks that contain mermaid instructions
+            const targetCodes = document.querySelectorAll("pre > code.language-mermaid");
+
+            targetCodes.forEach((codeElement) => {
+                const preElement = codeElement.parentElement;
+                const diagramText = codeElement.textContent.trim();
+
+                // Create a clean layout container that the Mermaid engine expects
+                const mermaidDiv = document.createElement("div");
+                mermaidDiv.className = "mermaid";
+                mermaidDiv.textContent = diagramText;
+
+                // Replace the ugly nested <pre><code> block with our clean dynamic <div>
+                preElement.parentNode.replaceChild(mermaidDiv, preElement);
+            });
+
+            // Force the layout engine to scan and draw our new containers
+            await mermaid.run();
+        });
     </script>
+    <style>
+        /* Optional basic layout styling to keep your pages centered and neat */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .mermaid { text-align: center; margin: 24px 0; background: transparent !important; }
+    </style>
 </head>
 <body>
     {{ content }}
