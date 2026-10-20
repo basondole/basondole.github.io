@@ -4,7 +4,7 @@ permalink: /blog/networkauto/grpc/
 layout: default
 ---
 
-# Covers
+# In This Post
 
 1. [What's gRPC?](#grpc)
 2. [How to create a gRPC based service.](#grpc-service-implementation)
