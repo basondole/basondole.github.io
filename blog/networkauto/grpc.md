@@ -4,11 +4,20 @@ permalink: /blog/networkauto/grpc/
 mermaid: true
 ---
 
+# Covers
+
+1. What's gRPC?
+2. How to create a gRPC based service.
+3. Numbers: Comparison of gRPC and RESTful service.
+4. Theory: How does binary encoding work?
+5. Practical application for network Engineers.
+
+
 # GRPC
 
 By definition, gRPC is an open-source framework developed by Google that allows
 for remote procedure calls (RPC) using HTTP/2. That is, data is transferred
-in HTTP/2 frames (which should not to be confused with layer 2 Ethernet frames).
+in HTTP/2 frames (which is not to be confused with layer 2 Ethernet frames).
 HTTP/2 frames are used at the application layer.
 
 In simpler terms, gRPC allows you to call a function "remotely" over the
@@ -100,14 +109,6 @@ MachineA --> network
 network --> MachineB
 functionA() --> functionB(): RPC
 ```
-
-
-1. What's gRPC?
-2. How to create a gRPC based service
-3. Numbers: Comparison of gRPC and RESTful service
-4. Theory: How does binary encoding work?
-5. Practical application for network Engineers
-
 
 # gRPC service implementation
 
@@ -222,7 +223,7 @@ that handles the RPC communication layer.
 ## Server and client code
 
 We write code for the server and use the `pb` file generated previously as
-our imports
+our imports.
 
 ## Python implementation
 
@@ -293,14 +294,14 @@ if __name__ == "__main__":
 
 ```
 
-Run the client
+Run the client.
 ```shell
 basondole% python ./hello_client.py
 Greeter client received: Hello, PyWorld
 ```
 
 On the window where `service.py` is running you will see `Received: PyWorld`
-which is the name set in the request sent by the client above
+which is the name set in the request sent by the client above.
 ```shell
 basondole% python ./hello_server.py
 Server is running on port 50051...
@@ -309,12 +310,15 @@ Received: PyWorld
 
 ### gRPC Request pcap
 
-
-
 The entire HTTP data stream below is **660** *bytes*, on the headers portion
 we can see `user-agent grpc-python`.
 
-> The indented parts are the responses from the server
+> The indented parts are the responses from the server, also note the
+> packet's content is in plain text. This is because the example used here
+> is using an insecure channel. The server and client can be configured to
+> use TLS for transport encryption and per RPC authentication/authorization
+> with username and password or other authorization methods such as web
+> tokens etc.
 
 ```
 00000000  50 52 49 20 2a 20 48 54  54 50 2f 32 2e 30 0d 0a   PRI * HT TP/2.0..
