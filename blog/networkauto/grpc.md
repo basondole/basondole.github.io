@@ -37,10 +37,10 @@ reference within the same machine.
 Imagine a world where your code base is broken down into smaller, independent
 functional units called microservices, each running on different machines,
 VMs, or containers. This means instead of all your functions from different
-packages/modules being loaded into memory and communicate that way, you will
-have the communication happening over a network connection. Simply put
-instead of having functions calling each other in memory gRPC provides a
-framework for functions from different modules (or services depending) to be
+packages/modules being loaded into memory and communicate internally, you
+will have the communication between them happening over a network connection.
+Simply put instead of having functions calling each other in memory gRPC
+provides a framework for functions from different modules (or services) to be
 called over a network connection.
 
 Say we have a program that has 2 functions; functionA and functionB.
