@@ -1,6 +1,7 @@
 ---
 title: GRPC
 permalink: /blog/networkauto/grpc
+mermaid: true
 ---
 
 # GRPC
@@ -628,6 +629,7 @@ HTTP/2 stream, excluding TCP stuff i.e, excluding SYN, ACK, FIN
 **HTTP/2 frame count with Go client**
 > Frame count is not to be confused with packet count, a single packet can have
 multiple HTTP/2 frames of different types
+
 ```
 ================================================================================================================================
 HTTP2:
