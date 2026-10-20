@@ -1,19 +1,19 @@
 ---
-title: GRPC
+title: gRPC
 permalink: /blog/networkauto/grpc/
 layout: default
 ---
 
 # Covers
 
-1. What's gRPC?
-2. How to create a gRPC based service.
-3. Numbers: Comparison of gRPC and RESTful service.
-4. Theory: How does binary encoding work?
-5. Practical application for network Engineers.
+1. [What's gRPC?](#grpc)
+2. [How to create a gRPC based service.](#grpc-service-implementation)
+3. [Numbers: Comparison of gRPC and RESTful service.](#grpc-vs-rest-api)
+4. [Theory: How does binary encoding work?](#grpc-encoding-and-decoding)
+5. [Practical application for network Engineers.](#grpc-applications)
 
 
-# GRPC
+# gRPC
 
 By definition, gRPC is an open-source framework developed by Google that allows
 for remote procedure calls (RPC) using HTTP/2. That is, data is transferred
