@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: "Documentation" }}</title>
     
-    <!-- 1. PULL IN NATIVE GITHUB SYNTAX HIGH-LIGHTING LIGHT MODE THEME -->
+    <!-- 1. GITHUB COLOR SYNTAX THEME STYLES -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
-    <!-- 2. PULL IN HIGHLIGHT.JS ENGINE FOR CODE BLOCKS -->
+    <!-- 2. CORE SYNTAX HIGHLIGHTING ENGINE -->
     <script src="https://cloudflare.com"></script>
 
     <style>
@@ -69,14 +69,14 @@
     <!-- Target insertion point where compiled Markdown drops in safely -->
     {{ content }}
 
-    <!-- 3. COMPILER LOGIC CONTROLLER -->
+    <!-- 3. COMPILER LOGIC CONTROLLER (Safe from top-level freezes) -->
     <script type="module">
-        import mermaid from 'https://jsdelivr.net';
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         
         // Disable automatic start to give the converter script execution priority
         mermaid.initialize({ startOnLoad: false, theme: 'default' });
 
-        document.addEventListener("DOMContentLoaded", async function () {
+        document.addEventListener("DOMContentLoaded", function () {
             // STEP A: Isolate and transform only the Mermaid blocks
             const targetCodes = document.querySelectorAll("pre > code.language-mermaid");
 
@@ -90,14 +90,20 @@
                 canvasContainer.textContent = diagramSyntax;
 
                 // Replace the restrictive block element completely
-                preElement.parentNode.replaceChild(canvasContainer, preElement);
+                preElement.parentElement.replaceChild(canvasContainer, preElement);
             });
 
-            // STEP B: Safely fire the diagram engine across the clean containers
-            await mermaid.run();
-
-            // STEP C: Initialize syntax highlighting across all remaining programming languages
-            hljs.highlightAll();
+            // STEP B: Run layout engine safely within an async wrapper to prevent script freezes
+            (async () => {
+                try {
+                    await mermaid.run();
+                } catch (err) {
+                    console.error("Mermaid execution encountered an error: ", err);
+                } finally {
+                    // STEP C: Always trigger syntax highlighting even if a diagram syntax error occurs
+                    hljs.highlightAll();
+                }
+            })();
         });
     </script>
 </body>
