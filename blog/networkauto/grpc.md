@@ -4,6 +4,12 @@ permalink: /blog/networkauto/grpc/
 layout: default
 ---
 
+I originally wrote this back in 2024 when I started working with(for)
+Google in 2023 where I dealt with this technology extensively but
+didn't get around publishing this post until recently (this being 2026).
+In fact this is my first public blog post in quite a while :) the last
+one was in 2021.
+
 # In This Post
 
 1. [What's gRPC?](#grpc)
@@ -25,105 +31,113 @@ network, hence the name, "remote procedure". Basically, you define a function
 which acts as an endpoint and when the RPC for that endpoint is called it
 will execute the function and return the results to the caller. The function
 lives in some gRPC stub server and it is invoked thru a gRPC stub client.
-If this is confusing it will be clearer in a second, please read on.
+If all that sounds confusing it will be clearer in a moment, kindly read on.
 
-In typical setups all your code lives on the same machine and you just
-import the functions you need from different modules in your code. In that
-conventional setup all the modules and packages are locally available on your
-machine. This means the functions communicate in-memory of your computer.
-Each function is loaded into memory and can be called via that memory
-reference within the same machine.
+In typical setups all your source code lives/runs on the same machine. During
+development you just locally import the functions/classes you need from
+different modules in your code base. In that conventional setup all the
+modules and packages are locally available on your machine. This means when
+the code is deployed to run as an application its functions communicate
+in-memory of your computer. Each function is loaded into memory and can be
+called via that memory reference within the same machine.
 
 Imagine a world where your code base is broken down into smaller, independent
 functional units called microservices, each running on different machines,
 VMs, or containers. This means instead of all your functions from different
-packages/modules being loaded into memory and communicate internally, you
-will have the communication between them happening over a network connection.
-Simply put instead of having functions calling each other in memory gRPC
-provides a framework for functions from different modules (or services) to be
-called over a network connection.
+packages/modules being loaded into memory and communicate internally as part
+of the same application, you will have the communication between them
+happening over a network connection. Simply put instead of having functions
+calling each other in memory gRPC provides a framework for functions from
+different modules (or services) to be called over a network connection.
 
-Say we have a program that has 2 functions; functionA and functionB.
-When functionA calls functionB, that execution happen in memory of the
-machine in the call stack using pointers/memory addresses as both functions
-are likely to be running within the same process that is executing the program.
+Say we have a program that has 2 functions; *functionFoo* and *functionBar*.
+When *functionFoo* calls *functionBar*, that execution happen in memory of
+the machine in the call stack using pointers/memory addresses as both
+functions are likely to be running within the same process that is executing
+the program.
 
 ```mermaid
 stateDiagram-v2
 direction LR
-state Machine {
+state Machine1 {
   state Program {
    direction LR
-   functionA()
-   functionB()
+   functionFoo()
+   functionBar()
   }
  }
- functionA() --> functionB(): memory space
+ functionFoo() --> functionBar(): memory space
 ```
 
-If the functions were in different programs within the same machine. This communication
-would happen via Inter-Process Communication (IPC) using mechanism such as; signals, 
-message queues or pipes.
+If the functions were in different programs within the same machine, the
+communication would happen via Inter-Process Communication (IPC) using
+mechanism such as; signals, message queues or pipes.
 
 ```mermaid
 stateDiagram
   direction LR
-  state Machine {
+  state Machine1 {
     direction LR
-    state ProgramA {
+    state Program1 {
       direction LR
-      functionA()
+      functionFoo()
     }
-    state ProgramB {
+    state Program2 {
       direction LR
-      functionB()
+      functionBar()
     }
   }
-  functionA() --> functionB(): Pipe connection
+  functionFoo() --> functionBar(): Pipe connection
 ```
 
 With RPCs we bring about the idea that these 2 functions can live in different
 machines and they can call each other via RPC over a routed network connection
-using routing/IP addresses.
-Similar to a browser establishing a session to access a website URL, essentially the
-REST API fashion.
-
+using routing/IP addresses. Similar to a browser establishing a session to
+access a website URL, essentially the RESTful API fashion.
 
 ```mermaid
 stateDiagram-v2
 direction LR
-state MachineA {
-  state ProgramA {
-   functionA()
+state Machine1 {
+  state ProgramFoo {
+   functionFoo()
   }
  }
-state MachineB {
-  state ProgramB {
-      functionB()
+state Machine2 {
+  state ProgramBar {
+      functionBar()
     }
 }
 
-MachineA --> network
-network --> MachineB
-functionA() --> functionB(): RPC
+Machine1 --> network
+network --> Machine2
+functionFoo() --> functionBar(): RPC
 ```
 
 # gRPC service implementation
 
-gRPC operates in client/server model (more on this later). The code for
-the client and server is often generated using grpc tools. I say "often"
-because you can actually implement it yourself though I don't see why you would
-want to torture yourself like that. We'll see later on.
+gRPC operates in client/server model. The code for the client and server is
+often generated using grpc tools. I say "often" because you can actually
+implement it yourself though I don't see why you would want to hustle yourself
+like that. We'll see this later on under [this section](#go-server)
 
-> With the use of grpc tools and a [proto](#proto-file) file we will create the grpc server and
-> client classes that handle data serialization and RPC communication.
-> This auto generated code will be used when developing the server and client
-> modules for the service.
+> With the use of grpc tools and a [proto](#proto-file) file we will create
+> the grpc server and client classes that handle data serialization and RPC
+> communication. This auto generated code will be used when developing the
+> server and client modules for the service.
 
 ## Setting things up
 
+gRPC applications use Protocol Buffers (protobuf for short) files for
+service definitions and data serialization. The proto itself is language
+agnostic, that is, the proto file can be used to generate server and
+client code for any programming language of choice.
 
-For python the following module is necessary
+> The `protoc` tool is the Protocol Buffer Compiler. It's used to compile
+> `.proto` files, which contain service and message definitions, into
+> source code in various programming language.
+
+For python the following module is necessary.
 
 ```shell
 pip install grpcio-tools
@@ -131,33 +145,21 @@ pip install grpcio-tools
 
 For other languages like Go you will need `proto` compiler, this can be
 downloaded from [grpc.io](https://grpc.io/docs/protoc-installation/)
-> The `protoc` tool is the Protocol Buffer Compiler developed by Google. It's
-> used to compile `.proto` files, which contain service and message definitions,
-> into source code in various programming language.
 
-We will make use of these tools to compile `.proto` files, which contain
-service and message definitions. The server and client code is generated
-from proto file which basically defines what the service will look like
-and what RPC endpoints the server will be listening to.
+Using this tool the RPC server and its corresponding client code is
+generated from the proto file(s) which basically defines what the service
+will look like and what RPC endpoints the server will be listening to.
 
-gRPC applications use Protocol Buffers (protobuf for short) for service
-definitions and data serialization, more on this later on.
-The proto itself is language agnostic, that is, the proto file can be used
-to generate server and client code for any programming language of choice.
 
 ## Proto file
 
 A `.proto` **file** is a **Protocol Buffers (protobuf) file** used to define
-structured data formats.
-It defines; the **Service**, its APIs (**RPCs**) and data structures (**messages**) used by
-the APIs.
+structured data formats. It defines; the **Service**, its APIs (**RPCs**)
+and data structures (**messages**) used by the APIs.
 
-Let's walkthrough a typical "hello world!" example you may (or may not) have
-come across when learning a new programming language.
-
-The file `hello.proto` below defines a service called `Greeter` which
-implements the method `SayHello`. 
-
+Let's walk-through a typical "hello world!" example. The file `hello.proto`
+below defines a service called `Greeter` which implements the method
+`SayHello`.
 
 ```proto
 syntax = "proto3";
@@ -180,7 +182,6 @@ message HelloReply {
 }
 ```
 
-
 We use the proto file to generate a protobuf library for the programming
 language of choice, example below using python.
 
@@ -192,7 +193,8 @@ operable program or batch file.
 ```
 
 Note: In the above the `protoc` compiler doesn't work for python, so we use a
-python module instead. More on this behaviour [here](https://stackoverflow.com/questions/62649353/difference-between-protoc-and-python-m-grpc-tools-protoc).
+python module instead. More on this behaviour
+[here](https://stackoverflow.com/questions/62649353/difference-between-protoc-and-python-m-grpc-tools-protoc).
 
 ```shell
 basondole% pip install grpcio-tools
@@ -262,7 +264,8 @@ if __name__ == "__main__":
     serve()
 ```
 
-Start the server so it listens to incoming requests
+Start the server so it listens to incoming requests.
+
 ```shell
 basondole% python ./hello_server.py
 Server is running on port 50051...
@@ -289,10 +292,10 @@ def run():
 
 if __name__ == "__main__":
     run()
-
 ```
 
-Run the client.
+On a separate window, run the client.
+
 ```shell
 basondole% python ./hello_client.py
 Greeter client received: Hello, PyWorld
@@ -300,6 +303,7 @@ Greeter client received: Hello, PyWorld
 
 On the window where `service.py` is running you will see `Received: PyWorld`
 which is the name set in the request sent by the client above.
+
 ```shell
 basondole% python ./hello_server.py
 Server is running on port 50051...
@@ -311,12 +315,12 @@ Received: PyWorld
 The entire HTTP data stream below is **660** *bytes*, on the headers portion
 we can see `user-agent grpc-python`.
 
-> The indented parts are the responses from the server, also note the
-> packet's content is in plain text. This is because the example used here
-> is using an insecure channel. The server and client can be configured to
-> use TLS for transport encryption and per RPC authentication/authorization
-> with username and password or other authorization methods such as web
-> tokens etc.
+> In the output below the indented parts are the responses from the server,
+> also note the packet's content is in plain text. This is because the
+> example used here is using an insecure channel. The server and client can
+> be configured to use TLS for transport encryption and per RPC
+> authentication/authorization with username and password or other
+> authorization methods such as web tokens etc.
 
 ```
 00000000  50 52 49 20 2a 20 48 54  54 50 2f 32 2e 30 0d 0a   PRI * HT TP/2.0..
@@ -395,7 +399,7 @@ we can see `user-agent grpc-python`.
 ```
 
 
-HTTP/2 stream, excluding TCP stuff i.e, excluding SYN, ACK, FIN
+HTTP/2 stream, excluding TCP stuff i.e, excluding SYN, ACK, FIN.
 ```json
 [
     {
@@ -445,12 +449,13 @@ HTTP2            18                                                      6.2155 
 
 ## GoLang implementation
 
-As fore mentioned the proto file is language agnostic gRPC services defined by
-it can be implemented by any client, that is a client written in any language.
+As fore mentioned the proto file is language agnostic, gRPC services defined by
+it can be implemented by any client i.e., a client written in any language.
 We'll create a Go client next.
 
 First we create a directory and the proto buffers files for golang. Similar to 
 python, this will generate 2 files:
+
 1. `hello.pb.go`
 2. `hello_grpc.pb.go`
 
@@ -511,7 +516,7 @@ func main() {
 }
 ```
 
-Run the go client
+Run the go client.
 
 ```shell
 basondole% go run ./hello_client.go
@@ -534,7 +539,7 @@ Received: GoWorld
 
 HTTP/2 data stream when using Go client.
 
-> The indented parts are the responses from the server
+> In the output below, the indented parts are the responses from the server.
 
 ```
 00000000  50 52 49 20 2a 20 48 54  54 50 2f 32 2e 30 0d 0a   PRI * HT TP/2.0..
@@ -608,7 +613,7 @@ HTTP/2 data stream when using Go client.
 ]
 ```
 
-HTTP/2 stream, excluding TCP stuff i.e, excluding SYN, ACK, FIN
+HTTP/2 stream, excluding TCP stuff i.e, excluding SYN, ACK, FIN.
 
 ```json
 [
@@ -638,7 +643,7 @@ HTTP/2 stream, excluding TCP stuff i.e, excluding SYN, ACK, FIN
 **HTTP/2 frame count with Go client**
 
 > Frame count is not to be confused with packet count, a single packet can have
-multiple HTTP/2 frames of different types
+multiple HTTP/2 frames of different types.
 
 ```
 ================================================================================================================================
@@ -753,7 +758,7 @@ decoded = d.decode(bytes.fromhex(literal_byte))
 pp(decoded)
 ```
 
-Running the script
+Running the script.
 
 ```sh
 basondole% python decode.py
@@ -775,7 +780,7 @@ Similar to what we saw with the python client we can see the user agent for Go
 
 For completion sake below is the server written in Go using the protocol buffer
 code that we generated [before](#golang-implementation) from the proto file and
-stored in `my-package/hello`
+stored in `my-package/hello`.
 
 ```go
 // hello_server.go
@@ -816,6 +821,7 @@ func main() {
 ```
 
 What happens behind the scenes with gRPC is the following:
+
 1. Creating the Message:
     The client creates a HelloRequest message:
     `hello_pb2.HelloRequest(name='World')`
@@ -825,7 +831,6 @@ What happens behind the scenes with gRPC is the following:
     communication, including the creation and management of headers.
 3. Sending the Request:
     The serialized binary data is sent over the network using HTTP/2
-
 
 
 **Question**
@@ -862,7 +867,7 @@ basondole% pip install "httpx[http2]"
 ```
 
 Let's write some code for our new client without using auto generated code.
-Note this is only the client part the server itself is still running with the
+Note, this is only the client part the server itself is still running with the
 gRPC code we generated earlier.
 
 ```python
@@ -912,10 +917,10 @@ def make_wire_format(s: bytes) -> bytes:
 
 if __name__ == '__main__':
     main()
-
 ```
 
-Running the code
+Running the code.
+
 ```sh
 basondole% python ./explicit_hello_client.py
 Greeter client received: Hello, ExplicitWorld
@@ -923,6 +928,7 @@ Greeter client received: Hello, ExplicitWorld
 
 On the server terminal we see the received name `ExplicitWorld` that we
 manually crafted without the gRPC auto generated classes.
+
 > Note: I didn't spawn a new instance of the server. It is till the same server
 terminal so all the previous output is still there.
 
@@ -977,7 +983,7 @@ is identical to what we saw with Go protocol buffers.
 ```
 
 
-TCP stream details from pcap analysis
+TCP stream details from pcap analysis.
 
 ```json
 [
@@ -1007,8 +1013,8 @@ TCP stream details from pcap analysis
 
 ## gRPC vs REST API
 
-The above service we implemented using gRPC can be implemented in REST API
-as follows:
+The above service we implemented using gRPC can be implemented in RESTful fashion
+with regular HTTP request as follows:
 
 ### Server code
 
@@ -1035,7 +1041,8 @@ if __name__ == "__main__":
     app.run()
 ```
 
-Running the server
+Running the server.
+
 ```shell
 basondole% python ./server.py
  * Serving Flask app 'server'
@@ -1079,7 +1086,7 @@ basondole% python ./client.py
 Greeter client received: Hello, RESTWorld!
 ```
 
-On the server terminal we see a POST request received `RESTWorld`
+On the server terminal we see a POST request received `RESTWorld`.
 
 ```sh
 basondole% python ./server.py
@@ -1092,8 +1099,8 @@ Received: RESTWorld
 127.0.0.1 - - [19/Dec/2024 18:45:19] "POST /sayHello HTTP/1.1" 200 -
 ```
 
-
 What happens behind the scenes with REST API is the following;
+
 1. HTTP Headers Creation:
     Headers are created as a dictionary:
     `headers = {'Content-Type': 'application/json'}`
@@ -1122,14 +1129,13 @@ beginning of the line.
 Many protocols, such as HTTP, SMTP, and FTP, specify CRLF as the line
 terminator for headers and commands. For example, HTTP headers are separated by
 CRLF sequences. When crafting HTTP headers, each header line ends with a CRLF
-sequence:
+sequence, example below:
 ```
 GET /index.html HTTP/1.1\r\n
 Host: www.example.com\r\n
 Connection: close\r\n
 \r\n
 ```
-
 
 
 HTTP/1.1 data stream is **430** *bytes*.
@@ -1193,7 +1199,7 @@ TCP stream details.
 ```
 
 
-HTTP/1.1 frame count analysis
+HTTP/1.1 frame count analysis.
 
 ```
 =======================================================================================================================================
@@ -1234,17 +1240,19 @@ lower latency and better performance. Perhaps the other advantages become
 more significant with larger and more complex payloads.
 
 
-## GRPC: Encoding and decoding
+## gRPC encoding and decoding
 
 GRPC uses HTTP/2 to send traffic between client/server.
 
 In gRPC, a stub (also known as a client stub or client-side stub) is a
 generated client-side code that acts as a proxy for invoking remote methods
 (Remote Procedure Calls, RPCs) on a gRPC service. It abstracts away the
-low-level details of network communication, serialization, and deserialization.
+low-level details of network communication, serialization, and
+deserialization.
 
 When you call a method on the stub e.g., `stub.SayHello(request)`, it
 internally handles the following:
+
 - Serializing the request message (including the method name) into binary
 format.
 - Sending the serialized request over the network to the server.
@@ -1252,6 +1260,7 @@ format.
 
 
 ### Binary serialization
+
 gRPC uses binary serialization in contrast to things like XML or JSON which use
 human-readable text representations. For instance; 
 
@@ -1319,12 +1328,9 @@ converted to binary for network transmission, its initial form is text.
 Protobuf is a language-agnostic binary serialization format. It directly
 encodes data as binary, without any intermediate text representation.
 
-
 JSON is straightforward but less efficient, while protobufs offer efficiency at
 the cost of additional steps as more setup is required but it has more
 advantages (you can Google the other advantages).
-
-
 
 >**In summary**: JSON starts as text and later gets encoded into binary,
 whereas Protobuf is binary from the outset.
@@ -1438,6 +1444,7 @@ sequence of bytes encoded in UTF-8 which will be
 This JSON payload is **17 bytes** in size
 
 To summarize:
+
 1. Application Level (e.g., in Python):
     - The data structure (e.g., a Python dictionary) is serialized to a JSON
     string.
@@ -1462,6 +1469,7 @@ serialization, deserialization, and data size.
 
 
 So on paper the key points are:
+
 - Compact Encoding: Protobuf uses a binary format that is much more compact
 than JSON. This can lead to smaller payload sizes, which reduces network
 bandwidth usage and can result in faster transmissions.
@@ -1494,17 +1502,17 @@ supports streaming via Event Notifications while RESTCONF does not, I think.
 ### Practical example
 
 Say we have a pure python function `my_func()` that we want to make accessible
-to remote clients, by streaming the results back to the clients. Here's how we
-can adapt the function and the gRPC service to achieve this:
+to remote clients, when called it will stream the results back to the clients
+(caller). Here's how we can adapt the function and the gRPC service to achieve
+this:
 
-Creating a work directory
+Creating a work directory.
 
 ```sh
 basondole% mkdir demo && cd demo
 basondole% ls
 basondole%
 ```
-
 
 Creating the `.proto` file to define a Service and a streaming RPC:
 
@@ -1515,6 +1523,7 @@ basondole%  vi stream.proto
 Contents of proto file.
 
 ```proto
+// stream.proto
 syntax = "proto3";
 
 service MyService {
@@ -1539,8 +1548,10 @@ generator function in this example to simulate a streaming telemetry RPC.
 basondole%  vi code.py
 ```
 
-Contents of the python file
+Contents of the python file `code.py`.
+
 ```python
+# code.py
 from typing import Iterator
 import time
 
@@ -1572,9 +1583,10 @@ Implement the gRPC service that uses `my_func()`:
 basondole% vi server.py
 ```
 
-Contents of the file
+Contents of the file `server.py`.
 
 ```python
+# server.py
 from concurrent import futures
 import grpc
 import stream_pb2
@@ -1608,9 +1620,10 @@ Implement the client to receive and process the stream.
 basondole% vi client.py
 ```
 
-Contents of the file.
+Contents of the file `client.py`.
 
 ```python
+# client.py
 import grpc
 import stream_pb2
 import stream_pb2_grpc
@@ -1628,7 +1641,6 @@ def run():
 
 if __name__ == '__main__':
     run()
-
 ```
 
 Start the service.
@@ -1676,7 +1688,9 @@ Like what we did [here](#practical-example).
 messages in both directions.
 
 
-That's enough for today. Feel free to create your own gNMI client if you will
-or contribute to gNMI open source efforts:
+This covers all we set out to explore. You are welcome to implement your own
+gNMI client if you will or contribute to gNMI open source efforts:
 - [gnmic](https://github.com/openconfig/gnmic)
 - [pygnmi](https://github.com/akarneliuk/pygnmi)
+
+Regards!
