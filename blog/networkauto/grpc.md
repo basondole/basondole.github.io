@@ -16,7 +16,7 @@ one was in 2021.
 2. [How to create a gRPC based service.](#grpc-service-implementation)
 3. [Numbers: Comparison of gRPC and RESTful service.](#grpc-vs-rest-api)
 4. [Theory: How does binary encoding work?](#grpc-encoding-and-decoding)
-5. [Practical application for network Engineers.](#grpc-applications)
+5. [Practical application for network engineers.](#grpc-applications)
 
 
 # gRPC
