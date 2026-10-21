@@ -1488,7 +1488,7 @@ multiple programming languages
 
 gRPC sees its usefulness mostly in microservices environments and web apps.
 For Network engineers (which I am) the most interesting application of gRPC is
-the gNMI protocol (and its child variant gNOI).
+the gNMI protocol, its sibling gNOI and gRIBI for programing routes in the RIB.
 
 gRPC Network Management Interface (gNMI) is a protocol defined by OpenConfig
 that uses gRPC for network management. It allows for the retrieval and
