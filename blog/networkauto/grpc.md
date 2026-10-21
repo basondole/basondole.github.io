@@ -144,7 +144,7 @@ pip install grpcio-tools
 ```
 
 For other languages like Go you will need `proto` compiler, this can be
-downloaded from [grpc.io](https://grpc.io/docs/protoc-installation/)
+downloaded from [grpc.io](https://grpc.io/docs/protoc-installation/).
 
 Using this tool the RPC server and its corresponding client code is
 generated from the proto file(s) which basically defines what the service
