@@ -109,7 +109,7 @@ state Machine2 {
     }
 }
 
-Machine1 --> network
+network --> Machine1
 network --> Machine2
 functionFoo() --> functionBar(): RPC
 ```
