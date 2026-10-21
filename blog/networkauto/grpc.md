@@ -119,7 +119,7 @@ functionFoo() --> functionBar(): RPC
 gRPC operates in client/server model. The code for the client and server is
 often generated using grpc tools. I say "often" because you can actually
 implement it yourself though I don't see why you would want to hustle yourself
-like that. We'll see this later on under [this section](#go-server)
+like that. We'll see this later on under [this section](#go-server).
 
 > With the use of grpc tools and a [proto](#proto-file) file we will create
 > the grpc server and client classes that handle data serialization and RPC
