@@ -668,7 +668,7 @@ The above HTTP/2 stream with a Go client is **513** *bytes* versus the
 the 2 hex dumps is that the Python client request hex dump had a bunch of
 metadata that's not seen in the Go client stream hex dump. This is because of
 header compression
-[HPACK](https://medium.com/geekculture/hpack-header-compression-format-for-http-2-155a0b4934f7)
+[HPACK](https://medium.com/geekculture/hpack-header-compression-format-for-http-2-155a0b4934f7).
 
 > The HTTP/2 protocol has specific frame types, and the presence of certain
 frames e.g., `HEADERS` frames inherently indicates that the headers are `HPACK`
@@ -729,11 +729,11 @@ to be decompressed using HPACK. When decompressed that stream of bytes becomes:
 the stream. Wireshark uses 8 digits in order to accommodate large stream.
 After decompressing, the offsets are shown in a 4-digit format starting with
 `0000` because the count is relative to the segment we are looking at.
-The segment it self is `0000002A` relative to the first byte of the stream
+The segment it self is `0000002A` relative to the first byte of the stream.
 
 Tools like Wireshark have ability to use the HPACK algorithm to decompress
 HTTP/2 headers. We can actually use some library to decode HPACK headers.
-In Python for example with the `hpack` library
+In Python for example with the `hpack` library.
 
 ```sh
 pip install hpack
@@ -824,13 +824,13 @@ What happens behind the scenes with gRPC is the following:
 
 1. Creating the Message:
     The client creates a HelloRequest message:
-    `hello_pb2.HelloRequest(name='World')`
+    `hello_pb2.HelloRequest(name='World')`.
 2. Serialization:
     When the client calls `stub.SayHello`, gRPC internally serializes the
     `HelloRequest` message to a binary format and handles the HTTP/2
     communication, including the creation and management of headers.
 3. Sending the Request:
-    The serialized binary data is sent over the network using HTTP/2
+    The serialized binary data is sent over the network using HTTP/2.
 
 
 **Question**
@@ -851,8 +851,8 @@ the `SayHello` method in the `Greeter` service, the path would look like this:
 serialized message body.
 
 A complete gRPC request would include:
-- HTTP/2 headers including the method path
-- The serialized message body
+- HTTP/2 headers including the method path.
+- The serialized message body.
 
 gRPC handles a lot of this internally but we can actually explicitly serialize
 the data and manage the headers without using the generated proto buffer
@@ -860,7 +860,7 @@ classes. Not that you'd ever want to do that, but it is possible nonetheless.
 See the following example;
 
 > Note: We are using `httpx` instead of the defacto `requests` library because
-gRPC uses HTTP/2 transport. The `requests` library is HTTP/1.1 it will not work
+gRPC uses HTTP/2 transport. The `requests` library is HTTP/1.1 it will not work.
 
 ```sh
 basondole% pip install "httpx[http2]"
@@ -1310,7 +1310,7 @@ Let's break it down by comparing to JSON:
    names and values.
    - **Steps**:
      - Create a JSON object with key-value pairs (field names and values).
-     - Serialize the object into a JSON string payload
+     - Serialize the object into a JSON string payload.
      - Encode the payload/header and transmit over the network.
 
 2. **Binary Serialization (Protocol Buffers)**:
@@ -1350,8 +1350,8 @@ Explanation:
     type.
     0A in binary is 0001 010, and in the context of Protocol Buffers,
     it indicates:
-    - Field Number: 1 (1 is encoded as 1 left-shifted by 3 bits)
-    - Wire Type: 2 (which signifies that the field is of type "length-delimited")
+    - Field Number: 1 (1 is encoded as 1 left-shifted by 3 bits).
+    - Wire Type: 2 (which signifies that the field is of type "length-delimited").
 - `05`: Length of the string. In this case, 05 indicates that there
     are 5 bytes following the length byte 0A.
 - `57 6F 72 6C 64`: UTF-8 encoding of the string "World".
@@ -1383,7 +1383,7 @@ This protobuf encoded binary payload is **12 bytes** in size.
 > Note: This is high-level view of the HTTP request, after the application has
 prepared the headers and payload, but before the HTTP/2 protocol has processed
 and framed the data. This representation is actually at the interface between
-the application layer and the HTTP layer
+the application layer and the HTTP layer.
 
 The message is directly serialized into a compact binary format. The HTTP/2 
 headers are then added as part of the gRPC protocol. After the HTTP/2 headers
@@ -1435,13 +1435,13 @@ Content-Type: application/json
 ```
 
 When this JSON payload is transmitted in a network packet, it is sent as a
-sequence of bytes encoded in UTF-8 which will be
+sequence of bytes encoded in UTF-8 which will be:
 
 ```
 7B 22 6E 61 6D 65 22 3A 22 57 6F 72 6C 64 22 7D
 ```
 
-This JSON payload is **17 bytes** in size
+This JSON payload is **17 bytes** in size.
 
 To summarize:
 
@@ -1481,7 +1481,7 @@ ensures that the data adheres to the specified structure.
 - Efficient Tagging: Each field in a protobuf message is identified by a
 numeric tag, which is more compact than field names in JSON.
 - Language Support: Multi-language Support: Protobuf has strong support for
-multiple programming languages
+multiple programming languages.
 
 
 ## GRPC applications
@@ -1496,7 +1496,7 @@ modification of configuration data on network devices, as well as the control
 and generation of telemetry streams. It is a big brother to NETCONF
 (which uses SSH for transport), but probably more close to RESTCONF since both
 use HTTP transport. But then again maybe more close to NETCONF since NETCONF
-supports streaming via Event Notifications while RESTCONF does not, I think.
+supports streaming via Event Notifications while RESTCONF does not? I think.
 
 
 ### Practical example
