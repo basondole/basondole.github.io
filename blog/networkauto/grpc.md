@@ -1438,7 +1438,7 @@ When this JSON payload is transmitted in a network packet, it is sent as a
 sequence of bytes encoded in UTF-8 which will be:
 
 ```
-7B 22 6E 61 6D 65 22 3A 22 57 6F 72 6C 64 22 7D
+7B 22 6E 61 6D 65 22 3A 20 22 57 6F 72 6C 64 22 7D
 ```
 
 This JSON payload is **17 bytes** in size.
