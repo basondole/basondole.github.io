@@ -99,12 +99,12 @@ access a website URL, essentially the RESTful API fashion.
 stateDiagram-v2
 direction LR
 state Machine1 {
-  state ProgramFoo {
+  state Program1 {
    functionFoo()
   }
  }
 state Machine2 {
-  state ProgramBar {
+  state Program2 {
       functionBar()
     }
 }
