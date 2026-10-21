@@ -4,7 +4,7 @@ permalink: /blog/networkauto/grpc/
 layout: default
 ---
 
-I originally wrote this back in 2024 when I started working with(for)
+I originally wrote this back in 2024 after I started working with(for)
 Google in 2023 where I dealt with this technology extensively but
 didn't get around publishing this post until recently (this being 2026).
 In fact this is my first public blog post in quite a while :) the last
